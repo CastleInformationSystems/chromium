@@ -838,10 +838,12 @@ bool Browser::HasFindBarController() const {
 // Browser, State Storage and Retrieval for UI:
 
 GURL Browser::GetNewTabURL() const {
-  if (app_controller_) {
-    return app_controller_->GetAppNewTabUrl();
-  }
-  return GURL(chrome::kChromeUINewTabURL);
+  // JATTER MOD
+  return GURL("https://beacon-development-46c50.firebaseapp.com/");
+  // if (app_controller_) {
+  //   return app_controller_->GetAppNewTabUrl();
+  // }
+  // return GURL(chrome::kChromeUINewTabURL);
 }
 
 gfx::Image Browser::GetCurrentPageIcon() const {
