@@ -2109,7 +2109,7 @@ JatterBox is unable to recover your settings.
           Set JatterBox as your default
         </message>
         <message name="IDS_SET_BROWSER_AS_DEFAULT_MENU_ITEM" desc="Menu item that prompts user to set Chromium as their default browser.">
-          Set ChromJatterBoxium as your default browser
+          Set JatterBox as your default browser
         </message>
 
         <!-- Profile switch IPH -->
