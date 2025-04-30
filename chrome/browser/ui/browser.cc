@@ -839,7 +839,7 @@ bool Browser::HasFindBarController() const {
 
 GURL Browser::GetNewTabURL() const {
   // JATTER MOD
-  return GURL("https://beacon-development-46c50.firebaseapp.com/");
+  return GURL("https://beacon-staging-df5f2.firebaseapp.com/");
   // if (app_controller_) {
   //   return app_controller_->GetAppNewTabUrl();
   // }
