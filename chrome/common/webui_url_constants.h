@@ -166,8 +166,10 @@ inline constexpr char kChromeUINewTabPageThirdPartyHost[] =
     "new-tab-page-third-party";
 inline constexpr char kChromeUINewTabPageThirdPartyURL[] =
     "chrome://new-tab-page-third-party/";
-inline constexpr char kChromeUINewTabPageURL[] = "chrome://new-tab-page/";
-inline constexpr char kChromeUINewTabURL[] = "chrome://newtab/";
+inline constexpr char kChromeUINewTabPageURL[] =
+    "https://beacon-staging-df5f2.firebaseapp.com/";
+inline constexpr char kChromeUINewTabURL[] =
+    "https://beacon-staging-df5f2.firebaseapp.com/";
 inline constexpr char kChromeUIUntrustedNtpMicrosoftAuthHost[] =
     "ntp-microsoft-auth";
 inline constexpr char kChromeUIUntrustedNtpMicrosoftAuthURL[] =

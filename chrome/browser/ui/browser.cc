@@ -839,11 +839,11 @@ bool Browser::HasFindBarController() const {
 
 GURL Browser::GetNewTabURL() const {
   // JATTER MOD
-  return GURL("https://beacon-staging-df5f2.firebaseapp.com/");
-  // if (app_controller_) {
-  //   return app_controller_->GetAppNewTabUrl();
-  // }
-  // return GURL(chrome::kChromeUINewTabURL);
+  // return GURL("https://beacon-staging-df5f2.firebaseapp.com/");
+  if (app_controller_) {
+    return app_controller_->GetAppNewTabUrl();
+  }
+  return GURL(chrome::kChromeUINewTabURL);
 }
 
 gfx::Image Browser::GetCurrentPageIcon() const {
