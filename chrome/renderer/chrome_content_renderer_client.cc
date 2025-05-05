@@ -58,6 +58,7 @@
 #include "chrome/renderer/chrome_render_thread_observer.h"
 #include "chrome/renderer/controlled_frame/controlled_frame_extensions_renderer_api_provider.h"
 #include "chrome/renderer/google_accounts_private_api_extension.h"
+#include "chrome/renderer/jatter_authentication_frame_observer.h"
 #include "chrome/renderer/loadtimes_extension_bindings.h"
 #include "chrome/renderer/media/flash_embed_rewrite.h"
 #include "chrome/renderer/media/webrtc_logging_agent_impl.h"
@@ -403,8 +404,9 @@ ChromeContentRendererClient::ChromeContentRendererClient()
   ChromeExtensionsRendererClient::Create();
 #endif
 #if BUILDFLAG(ENABLE_PLUGINS)
-  for (const char* origin : kPredefinedAllowedCameraDeviceOrigins)
+  for (const char* origin : kPredefinedAllowedCameraDeviceOrigins) {
     allowed_camera_device_origins_.insert(origin);
+  }
 #endif
 }
 
@@ -470,8 +472,9 @@ void ChromeContentRendererClient::RenderThreadStarted() {
 #endif  // BUILDFLAG(ENABLE_EXTENSIONS_CORE)
 
 #if BUILDFLAG(ENABLE_SPELLCHECK)
-  if (!spellcheck_)
+  if (!spellcheck_) {
     InitSpellCheck();
+  }
 #endif
 
   subresource_filter_ruleset_dealer_ =
@@ -552,8 +555,9 @@ void ChromeContentRendererClient::RenderThreadStarted() {
 
   // The Instant process can only display the content but not read it.  Other
   // processes can't display it or read it.
-  if (!command_line->HasSwitch(switches::kInstantProcess))
+  if (!command_line->HasSwitch(switches::kInstantProcess)) {
     WebSecurityPolicy::RegisterURLSchemeAsDisplayIsolated(chrome_search_scheme);
+  }
 
   WebString dom_distiller_scheme(
       WebString::FromASCII(dom_distiller::kDomDistillerScheme));
@@ -657,6 +661,8 @@ void ChromeContentRendererClient::RenderFrameCreated(
   new paint_preview::PaintPreviewRecorderImpl(render_frame);
 #endif
 
+  new JatterAuthenticationFrameObserver(render_frame);
+
 #if BUILDFLAG(IS_ANDROID)
   SandboxStatusExtension::Create(render_frame);
 #endif
@@ -664,8 +670,9 @@ void ChromeContentRendererClient::RenderFrameCreated(
   TrustedVaultEncryptionKeysExtension::Create(render_frame);
   GoogleAccountsPrivateApiExtension::Create(render_frame);
 
-  if (render_frame->IsMainFrame())
+  if (render_frame->IsMainFrame()) {
     new webapps::WebPageMetadataAgent(render_frame);
+  }
 
   const bool search_result_extractor_enabled =
       render_frame->IsMainFrame() &&
@@ -1223,8 +1230,9 @@ GURL ChromeContentRendererClient::GetNaClContentHandlerURL(
   for (const auto& mime_type : plugin.mime_types) {
     if (mime_type.mime_type == actual_mime_type) {
       for (const auto& p : mime_type.additional_params) {
-        if (p.name == u"nacl")
+        if (p.name == u"nacl") {
           return GURL(p.value);
+        }
       }
       break;
     }
@@ -1475,8 +1483,9 @@ void ChromeContentRendererClient::WillSendRequest(
   extensions::ExtensionsRendererClient::Get()->WillSendRequest(
       frame, transition_type, upstream_url, target_url, site_for_cookies,
       initiator_origin, new_url);
-  if (!new_url->is_empty())
+  if (!new_url->is_empty()) {
     return;
+  }
 #endif
 
   if (!target_url.ProtocolIs(chrome::kChromeSearchScheme)) {
@@ -1489,8 +1498,9 @@ void ChromeContentRendererClient::WillSendRequest(
   if (search_box) {
     // Note: this GURL copy could be avoided if host() were added to WebURL.
     GURL gurl(target_url);
-    if (gurl.host_piece() == chrome::kChromeUIFaviconHost)
+    if (gurl.host_piece() == chrome::kChromeUIFaviconHost) {
       search_box->GenerateImageURLFromTransientURL(target_url, new_url);
+    }
   }
 #endif  // !BUILDFLAG(IS_ANDROID)
 }
@@ -1557,8 +1567,9 @@ bool ChromeContentRendererClient::IsOriginIsolatedPepperPlugin(
 
 #if BUILDFLAG(ENABLE_NACL)
   // Don't isolate the NaCl plugin (preserving legacy behavior).
-  if (plugin_path.value() == nacl::kInternalNaClPluginFileName)
+  if (plugin_path.value() == nacl::kInternalNaClPluginFileName) {
     return false;
+  }
 #endif
 
   // Isolate all the other plugins (including the PDF plugin + test plugins).
@@ -1659,12 +1670,14 @@ bool ChromeContentRendererClient::IsPluginAllowedToUseCameraDeviceAPI(
 #if BUILDFLAG(ENABLE_PLUGINS) && BUILDFLAG(ENABLE_EXTENSIONS)
 #if BUILDFLAG(ENABLE_PPAPI)
   if (base::CommandLine::ForCurrentProcess()->HasSwitch(
-          switches::kEnablePepperTesting))
+          switches::kEnablePepperTesting)) {
     return true;
+  }
 #endif  // BUILDFLAG(ENABLE_PPAPI)
 
-  if (IsExtensionOrSharedModuleAllowed(url, allowed_camera_device_origins_))
+  if (IsExtensionOrSharedModuleAllowed(url, allowed_camera_device_origins_)) {
     return true;
+  }
 #endif
 
   return false;
@@ -1710,8 +1723,9 @@ void ChromeContentRendererClient::
     blink::WebRuntimeFeatures::EnableSharedAutofill(true);
   }
 
-  if (base::FeatureList::IsEnabled(subresource_filter::kAdTagging))
+  if (base::FeatureList::IsEnabled(subresource_filter::kAdTagging)) {
     blink::WebRuntimeFeatures::EnableAdTagging(true);
+  }
 
 #if BUILDFLAG(ENABLE_EXTENSIONS)
   // WebHID and WebUSB on service workers is only available in extensions.
@@ -1803,8 +1817,9 @@ bool ChromeContentRendererClient::ShouldEnforceWebRTCRoutingPreferences() {
 }
 
 GURL ChromeContentRendererClient::OverrideFlashEmbedWithHTML(const GURL& url) {
-  if (!url.is_valid())
+  if (!url.is_valid()) {
     return GURL();
+  }
 
   return FlashEmbedRewrite::RewriteFlashEmbedURL(url);
 }
@@ -1865,8 +1880,9 @@ void ChromeContentRendererClient::AppendContentSecurityPolicy(
   // TODO(crbug.com/40792950): Lock down the CSP once style and script are no
   // longer injected inline by `pdf::PluginResponseWriter`. That class may be a
   // better place to define such CSP, or we may continue doing so here.
-  if (pdf::IsPdfRenderer())
+  if (pdf::IsPdfRenderer()) {
     return;
+  }
 #endif  // BUILDFLAG(ENABLE_PDF)
 
   DCHECK(csp);
@@ -1874,15 +1890,17 @@ void ChromeContentRendererClient::AppendContentSecurityPolicy(
   const extensions::Extension* extension =
       extensions::RendererExtensionRegistry::Get()->GetExtensionOrAppByURL(
           gurl);
-  if (!extension)
+  if (!extension) {
     return;
+  }
 
   // Append a minimum CSP to ensure the extension can't relax the default
   // applied CSP through means like Service Worker.
   const std::string* default_csp =
       extensions::CSPInfo::GetMinimumCSPToAppend(*extension, gurl.path());
-  if (!default_csp)
+  if (!default_csp) {
     return;
+  }
 
   csp->push_back({blink::WebString::FromUTF8(*default_csp),
                   network::mojom::ContentSecurityPolicyType::kEnforce,
