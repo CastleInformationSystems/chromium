@@ -14,6 +14,7 @@
 #include "chrome/browser/accessibility/accessibility_labels_service_factory.h"
 #include "chrome/browser/buildflags.h"
 #include "chrome/browser/dom_distiller/dom_distiller_service_factory.h"
+#include "chrome/browser/jatter/jatter_authorization_impl.h"
 #include "chrome/browser/navigation_predictor/navigation_predictor.h"
 #include "chrome/browser/password_manager/chrome_password_manager_client.h"
 #include "chrome/browser/predictors/lcp_critical_path_predictor/lcp_critical_path_predictor_host.h"
@@ -379,6 +380,12 @@ void BindScreen2xMainContentExtractor(
 }
 #endif
 
+void BindJatterSendAuthToken(
+    content::RenderFrameHost* frame_host,
+    mojo::PendingReceiver<jatter::mojom::JatterAuthorization> receiver) {
+  new JatterAuthorizationImpl(std::move(receiver));
+}
+
 }  // namespace
 
 void PopulateChromeFrameBinders(
@@ -431,6 +438,9 @@ void PopulateChromeFrameBinders(
   map->Add<chrome::mojom::OpenSearchDescriptionDocumentHandler>(
       base::BindRepeating(
           &SearchEngineTabHelper::BindOpenSearchDescriptionDocumentHandler));
+
+  map->Add<jatter::mojom::JatterAuthorization>(
+      base::BindRepeating(&BindJatterSendAuthToken));
 
 #if BUILDFLAG(IS_ANDROID)
   map->Add<blink::mojom::InstalledAppProvider>(base::BindRepeating(

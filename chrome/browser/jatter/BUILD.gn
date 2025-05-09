@@ -1,0 +1,24 @@
+
+import("//mojo/public/tools/bindings/mojom.gni")
+
+mojom("jatter_mojom") {
+  sources = [ "jatter.mojom" ]
+}
+
+source_set("jatter") {
+  sources = [
+    "jatter_authorization_impl.cc",
+    "jatter_authorization_impl.h",
+  ]
+
+  deps = [
+    ":jatter_mojom",
+    "//base",
+    "//content/public/browser",
+    "//mojo/public/cpp/bindings",      
+  ]
+
+  public_deps = [
+    ":jatter_mojom",
+  ]
+}
