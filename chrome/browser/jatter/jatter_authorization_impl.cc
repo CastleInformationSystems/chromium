@@ -1,14 +1,121 @@
 #include "chrome/browser/jatter/jatter_authorization_impl.h"
 
+#include "base/json/json_writer.h"
 #include "base/logging.h"
+#include "base/values.h"
+#include "chrome/browser/browser_process.h"
+#include "chrome/browser/profiles/profile.h"
+#include "content/public/browser/browser_context.h"
+#include "content/public/browser/storage_partition.h"
+#include "net/traffic_annotation/network_traffic_annotation.h"
+#include "services/network/public/cpp/resource_request.h"
+#include "services/network/public/cpp/shared_url_loader_factory.h"
+#include "services/network/public/cpp/simple_url_loader.h"
+#include "url/gurl.h"
+
+static const net::NetworkTrafficAnnotationTag kFirebaseAuthAnnotation =
+    net::DefineNetworkTrafficAnnotation("firebase_custom_token",
+                                        R"(
+      semantics {
+        sender: "Custom Firebase Auth"
+        description: "Signs in using a Firebase custom authentication token."
+        trigger: "User signs in through custom token workflow."
+        data: "Authentication token and request for secure token."
+        destination: GOOGLE_OWNED_SERVICE
+      }
+      policy {
+        cookies_allowed: NO
+        setting: "Not user-configurable"
+        policy_exception_justification: "Required for custom token login."
+      }
+    )");
+
+class DownloadHelper : public base::RefCounted<DownloadHelper> {
+ public:
+  static void Start(std::unique_ptr<network::SimpleURLLoader> loader,
+                    network::mojom::URLLoaderFactory* factory) {
+    auto helper = base::MakeRefCounted<DownloadHelper>(std::move(loader));
+    helper->StartDownload(factory);
+  }
+
+  DownloadHelper(std::unique_ptr<network::SimpleURLLoader> loader)
+      : simple_url_loader_(std::move(loader)) {}
+
+ private:
+  friend class base::RefCounted<DownloadHelper>;
+
+  ~DownloadHelper() = default;
+
+  void StartDownload(network::mojom::URLLoaderFactory* factory) {
+    simple_url_loader_->DownloadToString(
+        factory, base::BindOnce(&DownloadHelper::OnDownloadComplete, this),
+        1024 * 1024);
+  }
+
+  void OnDownloadComplete(std::unique_ptr<std::string> response_body) {
+    if (response_body) {
+      LOG(INFO) << "Firebase response: " << *response_body;
+    } else {
+      LOG(ERROR) << "Failed to get Firebase response";
+    }
+  }
+
+  std::unique_ptr<network::SimpleURLLoader> simple_url_loader_;
+};
 
 JatterAuthorizationImpl::JatterAuthorizationImpl(
-    mojo::PendingReceiver<jatter::mojom::JatterAuthorization> receiver)
-    : receiver_(this, std::move(receiver)) {}
+    mojo::PendingReceiver<jatter::mojom::JatterAuthorization> receiver,
+    content::RenderFrameHost* rfh)
+    : render_frame_host(rfh), receiver_(this, std::move(receiver)) {}
 
 JatterAuthorizationImpl::~JatterAuthorizationImpl() = default;
 
 void JatterAuthorizationImpl::SendAuthToken(const std::string& token) {
   LOG(INFO) << "Received Firebase token from renderer: " << token;
-  // Store or use the token here.
+  SendCustomTokenRequest(token, "AIzaSyDMEcoBQaYnTWMA_hGmkIK3hpr0NB9Zqf8");
+}
+
+void JatterAuthorizationImpl::SendCustomTokenRequest(
+    const std::string& custom_token,
+    const std::string& api_key) {
+  LOG(INFO) << "JatterAuthorizationImpl::SendCustomTokenRequest 1";
+  GURL url(
+      "https://identitytoolkit.googleapis.com/v1/"
+      "accounts:signInWithCustomToken?key=" +
+      api_key);
+
+  LOG(INFO) << "JatterAuthorizationImpl::SendCustomTokenRequest 2";
+
+  auto resource_request = std::make_unique<network::ResourceRequest>();
+  resource_request->url = url;
+  resource_request->method = "POST";
+  resource_request->headers.SetHeader("Content-Type", "application/json");
+
+  LOG(INFO) << "JatterAuthorizationImpl::SendCustomTokenRequest 3";
+
+  base::Value::Dict body;
+  body.Set("token", custom_token);
+  body.Set("returnSecureToken", true);
+
+  std::string json_body;
+  base::JSONWriter::Write(body, &json_body);
+
+  LOG(INFO) << "JatterAuthorizationImpl::SendCustomTokenRequest 4: "
+            << json_body;
+
+  auto loader = network::SimpleURLLoader::Create(std::move(resource_request),
+                                                 kFirebaseAuthAnnotation);
+  loader->AttachStringForUpload(json_body, "application/json");
+
+  LOG(INFO) << "JatterAuthorizationImpl::SendCustomTokenRequest 5";
+
+  auto url_loader_factory = render_frame_host->GetBrowserContext()
+                                ->GetDefaultStoragePartition()
+                                ->GetURLLoaderFactoryForBrowserProcess();
+
+  LOG(INFO) << "JatterAuthorizationImpl::SendCustomTokenRequest 6";
+
+  DownloadHelper::Start(std::move(loader), url_loader_factory.get());
+
+  LOG(INFO) << "JatterAuthorizationImpl::SendCustomTokenRequest 7";
 }

@@ -383,7 +383,7 @@ void BindScreen2xMainContentExtractor(
 void BindJatterSendAuthToken(
     content::RenderFrameHost* frame_host,
     mojo::PendingReceiver<jatter::mojom::JatterAuthorization> receiver) {
-  new JatterAuthorizationImpl(std::move(receiver));
+  new JatterAuthorizationImpl(std::move(receiver), frame_host);
 }
 
 }  // namespace
