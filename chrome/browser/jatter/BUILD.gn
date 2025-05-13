@@ -9,6 +9,8 @@ source_set("jatter") {
   sources = [
     "jatter_authorization_impl.cc",
     "jatter_authorization_impl.h",
+    "jatter_token_storage.cc",
+    "jatter_token_storage.h",
   ]
 
   deps = [

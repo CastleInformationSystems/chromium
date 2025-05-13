@@ -287,8 +287,9 @@ static constexpr base::TimeDelta kCreateSessionServiceDelay =
 // Gets the creation time for |path|, returning base::Time::Now() on failure.
 base::Time GetCreationTimeForPath(const base::FilePath& path) {
   base::File::Info info;
-  if (base::GetFileInfo(path, &info))
+  if (base::GetFileInfo(path, &info)) {
     return info.creation_time;
+  }
   return base::Time::Now();
 }
 
@@ -308,8 +309,9 @@ base::Time CreateProfileDirectory(base::SequencedTaskRunner* io_task_runner,
   ScopedAllowBlockingForProfile allow_io_to_create_directory;
 
   // If the readme exists, the profile directory must also already exist.
-  if (base::PathExists(path.Append(chrome::kReadmeFilename)))
+  if (base::PathExists(path.Append(chrome::kReadmeFilename))) {
     return GetCreationTimeForPath(path);
+  }
 
   DVLOG(1) << "Creating directory " << path.value();
   if (base::CreateDirectory(path)) {
@@ -439,6 +441,11 @@ void ProfileImpl::RegisterProfilePrefs(
   registry->RegisterBooleanPref(prefs::kPdfAnnotationsEnabled, true);
 #endif
   registry->RegisterIntegerPref(prefs::kEnterpriseBadgingTemporarySetting, 0);
+
+  // Jatter
+  registry->RegisterDictionaryPref(prefs::kJatterAuthenticationToken,
+                                   base::Value::Dict(),
+                                   PrefRegistry::NO_REGISTRATION_FLAGS);
 }
 
 ProfileImpl::ProfileImpl(
@@ -582,10 +589,11 @@ void ProfileImpl::LoadPrefsForNormalStartup(bool async_prefs) {
   policy::CloudPolicyManager* cloud_policy_manager;
   policy::ConfigurationPolicyProvider* policy_provider;
 #if BUILDFLAG(IS_CHROMEOS)
-  if (force_immediate_policy_load)
+  if (force_immediate_policy_load) {
     ash::DeviceSettingsService::Get()->LoadImmediately();
-  else
+  } else {
     ash::DeviceSettingsService::Get()->LoadIfNotPresent();
+  }
 
   user_cloud_policy_manager_ash_ = policy::CreateUserCloudPolicyManagerAsh(
       this, force_immediate_policy_load, io_task_runner_);
@@ -670,8 +678,9 @@ void ProfileImpl::DoFinalInit(CreateMode create_mode) {
   // st_ctim in posix which is actually the last status change time when the
   // inode was last updated) use to mimic it changes because of some other
   // modification.
-  if (!prefs->HasPrefPath(prefs::kProfileCreationTime))
+  if (!prefs->HasPrefPath(prefs::kProfileCreationTime)) {
     prefs->SetTime(prefs::kProfileCreationTime, path_creation_time_);
+  }
 
   pref_change_registrar_.Init(prefs);
   pref_change_registrar_.Add(
@@ -823,8 +832,9 @@ void ProfileImpl::DoFinalInit(CreateMode create_mode) {
     // the call to OnProfileCreationFinished(...) if the initialisation is
     // reported as a failure, thus no code should be executed past
     // that point.
-    if (shutting_down)
+    if (shutting_down) {
       return;
+    }
   }
 
   NotifyProfileInitializationComplete();
@@ -928,8 +938,9 @@ ProfileImpl::~ProfileImpl() {
 #endif
   }
 
-  for (Profile* otr_profile : raw_otr_profiles)
+  for (Profile* otr_profile : raw_otr_profiles) {
     ProfileDestroyer::DestroyOTRProfileImmediately(otr_profile);
+  }
 
 #if BUILDFLAG(ENABLE_EXTENSIONS_CORE)
   if (!primary_otr_available &&
@@ -946,8 +957,9 @@ ProfileImpl::~ProfileImpl() {
 
   // Records the number of active KeyedServices for SystemProfile right before
   // shutting the Services.
-  if (IsSystemProfile())
+  if (IsSystemProfile()) {
     ProfileMetrics::LogSystemProfileKeyedServicesCount(this);
+  }
 
   // The SimpleDependencyManager should always be passed after the
   // BrowserContextDependencyManager. This is because the KeyedService instances
@@ -960,8 +972,9 @@ ProfileImpl::~ProfileImpl() {
   SimpleKeyMap::GetInstance()->Dissociate(this);
 
   profile_policy_connector_->Shutdown();
-  if (configuration_policy_provider())
+  if (configuration_policy_provider()) {
     configuration_policy_provider()->Shutdown();
+  }
 
   // This must be called before ProfileIOData::ShutdownOnUIThread but after
   // other profile-related destroy notifications are dispatched.
@@ -1005,11 +1018,13 @@ scoped_refptr<base::SequencedTaskRunner> ProfileImpl::GetIOTaskRunner() {
 
 Profile* ProfileImpl::GetOffTheRecordProfile(const OTRProfileID& otr_profile_id,
                                              bool create_if_needed) {
-  if (HasOffTheRecordProfile(otr_profile_id))
+  if (HasOffTheRecordProfile(otr_profile_id)) {
     return otr_profiles_[otr_profile_id].get();
+  }
 
-  if (!create_if_needed)
+  if (!create_if_needed) {
     return nullptr;
+  }
   if (IsGuestSession()) {
     // Guest Session has only one primary OTR.
     CHECK_EQ(otr_profile_id, OTRProfileID::PrimaryID());
@@ -1029,8 +1044,9 @@ Profile* ProfileImpl::GetOffTheRecordProfile(const OTRProfileID& otr_profile_id,
 
 std::vector<Profile*> ProfileImpl::GetAllOffTheRecordProfiles() {
   std::vector<Profile*> raw_otr_profiles;
-  for (auto& otr : otr_profiles_)
+  for (auto& otr : otr_profiles_) {
     raw_otr_profiles.push_back(otr.second.get());
+  }
   return raw_otr_profiles;
 }
 
@@ -1165,8 +1181,9 @@ void ProfileImpl::OnLocaleReady(CreateMode create_mode) {
 void ProfileImpl::OnPrefsLoaded(CreateMode create_mode, bool success) {
   TRACE_EVENT0("browser", "ProfileImpl::OnPrefsLoaded");
   if (!success) {
-    if (delegate_)
+    if (delegate_) {
       delegate_->OnProfileCreationFinished(this, create_mode, false, false);
+    }
     return;
   }
 
@@ -1174,8 +1191,9 @@ void ProfileImpl::OnPrefsLoaded(CreateMode create_mode, bool success) {
   // UI, finalising profile creation, etc. which would trigger a crash down the
   // the line. See crbug.com/625646
   if (g_browser_process->IsShuttingDown()) {
-    if (delegate_)
+    if (delegate_) {
       delegate_->OnProfileCreationFinished(this, create_mode, false, false);
+    }
     return;
   }
 
@@ -1288,8 +1306,9 @@ policy::CloudPolicyManager* ProfileImpl::GetCloudPolicyManager() {
 policy::ConfigurationPolicyProvider*
 ProfileImpl::configuration_policy_provider() {
 #if BUILDFLAG(IS_CHROMEOS)
-  if (user_cloud_policy_manager_ash_)
+  if (user_cloud_policy_manager_ash_) {
     return user_cloud_policy_manager_ash_.get();
+  }
   return nullptr;
 #else  // !BUILDFLAG(IS_CHROMEOS)
   if (user_cloud_policy_manager_.get()) {
@@ -1459,8 +1478,9 @@ void ProfileImpl::ChangeAppLocale(const std::string& new_locale,
   }
   PrefService* local_state = g_browser_process->local_state();
   DCHECK(local_state);
-  if (local_state->IsManagedPreference(language::prefs::kApplicationLocale))
+  if (local_state->IsManagedPreference(language::prefs::kApplicationLocale)) {
     return;
+  }
   std::string pref_locale =
       GetPrefs()->GetString(language::prefs::kApplicationLocale);
   language::ConvertToActualUILocale(&pref_locale);
@@ -1514,12 +1534,13 @@ void ProfileImpl::ChangeAppLocale(const std::string& new_locale,
         // (2) on next login we assume that synchronization is already completed
         //     and we may finalize initialization.
         GetPrefs()->SetString(prefs::kApplicationLocaleBackup, cur_locale);
-        if (!new_locale.empty())
+        if (!new_locale.empty()) {
           GetPrefs()->SetString(language::prefs::kApplicationLocale,
                                 new_locale);
-        else if (!backup_locale.empty())
+        } else if (!backup_locale.empty()) {
           GetPrefs()->SetString(language::prefs::kApplicationLocale,
                                 backup_locale);
+        }
         do_update_pref = false;
       }
       break;
@@ -1539,14 +1560,17 @@ void ProfileImpl::ChangeAppLocale(const std::string& new_locale,
       NOTREACHED();
     }
   }
-  if (do_update_pref)
+  if (do_update_pref) {
     GetPrefs()->SetString(language::prefs::kApplicationLocale, new_locale);
-  if (via != APP_LOCALE_CHANGED_VIA_PUBLIC_SESSION_LOGIN)
+  }
+  if (via != APP_LOCALE_CHANGED_VIA_PUBLIC_SESSION_LOGIN) {
     local_state->SetString(language::prefs::kApplicationLocale, new_locale);
+  }
 
   if (user_manager::UserManager::Get()->GetOwnerAccountId() ==
-      ash::ProfileHelper::Get()->GetUserByProfile(this)->GetAccountId())
+      ash::ProfileHelper::Get()->GetUserByProfile(this)->GetAccountId()) {
     local_state->SetString(prefs::kOwnerLocale, new_locale);
+  }
 }
 
 void ProfileImpl::OnLogin() {
@@ -1570,8 +1594,9 @@ bool ProfileImpl::IsNewProfile() const {
   // The profile is new if the preference files has just been created, except on
   // first run, because the installer may create a preference file. See
   // https://crbug.com/728402
-  if (first_run::IsChromeFirstRun())
+  if (first_run::IsChromeFirstRun()) {
     return true;
+  }
 #endif
 
   return GetPrefs()->GetInitializationStatus() ==
@@ -1608,16 +1633,19 @@ GURL ProfileImpl::GetHomePage() {
     GURL home_page(url_formatter::FixupRelativeFile(
         browser_directory,
         command_line.GetSwitchValuePath(switches::kHomePage)));
-    if (home_page.is_valid())
+    if (home_page.is_valid()) {
       return home_page;
+    }
   }
 
-  if (GetPrefs()->GetBoolean(prefs::kHomePageIsNewTabPage))
+  if (GetPrefs()->GetBoolean(prefs::kHomePageIsNewTabPage)) {
     return GURL(chrome::kChromeUINewTabURL);
+  }
   GURL home_page(url_formatter::FixupURL(
       GetPrefs()->GetString(prefs::kHomePage), std::string()));
-  if (!home_page.is_valid())
+  if (!home_page.is_valid()) {
     return GURL(chrome::kChromeUINewTabURL);
+  }
   return home_page;
 }
 
@@ -1625,8 +1653,9 @@ void ProfileImpl::UpdateSupervisedUserIdInStorage() {
   ProfileManager* profile_manager = g_browser_process->profile_manager();
   ProfileAttributesEntry* entry = profile_manager->GetProfileAttributesStorage()
                                       .GetProfileAttributesWithPath(GetPath());
-  if (entry)
+  if (entry) {
     entry->SetSupervisedUserId(GetPrefs()->GetString(prefs::kSupervisedUserId));
+  }
 }
 
 void ProfileImpl::UpdateNameInStorage() {

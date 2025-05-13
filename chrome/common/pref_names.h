@@ -4225,6 +4225,10 @@ inline constexpr char kServiceWorkerToControlSrcdocIframeEnabled[] =
 // is set as a SharedWorker script URL.
 inline constexpr char kSharedWorkerBlobURLFixEnabled[] =
     "worker.shared_worker_blob_url_fix_enabled";
+
+// Dictionary to persist Firebase token id and refresh token
+inline constexpr char kJatterAuthenticationToken[] =
+    "jatter.authentication.token";
 }  // namespace prefs
 
 #endif  // CHROME_COMMON_PREF_NAMES_H_
