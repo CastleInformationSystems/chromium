@@ -11,6 +11,8 @@ source_set("jatter") {
     "jatter_authorization_impl.h",
     "jatter_token_storage.cc",
     "jatter_token_storage.h",
+    "jatter_firebase_client.cc",
+    "jatter_firebase_client.h",
   ]
 
   deps = [

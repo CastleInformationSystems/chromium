@@ -81,13 +81,6 @@ class DownloadHelper : public base::RefCounted<DownloadHelper> {
 
           // Store tokens
           storage->SetTokens(*id_token, *refresh_token);
-
-          JatterTokenStorage* storage_recall =
-              JatterTokenStorage::GetOrCreate(profile);
-          std::string id_token_recall = storage_recall->GetIdToken();
-          std::string refresh_token_recall = storage_recall->GetRefreshToken();
-          LOG(INFO) << "id_token RECALL: " << id_token_recall;
-          LOG(INFO) << "refresh_token RECALL: " << refresh_token_recall;
         }
       }
 
@@ -115,20 +108,15 @@ void JatterAuthorizationImpl::SendAuthToken(const std::string& token) {
 void JatterAuthorizationImpl::SendCustomTokenRequest(
     const std::string& custom_token,
     const std::string& api_key) {
-  LOG(INFO) << "JatterAuthorizationImpl::SendCustomTokenRequest 1";
   GURL url(
       "https://identitytoolkit.googleapis.com/v1/"
       "accounts:signInWithCustomToken?key=" +
       api_key);
 
-  LOG(INFO) << "JatterAuthorizationImpl::SendCustomTokenRequest 2";
-
   auto resource_request = std::make_unique<network::ResourceRequest>();
   resource_request->url = url;
   resource_request->method = "POST";
   resource_request->headers.SetHeader("Content-Type", "application/json");
-
-  LOG(INFO) << "JatterAuthorizationImpl::SendCustomTokenRequest 3";
 
   base::Value::Dict body;
   body.Set("token", custom_token);
@@ -137,23 +125,14 @@ void JatterAuthorizationImpl::SendCustomTokenRequest(
   std::string json_body;
   base::JSONWriter::Write(body, &json_body);
 
-  LOG(INFO) << "JatterAuthorizationImpl::SendCustomTokenRequest 4: "
-            << json_body;
-
   auto loader = network::SimpleURLLoader::Create(std::move(resource_request),
                                                  kFirebaseAuthAnnotation);
   loader->AttachStringForUpload(json_body, "application/json");
-
-  LOG(INFO) << "JatterAuthorizationImpl::SendCustomTokenRequest 5";
 
   auto url_loader_factory = render_frame_host->GetBrowserContext()
                                 ->GetDefaultStoragePartition()
                                 ->GetURLLoaderFactoryForBrowserProcess();
 
-  LOG(INFO) << "JatterAuthorizationImpl::SendCustomTokenRequest 6";
-
   DownloadHelper::Start(render_frame_host, std::move(loader),
                         url_loader_factory.get());
-
-  LOG(INFO) << "JatterAuthorizationImpl::SendCustomTokenRequest 7";
 }
