@@ -57,6 +57,7 @@ class SecureOriginPrefsObserver;
 class SiteIsolationPrefsObserver;
 class SystemNotificationHelper;
 class StartupData;
+class JatterProfileObserver;
 
 namespace breadcrumbs {
 class ApplicationBreadcrumbsLogger;
@@ -77,7 +78,7 @@ class GCMDriver;
 namespace os_crypt_async {
 class KeyProvider;
 class OSCryptAsync;
-}
+}  // namespace os_crypt_async
 
 namespace policy {
 class ChromeBrowserPolicyConnector;
@@ -485,6 +486,8 @@ class BrowserProcessImpl : public BrowserProcess,
 
   std::optional<std::pair<size_t, std::unique_ptr<os_crypt_async::KeyProvider>>>
       additional_provider_for_test_;
+
+  std::unique_ptr<JatterProfileObserver> jatter_profile_observer_;
 
   // Do not add new members to this class. Instead use GlobalFeatures. See
   // browser_process.h file level comments for more details.

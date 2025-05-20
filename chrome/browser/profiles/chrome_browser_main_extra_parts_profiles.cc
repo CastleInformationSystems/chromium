@@ -80,6 +80,7 @@
 #include "chrome/browser/history/top_sites_factory.h"
 #include "chrome/browser/history_clusters/history_clusters_service_factory.h"
 #include "chrome/browser/ip_protection/ip_protection_core_host_factory.h"
+#include "chrome/browser/jatter/jatter_history_observer_service_factory.h"
 #include "chrome/browser/k_anonymity_service/k_anonymity_service_factory.h"
 #include "chrome/browser/language/accept_languages_service_factory.h"
 #include "chrome/browser/language/language_model_manager_factory.h"
@@ -1359,6 +1360,7 @@ void ChromeBrowserMainExtraPartsProfiles::
     tab_groups::CollaborationMessagingObserverFactory::GetInstance();
   }
 #endif
+  JatterHistoryObserverServiceFactory::GetInstance();
 }
 
 void ChromeBrowserMainExtraPartsProfiles::PreProfileInit() {

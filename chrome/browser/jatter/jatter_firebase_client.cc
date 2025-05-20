@@ -1,7 +1,9 @@
 #include "chrome/browser/jatter/jatter_firebase_client.h"
 
+#include "base/i18n/time_formatting.h"
 #include "base/json/json_reader.h"
 #include "base/json/json_writer.h"
+#include "base/time/time.h"
 #include "chrome/browser/browser_process.h"
 #include "chrome/browser/jatter/jatter_token_storage.h"
 #include "chrome/browser/profiles/profile.h"
@@ -30,29 +32,35 @@ static const net::NetworkTrafficAnnotationTag kFirebaseFunctionAnnotation =
       }
     )");
 
-void JatterFirebaseClient::ObservePageVisit(
-    content::RenderFrameHost* render_frame_host,
-    std::string url) {
+void JatterFirebaseClient::ObservePageVisit(Profile* profile,
+                                            std::string url,
+                                            std::string title) {
   JatterFirebaseClient::Invoke(
-      render_frame_host,
-      [render_frame_host, url]() {
+      profile,
+      [profile, url, title]() {
         GURL endpoint(
-            std::string(
-                "https://identitytoolkit.googleapis.com/v1/token?key=") +
-            kFirebaseApiKey);
+            std::string("https://"
+                        "us-central1-beacon-development-46c50."
+                        "cloudfunctions.net/logWebPageVisit"));
 
         auto resource_request = std::make_unique<network::ResourceRequest>();
         resource_request->url = endpoint;
         resource_request->method = "POST";
         resource_request->headers.SetHeader("Content-Type", "application/json");
-        JatterFirebaseClient::SetAuthorizationnHeader(render_frame_host,
+        JatterFirebaseClient::SetAuthorizationnHeader(profile,
                                                       resource_request.get());
 
-        base::Value::Dict data;
-        data.Set("url", url);
+        base::Value::List metadata;
+        metadata.Append(base::Value::Dict().Set("title", title));
+        // metadata.Append(
+        //     base::Value::Dict().Set("description", "Test Description"));
+
+        base::Time now = base::Time::Now();
 
         base::Value::Dict body;
-        body.Set("data", std::move(data));
+        body.Set("date", base::TimeFormatAsIso8601(now));
+        body.Set("url", url);
+        body.Set("metadata", std::move(metadata));
 
         std::string json_body;
         base::JSONWriter::Write(body, &json_body);
@@ -68,11 +76,8 @@ void JatterFirebaseClient::ObservePageVisit(
 }
 
 void JatterFirebaseClient::SetAuthorizationnHeader(
-    content::RenderFrameHost* render_frame_host,
+    Profile* profile,
     network::ResourceRequest* resource_request) {
-  Profile* profile = Profile::FromBrowserContext(
-      render_frame_host->GetProcess()->GetBrowserContext());
-
   JatterTokenStorage* storage = JatterTokenStorage::GetOrCreate(profile);
   std::string id_token = storage->GetIdToken();
   LOG(INFO) << "JatterFirebaseClient::SetAuthenticationHeader id_token: "
@@ -82,19 +87,18 @@ void JatterFirebaseClient::SetAuthorizationnHeader(
 }
 
 void JatterFirebaseClient::Invoke(
-    content::RenderFrameHost* render_frame_host,
+    Profile* profile,
     std::function<std::unique_ptr<network::SimpleURLLoader>()> loader_factory,
     std::function<void(std::unique_ptr<std::string> response_body)> callback) {
   std::unique_ptr<network::SimpleURLLoader> loader(loader_factory());
 
-  auto url_loader_factory = render_frame_host->GetBrowserContext()
-                                ->GetDefaultStoragePartition()
+  auto url_loader_factory = profile->GetDefaultStoragePartition()
                                 ->GetURLLoaderFactoryForBrowserProcess();
 
   loader->DownloadToString(
       url_loader_factory.get(),
       base::BindOnce(
-          [](content::RenderFrameHost* render_frame_host,
+          [](Profile* profile,
              std::function<std::unique_ptr<network::SimpleURLLoader>()>
                  loader_factory,
              std::function<void(std::unique_ptr<std::string> response_body)>
@@ -120,7 +124,7 @@ void JatterFirebaseClient::Invoke(
 
                     base::OnceCallback<void(bool)> once_callback =
                         base::BindOnce(
-                            [](content::RenderFrameHost* render_frame_host,
+                            [](Profile* profile,
                                std::function<std::unique_ptr<
                                    network::SimpleURLLoader>()> loader_factory,
                                std::function<void(std::unique_ptr<std::string>)>
@@ -130,8 +134,7 @@ void JatterFirebaseClient::Invoke(
                                 auto loader = loader_factory();
 
                                 auto url_loader_factory =
-                                    render_frame_host->GetBrowserContext()
-                                        ->GetDefaultStoragePartition()
+                                    profile->GetDefaultStoragePartition()
                                         ->GetURLLoaderFactoryForBrowserProcess();
 
                                 auto once_callback = base::BindOnce(
@@ -158,10 +161,10 @@ void JatterFirebaseClient::Invoke(
                                 callback(std::move(foobar));
                               }
                             },
-                            render_frame_host, loader_factory, callback);
+                            profile, loader_factory, callback);
 
                     JatterFirebaseClient::RefreshAuthToken(
-                        render_frame_host, std::move(once_callback));
+                        profile, std::move(once_callback));
                   }
                 }
               }
@@ -174,16 +177,13 @@ void JatterFirebaseClient::Invoke(
               callback(std::move(response_body));
             }
           },
-          render_frame_host, loader_factory, callback),
+          profile, loader_factory, callback),
       1024 * 1024);
 }
 
 void JatterFirebaseClient::RefreshAuthToken(
-    content::RenderFrameHost* render_frame_host,
+    Profile* profile,
     base::OnceCallback<void(bool)> callback) {
-  Profile* profile = Profile::FromBrowserContext(
-      render_frame_host->GetProcess()->GetBrowserContext());
-
   JatterTokenStorage* storage = JatterTokenStorage::GetOrCreate(profile);
   std::string refresh_token = storage->GetRefreshToken();
   LOG(INFO) << "refresh_token RECALL: " << refresh_token;
@@ -203,15 +203,13 @@ void JatterFirebaseClient::RefreshAuthToken(
                                                  kFirebaseFunctionAnnotation);
   loader->AttachStringForUpload(body, "application/x-www-form-urlencoded");
 
-  auto url_loader_factory = render_frame_host->GetBrowserContext()
-                                ->GetDefaultStoragePartition()
+  auto url_loader_factory = profile->GetDefaultStoragePartition()
                                 ->GetURLLoaderFactoryForBrowserProcess();
 
   loader->DownloadToString(
       url_loader_factory.get(),
       base::BindOnce(
-          [](content::RenderFrameHost* render_frame_host,
-             base::OnceCallback<void(bool)> callback,
+          [](Profile* profile, base::OnceCallback<void(bool)> callback,
              std::unique_ptr<std::string> response_body) {
             bool success = false;
 
@@ -231,9 +229,6 @@ void JatterFirebaseClient::RefreshAuthToken(
                   LOG(INFO) << "id_token: " << *id_token;
                   LOG(INFO) << "refresh_token: " << *refresh_token;
 
-                  Profile* profile = Profile::FromBrowserContext(
-                      render_frame_host->GetProcess()->GetBrowserContext());
-
                   JatterTokenStorage* storage =
                       JatterTokenStorage::GetOrCreate(profile);
 
@@ -249,6 +244,6 @@ void JatterFirebaseClient::RefreshAuthToken(
 
             std::move(callback).Run(success);
           },
-          render_frame_host, std::move(callback)),
+          profile, std::move(callback)),
       1024 * 1024);
 }

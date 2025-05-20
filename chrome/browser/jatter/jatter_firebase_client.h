@@ -8,19 +8,20 @@
 
 class JatterFirebaseClient {
  public:
-  static void ObservePageVisit(content::RenderFrameHost* render_frame_host,
-                               std::string url);
+  static void ObservePageVisit(Profile* profile,
+                               std::string url,
+                               std::string title);
 
  private:
   static void SetAuthorizationnHeader(
-      content::RenderFrameHost* render_frame_host,
+      Profile* profile,
       network::ResourceRequest* resource_request);
 
-  static void RefreshAuthToken(content::RenderFrameHost* render_frame_host,
+  static void RefreshAuthToken(Profile* profile,
                                base::OnceCallback<void(bool)> callback);
 
   static void Invoke(
-      content::RenderFrameHost* render_frame_host,
+      Profile* profile,
       std::function<std::unique_ptr<network::SimpleURLLoader>()> loader_factory,
       std::function<void(std::unique_ptr<std::string> response_body)> callback);
 };

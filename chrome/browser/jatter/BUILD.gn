@@ -13,6 +13,12 @@ source_set("jatter") {
     "jatter_token_storage.h",
     "jatter_firebase_client.cc",
     "jatter_firebase_client.h",
+    "jatter_history_observer.cc",
+    "jatter_history_observer.h",
+    "jatter_profile_observer.cc",
+    "jatter_profile_observer.h",
+    "jatter_history_observer_service_factory.cc",
+    "jatter_history_observer_service_factory.h",
   ]
 
   deps = [
