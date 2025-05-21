@@ -20,8 +20,6 @@ JatterAuthenticationFrameObserver::~JatterAuthenticationFrameObserver() =
 void JatterAuthenticationFrameObserver::DidCreateScriptContext(
     v8::Local<v8::Context> context,
     int world_id) {
-  LOG(INFO) << "JatterAuthenticationFrameObserver::DidCreateScriptContext";
-
   // Only allow in the main world
   if (world_id != content::ISOLATED_WORLD_ID_GLOBAL) {
     return;
@@ -35,13 +33,8 @@ void JatterAuthenticationFrameObserver::DidCreateScriptContext(
       origin.host() != "beacon-development-46c50.firebaseapp.com" &&
       origin.host() != "beacon-staging-df5f2.firebaseapp.com" &&
       origin.host() != "localhost") {
-    LOG(INFO) << "JatterAuthenticationFrameObserver::DidCreateScriptContext, "
-                 "origin NOT allowed";
     return;
   }
-
-  LOG(INFO) << "JatterAuthenticationFrameObserver::DidCreateScriptContext, "
-               "origin allowed";
 
   v8::Isolate* isolate = context->GetIsolate();
   v8::HandleScope handle_scope(isolate);

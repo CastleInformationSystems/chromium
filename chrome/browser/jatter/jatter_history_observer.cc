@@ -34,6 +34,6 @@ void JatterHistoryObserver::OnURLVisited(
     const history::VisitRow& new_visit) {
   LOG(INFO) << "Visited URL: " << url_row.url();
 
-  JatterFirebaseClient::ObservePageVisit(profile_, url_row.url().spec(),
-                                         base::UTF16ToUTF8(url_row.title()));
+  JatterFirebaseClient::GetInstance()->ObservePageVisit(
+      profile_, url_row.url().spec(), base::UTF16ToUTF8(url_row.title()));
 }
