@@ -57,10 +57,8 @@ void JatterFirebaseClient::ObservePageVisit(Profile* profile,
         JatterFirebaseClient::SetAuthorizationnHeader(profile,
                                                       resource_request.get());
 
-        base::Value::List metadata;
-        metadata.Append(base::Value::Dict().Set("title", title));
-        // metadata.Append(
-        //     base::Value::Dict().Set("description", "Test Description"));
+        base::Value::Dict metadata;
+        metadata.Set("title", title);
 
         base::Time now = base::Time::Now();
 
