@@ -29,9 +29,11 @@ void JatterAuthenticationFrameObserver::DidCreateScriptContext(
   const url::Origin& origin = frame->GetWebFrame()->GetSecurityOrigin();
 
   // Check allowed origin
-  if (origin.host() != "www.jatter.ai" &&
+  if (origin.host() != "www.jatter.ai" && origin.host() != "app.jatter.ai" &&
       origin.host() != "beacon-development-46c50.firebaseapp.com" &&
+      origin.host() != "beacon-development-46c50.web.app" &&
       origin.host() != "beacon-staging-df5f2.firebaseapp.com" &&
+      origin.host() != "beacon-staging-df5f2.web.app" &&
       origin.host() != "localhost") {
     return;
   }
