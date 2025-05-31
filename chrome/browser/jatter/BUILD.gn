@@ -1,11 +1,24 @@
 
 import("//mojo/public/tools/bindings/mojom.gni")
 
+declare_args() {
+  # Sets the build environment. Possible values: "development", "staging", "production".
+  jatter_build_environment = "development"
+}
+
 mojom("jatter_mojom") {
   sources = [ "jatter.mojom" ]
 }
 
 source_set("jatter") {
+  if (jatter_build_environment == "development") {
+    defines = [ "JATTER_DEVELOPMENT_MODE" ]
+  } else if (jatter_build_environment == "staging") {
+    defines = [ "JATTER_STAGING_MODE" ]
+  } else { # Production
+    defines = [ "JATTER_PRODUCTION_MODE" ]
+  }
+
   sources = [
     "jatter_authorization_impl.cc",
     "jatter_authorization_impl.h",

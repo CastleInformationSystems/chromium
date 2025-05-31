@@ -5,6 +5,7 @@
 #include "base/logging.h"
 #include "base/values.h"
 #include "chrome/browser/browser_process.h"
+#include "chrome/browser/jatter/jatter_environment.h"
 #include "chrome/browser/jatter/jatter_token_storage.h"
 #include "chrome/browser/profiles/profile.h"
 #include "content/public/browser/browser_context.h"
@@ -102,7 +103,7 @@ JatterAuthorizationImpl::~JatterAuthorizationImpl() = default;
 
 void JatterAuthorizationImpl::SendAuthToken(const std::string& token) {
   LOG(INFO) << "Received Firebase token from renderer: " << token;
-  SendCustomTokenRequest(token, "AIzaSyDMEcoBQaYnTWMA_hGmkIK3hpr0NB9Zqf8");
+  SendCustomTokenRequest(token, kFirebaseApiKey);
 }
 
 void JatterAuthorizationImpl::SendCustomTokenRequest(

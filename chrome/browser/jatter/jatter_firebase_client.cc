@@ -6,6 +6,7 @@
 #include "base/memory/singleton.h"
 #include "base/time/time.h"
 #include "chrome/browser/browser_process.h"
+#include "chrome/browser/jatter/jatter_environment.h"
 #include "chrome/browser/jatter/jatter_token_storage.h"
 #include "chrome/browser/profiles/profile.h"
 #include "content/public/browser/browser_context.h"
@@ -13,8 +14,6 @@
 #include "content/public/browser/storage_partition.h"
 #include "net/traffic_annotation/network_traffic_annotation.h"
 #include "services/network/public/cpp/resource_request.h"
-
-static const char kFirebaseApiKey[] = "AIzaSyDMEcoBQaYnTWMA_hGmkIK3hpr0NB9Zqf8";
 
 static const net::NetworkTrafficAnnotationTag kFirebaseFunctionAnnotation =
     net::DefineNetworkTrafficAnnotation("firebase_function_call",
@@ -46,9 +45,7 @@ void JatterFirebaseClient::ObservePageVisit(Profile* profile,
   JatterFirebaseClient::Invoke(
       profile,
       [profile, url, title]() {
-        GURL endpoint(std::string(
-            "https://us-central1-beacon-development-46c50.cloudfunctions.net/"
-            "logWebPageVisit"));
+        GURL endpoint(kLogWebPageVisitUrl);
 
         auto resource_request = std::make_unique<network::ResourceRequest>();
         resource_request->url = endpoint;
