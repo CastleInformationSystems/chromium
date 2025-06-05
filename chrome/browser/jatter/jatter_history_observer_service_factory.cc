@@ -3,7 +3,6 @@
 #include "chrome/browser/jatter/jatter_history_observer.h"
 #include "chrome/browser/profiles/profile.h"
 #include "components/keyed_service/content/browser_context_dependency_manager.h"
-#include "components/keyed_service/core/dependency_manager.cc"
 
 JatterHistoryObserverServiceFactory::JatterHistoryObserverServiceFactory()
     : BrowserContextKeyedServiceFactory(
