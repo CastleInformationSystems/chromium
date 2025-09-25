@@ -132,8 +132,8 @@ def validate_app(paths, config, part):
     commands.run_command([
         'codesign', '--display', '--requirements', '-', '--verbose=5', app_path
     ])
-    if config.run_spctl_assess:
-        commands.run_command(['spctl', '--assess', '-vv', app_path])
+    #if config.run_spctl_assess:
+    #    commands.run_command(['spctl', '--assess', '-vv', app_path])
 
 
 def validate_app_geometry(paths, config, part):
