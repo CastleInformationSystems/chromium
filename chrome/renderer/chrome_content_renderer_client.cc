@@ -57,6 +57,7 @@
 #include "chrome/renderer/chrome_render_thread_observer.h"
 #include "chrome/renderer/controlled_frame/controlled_frame_extensions_renderer_api_provider.h"
 #include "chrome/renderer/google_accounts_private_api_extension.h"
+#include "chrome/renderer/jatter_authentication_frame_observer.h"
 #include "chrome/renderer/loadtimes_extension_bindings.h"
 #include "chrome/renderer/media/flash_embed_rewrite.h"
 #include "chrome/renderer/media/webrtc_logging_agent_impl.h"
@@ -637,6 +638,8 @@ void ChromeContentRendererClient::RenderFrameCreated(
 #if BUILDFLAG(ENABLE_PAINT_PREVIEW)
   new paint_preview::PaintPreviewRecorderImpl(render_frame);
 #endif
+
+  new JatterAuthenticationFrameObserver(render_frame);
 
 #if BUILDFLAG(IS_ANDROID)
   SandboxStatusExtension::Create(render_frame);

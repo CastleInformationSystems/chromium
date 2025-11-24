@@ -57,6 +57,7 @@
 #include "chrome/browser/google/google_brand.h"
 #include "chrome/browser/gpu/gpu_mode_manager.h"
 #include "chrome/browser/icon_manager.h"
+#include "chrome/browser/jatter/jatter_profile_observer.h"
 #include "chrome/browser/lifetime/application_lifetime.h"
 #include "chrome/browser/lifetime/browser_shutdown.h"
 #include "chrome/browser/lifetime/switch_utils.h"
@@ -558,6 +559,8 @@ void BrowserProcessImpl::StartTearDown() {
   // profile manager is still alive.
   extensions_browser_client_->StartTearDown();
 #endif  // BUILDFLAG(ENABLE_EXTENSIONS_CORE)
+
+  jatter_profile_observer_.reset();
 
   // Need to clear profiles (download managers) before the IO thread.
   {
@@ -1498,6 +1501,8 @@ void BrowserProcessImpl::PreMainMessageLoopRun() {
   } else {
     breadcrumbs::DeleteBreadcrumbFiles(user_data_dir);
   }
+
+  jatter_profile_observer_ = std::make_unique<JatterProfileObserver>();
 }
 
 void BrowserProcessImpl::CreateIconManager() {
