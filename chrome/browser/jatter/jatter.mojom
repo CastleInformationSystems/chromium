@@ -1,0 +1,6 @@
+
+module jatter.mojom;
+
+interface JatterAuthorization {
+  SendAuthToken(string token);
+};
