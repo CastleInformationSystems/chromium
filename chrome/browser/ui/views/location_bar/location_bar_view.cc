@@ -30,6 +30,7 @@
 #include "chrome/browser/extensions/api/omnibox/omnibox_api.h"
 #include "chrome/browser/extensions/extension_ui_util.h"
 #include "chrome/browser/extensions/tab_helper.h"
+#include "chrome/browser/jatter/jatter_environment.h"
 #include "chrome/browser/page_info/merchant_trust_service_factory.h"
 #include "chrome/browser/page_info/page_info_features.h"
 #include "chrome/browser/profiles/profile.h"
@@ -101,6 +102,7 @@
 #include "chrome/browser/ui/views/passwords/manage_passwords_icon_views.h"
 #include "chrome/browser/ui/views/permissions/chip/permission_chip_view.h"
 #include "chrome/browser/ui/views/permissions/chip/permission_dashboard_view.h"
+#include "chrome/browser/ui/views/rag_ingestion/rag_ingestion_page_action_icon_view.h"
 #include "chrome/browser/ui/views/sharing_hub/sharing_hub_icon_view.h"
 #include "chrome/browser/ui/views/toolbar/pinned_toolbar_actions_container.h"
 #include "chrome/browser/ui/views/toolbar/toolbar_view.h"
@@ -575,6 +577,7 @@ void LocationBarView::Init() {
 
   if (browser_ && !is_popup_mode_) {
     params.types_enabled.push_back(PageActionIconType::kBookmarkStar);
+    params.types_enabled.push_back(PageActionIconType::kRagIngestion);
   }
 
   params.icon_color = color_provider->GetColor(kColorOmniboxActionIcon);
@@ -1202,6 +1205,21 @@ void LocationBarView::Update(WebContents* contents) {
         permissions::PermissionRequestManager::FromWebContents(contents);
     if (permission_request_manager->CanRestorePrompt()) {
       permission_request_manager->RestorePrompt();
+    }
+  }
+
+  if (contents) {
+    GURL url = contents->GetVisibleURL();
+    if (url.DomainIs(jatter::kAppDomain) || url.host() == jatter::kAppHost) {
+      
+      // 1. Force the Omnibox to clear any "https://..." text
+      omnibox_view_->SetUserText(std::u16string(), true);
+      
+      // 2. Force keyboard focus into the bar
+      // We PostTask to make sure we win the focus fight against the webpage
+      base::SequencedTaskRunner::GetCurrentDefault()->PostTask(
+          FROM_HERE, base::BindOnce(&LocationBarView::FocusLocation, 
+          base::Unretained(this), false));
     }
   }
 }

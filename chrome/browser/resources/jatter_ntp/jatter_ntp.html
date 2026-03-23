@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>New Tab</title>
+  <style>
+    /* Ensure this matches your app's exact hex code to prevent flicker */
+    body { background-color: #121212; margin: 0; overflow: hidden; }
+  </style>
+</head>
+<body>
+  <script>
+    const target = "$i18n{appIframeUrl}";
+    let bounced = false;
+
+    function executeBounce() {
+      if (bounced || !target || !target.startsWith("http")) return;
+      bounced = true;
+      console.log("Network stack alive.");
+      window.location.replace(target);
+    }
+
+    function probeNetwork() {
+      if (bounced) return;
+      
+      // Fire a tiny, no-cors HEAD request to the target. 
+      // We don't care about the response body, just that the Network Service 
+      // successfully routed the packet and resolved the DNS.
+      fetch(target, { method: 'HEAD', mode: 'no-cors', cache: 'no-store' })
+        .then(() => {
+            executeBounce();
+        })
+        .catch(() => {
+            // FAILED! Network Service is still booting or OS is offline.
+            // Try again in 50ms.
+            console.log("Network not ready yet, retrying...");
+            setTimeout(probeNetwork, 50);
+        });
+    }
+
+    // Start probing the moment the DOM is parsed
+    probeNetwork();
+
+    // Absolute fallback: If the user gets impatient and clicks, try forcing it
+    window.addEventListener('click', executeBounce);
+  </script>
+</body>
+</html>

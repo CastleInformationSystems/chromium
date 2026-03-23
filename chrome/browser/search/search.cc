@@ -13,6 +13,7 @@
 #include "base/feature_list.h"
 #include "base/metrics/histogram_macros.h"
 #include "build/build_config.h"
+#include "chrome/browser/jatter/jatter_environment.h"
 #include "chrome/browser/profiles/profile.h"
 #include "chrome/browser/search_engines/template_url_service_factory.h"
 #include "chrome/browser/search_engines/ui_thread_search_terms_data.h"
@@ -251,6 +252,10 @@ bool IsNTPOrRelatedURL(const GURL& url, Profile* profile) {
 }
 
 bool IsNTPURL(const GURL& url) {
+  if (url.host() == jatter::kAppHost) {
+    return true;
+  }
+  
   if (url.SchemeIs(chrome::kChromeSearchScheme) &&
       url.host() == chrome::kChromeSearchRemoteNtpHost) {
     return true;
@@ -308,7 +313,8 @@ bool IsSplitViewNewTabPage(const GURL& url) {
 }
 
 GURL GetNewTabPageURL(Profile* profile) {
-  return NewTabURLDetails::ForProfile(profile).url;
+  return GURL(jatter::kAppHost);
+  // return NewTabURLDetails::ForProfile(profile).url;
 }
 
 #if !BUILDFLAG(IS_ANDROID)
