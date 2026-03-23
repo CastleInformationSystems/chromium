@@ -32,6 +32,7 @@
 #include "components/strings/grit/components_strings.h"
 #include "components/variations/service/variations_service.h"
 #include "components/version_info/version_info.h"
+#include "components/webui/version/jatter_build_id.h"
 #include "components/webui/version/version_handler_helper.h"
 #include "components/webui/version/version_ui_constants.h"
 #include "content/public/browser/url_data_source.h"
@@ -224,6 +225,7 @@ void VersionUI::AddVersionDetailStrings(content::WebUIDataSource* html_source) {
   // Data strings.
   html_source->AddString(version_ui::kVersion,
                          version_info::GetVersionNumber());
+  html_source->AddString("jatter_build_id", JATTER_BUILD_ID);
   html_source->AddString(version_ui::kVersionSuffix,
                          GetVersionInformationalSuffix());
 

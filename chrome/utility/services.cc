@@ -8,6 +8,8 @@
 #include <utility>
 
 #include "build/build_config.h"
+#include "chrome/services/rag_ingestion_pdf/rag_ingestion_pdf_extractor_impl.h"
+#include "chrome/services/rag_ingestion_pdf/public/mojom/rag_ingestion_pdf.mojom.h"
 #include "chrome/services/speech/buildflags/buildflags.h"
 #include "components/paint_preview/buildflags/buildflags.h"
 #include "components/password_manager/core/common/password_manager_features.h"
@@ -167,6 +169,12 @@ auto ContentBookmarkParser(
         receiver) {
   return std::make_unique<
       user_data_importer::ContentBookmarkParserInUtilityProcess>(
+      std::move(receiver));
+}
+
+auto RunRagIngestionPdfExtractor(
+    mojo::PendingReceiver<rag_ingestion::mojom::PdfTextExtractor> receiver) {
+  return std::make_unique<rag_ingestion::PdfTextExtractorImpl>(
       std::move(receiver));
 }
 
@@ -440,6 +448,8 @@ void RegisterMainThreadServices(mojo::ServiceFactory& services) {
   services.Add(RunWebAppOriginAssociationParser);
   services.Add(RunCSVPasswordParser);
   services.Add(ContentBookmarkParser);
+
+  services.Add(RunRagIngestionPdfExtractor);
 
 #if !BUILDFLAG(IS_ANDROID)
   services.Add(RunProfileImporter);

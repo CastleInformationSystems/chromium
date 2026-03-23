@@ -33,9 +33,9 @@ const char kChromeVersion[] = CHROME_VERSION_STRING;
 
 #if BUILDFLAG(IS_WIN)
 const base::FilePath::CharType kBrowserProcessExecutableName[] =
-    FPL("chrome.exe");
+    FPL("jatter.exe");
 const base::FilePath::CharType kHelperProcessExecutableName[] =
-    FPL("chrome.exe");
+    FPL("jatter.exe");
 #elif BUILDFLAG(IS_MAC)
 const base::FilePath::CharType kBrowserProcessExecutableName[] =
     FPL(PRODUCT_FULLNAME_STRING);
@@ -55,9 +55,9 @@ const base::FilePath::CharType kHelperProcessExecutableName[] = FPL("exe");
 
 #if BUILDFLAG(IS_WIN)
 const base::FilePath::CharType kBrowserProcessExecutablePath[] =
-    FPL("chrome.exe");
+    FPL("jatter.exe");
 const base::FilePath::CharType kHelperProcessExecutablePath[] =
-    FPL("chrome.exe");
+    FPL("jatter.exe");
 #elif BUILDFLAG(IS_MAC)
 const base::FilePath::CharType kBrowserProcessExecutablePath[] =
     FPL(PRODUCT_FULLNAME_STRING ".app/Contents/MacOS/" PRODUCT_FULLNAME_STRING);
@@ -68,7 +68,7 @@ const base::FilePath::CharType
 const base::FilePath::CharType kGoogleChromeBrowserProcessExecutablePath[] =
     FPL("Google Chrome.app/Contents/MacOS/Google Chrome");
 const base::FilePath::CharType kChromiumBrowserProcessExecutablePath[] =
-    FPL("Chromium.app/Contents/MacOS/Chromium");
+    FPL("Chromium.app/Contents/MacOS/Jatter");
 const base::FilePath::CharType kHelperProcessExecutablePath[] =
     FPL(PRODUCT_FULLNAME_STRING
         " Helper.app/Contents/MacOS/" PRODUCT_FULLNAME_STRING " Helper");

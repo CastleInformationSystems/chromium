@@ -4317,6 +4317,10 @@ inline constexpr char kNonMilestoneUpdateToastVersion[] =
     "toast.non_milestone_update_toast_version";
 #endif  // !BUILDFLAG(IS_ANDROID)
 
+// Dictionary to persist Firebase token id and refresh token
+inline constexpr char kJatterAuthenticationToken[] =
+    "jatter.authentication.token";
+
 }  // namespace prefs
 
 #endif  // CHROME_COMMON_PREF_NAMES_H_

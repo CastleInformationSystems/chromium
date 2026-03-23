@@ -23,6 +23,7 @@ template("chrome_repack_locales") {
     # Each input pak file should also have a deps line.
     source_patterns = [
       "${root_gen_dir}/chrome/branded_strings_",
+      "${root_gen_dir}/chrome/browser/rag_ingestion/rag_ingestion_strings_",
       "${root_gen_dir}/chrome/generated_resources_",
       "${root_gen_dir}/chrome/locale_settings_",
       "${root_gen_dir}/chrome/platform_locale_settings_",
@@ -51,6 +52,7 @@ template("chrome_repack_locales") {
       "//chrome/app:generated_resources",
       "//chrome/app/resources:locale_settings",
       "//chrome/app/resources:platform_locale_settings",
+      "//chrome/browser/rag_ingestion:rag_ingestion_strings",
       "//components/omnibox/resources:omnibox_pedal_synonyms",
       "//components/plus_addresses/core/browser/resources/strings",
       "//components/strings:components_branded_strings",

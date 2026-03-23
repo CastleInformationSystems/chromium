@@ -434,6 +434,11 @@ void ProfileImpl::RegisterProfilePrefs(
   registry->RegisterBooleanPref(prefs::kPdfAnnotationsEnabled, true);
 #endif
   registry->RegisterIntegerPref(prefs::kEnterpriseBadgingTemporarySetting, 0);
+
+  // Jatter
+  registry->RegisterDictionaryPref(prefs::kJatterAuthenticationToken,
+                                   base::Value::Dict(),
+                                   PrefRegistry::NO_REGISTRATION_FLAGS);
 }
 
 ProfileImpl::ProfileImpl(

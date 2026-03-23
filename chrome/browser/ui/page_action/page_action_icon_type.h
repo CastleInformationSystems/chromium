@@ -49,7 +49,8 @@ enum class PageActionIconType {
   // DEPRECATED: kChangePassword = 33,
   kLensOverlayHomework = 34,
   kAiMode = 35,
-  kMaxValue = kAiMode,
+  kRagIngestion = 36,
+  kMaxValue = kRagIngestion,
 };
 // LINT.ThenChange(//tools/metrics/histograms/metadata/page/enums.xml:PageActionIconType)
 

@@ -9,11 +9,13 @@
 #include "base/functional/bind.h"
 #include "build/build_config.h"
 #include "chrome/browser/favicon/favicon_utils.h"
+#include "chrome/browser/jatter/jatter_environment.h"
 #include "chrome/browser/sessions/session_restore.h"
 #include "chrome/browser/ui/tabs/public/tab_features.h"
 #include "chrome/browser/ui/tabs/saved_tab_groups/saved_tab_group_web_contents_listener.h"
 #include "chrome/browser/ui/tabs/split_tab_metrics.h"
 #include "chrome/grit/generated_resources.h"
+#include "components/strings/grit/components_strings.h"
 #include "components/tabs/public/tab_interface.h"
 #include "content/public/browser/web_contents.h"
 #include "ui/base/l10n/l10n_util.h"
@@ -39,6 +41,11 @@ TabUIHelper::TabUIHelper(tabs::TabInterface& tab_interface)
 TabUIHelper::~TabUIHelper() = default;
 
 std::u16string TabUIHelper::GetTitle() const {
+  GURL url = web_contents()->GetVisibleURL();
+  if (url.DomainIs(jatter::kAppDomain) || url.host() == jatter::kAppHost) {
+    return l10n_util::GetStringUTF16(IDS_NEW_TAB_TITLE);
+  }
+
   tabs::TabInterface* const tab_interface =
       tabs::TabInterface::GetFromContents(web_contents());
   const tab_groups::SavedTabGroupWebContentsListener* wc_listener =
