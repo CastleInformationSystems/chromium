@@ -14,6 +14,7 @@
 #include "chrome/browser/accessibility/accessibility_labels_service_factory.h"
 #include "chrome/browser/buildflags.h"
 #include "chrome/browser/dom_distiller/dom_distiller_service_factory.h"
+#include "chrome/browser/jatter/jatter_authorization_impl.h"
 #include "chrome/browser/navigation_predictor/navigation_predictor.h"
 #include "chrome/browser/optimization_guide/optimization_guide_keyed_service.h"
 #include "chrome/browser/optimization_guide/optimization_guide_keyed_service_factory.h"
@@ -425,6 +426,12 @@ void BindCredentialManager(
   content_credential_manager->BindRequest(frame_host, std::move(receiver));
 }
 
+void BindJatterSendAuthToken(
+    content::RenderFrameHost* frame_host,
+    mojo::PendingReceiver<jatter::mojom::JatterAuthorization> receiver) {
+  new JatterAuthorizationImpl(std::move(receiver), frame_host);
+}
+
 }  // namespace
 
 void PopulateChromeFrameBinders(
@@ -477,6 +484,9 @@ void PopulateChromeFrameBinders(
   map->Add<chrome::mojom::OpenSearchDescriptionDocumentHandler>(
       base::BindRepeating(
           &SearchEngineTabHelper::BindOpenSearchDescriptionDocumentHandler));
+  
+  map->Add<jatter::mojom::JatterAuthorization>(
+      base::BindRepeating(&BindJatterSendAuthToken));
 
 #if BUILDFLAG(IS_ANDROID)
   map->Add<blink::mojom::InstalledAppProvider>(
