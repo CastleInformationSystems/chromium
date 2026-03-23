@@ -1,0 +1,15 @@
+// Copyright 2024 The Chromium Authors
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
+module rag_ingestion.mojom;
+
+import "sandbox/policy/mojom/sandbox.mojom";
+
+// Sandboxed utility process interface for extracting text from PDFs.
+[ServiceSandbox=sandbox.mojom.Sandbox.kUtility]
+interface PdfTextExtractor {
+  // Accepts raw PDF bytes and returns the extracted text.
+  // Returns an empty string if it's an image-only PDF or parsing fails.
+  ExtractText(array<uint8> pdf_bytes) => (string extracted_text);
+};

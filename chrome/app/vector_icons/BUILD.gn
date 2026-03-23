@@ -171,6 +171,8 @@ aggregate_vector_icons("chrome_vector_icons") {
     "privacy_tip.icon",
     "qr_code_chrome_refresh.icon",
     "qrcode_generator.icon",
+    "rag_ingestion.icon",
+    "rag_ingestion_bell.icon",
     "read_later_add.icon",
     "reading_list.icon",
     "release_alert.icon",

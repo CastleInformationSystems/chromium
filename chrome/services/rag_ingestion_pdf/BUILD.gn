@@ -1,0 +1,13 @@
+source_set("rag_ingestion_pdf") {
+  sources = [
+    "rag_ingestion_pdf_extractor_impl.cc",
+    "rag_ingestion_pdf_extractor_impl.h",
+  ]
+
+  deps = [
+    "//base",
+    "//chrome/services/rag_ingestion_pdf/public/mojom",
+    "//mojo/public/cpp/bindings",
+    "//third_party/pdfium",
+  ]
+}
