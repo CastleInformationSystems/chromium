@@ -51,6 +51,7 @@ export enum ContentSettingsTypes {
   PRIVATE_NETWORK_DEVICES = 'private-network-devices',
   PROTECTED_CONTENT = 'protected-content',
   PROTOCOL_HANDLERS = 'register-protocol-handler',
+  RAG_INGESTION = 'rag-ingestion',
   SENSORS = 'sensors',
   SERIAL_PORTS = 'serial-ports',
   SMART_CARD_READERS = 'smart-card-readers',

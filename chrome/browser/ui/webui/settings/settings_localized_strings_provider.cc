@@ -340,11 +340,11 @@ void AddAboutStrings(content::WebUIDataSource* html_source, Profile* profile) {
           l10n_util::GetStringUTF16(IDS_ABOUT_VERSION_COPYRIGHT),
           base::Time::Now()));
 
-  std::u16string license = l10n_util::GetStringFUTF16(
-      IDS_VERSION_UI_LICENSE, chrome::kChromiumProjectURL,
-      chrome::kChromeUICreditsURL16,
-      l10n_util::GetStringUTF16(IDS_SETTINGS_OPENS_IN_NEW_TAB));
-  html_source->AddString("aboutProductLicense", license);
+  // std::u16string license = l10n_util::GetStringFUTF16(
+  //     IDS_VERSION_UI_LICENSE, chrome::kChromiumProjectURL,
+  //     chrome::kChromeUICreditsURL16,
+  //     l10n_util::GetStringUTF16(IDS_SETTINGS_OPENS_IN_NEW_TAB));
+  // html_source->AddString("aboutProductLicense", license);
 
   html_source->AddBoolean("aboutObsoleteNowOrSoon",
                           ObsoleteSystem::IsObsoleteNowOrSoon());
@@ -3859,6 +3859,10 @@ void AddSiteSettingsStrings(content::WebUIDataSource* html_source,
        IDS_SETTINGS_SITE_SETTINGS_LOOPBACK_NETWORK_ALLOWED_EXCEPTIONS},
       {"siteSettingsLoopbackNetworkBlockedExceptions",
        IDS_SETTINGS_SITE_SETTINGS_LOOPBACK_NETWORK_BLOCKED_EXCEPTIONS},
+      {"siteSettingsRagIngestion",
+       IDS_SITE_SETTINGS_TYPE_RAG_INGESTION},
+      {"siteSettingsRagIngestionMidSentence",
+       IDS_SITE_SETTINGS_TYPE_RAG_INGESTION_MID_SENTENCE},
   };
   html_source->AddLocalizedStrings(kLocalizedStrings);
 

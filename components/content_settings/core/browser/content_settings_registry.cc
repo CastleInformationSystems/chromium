@@ -842,6 +842,15 @@ void ContentSettingsRegistry::Init() {
            WebsiteSettingsRegistry::PLATFORM_CHROMEOS,
            ContentSettingsInfo::INHERIT_IN_INCOGNITO,
            PermissionSettingsInfo::EXCEPTIONS_ON_SECURE_ORIGINS_ONLY);
+  
+  Register(ContentSettingsType::RAG_INGESTION, "rag-ingestion",
+           CONTENT_SETTING_ASK,WebsiteSettingsInfo::UNSYNCABLE,
+           /*allowlisted_primary_schemes=*/{},
+           /*valid_settings=*/{CONTENT_SETTING_ALLOW, CONTENT_SETTING_BLOCK, CONTENT_SETTING_ASK},
+           WebsiteSettingsInfo::GENERIC_SINGLE_ORIGIN_SCOPE,
+           WebsiteSettingsRegistry::ALL_PLATFORMS,
+           ContentSettingsInfo::INHERIT_IN_INCOGNITO,
+           PermissionSettingsInfo::EXCEPTIONS_ON_SECURE_AND_INSECURE_ORIGINS);
 }
 
 void ContentSettingsRegistry::Register(

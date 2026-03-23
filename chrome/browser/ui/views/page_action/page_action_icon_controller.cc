@@ -37,6 +37,7 @@
 #include "chrome/browser/ui/views/page_action/page_action_icon_params.h"
 #include "chrome/browser/ui/views/page_action/zoom_view.h"
 #include "chrome/browser/ui/views/passwords/manage_passwords_icon_views.h"
+#include "chrome/browser/ui/views/rag_ingestion/rag_ingestion_page_action_icon_view.h"
 #include "chrome/browser/ui/views/sharing/sharing_dialog_view.h"
 #include "chrome/browser/ui/views/sharing/sharing_icon_view.h"
 #include "chrome/browser/ui/views/sharing_hub/sharing_hub_icon_view.h"
@@ -158,6 +159,12 @@ void PageActionIconController::Init(const PageActionIconParams& params,
       case PageActionIconType::kAutofillAddress:
         add_page_action_icon(
             type, std::make_unique<autofill::AddressBubblesIconView>(
+                      params.command_updater, params.icon_label_bubble_delegate,
+                      params.page_action_icon_delegate));
+        break;
+      case PageActionIconType::kRagIngestion:
+        add_page_action_icon(
+            type, std::make_unique<RagIngestionPageActionIconView>(
                       params.command_updater, params.icon_label_bubble_delegate,
                       params.page_action_icon_delegate));
         break;
