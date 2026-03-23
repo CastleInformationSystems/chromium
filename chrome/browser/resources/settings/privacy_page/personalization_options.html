@@ -90,12 +90,14 @@
     </settings-toggle-button>
 </if><!-- not chromeos -->
 </if><!-- _google_chrome -->
+<if expr="False">
     <settings-toggle-button id="urlCollectionToggle"
         class="hr"
         pref="{{prefs.url_keyed_anonymized_data_collection.enabled}}"
         label="$i18n{urlKeyedAnonymizedDataCollection}"
         sub-label="$i18n{urlKeyedAnonymizedDataCollectionDesc}">
     </settings-toggle-button>
+</if>
 <if expr="_google_chrome">
 <if expr="not is_chromeos">
     <settings-toggle-button id="spellCheckControl"

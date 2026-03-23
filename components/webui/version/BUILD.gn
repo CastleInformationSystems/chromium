@@ -8,6 +8,7 @@ static_library("version") {
     "version_handler_helper.h",
     "version_ui_constants.cc",
     "version_ui_constants.h",
+    "jatter_build_id.h",
   ]
 
   deps = [

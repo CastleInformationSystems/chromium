@@ -139,6 +139,59 @@ if (enable_uncompressed_archive) {
       "$target_gen_dir/mini_installer/packed_files_uncompressed.rc"
 }
 
+# [NEW ACTION] Step 1: Sign the core binaries before packaging.
+action("sign_binaries") {
+  script = "//chrome/installer/mini_installer/codesign/sign.py"
+  
+  # List all executable binaries (DLLs and EXEs) that need to be signed.
+  # These files MUST be compiled before this step runs.
+  core_binaries = [
+    "jatter.exe",
+    "chrome_proxy.exe",
+    "chrome.dll",
+    "chrome_elf.dll",
+    "chrome_wer.dll",
+    "d3dcompiler_47.dll",
+    "eventlog_provider.dll",
+    "libEGL.dll",
+    "libGLESv2.dll",
+    "notification_helper.exe",
+    "setup.exe",  # setup.exe is a vital part of the install process
+  ]
+
+  # The inputs are the binaries themselves, which ensures they are built first.
+  inputs = []
+  foreach(binary, core_binaries) {
+    # Assuming all these binaries live in the root output directory.
+    inputs += [ "$root_out_dir/$binary" ]
+  }
+  
+  # The output of this action is a placeholder file, just to satisfy the GN build dependency system.
+  outputs = [ "$target_gen_dir/signed_binaries.stamp" ]
+
+  args = [
+    rebase_path(root_out_dir, root_build_dir),
+    rebase_path("$target_gen_dir/signed_binaries.stamp", root_build_dir), # <--- Add this line
+  ]
+  args += core_binaries
+
+  # This must depend on the targets that produce the binaries listed in inputs.
+  deps = [
+    "//chrome",
+    "//chrome:chrome_dll",
+    "//chrome/chrome_elf",
+    "//chrome/installer/setup",
+    "//chrome/chrome_proxy:chrome_proxy",
+    "//chrome/browser/web_applications/chrome_pwa_launcher",
+    "//components/crash/win:chrome_wer",
+    "//third_party/angle:copy_compiler_dll",
+    "//chrome/common/win:eventlog_provider",
+    "//third_party/angle:libEGL",
+    "//third_party/angle:libGLESv2",
+    "//chrome/notification_helper",
+  ]
+}
+
 action("mini_installer_archive") {
   script = "//chrome/tools/build/win/create_installer_archive.py"
 
@@ -147,7 +200,7 @@ action("mini_installer_archive") {
   inputs = [
     "$root_out_dir/chrome.dll",
     "$root_out_dir/chrome_elf.dll",
-    "$root_out_dir/chrome.exe",
+    "$root_out_dir/jatter.exe",
     "$root_out_dir/locales/en-US.pak",
     "$root_out_dir/setup.exe",
     "//chrome/tools/build/win/makecab.py",
@@ -195,6 +248,8 @@ action("mini_installer_archive") {
     "//chrome/installer/setup",
     "//third_party/icu:icudata",
   ]
+
+  deps += [ ":sign_binaries" ]
 
   if (enable_hidpi) {
     args += [ "--enable_hidpi=1" ]
@@ -322,6 +377,26 @@ template("generate_mini_installer") {
 
 generate_mini_installer("mini_installer") {
   rc_file = packed_files_rc_file
+}
+
+# [NEW ACTION] Step 3: Sign the final mini_installer.exe wrapper.
+action("sign_mini_installer_action") {
+  # This ensures the installer is fully built before we try to sign it.
+  deps = [ ":mini_installer" ]
+
+  # Point to the new script
+  script = "//chrome/installer/mini_installer/codesign/sign_mini_installer.py"
+
+  # The input is the unsigned mini_installer.exe output by the previous step.
+  inputs = [ "$root_out_dir/mini_installer.exe" ]
+  
+  # The output is a placeholder stamp file to ensure GN knows this step was run.
+  outputs = [ "$target_gen_dir/mini_installer_signed.stamp" ] 
+
+  args = [
+    rebase_path("$root_out_dir/mini_installer.exe", root_build_dir),
+    rebase_path("$target_gen_dir/mini_installer_signed.stamp", root_build_dir), # <--- Add this line
+  ]
 }
 
 if (enable_uncompressed_archive) {
