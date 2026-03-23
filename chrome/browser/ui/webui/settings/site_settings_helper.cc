@@ -170,6 +170,7 @@ constexpr auto kContentSettingsTypeGroupNames = std::to_array<
     {ContentSettingsType::SMART_CARD_GUARD, "smart-card-readers"},
     {ContentSettingsType::SMART_CARD_DATA, kSmartCardChooserDataGroupType},
     {ContentSettingsType::LOCAL_NETWORK_ACCESS, "local-network-access"},
+    {ContentSettingsType::RAG_INGESTION, "rag-ingestion"},
 
     // Add new content settings here if a corresponding Javascript string
     // representation for it is not required, for example if the content setting
@@ -667,6 +668,8 @@ std::vector<ContentSettingsType> GetVisiblePermissionCategories(
             network::features::kLocalNetworkAccessChecks)) {
       base_types->push_back(ContentSettingsType::LOCAL_NETWORK_ACCESS);
     }
+
+    base_types->push_back(ContentSettingsType::RAG_INGESTION);
 
     initialized = true;
   }

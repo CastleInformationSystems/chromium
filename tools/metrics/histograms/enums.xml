@@ -2557,6 +2557,7 @@ Called by update_net_error_codes.py.-->
   <int value="140" label="Device Attributes"/>
   <int value="141" label="Permission actions history setting"/>
   <int value="142" label="Suspicious notification show original"/>
+  <int value="143" label="RAG ingestion"/>
 </enum>
 
 <!-- LINT.ThenChange(//components/content_settings/core/browser/content_settings_uma_util.cc:kHistogramValue) -->
