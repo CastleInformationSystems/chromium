@@ -20,6 +20,7 @@
 #include "chrome/browser/apps/app_service/web_contents_app_id_utils.h"
 #include "chrome/browser/apps/link_capturing/link_capturing_tab_data.h"
 #include "chrome/browser/browser_about_handler.h"
+#include "chrome/browser/jatter/jatter_environment.h"
 #include "chrome/browser/picture_in_picture/picture_in_picture_window_manager.h"
 #include "chrome/browser/platform_util.h"
 #include "chrome/browser/prefs/incognito_mode_prefs.h"
@@ -514,6 +515,23 @@ base::WeakPtr<content::NavigationHandle> Navigate(NavigateParams* params) {
     params->initiating_profile = source_browser->profile();
   }
   DCHECK(params->initiating_profile);
+
+  if (params->url == GURL(chrome::kChromeUINewTabURL) || 
+      params->url.host() == "jatter-ntp") {
+      
+      params->url = GURL(jatter::kAppUrl);
+      
+      // 1. Use AUTO_TOPLEVEL so it doesn't act like a clicked link.
+      // This breaks the parent/child tab grouping mechanism.
+      params->transition = ui::PAGE_TRANSITION_AUTO_TOPLEVEL;
+
+      // 2. Ensure we don't accidentally inherit the active tab as an opener.
+      // (Bitwise AND with the bitwise NOT of ADD_INHERIT_OPENER to clear it)
+      params->tabstrip_add_types &= ~AddTabTypes::ADD_INHERIT_OPENER;
+      
+      // 3. Clear any hardcoded index so the TabStripModel defaults to appending.
+      params->tabstrip_index = -1;
+  }
 
   // If the created window is a partitioned popin, a valid source exists, and
   // the disposition is NEW_POPUP then the resulting popup should be tab-modal.
