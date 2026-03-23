@@ -318,5 +318,11 @@
   <message name="IDS_SITE_SETTINGS_TYPE_OFFER_WRITING_HELP" desc="Name of the settings page that manages writing help UI preferences.">
     Offer writing help
   </message>
+  <message name="IDS_SITE_SETTINGS_TYPE_RAG_INGESTION" desc="Label for the RAG Ingestion permission in Site Settings">
+    Personal answers
+  </message>
+  <message name="IDS_SITE_SETTINGS_TYPE_RAG_INGESTION_MID_SENTENCE" desc="Mid-sentence label">
+    personal answers
+  </message>
   </if>
 </grit-part>
