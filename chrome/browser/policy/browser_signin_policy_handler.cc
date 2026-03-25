@@ -59,7 +59,7 @@ void BrowserSigninPolicyHandler::ApplyPolicySettings(const PolicyMap& policies,
 #else
           prefs::kSigninAllowedOnNextStartup,
 #endif
-          base::Value(true));
+          base::Value(false));
       break;
     case BrowserSigninMode::kDisabled:
       prefs->SetValue(

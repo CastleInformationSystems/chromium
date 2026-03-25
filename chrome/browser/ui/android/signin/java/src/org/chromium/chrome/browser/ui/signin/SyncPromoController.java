@@ -237,17 +237,18 @@ public class SyncPromoController {
 
     /** Determines whether the Sync promo can be shown. */
     public boolean canShowSyncPromo() {
-        switch (mAccessPoint) {
-            case SigninAccessPoint.BOOKMARK_MANAGER:
-                return canShowBookmarkPromo();
-            case SigninAccessPoint.NTP_FEED_TOP_PROMO:
-                return canShowNTPPromo();
-            case SigninAccessPoint.RECENT_TABS:
-                return canShowRecentTabsPromo();
-            default:
-                assert false : "Unexpected value for access point: " + mAccessPoint;
-                return false;
-        }
+        return false;
+        // switch (mAccessPoint) {
+        //     case SigninAccessPoint.BOOKMARK_MANAGER:
+        //         return canShowBookmarkPromo();
+        //     case SigninAccessPoint.NTP_FEED_TOP_PROMO:
+        //         return canShowNTPPromo();
+        //     case SigninAccessPoint.RECENT_TABS:
+        //         return canShowRecentTabsPromo();
+        //     default:
+        //         assert false : "Unexpected value for access point: " + mAccessPoint;
+        //         return false;
+        // }
     }
 
     private boolean canShowNTPPromo() {

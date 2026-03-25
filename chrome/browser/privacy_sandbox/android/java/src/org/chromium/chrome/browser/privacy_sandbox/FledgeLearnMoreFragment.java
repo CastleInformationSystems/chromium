@@ -34,16 +34,17 @@ public class FledgeLearnMoreFragment extends PrivacySandboxSettingsBaseFragment 
         mPageTitle.set(getString(R.string.settings_fledge_page_title));
         SettingsUtils.addPreferencesFromResource(this, R.xml.fledge_learn_more_preference);
         mFledgeLearnMoreBullet3Preference = findPreference(FLEDGE_LEARN_MORE_BULLET_3_PREFERENCE);
-        mFledgeLearnMoreBullet3Preference.setSummary(
-                SpanApplier.applySpans(
-                        getResources()
-                                .getString(
-                                        R.string
-                                                .settings_site_suggested_ads_page_learn_more_bullet_3_v2_clank),
-                        new SpanApplier.SpanInfo(
-                                "<link>",
-                                "</link>",
-                                new ChromeClickableSpan(getContext(), this::onLearnMoreClicked))));
+        // mFledgeLearnMoreBullet3Preference.setSummary(
+        //         SpanApplier.applySpans(
+        //                 getResources()
+        //                         .getString(
+        //                                 R.string
+        //                                         .settings_site_suggested_ads_page_learn_more_bullet_3_v2_clank),
+        //                 new SpanApplier.SpanInfo(
+        //                         "<link>",
+        //                         "</link>",
+        //                         new ChromeClickableSpan(getContext(), this::onLearnMoreClicked))));
+        mFledgeLearnMoreBullet3Preference.setSummary(R.string.settings_site_suggested_ads_page_learn_more_bullet_3_v2_clank);
         // Enable the options menu to be able to clear it.
         setHasOptionsMenu(true);
     }

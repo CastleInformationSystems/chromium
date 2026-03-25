@@ -27,7 +27,7 @@ declare_args() {
   # WebView providers which declare one of a handful of package names. See
   # https://chromium.googlesource.com/chromium/src/+/HEAD/android_webview/docs/build-instructions.md#Changing-package-name
   # for details.
-  chrome_public_manifest_package = "org.chromium.chrome"
+  chrome_public_manifest_package = "site.beacon.staging"
   if (use_stable_package_name_for_trichrome) {
     chrome_public_manifest_package += ".stable"
   } else if (android_channel != "default") {

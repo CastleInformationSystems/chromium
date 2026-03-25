@@ -586,19 +586,19 @@ public class SingleCategorySettings extends BaseSiteSettingsFragment
                     if (queryHasChanged) getInfoForOrigins();
                 });
 
-        if (getSiteSettingsDelegate().isHelpAndFeedbackEnabled()) {
-            MenuItem help =
-                    menu.add(
-                            Menu.NONE,
-                            R.id.menu_id_site_settings_help,
-                            Menu.NONE,
-                            R.string.menu_help);
-            help.setIcon(
-                    TraceEventVectorDrawableCompat.create(
-                            getResources(),
-                            R.drawable.ic_help_and_feedback,
-                            getContext().getTheme()));
-        }
+        // if (getSiteSettingsDelegate().isHelpAndFeedbackEnabled()) {
+        //     MenuItem help =
+        //             menu.add(
+        //                     Menu.NONE,
+        //                     R.id.menu_id_site_settings_help,
+        //                     Menu.NONE,
+        //                     R.string.menu_help);
+        //     help.setIcon(
+        //             TraceEventVectorDrawableCompat.create(
+        //                     getResources(),
+        //                     R.drawable.ic_help_and_feedback,
+        //                     getContext().getTheme()));
+        // }
     }
 
     @Override
@@ -1325,7 +1325,7 @@ public class SingleCategorySettings extends BaseSiteSettingsFragment
         Preference infoText = screen.findPreference(INFO_TEXT_KEY);
         @StringRes int res_id = getTextInfoResourceId();
         if (mCategory.getType() == SiteSettingsCategory.Type.STORAGE_ACCESS) {
-            infoText.setSummary(getStorageAccessSummary());
+            infoText.setSummary(R.string.website_settings_storage_access_page_description);
         } else if (getSiteSettingsDelegate().isPermissionSiteSettingsRadioButtonFeatureEnabled()
          && mCategory.getType() == SiteSettingsCategory.Type.PROTECTED_MEDIA) {
             infoText.setSummary(getProtectedMediaSummary());
