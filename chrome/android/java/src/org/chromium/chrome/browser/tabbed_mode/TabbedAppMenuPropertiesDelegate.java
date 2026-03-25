@@ -407,7 +407,7 @@ public class TabbedAppMenuPropertiesDelegate extends AppMenuPropertiesDelegateIm
         }
 
         // Help
-        modelList.add(buildHelpItem());
+        // modelList.add(buildHelpItem());
 
         // Managed by
         if (shouldShowManagedByMenuItem(currentTab)) {

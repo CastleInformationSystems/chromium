@@ -213,7 +213,7 @@ public class PrivacySandboxDialogNoticeEeaV2 extends ChromeDialog
 
             mScrollView.post(
                     () -> mScrollView.scrollTo(0, mSiteSuggestedAdsDropdownElement.getTop()));
-            handlePrivacyPolicyLink();
+        //     handlePrivacyPolicyLink();
         }
 
         mSiteSuggestedAdsExpandArrowView.setChecked(isSiteSuggestedAdsDropdownExpanded());

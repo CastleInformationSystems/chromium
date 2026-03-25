@@ -313,18 +313,18 @@ public class MainSettings extends ChromeBaseSettingsFragment
             removePreferenceIfPresent(PREF_UI_THEME);
         }
 
-        if (DeviceInfo.isAutomotive()) {
+        // if (DeviceInfo.isAutomotive()) {
             getPreferenceScreen().removePreference(findPreference(PREF_SAFETY_HUB));
-        } else {
-            findPreference(PREF_SAFETY_HUB)
-                    .setOnPreferenceClickListener(
-                            preference -> {
-                                SafetyHubMetricUtils.recordExternalInteractions(
-                                        SafetyHubMetricUtils.ExternalInteractions
-                                                .OPEN_FROM_SETTINGS_PAGE);
-                                return false;
-                            });
-        }
+        // } else {
+        //     findPreference(PREF_SAFETY_HUB)
+        //             .setOnPreferenceClickListener(
+        //                     preference -> {
+        //                         SafetyHubMetricUtils.recordExternalInteractions(
+        //                                 SafetyHubMetricUtils.ExternalInteractions
+        //                                         .OPEN_FROM_SETTINGS_PAGE);
+        //                         return false;
+        //                     });
+        // }
     }
 
     /**

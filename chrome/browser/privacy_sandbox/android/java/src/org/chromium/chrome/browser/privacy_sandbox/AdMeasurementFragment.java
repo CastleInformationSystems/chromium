@@ -63,7 +63,7 @@ public class AdMeasurementFragment extends PrivacySandboxSettingsBaseFragment
         adMeasurementToggle.setChecked(isAdMeasurementPrefEnabled(getProfile()));
         adMeasurementToggle.setOnPreferenceChangeListener(this);
         adMeasurementToggle.setManagedPreferenceDelegate(createManagedPreferenceDelegate());
-        maybeApplyAdsApiUxEnhancements();
+        // maybeApplyAdsApiUxEnhancements();
     }
 
     private void maybeApplyAdsApiUxEnhancements() {
