@@ -535,6 +535,7 @@ const CGFloat kIdentityDiscAvatarBackgroundSpacing = 5;
   // Set up a button. Details for the button will be set through delegate
   // implementation of UserAccountImageUpdateDelegate.
   self.identityDiscButton = [UIButton buttonWithType:UIButtonTypeCustom];
+  self.identityDiscButton.hidden = YES;
   self.identityDiscButton.accessibilityIdentifier = kNTPFeedHeaderIdentityDisc;
   [self.identityDiscButton addTarget:self.commandHandler
                               action:@selector(identityDiscWasTapped:)

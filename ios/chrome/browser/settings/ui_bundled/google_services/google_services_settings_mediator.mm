@@ -303,54 +303,54 @@ bool GetStatusForSigninPolicy() {
     TableViewItem* allowSigninItem = [self allowChromeSigninItem];
     allowSigninItem.accessibilityIdentifier =
         kAllowSigninItemAccessibilityIdentifier;
-    [items addObject:allowSigninItem];
+    // [items addObject:allowSigninItem];
 
-    if (self.localPrefService->IsManagedPreference(
-            metrics::prefs::kMetricsReportingEnabled) &&
-        !self.localPrefService->GetBoolean(
-            metrics::prefs::kMetricsReportingEnabled)) {
-      TableViewInfoButtonItem* improveChromeItem = [self
-          tableViewInfoButtonItemType:ImproveChromeManagedItemType
-                         textStringID:
-                             IDS_IOS_GOOGLE_SERVICES_SETTINGS_IMPROVE_CHROME_TEXT
-                       detailStringID:
-                           IDS_IOS_GOOGLE_SERVICES_SETTINGS_IMPROVE_CHROME_DETAIL
-                               status:self.sendDataUsagePreference];
-      [items addObject:improveChromeItem];
-    } else {
-      SyncSwitchItem* improveChromeItem = [self
-          switchItemWithItemType:ImproveChromeItemType
-                    textStringID:
-                        IDS_IOS_GOOGLE_SERVICES_SETTINGS_IMPROVE_CHROME_TEXT
-                  detailStringID:
-                      IDS_IOS_GOOGLE_SERVICES_SETTINGS_IMPROVE_CHROME_DETAIL];
-      improveChromeItem.accessibilityIdentifier =
-          kImproveChromeItemAccessibilityIdentifier;
-      [items addObject:improveChromeItem];
-    }
-    if (self.userPrefService->IsManagedPreference(
-            unified_consent::prefs::kUrlKeyedAnonymizedDataCollectionEnabled)) {
-      TableViewInfoButtonItem* betterSearchAndBrowsingItem = [self
-          tableViewInfoButtonItemType:BetterSearchAndBrowsingManagedItemType
-                         textStringID:
-                             IDS_IOS_GOOGLE_SERVICES_SETTINGS_BETTER_SEARCH_AND_BROWSING_TEXT
-                       detailStringID:
-                           IDS_IOS_GOOGLE_SERVICES_SETTINGS_BETTER_SEARCH_AND_BROWSING_DETAIL
-                               status:self.anonymizedDataCollectionPreference];
-      betterSearchAndBrowsingItem.accessibilityIdentifier =
-          kBetterSearchAndBrowsingItemAccessibilityID;
-      [items addObject:betterSearchAndBrowsingItem];
-    } else {
-      SyncSwitchItem* betterSearchAndBrowsingItem = [self
-          switchItemWithItemType:BetterSearchAndBrowsingItemType
-                    textStringID:
-                        IDS_IOS_GOOGLE_SERVICES_SETTINGS_BETTER_SEARCH_AND_BROWSING_TEXT
-                  detailStringID:
-                      IDS_IOS_GOOGLE_SERVICES_SETTINGS_BETTER_SEARCH_AND_BROWSING_DETAIL];
-      betterSearchAndBrowsingItem.accessibilityIdentifier =
-          kBetterSearchAndBrowsingItemAccessibilityID;
-      [items addObject:betterSearchAndBrowsingItem];
-    }
+    // if (self.localPrefService->IsManagedPreference(
+    //         metrics::prefs::kMetricsReportingEnabled) &&
+    //     !self.localPrefService->GetBoolean(
+    //         metrics::prefs::kMetricsReportingEnabled)) {
+    //   TableViewInfoButtonItem* improveChromeItem = [self
+    //       tableViewInfoButtonItemType:ImproveChromeManagedItemType
+    //                      textStringID:
+    //                          IDS_IOS_GOOGLE_SERVICES_SETTINGS_IMPROVE_CHROME_TEXT
+    //                    detailStringID:
+    //                        IDS_IOS_GOOGLE_SERVICES_SETTINGS_IMPROVE_CHROME_DETAIL
+    //                            status:self.sendDataUsagePreference];
+    //   [items addObject:improveChromeItem];
+    // } else {
+    //   SyncSwitchItem* improveChromeItem = [self
+    //       switchItemWithItemType:ImproveChromeItemType
+    //                 textStringID:
+    //                     IDS_IOS_GOOGLE_SERVICES_SETTINGS_IMPROVE_CHROME_TEXT
+    //               detailStringID:
+    //                   IDS_IOS_GOOGLE_SERVICES_SETTINGS_IMPROVE_CHROME_DETAIL];
+    //   improveChromeItem.accessibilityIdentifier =
+    //       kImproveChromeItemAccessibilityIdentifier;
+    //   [items addObject:improveChromeItem];
+    // }
+    // if (self.userPrefService->IsManagedPreference(
+    //         unified_consent::prefs::kUrlKeyedAnonymizedDataCollectionEnabled)) {
+    //   TableViewInfoButtonItem* betterSearchAndBrowsingItem = [self
+    //       tableViewInfoButtonItemType:BetterSearchAndBrowsingManagedItemType
+    //                      textStringID:
+    //                          IDS_IOS_GOOGLE_SERVICES_SETTINGS_BETTER_SEARCH_AND_BROWSING_TEXT
+    //                    detailStringID:
+    //                        IDS_IOS_GOOGLE_SERVICES_SETTINGS_BETTER_SEARCH_AND_BROWSING_DETAIL
+    //                            status:self.anonymizedDataCollectionPreference];
+    //   betterSearchAndBrowsingItem.accessibilityIdentifier =
+    //       kBetterSearchAndBrowsingItemAccessibilityID;
+    //   [items addObject:betterSearchAndBrowsingItem];
+    // } else {
+    //   SyncSwitchItem* betterSearchAndBrowsingItem = [self
+    //       switchItemWithItemType:BetterSearchAndBrowsingItemType
+    //                 textStringID:
+    //                     IDS_IOS_GOOGLE_SERVICES_SETTINGS_BETTER_SEARCH_AND_BROWSING_TEXT
+    //               detailStringID:
+    //                   IDS_IOS_GOOGLE_SERVICES_SETTINGS_BETTER_SEARCH_AND_BROWSING_DETAIL];
+    //   betterSearchAndBrowsingItem.accessibilityIdentifier =
+    //       kBetterSearchAndBrowsingItemAccessibilityID;
+    //   [items addObject:betterSearchAndBrowsingItem];
+    // }
     if (self.userPrefService->IsManagedPreference(
             prefs::kSearchSuggestEnabled)) {
       TableViewInfoButtonItem* improveSearchSuggestionsItem = [self
@@ -371,25 +371,25 @@ bool GetStatusForSigninPolicy() {
                       IDS_IOS_GOOGLE_SERVICES_SETTINGS_IMPROVE_SEARCH_SUGGESTIONS_DETAIL];
       [items addObject:improveSearchSuggestionsItem];
     }
-    if (self.userPrefService->IsManagedPreference(
-            prefs::kTrackPricesOnTabsEnabled)) {
-      TableViewInfoButtonItem* trackPricesOnTabsItem = [self
-          tableViewInfoButtonItemType:TrackPricesOnTabsItemType
-                         textStringID:IDS_IOS_TRACK_PRICES_ON_TABS
-                       detailStringID:IDS_IOS_TRACK_PRICES_ON_TABS_DESCRIPTION
-                               status:self.trackPricesOnTabsPreference];
-      trackPricesOnTabsItem.accessibilityIdentifier =
-          kTrackPricesOnTabsItemAccessibilityID;
-      [items addObject:trackPricesOnTabsItem];
-    } else {
-      SyncSwitchItem* trackPricesOnTabsItem = [self
-          switchItemWithItemType:TrackPricesOnTabsItemType
-                    textStringID:IDS_IOS_TRACK_PRICES_ON_TABS
-                  detailStringID:IDS_IOS_TRACK_PRICES_ON_TABS_DESCRIPTION];
-      trackPricesOnTabsItem.accessibilityIdentifier =
-          kTrackPricesOnTabsItemAccessibilityID;
-      [items addObject:trackPricesOnTabsItem];
-    }
+    // if (self.userPrefService->IsManagedPreference(
+    //         prefs::kTrackPricesOnTabsEnabled)) {
+    //   TableViewInfoButtonItem* trackPricesOnTabsItem = [self
+    //       tableViewInfoButtonItemType:TrackPricesOnTabsItemType
+    //                      textStringID:IDS_IOS_TRACK_PRICES_ON_TABS
+    //                    detailStringID:IDS_IOS_TRACK_PRICES_ON_TABS_DESCRIPTION
+    //                            status:self.trackPricesOnTabsPreference];
+    //   trackPricesOnTabsItem.accessibilityIdentifier =
+    //       kTrackPricesOnTabsItemAccessibilityID;
+    //   [items addObject:trackPricesOnTabsItem];
+    // } else {
+    //   SyncSwitchItem* trackPricesOnTabsItem = [self
+    //       switchItemWithItemType:TrackPricesOnTabsItemType
+    //                 textStringID:IDS_IOS_TRACK_PRICES_ON_TABS
+    //               detailStringID:IDS_IOS_TRACK_PRICES_ON_TABS_DESCRIPTION];
+    //   trackPricesOnTabsItem.accessibilityIdentifier =
+    //       kTrackPricesOnTabsItemAccessibilityID;
+    //   [items addObject:trackPricesOnTabsItem];
+    // }
     _nonPersonalizedItems = items;
   }
   return _nonPersonalizedItems;

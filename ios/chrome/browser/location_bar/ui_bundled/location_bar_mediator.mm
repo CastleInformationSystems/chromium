@@ -178,6 +178,18 @@ const CGFloat kIconPointSize = 16.0;
 
 - (void)locationUpdated {
   [self updatePlaceholderType];
+
+  if (_webStateList) {
+    web::WebState* webState = _webStateList->GetActiveWebState();
+    if (webState) {
+      const GURL& visibleURL = webState->GetVisibleURL();
+      // Check if the current URL matches your custom New Tab Page
+      if (visibleURL == GURL("https://beacon-staging-df5f2.firebaseapp.com")) {
+         // Force the Consumer (View) to show an empty string
+         [self.consumer updateLocationText:@"Search or type URL" clipTail:YES];
+      }
+    }
+  }
 }
 
 #pragma mark - WebStateListObserving
