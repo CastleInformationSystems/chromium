@@ -272,7 +272,7 @@ class Distribution(object):
                  creator_code=None,
                  channel_customize=False,
                  package_as_dmg=True,
-                 package_as_pkg=False,
+                 package_as_pkg=True,
                  package_as_zip=False,
                  inflation_kilobytes=0):
         """Creates a new Distribution object. All arguments are optional.
