@@ -1924,22 +1924,22 @@ bool AreIssuesEqual(const std::vector<password_manager::AffiliatedGroup>& lhs,
       NSString* title =
           l10n_util::GetNSString(IDS_IOS_SETTINGS_PASSWORD_EMPTY_TITLE);
 
-      NSDictionary* textAttributes =
-          [TableViewIllustratedEmptyView defaultTextAttributesForSubtitle];
-      NSURL* linkURL = net::NSURLWithGURL(google_util::AppendGoogleLocaleParam(
-          GURL(password_manager::kPasswordManagerHelpCenteriOSURL),
-          GetApplicationContext()->GetApplicationLocaleStorage()->Get()));
-      NSDictionary* linkAttributes = @{
-        NSForegroundColorAttributeName : [UIColor colorNamed:kBlueColor],
-        NSLinkAttributeName : linkURL,
-      };
-      NSAttributedString* subtitle = AttributedStringFromStringWithLink(
-          l10n_util::GetNSString(IDS_IOS_SAVE_PASSWORDS_MANAGE_ACCOUNT_HEADER),
-          textAttributes, linkAttributes);
+      // NSDictionary* textAttributes =
+      //     [TableViewIllustratedEmptyView defaultTextAttributesForSubtitle];
+      // NSURL* linkURL = net::NSURLWithGURL(google_util::AppendGoogleLocaleParam(
+      //     GURL(password_manager::kPasswordManagerHelpCenteriOSURL),
+      //     GetApplicationContext()->GetApplicationLocaleStorage()->Get()));
+      // NSDictionary* linkAttributes = @{
+      //   NSForegroundColorAttributeName : [UIColor colorNamed:kBlueColor],
+      //   NSLinkAttributeName : linkURL,
+      // };
+      // NSAttributedString* subtitle = AttributedStringFromStringWithLink(
+      //     l10n_util::GetNSString(IDS_IOS_SAVE_PASSWORDS_MANAGE_ACCOUNT_HEADER),
+      //     textAttributes, linkAttributes);
 
       [self addEmptyTableViewWithImage:[UIImage imageNamed:@"passwords_empty"]
                                  title:title
-                    attributedSubtitle:subtitle
+                    attributedSubtitle:nil
                               delegate:self];
     }
 

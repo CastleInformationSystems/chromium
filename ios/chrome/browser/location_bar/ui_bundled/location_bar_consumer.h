@@ -32,6 +32,8 @@
 // Sets the default search engine image to use as placeholder when the
 // placeholder is set to kDefaultSearchEngineIcon.
 - (void)setPlaceholderDefaultSearchEngineIcon:(UIImage*)icon;
+
+- (void)updateLocationText:(NSString*)text clipTail:(BOOL)clipTail;
 @end
 
 #endif  // IOS_CHROME_BROWSER_LOCATION_BAR_UI_BUNDLED_LOCATION_BAR_CONSUMER_H_

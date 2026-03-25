@@ -98,8 +98,8 @@ typedef NS_ENUM(NSInteger, ItemType) {
   [model addItem:[self preloadWebpagesItem]
       toSectionWithIdentifier:SectionIdentifierActions];
 
-  [model setFooter:[self footerItem]
-      forSectionWithIdentifier:SectionIdentifierActions];
+  // [model setFooter:[self footerItem]
+  //     forSectionWithIdentifier:SectionIdentifierActions];
 }
 
 #pragma mark - SettingsControllerProtocol
@@ -114,18 +114,18 @@ typedef NS_ENUM(NSInteger, ItemType) {
 
 #pragma mark - UITableViewDelegate
 
-- (UIView*)tableView:(UITableView*)tableView
-    viewForFooterInSection:(NSInteger)section {
-  UIView* footerView = [super tableView:tableView
-                 viewForFooterInSection:section];
-  if (SectionIdentifierActions ==
-      [self.tableViewModel sectionIdentifierForSectionIndex:section]) {
-    TableViewLinkHeaderFooterView* footer =
-        base::apple::ObjCCastStrict<TableViewLinkHeaderFooterView>(footerView);
-    footer.delegate = self;
-  }
-  return footerView;
-}
+// - (UIView*)tableView:(UITableView*)tableView
+//     viewForFooterInSection:(NSInteger)section {
+//   UIView* footerView = [super tableView:tableView
+//                  viewForFooterInSection:section];
+//   if (SectionIdentifierActions ==
+//       [self.tableViewModel sectionIdentifierForSectionIndex:section]) {
+//     TableViewLinkHeaderFooterView* footer =
+//         base::apple::ObjCCastStrict<TableViewLinkHeaderFooterView>(footerView);
+//     footer.delegate = self;
+//   }
+//   return footerView;
+// }
 
 - (void)tableView:(UITableView*)tableView
     didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
@@ -178,17 +178,17 @@ typedef NS_ENUM(NSInteger, ItemType) {
 
 // Returns a newly created item for the footer of the section, describing how
 // the bandwidth management is done.
-- (TableViewLinkHeaderFooterItem*)footerItem {
-  TableViewLinkHeaderFooterItem* item =
-      [[TableViewLinkHeaderFooterItem alloc] initWithType:ItemTypeFooter];
+// - (TableViewLinkHeaderFooterItem*)footerItem {
+//   TableViewLinkHeaderFooterItem* item =
+//       [[TableViewLinkHeaderFooterItem alloc] initWithType:ItemTypeFooter];
 
-  item.text = l10n_util::GetNSString(
-      IDS_IOS_BANDWIDTH_MANAGEMENT_DESCRIPTION_LEARN_MORE);
-  item.urls = @[ [[CrURL alloc]
-      initWithGURL:GURL(l10n_util::GetStringUTF8(
-                       IDS_IOS_BANDWIDTH_MANAGEMENT_LEARN_URL))] ];
-  item.accessibilityTraits |= UIAccessibilityTraitButton;
-  return item;
-}
+//   item.text = l10n_util::GetNSString(
+//       IDS_IOS_BANDWIDTH_MANAGEMENT_DESCRIPTION_LEARN_MORE);
+//   item.urls = @[ [[CrURL alloc]
+//       initWithGURL:GURL(l10n_util::GetStringUTF8(
+//                        IDS_IOS_BANDWIDTH_MANAGEMENT_LEARN_URL))] ];
+//   item.accessibilityTraits |= UIAccessibilityTraitButton;
+//   return item;
+// }
 
 @end

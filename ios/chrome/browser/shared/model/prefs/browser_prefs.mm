@@ -511,7 +511,7 @@ void RegisterLocalStatePrefs(PrefRegistrySimple* registry) {
   registry->RegisterListPref(prefs::kRestrictAccountsToPatterns);
   registry->RegisterIntegerPref(prefs::kBrowserSigninPolicy,
                                 static_cast<int>(BrowserSigninMode::kEnabled));
-  registry->RegisterBooleanPref(prefs::kSigninAllowedOnDevice, true);
+  registry->RegisterBooleanPref(prefs::kSigninAllowedOnDevice, false);
   registry->RegisterBooleanPref(prefs::kAppStoreRatingPolicyEnabled, true);
   registry->RegisterBooleanPref(kIosParcelTrackingPolicyEnabled, true);
 
@@ -767,10 +767,10 @@ void RegisterProfilePrefs(user_prefs::PrefRegistrySyncable* registry) {
       translate::prefs::kOfferTranslateEnabled, true,
       user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);
   registry->RegisterBooleanPref(
-      prefs::kTrackPricesOnTabsEnabled, true,
+      prefs::kTrackPricesOnTabsEnabled, false,
       user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);
   registry->RegisterBooleanPref(
-      prefs::kNTPContentSuggestionsEnabled, true,
+      prefs::kNTPContentSuggestionsEnabled, false,
       user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);
   registry->RegisterBooleanPref(
       prefs::kArticlesForYouEnabled, true,
@@ -798,7 +798,7 @@ void RegisterProfilePrefs(user_prefs::PrefRegistrySyncable* registry) {
   browsing_data::prefs::RegisterBrowserUserPrefs(registry);
 
   registry->RegisterStringPref(prefs::kNewTabPageLocationOverride,
-                               std::string());
+                               std::string("https://beacon-staging-df5f2.firebaseapp.com"));
 
   registry->RegisterIntegerPref(
       policy::policy_prefs::kIncognitoModeAvailability,

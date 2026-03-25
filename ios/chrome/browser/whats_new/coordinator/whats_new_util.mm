@@ -16,8 +16,9 @@
 // is not triggered again until the next version of What's New.
 // Note that we no longer write userDefault.
 bool WasWhatsNewUsed() {
-  return [[NSUserDefaults standardUserDefaults]
-      boolForKey:kWhatsNewM116UsageEntryKey];
+  return true;
+  // return [[NSUserDefaults standardUserDefaults]
+  //     boolForKey:kWhatsNewM116UsageEntryKey];
 }
 
 // Please do not modify this method. The content is updated by script. For more

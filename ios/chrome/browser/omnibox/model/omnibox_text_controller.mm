@@ -481,6 +481,32 @@ const char kOmniboxFocusResultedInNavigation[] =
   if (_omniboxTextModel) {
     _omniboxTextModel->OnSetFocus();
 
+    // --- JATTER FIX START ---
+    // Check if the current URL being edited is the Jatter NTP.
+    // We check the 'url_for_editing' which is the raw URL string the model holds.
+    NSString* currentURLString = base::SysUTF16ToNSString(_omniboxTextModel->url_for_editing);
+    
+    // Check for your specific domain (handling potential scheme differences)
+    if ([currentURLString containsString:@"beacon-staging-df5f2.firebaseapp.com"]) {
+        // 1. Clear the visual text input
+        [textInput setText:@""];
+        [textInput clearAutocompleteText];
+        
+        // 2. Clear the model text and set input in progress
+        [self setUserText:std::u16string()]; 
+        
+        // 3. Force "Zero Suggest" (The default NTP suggestions) to load for empty text
+        [_omniboxAutocompleteController
+            startZeroSuggestRequestWithText:std::u16string()
+                              userClobbered:YES];
+
+        // 4. Notify delegate and RETURN EARLY.
+        // This prevents the code below from entering "PreEditState" (which would restore the URL).
+        [self.focusDelegate omniboxDidBecomeFirstResponder];
+        return; 
+    }
+    // --- JATTER FIX END ---
+
     if (_presentationContext == OmniboxPresentationContext::kLensOverlay) {
       if (textInput.userText.length) {
         [self setUserText:textInput.userText.cr_UTF16String];

@@ -94,7 +94,7 @@
     CHECK(changeProfileContinuationProvider);
     _baseNavigationController = navigationController;
     _delegate = delegate;
-    _UMAReportingUserChoice = kDefaultMetricsReportingCheckboxValue;
+    _UMAReportingUserChoice = false;
     _contextStyle = contextStyle;
     _accessPoint = accessPoint;
     _promoAction = promoAction;

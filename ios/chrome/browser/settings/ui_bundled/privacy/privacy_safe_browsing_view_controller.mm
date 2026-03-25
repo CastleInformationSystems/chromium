@@ -175,11 +175,11 @@ typedef NS_ENUM(NSInteger, SectionIdentifier) {
     cell.selectedBackgroundView = selectedBackgroundView;
   }
 
-  TableViewInfoButtonCell* infoCell =
-      base::apple::ObjCCastStrict<TableViewInfoButtonCell>(cell);
-  [infoCell.trailingButton addTarget:self
-                              action:@selector(didTapUIInfoButton:)
-                    forControlEvents:UIControlEventTouchUpInside];
+  // TableViewInfoButtonCell* infoCell =
+  //     base::apple::ObjCCastStrict<TableViewInfoButtonCell>(cell);
+  // [infoCell.trailingButton addTarget:self
+  //                             action:@selector(didTapUIInfoButton:)
+  //                   forControlEvents:UIControlEventTouchUpInside];
 
   return cell;
 }
