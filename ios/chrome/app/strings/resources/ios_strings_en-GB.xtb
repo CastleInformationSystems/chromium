@@ -24,7 +24,7 @@
 <translation id="1072679792409426431">Disabled by your administrator</translation>
 <translation id="1074827084851510304">You are about to delete {password_count} passwords and the list of sites and apps for which you chose to never save sign-in info. Any account that you created for sites and apps won't be deleted.</translation>
 <translation id="1076421457278169141">Code scanned</translation>
-<translation id="1081114897601629648">The following passwords were not imported to Google Password Manager, because they don't match with the requirements.</translation>
+<translation id="1081114897601629648">The following passwords were not imported to Password Manager, because they don't match with the requirements.</translation>
 <translation id="1081932398873105675">{count,plural, =1{{count} tab}other{{count} tabs}}</translation>
 <translation id="1082554859195167538">Product reviews for you</translation>
 <translation id="1084365883616172403">Facebook post completed.</translation>
@@ -40,7 +40,7 @@
 <translation id="1121850836842642159">Photos and images</translation>
 <translation id="1122068467107743258">Work</translation>
 <translation id="1126696498560056882">Manage accounts on this device</translation>
-<translation id="1126809382673880764">Does not protect you against dangerous websites, downloads and extensions. You’ll still get Safe Browsing protection, where available, in other Google services, like Gmail and Search.</translation>
+<translation id="1126809382673880764">Does not protect you against dangerous websites, downloads and extensions. You’ll still get Safe Browsing protection, where available, in other Services, like Gmail and Search.</translation>
 <translation id="1136104150802877429">Shows product reviews</translation>
 <translation id="1142371195993008685">Turn off notifications for <ph name="FEATURE_NAME" /></translation>
 <translation id="1147031633655575115">Signed in as <ph name="USER" /></translation>
@@ -352,7 +352,7 @@
 <translation id="2273327106802955778">More menu</translation>
 <translation id="2287614783861766820">{count,plural, =1{This address will be deleted from this device.}other{These addresses will be deleted from this device.}}</translation>
 <translation id="2297989278479054870">After you sign out, the bookmarks, passwords and more in your Google Account will be removed from this device.</translation>
-<translation id="2299218006564889602">Your passwords are encrypted on your device before they’re saved to Google Password Manager.</translation>
+<translation id="2299218006564889602">Your passwords are encrypted on your device before they’re saved to Password Manager.</translation>
 <translation id="2306265833370324042">Show <ph name="SEARCH_ENGINE_NAME" /> details</translation>
 <translation id="2309265394777270359">Close tab</translation>
 <translation id="2311077293164383652">Close pinned tab</translation>
@@ -413,7 +413,7 @@
 <translation id="2523295204312809179">When you close a tab group, it's automatically saved here</translation>
 <translation id="2524699375503213836">Bring your data from Safari</translation>
 <translation id="2529021024822217800">Open All</translation>
-<translation id="2536991091671391962">You can use saved passwords on any device. They're saved to Google Password Manager for <ph name="EMAIL" />.</translation>
+<translation id="2536991091671391962">You can use saved passwords on any device. They're saved to Password Manager for <ph name="EMAIL" />.</translation>
 <translation id="2538103551183528357">Hidden, password</translation>
 <translation id="2539748786028143624">Turn on enhanced protection…</translation>
 <translation id="2540111494300686866">Suppress dialogues</translation>
@@ -440,7 +440,7 @@
 <translation id="2640733327287333451">No username ••••••</translation>
 <translation id="264215785133931186">Checked just now</translation>
 <translation id="2647434099613338025">Add language</translation>
-<translation id="2649592894792404568">You're about to delete your Google Password Manager data</translation>
+<translation id="2649592894792404568">You're about to delete your Password Manager data</translation>
 <translation id="2652129567809778422">Select password</translation>
 <translation id="2658056020748144467">Unable to open file</translation>
 <translation id="2661809266906115479"><ph name="TITLE" />, <ph name="STATE" />, only on this device, <ph name="URL" /></translation>
@@ -530,8 +530,8 @@
 <translation id="3021342271734507256">Draw, highlight or tap anything on your screen to search</translation>
 <translation id="3023690182746510369">Hang tight while we use AI to supercharge your calendar event with the web page's context.</translation>
 <translation id="3030138564564344289">Retry download</translation>
-<translation id="3032704072014531631">You'll immediately lose access to the '<ph name="GROUP_NAME" />' tab group, and <ph name="USER_NAME" /> (<ph name="USER_EMAIL" />) will no longer be able to interact with you across Google services</translation>
-<translation id="3034496853223708513"><ph name="USER_NAME" /> (<ph name="USER_EMAIL" />) will immediately lose access to the '<ph name="GROUP_NAME" />' tab group and will no longer be able to interact with you across Google services</translation>
+<translation id="3032704072014531631">You'll immediately lose access to the '<ph name="GROUP_NAME" />' tab group, and <ph name="USER_NAME" /> (<ph name="USER_EMAIL" />) will no longer be able to interact with you across Services</translation>
+<translation id="3034496853223708513"><ph name="USER_NAME" /> (<ph name="USER_EMAIL" />) will immediately lose access to the '<ph name="GROUP_NAME" />' tab group and will no longer be able to interact with you across Services</translation>
 <translation id="3037177537145227281">Tracking price</translation>
 <translation id="3038136505713492417">Verify that it's you to use your passkeys on this device</translation>
 <translation id="3039671569659952257">Delete folder</translation>
@@ -1096,7 +1096,7 @@
 <translation id="5233638681132016545">New tab</translation>
 <translation id="5234094073825090254">{count,plural, =1{Bookmark saved in your Google Account, {email}.}other{Bookmarks saved in your Google Account, {email}.}}</translation>
 <translation id="5234764350956374838">Dismiss</translation>
-<translation id="5238596603078743134"><ph name="BEGIN_BOLD" /><ph name="USERNAME" /><ph name="END_BOLD" /> can now use your username and password when they use Google Password Manager to sign in to <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" />.</translation>
+<translation id="5238596603078743134"><ph name="BEGIN_BOLD" /><ph name="USERNAME" /><ph name="END_BOLD" /> can now use your username and password when they use Password Manager to sign in to <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" />.</translation>
 <translation id="5241106044372754566"><ph name="NAME" />, <ph name="EMAIL" />, managed by your organisation currently selected. Choose an account.</translation>
 <translation id="5242899254250321823">Change password on website</translation>
 <translation id="5248640482715684545">This site is trying to open another application.</translation>
@@ -1217,7 +1217,7 @@ Handoff must also be enabled in the General section of Settings, and your device
 <translation id="5688739340234490129">{count,plural, =1{{count} card}other{{count} cards}}</translation>
 <translation id="5694848685995373177">Saved in Drive for <ph name="USER_EMAIL" />.</translation>
 <translation id="570209299585559496">You can change the default site view to desktop in Settings, then Content settings</translation>
-<translation id="5702108177581350218">When you share a copy of your username and password, your family member can fill them in using Google Password Manager.</translation>
+<translation id="5702108177581350218">When you share a copy of your username and password, your family member can fill them in using Password Manager.</translation>
 <translation id="5704908597376970822">Can't sign in.</translation>
 <translation id="5709005673595820640">{count,plural, =1{You have {count} reused password that could put your security at risk. Fix it now to stay safe.}other{You have {count} reused passwords that could put your security at risk. Fix them now to stay safe.}}</translation>
 <translation id="57094364128775171">Suggest strong password…</translation>
@@ -1225,7 +1225,7 @@ Handoff must also be enabled in the General section of Settings, and your device
 <translation id="5721040778297053709">Position credit card in this frame</translation>
 <translation id="572328651809341494">Recent tabs</translation>
 <translation id="5724941645893276623">To browse the web privately, add a new tab</translation>
-<translation id="5728072125198221967">Linked Google services</translation>
+<translation id="5728072125198221967">Linked Services</translation>
 <translation id="5728700505257787410">Sorry, there was a problem signing in to your account.</translation>
 <translation id="5737974891429562743">Account sign-in details are out of date. Update to start sync.</translation>
 <translation id="5738385766833540397">Manage how you receive price drop alerts for products that you track</translation>
@@ -1259,7 +1259,7 @@ Handoff must also be enabled in the General section of Settings, and your device
 <translation id="5838430324585198889">Unlock more features for your iPad with Google apps</translation>
 <translation id="583923961930319521">Use passwords on all your devices</translation>
 <translation id="5843013299019689749">Black background colour</translation>
-<translation id="5844284118433003733">When you're signed in, this data is linked to your Google Account to protect you across Google services, for example increased protection in Gmail after a security incident.</translation>
+<translation id="5844284118433003733">When you're signed in, this data is linked to your Google Account to protect you across Services, for example increased protection in Gmail after a security incident.</translation>
 <translation id="5854790677617711513">Older than 30 days</translation>
 <translation id="5857770089550859117">Passphrase required to start sync.</translation>
 <translation id="5859715514067755465">Forward</translation>
@@ -1321,7 +1321,7 @@ Handoff must also be enabled in the General section of Settings, and your device
 <translation id="607730456154980869">Get answers faster with Gemini in Chrome</translation>
 <translation id="6078236141387574983">Readjust the height of the sheet</translation>
 <translation id="6084848228346514841">Select tabs</translation>
-<translation id="6089212833343035912">Google Password Manager PIN</translation>
+<translation id="6089212833343035912">Password Manager PIN</translation>
 <translation id="6090760257419195752">Dismissed warnings</translation>
 <translation id="6094325891006032858">Turn On Enhanced Safe Browsing</translation>
 <translation id="6096965253650248286"><ph name="COUNT" /> found</translation>
@@ -1374,7 +1374,7 @@ Handoff must also be enabled in the General section of Settings, and your device
 <translation id="6234310016144827337">Check your connection and try again</translation>
 <translation id="6236952928980352967">Restore warning</translation>
 <translation id="6241132809279377987">Unlock more features for your iPhone with Google apps</translation>
-<translation id="6247557882553405851">Google Password Manager</translation>
+<translation id="6247557882553405851">Password Manager</translation>
 <translation id="6251835855431997163">Autofill <ph name="VALUE" /></translation>
 <translation id="6254066287920239840">Open links in the app instead of the browser.</translation>
 <translation id="6259928806013786178">Reading mode failed</translation>
@@ -1383,7 +1383,7 @@ Handoff must also be enabled in the General section of Settings, and your device
 <translation id="6271824294945464304">Sharing password</translation>
 <translation id="628251768213143684">You can always manage what's saved in your Google Account</translation>
 <translation id="6284652193729350524">Offer to translate <ph name="LANGUAGE" /></translation>
-<translation id="6293101329759844770">To turn on Safe Browsing, open <ph name="BEGIN_LINK" />Google services<ph name="END_LINK" /> and tap Safe Browsing.</translation>
+<translation id="6293101329759844770">To turn on Safe Browsing, open <ph name="BEGIN_LINK" />Services<ph name="END_LINK" /> and tap Safe Browsing.</translation>
 <translation id="6295751040240588413">Invalid card nickname</translation>
 <translation id="629730747756840877">Account</translation>
 <translation id="6301104306974789820">Get price tracking notifications</translation>
@@ -1417,7 +1417,7 @@ Handoff must also be enabled in the General section of Settings, and your device
 <translation id="6372558618707314581">Go to any page that you like</translation>
 <translation id="6374469231428023295">Try Again</translation>
 <translation id="6383719166112032471">Open location…</translation>
-<translation id="6387994324662817823">Passwords are saved to Google Password Manager on this device only.</translation>
+<translation id="6387994324662817823">Passwords are saved to Password Manager on this device only.</translation>
 <translation id="6393156038355142111">Suggest strong password</translation>
 <translation id="6404422529625928907">Open in Google Drive</translation>
 <translation id="6404511346730675251">Edit bookmark</translation>
@@ -1549,7 +1549,7 @@ Handoff must also be enabled in the General section of Settings, and your device
 <translation id="6867369562105931222">password</translation>
 <translation id="6867400383614725881">New Incognito tab</translation>
 <translation id="686831807558000905">Don't sign in</translation>
-<translation id="686899695320434745">Addresses aren't encrypted with your passphrase. This lets you use them in other Google services.</translation>
+<translation id="686899695320434745">Addresses aren't encrypted with your passphrase. This lets you use them in other Services.</translation>
 <translation id="687135068089457384">Show settings</translation>
 <translation id="6871397658902960384">Start browsing</translation>
 <translation id="6874328931822449112">{COUNT,plural, =1{Save password in account}other{Save passwords in account}}</translation>
@@ -1606,7 +1606,7 @@ Handoff must also be enabled in the General section of Settings, and your device
 <translation id="7080806333218412752">Sends URLs to Safe Browsing to check them. Also sends a small sample of pages, downloads, extension activity and system information to help discover new threats. Temporarily links this data to your Google Account when you’re signed in, to protect you across Google apps.</translation>
 <translation id="7082853213442715471">When turned on, certain web technologies are blocked, which might cause some websites to load more slowly or not operate correctly.</translation>
 <translation id="7091023926159231962">{count,plural, =1{Couldn't import {count} password}other{Couldn't import {count} passwords}}</translation>
-<translation id="7095110968493193530">To Google Password Manager for <ph name="EMAIL" /></translation>
+<translation id="7095110968493193530">To Password Manager for <ph name="EMAIL" /></translation>
 <translation id="7097046145876891318">In the address bar, tap price history to see price changes over time</translation>
 <translation id="7102005569666697658">Downloading… <ph name="FILE_SIZE" /></translation>
 <translation id="7104701424653979232">Menu → Settings → Payment methods</translation>
@@ -1624,7 +1624,7 @@ Handoff must also be enabled in the General section of Settings, and your device
 <translation id="7173114856073700355">Open settings</translation>
 <translation id="7173721738069475737">{count,plural, =1{Bookmark saved}other{{count} bookmarks saved}}</translation>
 <translation id="7176183551031110427">Zoom out</translation>
-<translation id="7186568385131859684">Control how browsing history is used with your other data across Google services</translation>
+<translation id="7186568385131859684">Control how browsing history is used with your other data across Services</translation>
 <translation id="719133302483559673">Manage your interests and preferences.</translation>
 <translation id="7191382490098297347">Camera roll image</translation>
 <translation id="7203496777391039568">Your organisation's data is private and secure</translation>
@@ -1654,7 +1654,7 @@ Handoff must also be enabled in the General section of Settings, and your device
 <translation id="7311244614769792472">No results found</translation>
 <translation id="7313347584264171202">You'll find your Incognito tabs here</translation>
 <translation id="7328162502911382168">(<ph name="COUNT" />)</translation>
-<translation id="7334364820047587268">You already have passwords for these accounts in your Google Password Manager. If you choose to import one of the passwords below, it will replace the existing one.</translation>
+<translation id="7334364820047587268">You already have passwords for these accounts in your Password Manager. If you choose to import one of the passwords below, it will replace the existing one.</translation>
 <translation id="7336264872878993241"><ph name="PERCENT" /> percent downloaded</translation>
 <translation id="7352651011704765696">Something went wrong</translation>
 <translation id="7363349185727752629">A guide to your privacy choices</translation>
@@ -1782,7 +1782,7 @@ Handoff must also be enabled in the General section of Settings, and your device
 <translation id="7765158879357617694">Move</translation>
 <translation id="7772032839648071052">Confirm passphrase</translation>
 <translation id="7772948288262733182">Welcome back</translation>
-<translation id="777637629667389858">When you're signed in, protects you across Google services.</translation>
+<translation id="777637629667389858">When you're signed in, protects you across Services.</translation>
 <translation id="7781829728241885113">Yesterday</translation>
 <translation id="7788868432173225918">Dismiss expanded view</translation>
 <translation id="7791543448312431591">Add</translation>
@@ -1795,13 +1795,13 @@ Handoff must also be enabled in the General section of Settings, and your device
 <translation id="78146569776629510">Downloads</translation>
 <translation id="7815852444315004084">Hide for now</translation>
 <translation id="7825973332242257878">Tab groups</translation>
-<translation id="7839994177130598711">Your family members can now use your username and password when they use Google Password Manager to sign in to <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" />.</translation>
+<translation id="7839994177130598711">Your family members can now use your username and password when they use Password Manager to sign in to <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" />.</translation>
 <translation id="7841180087127694526">Search for copied text</translation>
 <translation id="7841418003178675048">Choose what cards you see on your new tab page.</translation>
 <translation id="7845466610722898">Show reading list</translation>
 <translation id="7846161022626028328">There was an error. Try again.</translation>
 <translation id="784623644169604270">No recent activity</translation>
-<translation id="7846296061357476882">Google services</translation>
+<translation id="7846296061357476882">Services</translation>
 <translation id="784934925303690534">Time range</translation>
 <translation id="7851858861565204677">Other devices</translation>
 <translation id="7853202427316060426">Activity</translation>
@@ -1817,7 +1817,7 @@ Handoff must also be enabled in the General section of Settings, and your device
 <translation id="7887174313503389866">Take a guided tour of key privacy and security controls. For more options, go to individual settings.</translation>
 <translation id="7887198238286927132">To protect your privacy, Chrome will not auto-fill this field.</translation>
 <translation id="7887552845761062935">Double-tap and hold to open more options</translation>
-<translation id="7889910613639381518">Easy and secure access with the Google Password Manager widget.</translation>
+<translation id="7889910613639381518">Easy and secure access with the Password Manager widget.</translation>
 <translation id="7899199123054742721">Mark all unread</translation>
 <translation id="7911190106180361398">Your organisation doesn't allow for you to sync everything.</translation>
 <translation id="7918999344502274923">Hide <ph name="SEARCH_ENGINE_NAME" /> details</translation>
@@ -1843,16 +1843,16 @@ Handoff must also be enabled in the General section of Settings, and your device
 <translation id="797874245254030665">Access your passwords and passkeys from any app</translation>
 <translation id="7982789257301363584">Network</translation>
 <translation id="798299424881500862">Orange theme</translation>
-<translation id="7987685713885608670">For added safety, encrypt passwords on your device before they’re saved to Google Password Manager.</translation>
+<translation id="7987685713885608670">For added safety, encrypt passwords on your device before they’re saved to Password Manager.</translation>
 <translation id="798991908416757345">Tab groups are unavailable</translation>
 <translation id="7993170188789685695">Double-tap to close this notification.</translation>
 <translation id="7996239959906074962">Set up…</translation>
 <translation id="8001561107130904792">Page content sharing</translation>
 <translation id="800361585186029508">Opens the inputted URLs in Google Chrome.</translation>
-<translation id="8005666035647241369">To Google Password Manager on this device</translation>
+<translation id="8005666035647241369">To Password Manager on this device</translation>
 <translation id="8010488806779226127">Explore features that can help you do more as you browse</translation>
 <translation id="8011489434346330032">Web Inspector</translation>
-<translation id="8017015647846870183">From Google Password Manager, including passwords and passkeys</translation>
+<translation id="8017015647846870183">From Password Manager, including passwords and passkeys</translation>
 <translation id="802154636333426148">Download failed</translation>
 <translation id="8023170444051056234">You'll immediately lose access to the '<ph name="GROUP_NAME" />' tab group, and it will be deleted from all your devices</translation>
 <translation id="8023878949384262191">Expands the section.</translation>
@@ -2155,7 +2155,7 @@ Handoff must also be enabled in the General section of Settings, and your device
 <translation id="91023216973987714">Payment methods</translation>
 <translation id="9106655997975673326">From "<ph name="SOURCE_DEVICE" />"</translation>
 <translation id="9107664647686727385">Check for compromised passwords</translation>
-<translation id="9124387962554796433">Google may use your history to personalise Search and other Google services.</translation>
+<translation id="9124387962554796433">Google may use your history to personalise Search and other Services.</translation>
 <translation id="9124978074365039456">Shop, translate and identify what you see using your camera and photo gallery</translation>
 <translation id="9130317582644834675">Hide zoom text</translation>
 <translation id="913036870884277353">Easily open links in other apps.</translation>
