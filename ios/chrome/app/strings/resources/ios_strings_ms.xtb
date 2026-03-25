@@ -24,7 +24,7 @@
 <translation id="1072679792409426431">Dilumpuhkan oleh pentadbir anda</translation>
 <translation id="1074827084851510304">Anda akan memadamkan {password_count} kata laluan serta senarai laman &amp; apl yang anda pilih untuk tidak sekali-kali menyimpan log masuk. Mana-mana akaun yang anda buat untuk laman dan apl tidak akan dipadamkan.</translation>
 <translation id="1076421457278169141">Kod diimbas</translation>
-<translation id="1081114897601629648">Kata laluan yang berikut tidak diimport kepada Google Password Manager kerana kata laluan tersebut tidak sepadan dengan keperluan.</translation>
+<translation id="1081114897601629648">Kata laluan yang berikut tidak diimport kepada Password Manager kerana kata laluan tersebut tidak sepadan dengan keperluan.</translation>
 <translation id="1081932398873105675">{count,plural, =1{{count} tab}other{{count} tab}}</translation>
 <translation id="1082554859195167538">Ulasan produk untuk anda</translation>
 <translation id="1084365883616172403">Catatan Facebook selesai.</translation>
@@ -413,7 +413,7 @@
 <translation id="2523295204312809179">Apabila anda menutup kumpulan tab, kumpulan tab tersebut disimpan di sini secara automatik</translation>
 <translation id="2524699375503213836">Bawa data anda daripada Safari</translation>
 <translation id="2529021024822217800">Buka Semua</translation>
-<translation id="2536991091671391962">Anda boleh menggunakan kata laluan yang disimpan pada mana-mana peranti. Kata laluan tersebut disimpan pada Google Password Manager untuk <ph name="EMAIL" />.</translation>
+<translation id="2536991091671391962">Anda boleh menggunakan kata laluan yang disimpan pada mana-mana peranti. Kata laluan tersebut disimpan pada Password Manager untuk <ph name="EMAIL" />.</translation>
 <translation id="2538103551183528357">Disembunyikan, kata laluan</translation>
 <translation id="2539748786028143624">Hidupkan Perlindungan Dipertingkat…</translation>
 <translation id="2540111494300686866">Sekat dialog</translation>
@@ -440,7 +440,7 @@
 <translation id="2640733327287333451">Tiada Nama Pengguna ••••••</translation>
 <translation id="264215785133931186">Disemak sebentar tadi</translation>
 <translation id="2647434099613338025">Tambah bahasa</translation>
-<translation id="2649592894792404568">Anda akan memadamkan data Google Password Manager anda</translation>
+<translation id="2649592894792404568">Anda akan memadamkan data Password Manager anda</translation>
 <translation id="2652129567809778422">Pilih kata laluan</translation>
 <translation id="2658056020748144467">Tidak dapat membuka fail</translation>
 <translation id="2661809266906115479"><ph name="TITLE" />, <ph name="STATE" />, hanya pada peranti ini, <ph name="URL" /></translation>
@@ -1096,7 +1096,7 @@
 <translation id="5233638681132016545">Tab baharu</translation>
 <translation id="5234094073825090254">{count,plural, =1{Penanda halaman disimpan dalam Google Account anda, {email}.}other{Penanda halaman disimpan dalam Google Account anda, {email}.}}</translation>
 <translation id="5234764350956374838">Ketepikan</translation>
-<translation id="5238596603078743134">Kini <ph name="BEGIN_BOLD" /><ph name="USERNAME" /><ph name="END_BOLD" /> boleh menggunakan nama pengguna dan kata laluan anda apabila mereka menggunakan Google Password Manager untuk log masuk ke <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" />.</translation>
+<translation id="5238596603078743134">Kini <ph name="BEGIN_BOLD" /><ph name="USERNAME" /><ph name="END_BOLD" /> boleh menggunakan nama pengguna dan kata laluan anda apabila mereka menggunakan Password Manager untuk log masuk ke <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" />.</translation>
 <translation id="5241106044372754566"><ph name="NAME" />, <ph name="EMAIL" />, diurus oleh organisasi anda, dipilih pada masa ini. Pilih akaun.</translation>
 <translation id="5242899254250321823">Tukar kata laluan pada laman web</translation>
 <translation id="5248640482715684545">Laman ini sedang mencuba membuka aplikasi lain.</translation>
@@ -1217,7 +1217,7 @@ Serah mestilah turut didayakan dalam bahagian Umum pada Tetapan dan peranti anda
 <translation id="5688739340234490129">{count,plural, =1{{count} kad}other{{count} kad}}</translation>
 <translation id="5694848685995373177">Disimpan dalam Drive untuk <ph name="USER_EMAIL" />.</translation>
 <translation id="570209299585559496">Anda boleh menukar paparan laman lalai pada desktop dalam tetapan kemudian tetapan kandungan</translation>
-<translation id="5702108177581350218">Apabila anda berkongsi salinan nama pengguna dan kata laluan anda, ahli keluarga anda boleh mengisi nama pengguna dan kata laluan tersebut menggunakan Google Password Manager.</translation>
+<translation id="5702108177581350218">Apabila anda berkongsi salinan nama pengguna dan kata laluan anda, ahli keluarga anda boleh mengisi nama pengguna dan kata laluan tersebut menggunakan Password Manager.</translation>
 <translation id="5704908597376970822">Tidak dapat log masuk.</translation>
 <translation id="5709005673595820640">{count,plural, =1{Anda mempunyai {count} kata laluan yang digunakan semula yang boleh mendedahkan keselamatan anda kepada risiko. Betulkan masalah ini sekarang untuk kekal selamat.}other{Anda mempunyai {count} kata laluan yang digunakan semula yang boleh mendedahkan keselamatan anda kepada risiko. Betulkan masalah ini sekarang untuk kekal selamat.}}</translation>
 <translation id="57094364128775171">Cadangkan kata laluan yang kukuh…</translation>
@@ -1321,7 +1321,7 @@ Serah mestilah turut didayakan dalam bahagian Umum pada Tetapan dan peranti anda
 <translation id="607730456154980869">Dapatkan jawapan dengan lebih cepat menggunakan Gemini dalam Chrome</translation>
 <translation id="6078236141387574983">Laraskan semula ketinggian helaian</translation>
 <translation id="6084848228346514841">Pilih Tab</translation>
-<translation id="6089212833343035912">PIN Google Password Manager</translation>
+<translation id="6089212833343035912">PIN Password Manager</translation>
 <translation id="6090760257419195752">Amaran yang diketepikan</translation>
 <translation id="6094325891006032858">Hidupkan Penyemakan Imbas Selamat Dipertingkat</translation>
 <translation id="6096965253650248286"><ph name="COUNT" /> ditemukan</translation>
@@ -1374,7 +1374,7 @@ Serah mestilah turut didayakan dalam bahagian Umum pada Tetapan dan peranti anda
 <translation id="6234310016144827337">Semak sambungan anda, kemudian cuba lagi</translation>
 <translation id="6236952928980352967">Pulihkan Amaran</translation>
 <translation id="6241132809279377987">Dapatkan lebih banyak ciri untuk iPhone anda dengan apl Google</translation>
-<translation id="6247557882553405851">Google Password Manager</translation>
+<translation id="6247557882553405851">Password Manager</translation>
 <translation id="6251835855431997163">Autolengkap <ph name="VALUE" /></translation>
 <translation id="6254066287920239840">Buka pautan dalam Apl dan bukannya penyemak imbas.</translation>
 <translation id="6259928806013786178">Mod membaca gagal</translation>
@@ -1606,7 +1606,7 @@ Serah mestilah turut didayakan dalam bahagian Umum pada Tetapan dan peranti anda
 <translation id="7080806333218412752">Menghantar URL kepada Penyemakan Imbas Selamat untuk semakan. Turut menghantar sedikit contoh halaman, muat turun, aktiviti sambungan dan maklumat sistem untuk membantu penemuan ancaman baharu. Memautkan data ini pada Google Account anda secara sementara apabila anda log masuk, untuk melindungi anda merentas apl Google.</translation>
 <translation id="7082853213442715471">Apabila dihidupkan, teknologi web tertentu disekat dan boleh menyebabkan sesetengah laman web dimuatkan dengan lebih perlahan atau tidak beroperasi dengan betul.</translation>
 <translation id="7091023926159231962">{count,plural, =1{Tidak dapat mengimport {count} kata laluan}other{Tidak dapat mengimport {count} kata laluan}}</translation>
-<translation id="7095110968493193530">Kepada Google Password Manager untuk <ph name="EMAIL" /></translation>
+<translation id="7095110968493193530">Kepada Password Manager untuk <ph name="EMAIL" /></translation>
 <translation id="7097046145876891318">Dalam bar alamat, ketik sejarah harga untuk melihat perubahan harga dari semasa ke semasa</translation>
 <translation id="7102005569666697658">Memuat turun… <ph name="FILE_SIZE" /></translation>
 <translation id="7104701424653979232">Menu → Tetapan → Kaedah pembayaran</translation>
@@ -1654,7 +1654,7 @@ Serah mestilah turut didayakan dalam bahagian Umum pada Tetapan dan peranti anda
 <translation id="7311244614769792472">Tiada hasil ditemukan</translation>
 <translation id="7313347584264171202">Anda dapat menemukan tab Inkognito anda di sini</translation>
 <translation id="7328162502911382168">(<ph name="COUNT" />)</translation>
-<translation id="7334364820047587268">Anda sudah mempunyai kata laluan untuk akaun ini dalam Google Password Manager anda. Jika anda memilih untuk mengimport salah satu kata laluan di bawah, kata laluan itu akan menggantikan kata laluan sedia ada.</translation>
+<translation id="7334364820047587268">Anda sudah mempunyai kata laluan untuk akaun ini dalam Password Manager anda. Jika anda memilih untuk mengimport salah satu kata laluan di bawah, kata laluan itu akan menggantikan kata laluan sedia ada.</translation>
 <translation id="7336264872878993241"><ph name="PERCENT" /> peratus dimuat turun</translation>
 <translation id="7352651011704765696">Kesilapan telah berlaku</translation>
 <translation id="7363349185727752629">Panduan pilihan privasi anda</translation>
@@ -1795,7 +1795,7 @@ Serah mestilah turut didayakan dalam bahagian Umum pada Tetapan dan peranti anda
 <translation id="78146569776629510">Muat turun</translation>
 <translation id="7815852444315004084">Sorok Sementara</translation>
 <translation id="7825973332242257878">Kumpulan tab</translation>
-<translation id="7839994177130598711">Kini ahli keluarga anda boleh menggunakan nama pengguna dan kata laluan anda apabila mereka menggunakan Google Password Manager untuk log masuk ke <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" />.</translation>
+<translation id="7839994177130598711">Kini ahli keluarga anda boleh menggunakan nama pengguna dan kata laluan anda apabila mereka menggunakan Password Manager untuk log masuk ke <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" />.</translation>
 <translation id="7841180087127694526">Cari teks yang disalin</translation>
 <translation id="7841418003178675048">Pilih kad yang anda lihat pada halaman tab baharu anda.</translation>
 <translation id="7845466610722898">Paparkan Senarai Bacaan</translation>
@@ -1817,7 +1817,7 @@ Serah mestilah turut didayakan dalam bahagian Umum pada Tetapan dan peranti anda
 <translation id="7887174313503389866">Ikuti lawatan berpandu privasi dan kawalan keselamatan utama. Untuk mendapatkan lagi pilihan, pergi ke tetapan individu.</translation>
 <translation id="7887198238286927132">Untuk melindungi privasi anda, Chrome tidak akan mengisi medan ini secara automatik.</translation>
 <translation id="7887552845761062935">Ketik dua kali dan tahan untuk membuka lebih banyak pilihan</translation>
-<translation id="7889910613639381518">Akses mudah dan selamat dengan widget Google Password Manager.</translation>
+<translation id="7889910613639381518">Akses mudah dan selamat dengan widget Password Manager.</translation>
 <translation id="7899199123054742721">Tandai semua sebagai belum dibaca</translation>
 <translation id="7911190106180361398">Organisasi anda tidak membenarkan anda menyegerakkan semua.</translation>
 <translation id="7918999344502274923">Sembunyikan butiran <ph name="SEARCH_ENGINE_NAME" /></translation>
@@ -1852,7 +1852,7 @@ Serah mestilah turut didayakan dalam bahagian Umum pada Tetapan dan peranti anda
 <translation id="8005666035647241369">Kepada Pengurus Kata Laluan Google pada peranti ini</translation>
 <translation id="8010488806779226127">Terokai ciri yang boleh membantu anda melakukan lebih banyak perkara sambil anda menyemak imbas</translation>
 <translation id="8011489434346330032">Pemeriksa Web</translation>
-<translation id="8017015647846870183">Daripada Google Password Manager, termasuk kata laluan dan kunci laluan</translation>
+<translation id="8017015647846870183">Daripada Password Manager, termasuk kata laluan dan kunci laluan</translation>
 <translation id="802154636333426148">Muat turun gagal</translation>
 <translation id="8023170444051056234">Anda akan kehilangan akses kepada kumpulan tab “<ph name="GROUP_NAME" />" dengan serta-merta dan kumpulan tab ini akan dipadamkan daripada semua peranti anda</translation>
 <translation id="8023878949384262191">Mengembangkan bahagian.</translation>

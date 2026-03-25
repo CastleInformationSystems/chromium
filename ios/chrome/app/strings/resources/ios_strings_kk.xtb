@@ -24,7 +24,7 @@
 <translation id="1072679792409426431">Әкімші өшірді</translation>
 <translation id="1074827084851510304">{password_count} құпия сөзді және аккаунтқа кіру ақпаратын ешқашан сақтағыңыз келмейтін сайттар мен қолданбалар тізімін жойғалы жатырсыз. Сайттар немесе қолданбалар үшін жасаған аккаунттар жойылмайды.</translation>
 <translation id="1076421457278169141">Код сканерленген</translation>
-<translation id="1081114897601629648">Келесі құпия сөздер Google Password Manager-ге импортталмады, себебі олар талаптарға сай емес.</translation>
+<translation id="1081114897601629648">Келесі құпия сөздер Password Manager-ге импортталмады, себебі олар талаптарға сай емес.</translation>
 <translation id="1081932398873105675">{count,plural, =1{{count} қойынды}other{{count} қойынды}}</translation>
 <translation id="1082554859195167538">Сізге арналған өнім туралы пікірлер</translation>
 <translation id="1084365883616172403">Facebook жариялау аяқталды.</translation>
@@ -413,7 +413,7 @@
 <translation id="2523295204312809179">Қойындылар тобын жапқан кезде, ол автоматты түрде осы жерге сақталады.</translation>
 <translation id="2524699375503213836">Safari-дегі деректеріңізді импорттаңыз</translation>
 <translation id="2529021024822217800">Барлығын ашу</translation>
-<translation id="2536991091671391962">Сақталған құпия сөздерді кез келген құрылғыда пайдалана аласыз. Олар <ph name="EMAIL" /> аккаунтына арналған Google Password Manager қызметіне сақталады.</translation>
+<translation id="2536991091671391962">Сақталған құпия сөздерді кез келген құрылғыда пайдалана аласыз. Олар <ph name="EMAIL" /> аккаунтына арналған Password Manager қызметіне сақталады.</translation>
 <translation id="2538103551183528357">Жасырын құпия сөз</translation>
 <translation id="2539748786028143624">Күшейтілген қорғаныс қосылып жатыр…</translation>
 <translation id="2540111494300686866">Диалогтік терезелерді бөгеу</translation>
@@ -440,7 +440,7 @@
 <translation id="2640733327287333451">Пайдаланушы аты жоқ ••••••</translation>
 <translation id="264215785133931186">Жаңа ғана тексерілді.</translation>
 <translation id="2647434099613338025">Тіл қосу</translation>
-<translation id="2649592894792404568">Google Password Manager-дегі деректеріңізді жойғалы жатырсыз</translation>
+<translation id="2649592894792404568">Password Manager-дегі деректеріңізді жойғалы жатырсыз</translation>
 <translation id="2652129567809778422">Құпия сөз таңдау</translation>
 <translation id="2658056020748144467">Файлды ашу мүмкін емес</translation>
 <translation id="2661809266906115479"><ph name="TITLE" />, <ph name="STATE" />, тек осы құрылғыда, <ph name="URL" /></translation>
@@ -1096,7 +1096,7 @@
 <translation id="5233638681132016545">Жаңа қойынды</translation>
 <translation id="5234094073825090254">{count,plural, =1{Бетбелгі Google аккаунтына ({email}) сақталды.}other{Бетбелгілер Google аккаунтына ({email}) сақталды.}}</translation>
 <translation id="5234764350956374838">Жабу</translation>
-<translation id="5238596603078743134"><ph name="BEGIN_BOLD" /><ph name="USERNAME" /><ph name="END_BOLD" /> <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" /> веб-сайтына кіру үшін Google Password Manager қызметін қолданған кезде, енді пайдаланушы атыңыз бен құпия сөзіңізді де пайдалана алады.</translation>
+<translation id="5238596603078743134"><ph name="BEGIN_BOLD" /><ph name="USERNAME" /><ph name="END_BOLD" /> <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" /> веб-сайтына кіру үшін Password Manager қызметін қолданған кезде, енді пайдаланушы атыңыз бен құпия сөзіңізді де пайдалана алады.</translation>
 <translation id="5241106044372754566"><ph name="NAME" />, <ph name="EMAIL" />, қазір таңдалған ұйымыңыз басқарады. Аккаунт таңдаңыз.</translation>
 <translation id="5242899254250321823">Құпия сөзді веб-сайтта өзгерту</translation>
 <translation id="5248640482715684545">Бұл сайт басқа қолданбаны ашқалы жатыр.</translation>
@@ -1217,7 +1217,7 @@ Handoff функциясы параметрлердің жалпы бөлімі�
 <translation id="5688739340234490129">{count,plural, =1{{count} карта}other{{count} карта}}</translation>
 <translation id="5694848685995373177"><ph name="USER_EMAIL" /> поштасындағы Drive-ға сақталды.</translation>
 <translation id="570209299585559496">"Параметрлер", одан кейін "Мазмұн параметрлері" бөлімінде сайттың әдепкі көрінісін компьютерлік нұсқаға өзгерте аласыз.</translation>
-<translation id="5702108177581350218">Пайдаланушы аты және құпия сөз көшірмесін бөліскен кезде, отбасы мүшесі оларды Google Password Manager көмегімен толтыра алады.</translation>
+<translation id="5702108177581350218">Пайдаланушы аты және құпия сөз көшірмесін бөліскен кезде, отбасы мүшесі оларды Password Manager көмегімен толтыра алады.</translation>
 <translation id="5704908597376970822">Кіру мүмкін емес.</translation>
 <translation id="5709005673595820640">{count,plural, =1{{count} құпия сөзді көп жерде қолданасыз. Бұл жағдай қауіп төндіруі мүмкін. Қауіпсіздікті сақтау үшін мұны қазір түзетіңіз.}other{{count} құпия сөзді көп жерде қолданасыз. Бұл жағдай қауіп төндіруі мүмкін. Қауіпсіздікті сақтау үшін мұны қазір түзетіңіз.}}</translation>
 <translation id="57094364128775171">Күрделі құпия сөз жасау…</translation>
@@ -1321,7 +1321,7 @@ Handoff функциясы параметрлердің жалпы бөлімі�
 <translation id="607730456154980869">Chrome-дағы Gemini-мен жауаптарды лезде алыңыз</translation>
 <translation id="6078236141387574983">Парақ биіктігін қайта реттеңіз.</translation>
 <translation id="6084848228346514841">Қойындыларды таңдау</translation>
-<translation id="6089212833343035912">Google Password Manager PIN коды</translation>
+<translation id="6089212833343035912">Password Manager PIN коды</translation>
 <translation id="6090760257419195752">Жабылған ескертулер</translation>
 <translation id="6094325891006032858">Күшейтілген Safe Browsing қосыңыз</translation>
 <translation id="6096965253650248286"><ph name="COUNT" /> табылды</translation>
@@ -1374,7 +1374,7 @@ Handoff функциясы параметрлердің жалпы бөлімі�
 <translation id="6234310016144827337">Байланысты тексеріп, әрекетті қайталап көріңіз.</translation>
 <translation id="6236952928980352967">Ескертуді қалпына келтіру</translation>
 <translation id="6241132809279377987">iPhone-ға арналған Google қолданбаларының көбірек функцияларының құлпын ашыңыз.</translation>
-<translation id="6247557882553405851">Google Password Manager</translation>
+<translation id="6247557882553405851">Password Manager</translation>
 <translation id="6251835855431997163">Автотолтыру: <ph name="VALUE" /></translation>
 <translation id="6254066287920239840">Сілтемелерді браузердің орнына қолданбалардан ашу.</translation>
 <translation id="6259928806013786178">Оқу режимі іске қосылмады.</translation>
@@ -1654,7 +1654,7 @@ Handoff функциясы параметрлердің жалпы бөлімі�
 <translation id="7311244614769792472">Ешбір нәтиже табылмады</translation>
 <translation id="7313347584264171202">Инкогнито қойындылары осы жерге шығады</translation>
 <translation id="7328162502911382168">(<ph name="COUNT" />)</translation>
-<translation id="7334364820047587268">Google Password Manager-де бұл аккаунттарға арналған құпия сөздеріңіз бұрыннан бар. Төмендегі құпия сөздердің бірін импорттауды таңдасаңыз, ол бұрыннан бар біреуін ауыстырады.</translation>
+<translation id="7334364820047587268">Password Manager-де бұл аккаунттарға арналған құпия сөздеріңіз бұрыннан бар. Төмендегі құпия сөздердің бірін импорттауды таңдасаңыз, ол бұрыннан бар біреуін ауыстырады.</translation>
 <translation id="7336264872878993241"><ph name="PERCENT" /> пайыз жүктелді</translation>
 <translation id="7352651011704765696">Бірнәрсе дұрыс емес</translation>
 <translation id="7363349185727752629">Құпиялыққа қатысты таңдауларыңыз бойынша нұсқаулық</translation>
@@ -1795,7 +1795,7 @@ Handoff функциясы параметрлердің жалпы бөлімі�
 <translation id="78146569776629510">Жүктеп алынғандар</translation>
 <translation id="7815852444315004084">Әзірге жасыру</translation>
 <translation id="7825973332242257878">Қойындылар топтары</translation>
-<translation id="7839994177130598711">Отбасыңыздың мүшелері <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" /> веб-сайтына кіру үшін Google Password Manager қызметін қолданған кезде, енді пайдаланушы атыңыз бен құпия сөзіңізді де пайдалана алады.</translation>
+<translation id="7839994177130598711">Отбасыңыздың мүшелері <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" /> веб-сайтына кіру үшін Password Manager қызметін қолданған кезде, енді пайдаланушы атыңыз бен құпия сөзіңізді де пайдалана алады.</translation>
 <translation id="7841180087127694526">Көшірілген мәтінді іздеу</translation>
 <translation id="7841418003178675048">Жаңа қойынды бетінде қандай карталар көрсетілуі керек екенін таңдаңыз.</translation>
 <translation id="7845466610722898">Оқу тізімін көрсету</translation>
@@ -1817,7 +1817,7 @@ Handoff функциясы параметрлердің жалпы бөлімі�
 <translation id="7887174313503389866">Құпиялық пен қауіпсіздікті басқарудың маңызды құралдары туралы қысқаша презентацияны қарап шығыңыз. Басқа опцияларды көру үшін әр параметрге жеке-жеке өтіңіз.</translation>
 <translation id="7887198238286927132">Құпиялығыңызды сақтау мақсатында бұл өріс автоматты түрде толтырылмайды.</translation>
 <translation id="7887552845761062935">Қосымша опцияларды ашу үшін екі рет түртіп, басып тұрыңыз</translation>
-<translation id="7889910613639381518">Google Password Manager виджетімен оңай әрі қауіпсіз кіріңіз.</translation>
+<translation id="7889910613639381518">Password Manager виджетімен оңай әрі қауіпсіз кіріңіз.</translation>
 <translation id="7899199123054742721">Барлығын оқылмаған етіп белгілеу</translation>
 <translation id="7911190106180361398">Ұйымыңыз кез келген деректі синхрондауыңызға рұқсат бермейді.</translation>
 <translation id="7918999344502274923"><ph name="SEARCH_ENGINE_NAME" /> мәліметтерін жасыру</translation>
@@ -1852,7 +1852,7 @@ Handoff функциясы параметрлердің жалпы бөлімі�
 <translation id="8005666035647241369">Құрылғыдағы Google Құпия сөз менеджеріне</translation>
 <translation id="8010488806779226127">Шолу кезінде қосымша мүмкіндіктерді ұсынатын функциялармен танысыңыз.</translation>
 <translation id="8011489434346330032">Веб-инспектор</translation>
-<translation id="8017015647846870183">Google Password Manager қызметінен құпия сөздермен және кіру кілттерімен қоса жойылады</translation>
+<translation id="8017015647846870183">Password Manager қызметінен құпия сөздермен және кіру кілттерімен қоса жойылады</translation>
 <translation id="802154636333426148">Жүктеу сәтсіз аяқталды</translation>
 <translation id="8023170444051056234">"<ph name="GROUP_NAME" />" қойындылар тобын пайдалану рұқсатынан бірден айырылып қаласыз. Бұл топ барлық құрылғыңыздан жойылады.</translation>
 <translation id="8023878949384262191">Бөлімді кеңейтеді.</translation>

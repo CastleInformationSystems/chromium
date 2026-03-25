@@ -24,7 +24,7 @@
 <translation id="1072679792409426431">इसे आपके एडमिन ने ब्लॉक किया है</translation>
 <translation id="1074827084851510304">{password_count} पासवर्ड और उन साइटों और ऐप्लिकेशन की सूची को मिटाया जाएगा जिनके लिए, आपने साइन-इन करने के क्रेडेंशियल कभी भी सेव न करने का विकल्प चुना है. साइटों और ऐप्लिकेशन के लिए बनाए गए किसी भी खाते को नहीं मिटाया जाएगा.</translation>
 <translation id="1076421457278169141">कोड स्कैन किया गया</translation>
-<translation id="1081114897601629648">इन पासवर्ड को Google Password Manager में इंपोर्ट नहीं किया गया, क्योंकि ये ज़रूरी शर्तों को पूरा नहीं करते.</translation>
+<translation id="1081114897601629648">इन पासवर्ड को Password Manager में इंपोर्ट नहीं किया गया, क्योंकि ये ज़रूरी शर्तों को पूरा नहीं करते.</translation>
 <translation id="1081932398873105675">{count,plural, =1{{count} टैब}one{{count} टैब}other{{count} टैब}}</translation>
 <translation id="1082554859195167538">आपके लिए प्रॉडक्ट की समीक्षाएं</translation>
 <translation id="1084365883616172403">Facebook पोस्ट पूरी हुई.</translation>
@@ -413,7 +413,7 @@
 <translation id="2523295204312809179">किसी टैब ग्रुप को बंद करने पर, वह यहां अपने-आप सेव हो जाता है</translation>
 <translation id="2524699375503213836">Safari से अपना डेटा इंपोर्ट करें</translation>
 <translation id="2529021024822217800">सभी खोलें</translation>
-<translation id="2536991091671391962">सेव किए गए पासवर्ड को किसी भी डिवाइस पर इस्तेमाल किया जा सकता है. <ph name="EMAIL" /> के लिए ये पासवर्ड, Google Password Manager में सेव किए गए हैं.</translation>
+<translation id="2536991091671391962">सेव किए गए पासवर्ड को किसी भी डिवाइस पर इस्तेमाल किया जा सकता है. <ph name="EMAIL" /> के लिए ये पासवर्ड, Password Manager में सेव किए गए हैं.</translation>
 <translation id="2538103551183528357">पासवर्ड छिपाया गया</translation>
 <translation id="2539748786028143624">बेहतर सुरक्षा मोड चालू करें…</translation>
 <translation id="2540111494300686866">डायलॉग छिपाएं</translation>
@@ -440,7 +440,7 @@
 <translation id="2640733327287333451">उपयोगकर्ता नाम नहीं है ••••••</translation>
 <translation id="264215785133931186">अभी-अभी जांच की गई</translation>
 <translation id="2647434099613338025">भाषा जोड़ें</translation>
-<translation id="2649592894792404568">यह कार्रवाई करने पर Google Password Manager से जुड़ा आपका डेटा मिट जाएगा</translation>
+<translation id="2649592894792404568">यह कार्रवाई करने पर Password Manager से जुड़ा आपका डेटा मिट जाएगा</translation>
 <translation id="2652129567809778422">पासवर्ड चुनें</translation>
 <translation id="2658056020748144467">फ़ाइल नहीं खोली जा सकी</translation>
 <translation id="2661809266906115479"><ph name="TITLE" />, <ph name="STATE" />, सिर्फ़ इस डिवाइस पर, <ph name="URL" /></translation>
@@ -1096,7 +1096,7 @@
 <translation id="5233638681132016545">नया टैब</translation>
 <translation id="5234094073825090254">{count,plural, =1{आपके Google खाते, {email} में बुकमार्क सेव किया गया.}one{आपके Google खाते, {email} में बुकमार्क सेव किया गया.}other{आपके Google खाते, {email} में बुकमार्क सेव किए गए.}}</translation>
 <translation id="5234764350956374838">खारिज करें</translation>
-<translation id="5238596603078743134"><ph name="BEGIN_BOLD" /><ph name="USERNAME" /><ph name="END_BOLD" /> के पास अब Google Password Manager की मदद से, आपके उपयोगकर्ता नाम और पासवर्ड का इस्तेमाल करके <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" /> में साइन इन करने की सुविधा है.</translation>
+<translation id="5238596603078743134"><ph name="BEGIN_BOLD" /><ph name="USERNAME" /><ph name="END_BOLD" /> के पास अब Password Manager की मदद से, आपके उपयोगकर्ता नाम और पासवर्ड का इस्तेमाल करके <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" /> में साइन इन करने की सुविधा है.</translation>
 <translation id="5241106044372754566">फ़िलहाल <ph name="NAME" />, <ph name="EMAIL" /> को चुना गया है. इसे आपका संगठन मैनेज करता है. कोई खाता चुनें.</translation>
 <translation id="5242899254250321823">वेबसाइट पर पासवर्ड बदलें</translation>
 <translation id="5248640482715684545">यह साइट किसी दूसरे ऐप्लिकेशन को खोलने की कोशिश कर रही है.</translation>
@@ -1217,7 +1217,7 @@ Handoff को Settings के General अनुभाग में भी स�
 <translation id="5688739340234490129">{count,plural, =1{{count} कार्ड}one{{count} कार्ड}other{{count} कार्ड}}</translation>
 <translation id="5694848685995373177"><ph name="USER_EMAIL" /> के लिए फ़ाइल को Drive में सेव किया गया.</translation>
 <translation id="570209299585559496">सेटिंग और उसके बाद कॉन्टेंट सेटिंग में जाकर सेट किया जा सकता है कि साइटें, डिफ़ॉल्ट तौर पर डेस्कटॉप व्यू मोड में दिखें</translation>
-<translation id="5702108177581350218">जब अपने उपयोगकर्ता नाम और पासवर्ड की कॉपी शेयर की जाती है, तब आपके परिवार का सदस्य उन्हें Google Password Manager का इस्तेमाल करके भर सकता है.</translation>
+<translation id="5702108177581350218">जब अपने उपयोगकर्ता नाम और पासवर्ड की कॉपी शेयर की जाती है, तब आपके परिवार का सदस्य उन्हें Password Manager का इस्तेमाल करके भर सकता है.</translation>
 <translation id="5704908597376970822">साइन इन नहीं किया जा सकता.</translation>
 <translation id="5709005673595820640">{count,plural, =1{आपका {count} पासवर्ड ऐसा है जिसे एक से ज़्यादा खातों में इस्तेमाल किया गया है. इससे आपकी सुरक्षा को खतरा हो सकता है. खाते को सुरक्षित रखने के लिए इसे अभी ठीक करें.}one{आपका {count} पासवर्ड ऐसा है जिसे एक से ज़्यादा खातों में इस्तेमाल किया गया है. इससे आपकी सुरक्षा को खतरा हो सकता है. खाते को सुरक्षित रखने के लिए इसे अभी ठीक करें.}other{आपके {count} पासवर्ड ऐसे हैं जिन्हें एक से ज़्यादा खातों में इस्तेमाल किया गया है. इनसे आपकी सुरक्षा को खतरा हो सकता है. खाते को सुरक्षित रखने के लिए इन्हें अभी ठीक करें.}}</translation>
 <translation id="57094364128775171">मज़बूत पासवर्ड सुझाएं…</translation>
@@ -1321,7 +1321,7 @@ Handoff को Settings के General अनुभाग में भी स�
 <translation id="607730456154980869">Chrome में Gemini की मदद से, तेज़ी से जवाब पाएं</translation>
 <translation id="6078236141387574983">शीट की लंबाई को फिर से अडजस्ट करें</translation>
 <translation id="6084848228346514841">टैब चुनें</translation>
-<translation id="6089212833343035912">Google Password Manager का पिन</translation>
+<translation id="6089212833343035912">Password Manager का पिन</translation>
 <translation id="6090760257419195752">खारिज की गई चेतावनियां</translation>
 <translation id="6094325891006032858">बेहतर सुरक्षित ब्राउज़िंग की सुविधा चालू करें</translation>
 <translation id="6096965253650248286"><ph name="COUNT" /> मिले</translation>
@@ -1374,7 +1374,7 @@ Handoff को Settings के General अनुभाग में भी स�
 <translation id="6234310016144827337">अपना इंटरनेट कनेक्शन देखें और फिर से कोशिश करें</translation>
 <translation id="6236952928980352967">चेतावनी को पहले जैसा करें</translation>
 <translation id="6241132809279377987">Google के ऐप्लिकेशन इस्तेमाल करें और अपने iPhone पर ज़्यादा सुविधाएं पाएं</translation>
-<translation id="6247557882553405851">Google Password Manager</translation>
+<translation id="6247557882553405851">Password Manager</translation>
 <translation id="6251835855431997163"><ph name="VALUE" /> को अपने-आप भरने की सुविधा इस्तेमाल करें</translation>
 <translation id="6254066287920239840">ब्राउज़र के बजाय ऐप्लिकेशन में लिंक खोलें.</translation>
 <translation id="6259928806013786178">रीडिंग मोड चालू नहीं किया जा सका</translation>
@@ -1606,7 +1606,7 @@ Handoff को Settings के General अनुभाग में भी स�
 <translation id="7080806333218412752">जांच करने के लिए, सुरक्षित ब्राउज़िंग की सेवा को यूआरएल भेजता है. नए खतरों का पता लगाने के लिए पेज के नमूने, डाउनलोड, एक्सटेंशन की गतिविधि, और सिस्टम की जानकारी भी भेजता है. आपके साइन इन होने पर, थोड़ी देर के लिए इस डेटा को आपके Google खाते से जोड़ता है. ऐसा सभी Google ऐप्लिकेशन पर आपको सुरक्षित रखने के लिए किया जाता है.</translation>
 <translation id="7082853213442715471">चालू होने पर, इंटरनेट पर काम करने वाली कुछ टेक्नोलॉजी ब्लॉक हो जाती हैं. इस वजह से, ऐसा हो सकता है कि कुछ वेबसाइटें धीरे-धीरे लोड हों या ठीक से काम न करें.</translation>
 <translation id="7091023926159231962">{count,plural, =1{{count} पासवर्ड इंपोर्ट नहीं किया जा सका}one{{count} पासवर्ड इंपोर्ट नहीं किया जा सका}other{{count} पासवर्ड इंपोर्ट नहीं किए जा सके}}</translation>
-<translation id="7095110968493193530"><ph name="EMAIL" /> का पासवर्ड Google Password Manager में सेव करें</translation>
+<translation id="7095110968493193530"><ph name="EMAIL" /> का पासवर्ड Password Manager में सेव करें</translation>
 <translation id="7097046145876891318">कीमतों में समय के साथ हुए बदलावों को देखने के लिए, पता बार पर मौजूद 'कीमत का इतिहास' पर टैप करें</translation>
 <translation id="7102005569666697658">डाउनलोड हो रही है… <ph name="FILE_SIZE" /></translation>
 <translation id="7104701424653979232">मेन्यू → सेटिंग → पेमेंट का तरीका</translation>
@@ -1654,7 +1654,7 @@ Handoff को Settings के General अनुभाग में भी स�
 <translation id="7311244614769792472">कोई नतीजा नहीं मिला</translation>
 <translation id="7313347584264171202">आपको अपने गुप्त टैब यहां मिलेंगे</translation>
 <translation id="7328162502911382168">(<ph name="COUNT" />)</translation>
-<translation id="7334364820047587268">आपने Google Password Manager में इन खातों के पासवर्ड पहले से सेव किए हैं. यहां दिए गए पासवर्ड में से किसी एक को इंपोर्ट करने का विकल्प चुनने पर, मौजूदा पासवर्ड बदल जाएगा.</translation>
+<translation id="7334364820047587268">आपने Password Manager में इन खातों के पासवर्ड पहले से सेव किए हैं. यहां दिए गए पासवर्ड में से किसी एक को इंपोर्ट करने का विकल्प चुनने पर, मौजूदा पासवर्ड बदल जाएगा.</translation>
 <translation id="7336264872878993241"><ph name="PERCENT" /> प्रतिशत डाउनलोड हो गई</translation>
 <translation id="7352651011704765696">कुछ गलत हुआ</translation>
 <translation id="7363349185727752629">आपकी निजता के विकल्पों की गाइड</translation>
@@ -1795,7 +1795,7 @@ Handoff को Settings के General अनुभाग में भी स�
 <translation id="78146569776629510">डाउनलोड</translation>
 <translation id="7815852444315004084">अभी के लिए छिपाएं</translation>
 <translation id="7825973332242257878">टैब ग्रुप</translation>
-<translation id="7839994177130598711">आपके परिवार के सदस्यों के पास अब Google Password Manager की मदद से, आपके उपयोगकर्ता नाम और पासवर्ड का इस्तेमाल करके <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" /> में साइन इन करने की सुविधा है.</translation>
+<translation id="7839994177130598711">आपके परिवार के सदस्यों के पास अब Password Manager की मदद से, आपके उपयोगकर्ता नाम और पासवर्ड का इस्तेमाल करके <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" /> में साइन इन करने की सुविधा है.</translation>
 <translation id="7841180087127694526">कॉपी किया गया टेक्स्ट खोजें</translation>
 <translation id="7841418003178675048">चुनें कि टैब के नए पेज पर आपको कौनसे कार्ड देखने हैं.</translation>
 <translation id="7845466610722898">रीडिंग लिस्ट दिखाएं</translation>
@@ -1817,7 +1817,7 @@ Handoff को Settings के General अनुभाग में भी स�
 <translation id="7887174313503389866">गाइड की मदद से, निजता और सुरक्षा से जुड़े मुख्य कंट्रोल के बारे में जानकारी पाएं. ज़्यादा विकल्पों के लिए, हर एक सेटिंग पर जाएं.</translation>
 <translation id="7887198238286927132">आपकी निजता को सुरक्षित रखने के लिए, Chrome इस फ़ील्ड को ऑटोमैटिक नहीं भरेगा.</translation>
 <translation id="7887552845761062935">ज़्यादा विकल्प देखने के लिए, दो बार टैप करें और दबाकर रखें</translation>
-<translation id="7889910613639381518">Google Password Manager के विजेट की मदद से, आसान और सुरक्षित ऐक्सेस.</translation>
+<translation id="7889910613639381518">Password Manager के विजेट की मदद से, आसान और सुरक्षित ऐक्सेस.</translation>
 <translation id="7899199123054742721">सभी को 'नहीं पढ़ा गया' के तौर पर मार्क करें</translation>
 <translation id="7911190106180361398">आपका संगठन आपको सभी चीज़ें सिंक करने की अनुमति नहीं देता.</translation>
 <translation id="7918999344502274923"><ph name="SEARCH_ENGINE_NAME" /> की जानकारी छिपाएं</translation>
@@ -1852,7 +1852,7 @@ Handoff को Settings के General अनुभाग में भी स�
 <translation id="8005666035647241369">इस डिवाइस पर Google पासवर्ड मैनेजर में</translation>
 <translation id="8010488806779226127">ब्राउज़ करते समय, ज़्यादा काम करने में मदद करने वाली सुविधाएं आज़माएं</translation>
 <translation id="8011489434346330032">Web Inspector</translation>
-<translation id="8017015647846870183">Google Password Manager में सेव किए गए पासवर्ड और पासकी</translation>
+<translation id="8017015647846870183">Password Manager में सेव किए गए पासवर्ड और पासकी</translation>
 <translation id="802154636333426148">डाउनलोड विफल रहा</translation>
 <translation id="8023170444051056234">आपके लिए “<ph name="GROUP_NAME" />" टैब ग्रुप का ऐक्सेस तुरंत हटा दिया जाएगा. साथ ही, इसे आपके सभी डिवाइसों से मिटा दिया जाएगा</translation>
 <translation id="8023878949384262191">अनुभाग का विस्तार करता है.</translation>

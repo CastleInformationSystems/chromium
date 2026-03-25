@@ -24,7 +24,7 @@
 <translation id="1072679792409426431">သင့်စီမံခန့်ခွဲသူက ပိတ်ထားသည်</translation>
 <translation id="1074827084851510304">သင်သည် စကားဝှက် {password_count} ခုနှင့် လက်မှတ်ထိုးဝင်ရန် အချက်အလက်များကို ဘယ်တော့မှမသိမ်းရန် ရွေးထားသော ဝဘ်ဆိုက်နှင့် အက်ပ်များစာရင်းတို့ကို ဖျက်ပါတော့မည်။ ဝဘ်ဆိုက်နှင့် အက်ပ်များအတွက် သင်ဖွင့်ထားသည့် အကောင့်များကို ဖျက်မည်မဟုတ်ပါ။</translation>
 <translation id="1076421457278169141">ကုဒ်ကို ဖတ်ပြီးပါပြီ</translation>
-<translation id="1081114897601629648">အောက်ပါစကားဝှက်များသည် သတ်မှတ်ချက်များနှင့် မကိုက်ညီသဖြင့် ၎င်းတို့ကို Google Password Manager သို့ ထည့်သွင်းမထားပါ။</translation>
+<translation id="1081114897601629648">အောက်ပါစကားဝှက်များသည် သတ်မှတ်ချက်များနှင့် မကိုက်ညီသဖြင့် ၎င်းတို့ကို Password Manager သို့ ထည့်သွင်းမထားပါ။</translation>
 <translation id="1081932398873105675">{count,plural, =1{တဘ် {count} ခု}other{တဘ် {count} ခု}}</translation>
 <translation id="1082554859195167538">သင့်အတွက် ကုန်ပစ္စည်းသုံးသပ်ချက်များ</translation>
 <translation id="1084365883616172403">ဖေ့စ်ဘွတ်တွင် တင်ပြခြင်း ပြီးစီပါပြီ။</translation>
@@ -413,7 +413,7 @@
 <translation id="2523295204312809179">တဘ်အုပ်စုကို ပိတ်သောအခါ ၎င်းကို ဤနေရာတွင် အလိုအလျောက်သိမ်းသည်</translation>
 <translation id="2524699375503213836">Safari မှ သင့်ဒေတာများ ရယူခြင်း</translation>
 <translation id="2529021024822217800">အားလုံးကို ဖွင့်ရန်</translation>
-<translation id="2536991091671391962">သိမ်းထားသော စကားဝှက်များကို မည်သည့်စက်တွင်မဆို သုံးနိုင်သည်။ ၎င်းတို့ကို <ph name="EMAIL" /> အတွက် Google Password Manager တွင် သိမ်းသည်။</translation>
+<translation id="2536991091671391962">သိမ်းထားသော စကားဝှက်များကို မည်သည့်စက်တွင်မဆို သုံးနိုင်သည်။ ၎င်းတို့ကို <ph name="EMAIL" /> အတွက် Password Manager တွင် သိမ်းသည်။</translation>
 <translation id="2538103551183528357">ဖျောက်ထားသော စကားဝှက်</translation>
 <translation id="2539748786028143624">‘အဆင့်မြင့်ကာကွယ်မှု’ ဖွင့်ရန်…</translation>
 <translation id="2540111494300686866">ဒိုင်ယာလော့ဂ်များကို ရပ်ရန်</translation>
@@ -440,7 +440,7 @@
 <translation id="2640733327287333451">အသုံးပြုသူအမည် မရှိပါ ••••••</translation>
 <translation id="264215785133931186">ယခုလေးတင် စစ်ဆေးထားသည်</translation>
 <translation id="2647434099613338025">ဘာသာစကား ထည့်ရန်</translation>
-<translation id="2649592894792404568">သင်သည် Google Password Manager ဒေတာကို ဖျက်ပါတော့မည်</translation>
+<translation id="2649592894792404568">သင်သည် Password Manager ဒေတာကို ဖျက်ပါတော့မည်</translation>
 <translation id="2652129567809778422">စကားဝှက်ရွေးခြင်း</translation>
 <translation id="2658056020748144467">ဖိုင်ကို ဖွင့်၍မရနိုင်ပါ</translation>
 <translation id="2661809266906115479"><ph name="TITLE" />၊ <ph name="STATE" />၊ ဤစက်တွင်သာ၊ <ph name="URL" /></translation>
@@ -1096,7 +1096,7 @@
 <translation id="5233638681132016545">တဘ် အသစ်</translation>
 <translation id="5234094073825090254">{count,plural, =1{သင်၏ Google Account {email} တွင် လိပ်စာ သိမ်းလိုက်သည်။}other{သင်၏ Google Account {email} တွင် လိပ်စာများ သိမ်းလိုက်သည်။}}</translation>
 <translation id="5234764350956374838">ပယ်ရန်</translation>
-<translation id="5238596603078743134"><ph name="BEGIN_BOLD" /><ph name="USERNAME" /><ph name="END_BOLD" /> က <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" /> သို့ လက်မှတ်ထိုးဝင်ရန် Google Password Manager သုံးသောအခါ သင့်အသုံးပြုသူအမည်နှင့် စကားဝှက်တို့ကို ယခုသုံးနိုင်သည်။</translation>
+<translation id="5238596603078743134"><ph name="BEGIN_BOLD" /><ph name="USERNAME" /><ph name="END_BOLD" /> က <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" /> သို့ လက်မှတ်ထိုးဝင်ရန် Password Manager သုံးသောအခါ သင့်အသုံးပြုသူအမည်နှင့် စကားဝှက်တို့ကို ယခုသုံးနိုင်သည်။</translation>
 <translation id="5241106044372754566">လက်ရှိရွေးချယ်ထားသော သင့်အဖွဲ့အစည်းက စီမံခန့်ခွဲသည့် <ph name="NAME" />၊ <ph name="EMAIL" />။ အကောင့်ရွေးပါ။</translation>
 <translation id="5242899254250321823">ဝဘ်ဆိုက်ပေါ်ရှိ စကားဝှက်ပြောင်းရန်</translation>
 <translation id="5248640482715684545">ဤဝဘ်ဆိုက်က အပလီကေးရှင်းနောက်တစ်ခုကို ဖွင့်ရန် ကြိုးပမ်းနေသည်။</translation>
@@ -1216,7 +1216,7 @@ Handoff ကို ဆက်တင်များ၏ ယေဘူယျအပိ�
 <translation id="5688739340234490129">{count,plural, =1{ကတ် {count} ကတ်}other{ကတ် {count} ကတ်}}</translation>
 <translation id="5694848685995373177"><ph name="USER_EMAIL" /> အတွက် Drive တွင် သိမ်းပြီးပြီ။</translation>
 <translation id="570209299585559496">ဆက်တင်များသို့သွားပြီး အကြောင်းအရာ ဆက်တင်များ၌ မူရင်းဝဘ်ဆိုက်ပြသခြင်းကို ဒက်စ်တော့ဝဘ်ဆိုက်ပြသခြင်းသို့ ပြောင်းနိုင်သည်</translation>
-<translation id="5702108177581350218">သင့်အသုံးပြုသူအမည်နှင့် စကားဝှက် မိတ္တူကို သင်မျှဝေသောအခါ သင်၏မိသားစုဝင်က Google Password Manager သုံးခြင်းဖြင့် ၎င်းတို့ကို ဖြည့်နိုင်သည်။</translation>
+<translation id="5702108177581350218">သင့်အသုံးပြုသူအမည်နှင့် စကားဝှက် မိတ္တူကို သင်မျှဝေသောအခါ သင်၏မိသားစုဝင်က Password Manager သုံးခြင်းဖြင့် ၎င်းတို့ကို ဖြည့်နိုင်သည်။</translation>
 <translation id="5704908597376970822">လက်မှတ်ထိုးဝင်၍ မရပါ။</translation>
 <translation id="5709005673595820640">{count,plural, =1{သင့်တွင် လုံခြုံရေးအန္တရာယ် ဖြစ်စေနိုင်သော ပြန်သုံးထားသည့် စကားဝှက် {count} ခုရှိသည်။ ဘေးကင်းစေရန် ၎င်းကို ယခုပြင်ပါ။}other{သင့်တွင် လုံခြုံရေးအန္တရာယ် ဖြစ်စေနိုင်သော ပြန်သုံးထားသည့် စကားဝှက် {count} ခုရှိသည်။ ဘေးကင်းစေရန် ၎င်းကို ယခုပြင်ပါ။}}</translation>
 <translation id="57094364128775171">ခိုင်မာသည့် စကားဝှက် အကြံပြုရန်…</translation>
@@ -1320,7 +1320,7 @@ Handoff ကို ဆက်တင်များ၏ ယေဘူယျအပိ�
 <translation id="607730456154980869">‘Chrome ရှိ Gemini’ သုံး၍ အဖြေများ အမြန်ရယူပါ</translation>
 <translation id="6078236141387574983">စာမျက်နှာအမြင့်ကို ပြန်ချိန်ညှိရန်</translation>
 <translation id="6084848228346514841">တဘ်ရွေးပါ</translation>
-<translation id="6089212833343035912">Google Password Manager ပင်နံပါတ်</translation>
+<translation id="6089212833343035912">Password Manager ပင်နံပါတ်</translation>
 <translation id="6090760257419195752">ပယ်ထားသော သတိပေးချက်များ</translation>
 <translation id="6094325891006032858">‘အရည်အသွေးမြှင့် ဘေးကင်းလုံခြုံသည့် အသုံးပြုမှု’ ဖွင့်ပါ</translation>
 <translation id="6096965253650248286"><ph name="COUNT" /> ခု တွေ့သည်</translation>
@@ -1653,7 +1653,7 @@ Handoff ကို ဆက်တင်များ၏ ယေဘူယျအပိ�
 <translation id="7311244614769792472">ရလဒ်မတွေ့ပါ</translation>
 <translation id="7313347584264171202">သင့်ရုပ်ဖျက်တဘ်များကို ဤနေရာတွင် ပြပါမည်</translation>
 <translation id="7328162502911382168">(<ph name="COUNT" />) ခု</translation>
-<translation id="7334364820047587268">သင်၏ Google Password Manager တွင် ဤအကောင့်များအတွက် စကားဝှက်များ ရှိပြီးဖြစ်သည်။ အောက်ရှိ စကားဝှက်များအနက်တစ်ခုကို ထည့်သွင်းရန်ရွေးပါက ၎င်းသည် လက်ရှိတစ်ခုကို အစားထိုးလိုက်မည်။</translation>
+<translation id="7334364820047587268">သင်၏ Password Manager တွင် ဤအကောင့်များအတွက် စကားဝှက်များ ရှိပြီးဖြစ်သည်။ အောက်ရှိ စကားဝှက်များအနက်တစ်ခုကို ထည့်သွင်းရန်ရွေးပါက ၎င်းသည် လက်ရှိတစ်ခုကို အစားထိုးလိုက်မည်။</translation>
 <translation id="7336264872878993241"><ph name="PERCENT" /> ရာခိုင်နှုန်းဒေါင်းလုဒ်လုပ်ပြီးပါပြီ</translation>
 <translation id="7352651011704765696">တစ်ခုခု မှားသွားသည်</translation>
 <translation id="7363349185727752629">သင့်ကိုယ်ရေးအချက်အလက် လုံခြုံမှုဆိုင်ရာ ရွေးချယ်မှုလမ်းညွှန်</translation>
@@ -1794,7 +1794,7 @@ Handoff ကို ဆက်တင်များ၏ ယေဘူယျအပိ�
 <translation id="78146569776629510">ဒေါင်းလုဒ်များ</translation>
 <translation id="7815852444315004084">ယခု ဖျောက်ထားရန်</translation>
 <translation id="7825973332242257878">တဘ်အုပ်စု</translation>
-<translation id="7839994177130598711">မိသားစုဝင်များက <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" /> သို့ လက်မှတ်ထိုးဝင်ရန် Google Password Manager သုံးသောအခါ သင့်အသုံးပြုသူအမည်နှင့် စကားဝှက်ကို ယခုသုံးနိုင်သည်။</translation>
+<translation id="7839994177130598711">မိသားစုဝင်များက <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" /> သို့ လက်မှတ်ထိုးဝင်ရန် Password Manager သုံးသောအခါ သင့်အသုံးပြုသူအမည်နှင့် စကားဝှက်ကို ယခုသုံးနိုင်သည်။</translation>
 <translation id="7841180087127694526">မိတ္တူကူးထားသော စာသားကို ရှာရန်</translation>
 <translation id="7841418003178675048">သင့်တဘ်စာမျက်နှာအသစ်တွင် မြင်လိုသောကတ်များကို ရွေးပါ။</translation>
 <translation id="7845466610722898">ဖတ်ရန်စာရင်းပြပါ</translation>
@@ -1816,7 +1816,7 @@ Handoff ကို ဆက်တင်များ၏ ယေဘူယျအပိ�
 <translation id="7887174313503389866">အဓိကကျသော ကိုယ်ရေးအချက်အလက်နှင့် လုံခြုံရေး ထိန်းချုပ်မှုများ လမ်းညွှန်ပြသမှုကို ကြည့်ရှုပါ။ အခြားရွေးချယ်စရာများအတွက် သီးခြားဆက်တင်များသို့ သွားပါ။</translation>
 <translation id="7887198238286927132">သင်၏ ကိုယ်ရေးအချက်အလက်ကို ကာကွယ်ရန် Chrome သည် ဤအကွက်တွင် အော်တိုဖြည့်မည် မဟုတ်ပါ။</translation>
 <translation id="7887552845761062935">နောက်ထပ်ရွေးစရာများ ဖွင့်ရန် နှစ်ချက်တို့ပြီး ဖိထားပါ</translation>
-<translation id="7889910613639381518">Google Password Manager ဝိဂျက်ဖြင့် လွယ်ကူလုံခြုံစွာ သုံးပါ။</translation>
+<translation id="7889910613639381518">Password Manager ဝိဂျက်ဖြင့် လွယ်ကူလုံခြုံစွာ သုံးပါ။</translation>
 <translation id="7899199123054742721">အားလုံး မဖတ်ရသေးဟု မှတ်ရန်</translation>
 <translation id="7911190106180361398">သင့်အဖွဲ့အစည်းက အားလုံးကိုစင့်ခ်လုပ်ရန် ခွင့်မပြုပါ။</translation>
 <translation id="7918999344502274923"><ph name="SEARCH_ENGINE_NAME" /> အသေးစိတ်ကို ဖျောက်ပါ</translation>
@@ -1851,7 +1851,7 @@ Handoff ကို ဆက်တင်များ၏ ယေဘူယျအပိ�
 <translation id="8005666035647241369">ဤစက်ရှိ ‘Google စကားဝှက်မန်နေဂျာ’ သို့</translation>
 <translation id="8010488806779226127">သင်ဘရောက်စ်လုပ်ချိန် ပိုမိုအသုံးချနိုင်ရန် ကူညီပေးနိုင်သည့် တူးလ်များကို စူးစမ်းလေ့လာပါ</translation>
 <translation id="8011489434346330032">Web Inspector</translation>
-<translation id="8017015647846870183">စကားဝှက်နှင့် လျှို့ဝှက်ကီးများ အပါအဝင် Google Password Manager မှ</translation>
+<translation id="8017015647846870183">စကားဝှက်နှင့် လျှို့ဝှက်ကီးများ အပါအဝင် Password Manager မှ</translation>
 <translation id="802154636333426148">ဒေါင်းလုဒ်လုပ်မှု မအောင်မြင်ပါ</translation>
 <translation id="8023170444051056234">သင်သည် “<ph name="GROUP_NAME" />” တဘ်အုပ်စုသုံးခွင့်ကို ချက်ချင်းဆုံးရှုံးမည်ဖြစ်ပြီး ၎င်းကို သင့်စက်အားလုံးမှ ဖျက်မည်</translation>
 <translation id="8023878949384262191">ကဏ္ဍကို ချဲ့ပေးသည်</translation>
