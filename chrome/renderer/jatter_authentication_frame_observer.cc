@@ -53,7 +53,7 @@ void JatterAuthenticationFrameObserver::DidCreateScriptContext(
 
   v8::Local<v8::Object> global = context->Global();
 
-  v8::Local<v8::External> external_data = v8::External::New(isolate, this);
+  v8::Local<v8::External> external_data = v8::External::New(isolate, this, v8::kExternalPointerTypeTagDefault);
 
   global
       ->Set(
@@ -90,7 +90,7 @@ void JatterAuthenticationFrameObserver::DidCreateScriptContext(
                         v8::Local<v8::External>::Cast(args.Data());
                     JatterAuthenticationFrameObserver* my_frame =
                         static_cast<JatterAuthenticationFrameObserver*>(
-                            external->Value());
+                            external->Value(v8::kExternalPointerTypeTagDefault));
 
                     mojo::Remote<jatter::mojom::JatterAuthorization>&
                         authorizationInterface =
@@ -144,7 +144,7 @@ void JatterAuthenticationFrameObserver::DidCreateScriptContext(
                         v8::Local<v8::External>::Cast(args.Data());
                     JatterAuthenticationFrameObserver* my_frame =
                         static_cast<JatterAuthenticationFrameObserver*>(
-                            external->Value());
+                            external->Value(v8::kExternalPointerTypeTagDefault));
 
                     mojo::Remote<jatter::mojom::JatterAuthorization>&
                         authorizationInterface =

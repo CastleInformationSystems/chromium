@@ -3894,7 +3894,7 @@
       Turn on to get your browsing history and tabs from other devices
     </message>
     <message name="IDS_SETTINGS_GOOGLE_SERVICES_PAGE_TITLE" desc="Name of the settings page for managing services.">
-      services
+      Services
     </message>
   </if>
 

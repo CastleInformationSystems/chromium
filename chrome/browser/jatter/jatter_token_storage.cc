@@ -41,7 +41,7 @@ std::string JatterTokenStorage::GetRefreshToken() const {
 }
 
 void JatterTokenStorage::LoadFromPrefs() {
-  const base::Value::Dict& dict =
+  const base::DictValue& dict =
       profile_->GetPrefs()->GetDict(prefs::kJatterAuthenticationToken);
   const std::string* id_token = dict.FindString("id_token");
   const std::string* refresh_token = dict.FindString("refresh_token");
@@ -54,7 +54,7 @@ void JatterTokenStorage::LoadFromPrefs() {
 }
 
 void JatterTokenStorage::SaveToPrefs() {
-  base::Value::Dict dict;
+  base::DictValue dict;
   dict.Set("id_token", id_token_);
   dict.Set("refresh_token", refresh_token_);
   profile_->GetPrefs()->SetDict(prefs::kJatterAuthenticationToken,

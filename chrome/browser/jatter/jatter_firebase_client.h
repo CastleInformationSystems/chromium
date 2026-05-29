@@ -39,18 +39,18 @@ class JatterFirebaseClient {
                                    Profile* profile,
                                    CreateUrlLoaderCallback url_loader_creator,
                                    ResponseCallback callback,
-                                   std::unique_ptr<std::string> response_body);
+                                   std::optional<std::string> response_body);
 
   void OnResponseReceived(network::SimpleURLLoader* loader,
                           ResponseCallback callback,
-                          std::unique_ptr<std::string> response_body);
+                          std::optional<std::string> response_body);
 
   void OnAuthenticationResponseReceived(
       network::SimpleURLLoader* loader,
       Profile* profile,
       CreateUrlLoaderCallback url_loader_creator,
       ResponseCallback callback,
-      std::unique_ptr<std::string> response_body);   
+      std::optional<std::string> response_body);   
 
   void RefreshAuthToken(Profile* profile,
                         CreateUrlLoaderCallback url_loader_creator,

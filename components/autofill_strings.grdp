@@ -67,32 +67,32 @@
   </if>
   <if expr="not _google_chrome">
     <message name="IDS_AUTOFILL_DELETE_AUTOCOMPLETE_SUGGESTION_CONFIRMATION_BODY" desc="Text in a dialog to confirm that the user wants to delete an autocomplete form history suggestion.">
-      Remove form suggestion from Chromium?
+      Remove form suggestion from Jatter?
     </message>
     <message name="IDS_AUTOFILL_DELETE_CREDIT_CARD_SUGGESTION_CONFIRMATION_BODY" desc="Text in a dialog to confirm that the user wants to delete a credit card from Autofill.">
-      Remove credit card from Chromium?
+      Remove credit card from Jatter?
     </message>
     <message name="IDS_AUTOFILL_DELETE_PROFILE_SUGGESTION_CONFIRMATION_BODY" desc="Text in a dialog to confirm that the user wants to delete an address from Autofill.">
-      Remove address from Chromium?
+      Remove address from Jatter?
     </message>
   </if>
   <message name="IDS_AUTOFILL_REMOVE_HOME_PROFILE_SUGGESTION_CONFIRMATION_TITLE" desc="Title in a dialog to confirm that the user wants to delete their Home address from Autofill." formatter_data="android_java">
     Remove home address from Chrome autofill?
   </message>
   <message name="IDS_AUTOFILL_REMOVE_HOME_PROFILE_SUGGESTION_CONFIRMATION_BODY" desc="Text in a dialog to confirm that the user wants to delete their Home address from Autofill." formatter_data="android_java">
-    Your home address can help you get things done across Google services, like more relevant Search results and directions in Google Maps. You can edit or delete your address <ph name="BEGIN_LINK">&lt;link&gt;</ph>in your Google Account <ph name="ACCOUNT">$1<ex>alexpark@gmail.com</ex></ph><ph name="END_LINK">&lt;/link&gt;</ph>.
+    Your home address can help you get things done across services, like more relevant Search results and directions in Google Maps. You can edit or delete your address <ph name="BEGIN_LINK">&lt;link&gt;</ph>in your Account <ph name="ACCOUNT">$1<ex>alexpark@gmail.com</ex></ph><ph name="END_LINK">&lt;/link&gt;</ph>.
   </message>
   <message name="IDS_AUTOFILL_REMOVE_WORK_PROFILE_SUGGESTION_CONFIRMATION_TITLE" desc="Title in a dialog to confirm that the user wants to delete their Work address from Autofill." formatter_data="android_java">
     Remove work address from Chrome autofill?
   </message>
   <message name="IDS_AUTOFILL_REMOVE_WORK_PROFILE_SUGGESTION_CONFIRMATION_BODY" desc="Title in a dialog to confirm that the user wants to delete their Work address from Autofill." formatter_data="android_java">
-    Your work address can help you get things done across Google services, like more relevant Search results and directions in Google Maps. You can edit or delete your address <ph name="BEGIN_LINK">&lt;link&gt;</ph>in your Google Account <ph name="ACCOUNT">$1<ex>alexpark@gmail.com</ex></ph><ph name="END_LINK">&lt;/link&gt;</ph>.
+    Your work address can help you get things done across services, like more relevant Search results and directions in Google Maps. You can edit or delete your address <ph name="BEGIN_LINK">&lt;link&gt;</ph>in your Account <ph name="ACCOUNT">$1<ex>alexpark@gmail.com</ex></ph><ph name="END_LINK">&lt;/link&gt;</ph>.
   </message>
   <message name="IDS_AUTOFILL_REMOVE_ACCOUNT_NAME_AND_EMAIL_PROFILE_SUGGESTION_CONFIRMATION_TITLE" desc="Title in a dialog to confirm that the user wants to delete their account name and email from Autofill." formatter_data="android_java">
     Remove this info from Chrome autofill?
   </message>
   <message name="IDS_AUTOFILL_REMOVE_ACCOUNT_NAME_AND_EMAIL_PROFILE_SUGGESTION_CONFIRMATION_BODY" desc="Title in a dialog to confirm that the user wants to delete their account name and email address from Autofill." formatter_data="android_java">
-    You can edit your name in your <ph name="BEGIN_LINK">&lt;link&gt;</ph>Google Account<ph name="END_LINK">&lt;/link&gt;</ph> <ph name="ACCOUNT">$1<ex>example@gmail.com</ex></ph>
+    You can edit your name in your <ph name="BEGIN_LINK">&lt;link&gt;</ph>Account<ph name="END_LINK">&lt;/link&gt;</ph> <ph name="ACCOUNT">$1<ex>example@gmail.com</ex></ph>
   </message>
   <message name="IDS_AUTOFILL_REMOVE_SUGGESTION_BUTTON" desc="Text in a remove button for Autofill suggestion." formatter_data="android_java">
     Remove
@@ -310,7 +310,7 @@
   </if>
 
   <message name="IDS_AUTOFILL_MANAGE_LOYALTY_CARDS_A11Y_HINT" desc="Voice over text that is read out when the manage loyalty cards at the bottom of the Autofill popup is selected.">
-    Manage loyalty cards in Google Wallet
+    Manage loyalty cards in Wallet
   </message>
 
   <message name="IDS_AUTOFILL_SCAN_CREDIT_CARD" desc="An item in the autofill popup that triggers a new credit card to be scanned using the camera on the device." formatter_data="android_java">
@@ -347,23 +347,23 @@
   </if>
 
   <message name="IDS_AUTOFILL_IPH_EXTERNAL_ACCOUNT_PROFILE_SUGGESTION" desc="IPH bubble for a suggestion item with an account profile that was created somewhere outside Chrome (e.g. Google Pay)." formatter_data="android_java">
-    You can now use addresses from your Google Account
+    You can now use addresses from your Account
   </message>
   <message name="IDS_AUTOFILL_IPH_HOME_AND_WORK_ACCOUNT_PROFILE_SUGGESTION" desc="IPH bubble for a suggestion item suggesting that home and work account profiles are available to use.">
-    Autofill your home and work addresses from your Google Account
+    Autofill your home and work addresses from your Account
   </message>
   <message name="IDS_AUTOFILL_IPH_HOME_AND_WORK_ACCOUNT_PROFILE_SUGGESTION_SCREENREADER" is_accessibility_with_no_ui="true" desc="IPH bubble for a suggestion item suggesting that home and work account profiles are available to use.">
-    Autofill your home and work addresses from your Google Account
+    Autofill your home and work addresses from your Account
   </message>
   <message name="IDS_AUTOFILL_IPH_HOME_AND_WORK_ACCOUNT_PROFILE_SUGGESTION_TITLE" desc="Title text for IPH bubble for a suggestion item suggesting that home and work account profiles are available to use.">
     Fill forms faster
   </message>
 
   <message name="IDS_AUTOFILL_IPH_ACCOUNT_NAME_EMAIL_SUGGESTION" desc="IPH bubble for a suggestion item suggesting that name and email account profile is available to use.">
-    Autofill your name and email address from your Google Account
+    Autofill your name and email address from your Account
   </message>
   <message name="IDS_AUTOFILL_IPH_ACCOUNT_NAME_EMAIL_SUGGESTION_SCREENREADER" is_accessibility_with_no_ui="true" desc="IPH bubble for a suggestion item suggesting that name and email account profile is available to use.">
-    Autofill your name and email address from your Google Account
+    Autofill your name and email address from your Account
   </message>
   <message name="IDS_AUTOFILL_IPH_ACCOUNT_NAME_EMAIL_SUGGESTION_TITLE" desc="Title text for IPH bubble for a suggestion item suggesting that name and email account profile is available to use.">
     Fill forms faster
@@ -416,7 +416,7 @@
     Fills in payment forms with your saved payment methods
   </message>
   <message name="IDS_AUTOFILL_DELETE_ACCOUNT_ADDRESS_RECORD_TYPE_NOTICE" desc="The notice/warning for the user before the address deletion." formatter_data="android_java">
-    This address will be deleted from your Google Account, <ph name="ACCOUNT">$1<ex>alexpark@gmail.com</ex></ph>
+    This address will be deleted from your Account, <ph name="ACCOUNT">$1<ex>alexpark@gmail.com</ex></ph>
   </message>
   <message name="IDS_AUTOFILL_DELETE_SYNC_ADDRESS_RECORD_TYPE_NOTICE" desc="The notice/warning for the user before the address deletion (with syncing enabled)." formatter_data="android_java">
     This address will be deleted from this and your other signed-in devices
@@ -425,25 +425,25 @@
     This address will be deleted from this device
   </message>
   <message name="IDS_AUTOFILL_SAVE_IN_ACCOUNT_MESSAGE_ADDRESS_RECORD_TYPE_NOTICE" desc="The notice/warning message for the user that this address is going to be stored in their account.">
-    In your Google Account, <ph name="ACCOUNT">$1<ex>alexpark@gmail.com</ex></ph>
+    In your Account, <ph name="ACCOUNT">$1<ex>alexpark@gmail.com</ex></ph>
   </message>
   <message name="IDS_AUTOFILL_SAVE_IN_ACCOUNT_MESSAGE_ADDRESS_MIGRATION_RECORD_TYPE_NOTICE" desc="The notice/warning message for the user that this address is going to be migrated in their account.">
-    You will be able to use it across Google products
+    You will be able to use it across products
   </message>
   <message name="IDS_AUTOFILL_ADDRESS_ALREADY_SAVED_IN_ACCOUNT_RECORD_TYPE_NOTICE" desc="The footer message used to notify user that their address is stored in their account." formatter_data="android_java">
-    You can use saved addresses across Google products. This address is saved in your Google Account, <ph name="ACCOUNT">$1<ex>alexpark@gmail.com</ex></ph>.
+    You can use saved addresses across products. This address is saved in your Account, <ph name="ACCOUNT">$1<ex>alexpark@gmail.com</ex></ph>.
   </message>
   <message name="IDS_AUTOFILL_ADDRESS_WILL_BE_SAVED_IN_ACCOUNT_RECORD_TYPE_NOTICE" desc="The footer message used to notify user that their address will be saved in their account." formatter_data="android_java">
-    You can use saved addresses across Google products. This address will be saved in your Google Account, <ph name="ACCOUNT">$1<ex>alexpark@gmail.com</ex></ph>.
+    You can use saved addresses across products. This address will be saved in your Account, <ph name="ACCOUNT">$1<ex>alexpark@gmail.com</ex></ph>.
   </message>
-  <message name="IDS_AUTOFILL_ADDRESS_HOME_RECORD_TYPE_NOTICE" desc="The footer message used to notify user that their home address won't be modified and a new address will be added to their Google Account.">
-    You can use saved addresses across Google products. This won’t change your existing home address. It’ll be saved in your Google Account, <ph name="ACCOUNT">$1<ex>alexpark@gmail.com</ex></ph>.
+  <message name="IDS_AUTOFILL_ADDRESS_HOME_RECORD_TYPE_NOTICE" desc="The footer message used to notify user that their home address won't be modified and a new address will be added to their Account.">
+    You can use saved addresses across products. This won’t change your existing home address. It’ll be saved in your Account, <ph name="ACCOUNT">$1<ex>alexpark@gmail.com</ex></ph>.
   </message>
-  <message name="IDS_AUTOFILL_ADDRESS_WORK_RECORD_TYPE_NOTICE" desc="The footer message used to notify user that their work address won't be modified and a new address will be added to their Google Account.">
-    You can use saved addresses across Google products. This won’t change your existing work address. It’ll be saved in your Google Account, <ph name="ACCOUNT">$1<ex>alexpark@gmail.com</ex></ph>.
+  <message name="IDS_AUTOFILL_ADDRESS_WORK_RECORD_TYPE_NOTICE" desc="The footer message used to notify user that their work address won't be modified and a new address will be added to their Account.">
+    You can use saved addresses across products. This won’t change your existing work address. It’ll be saved in your Account, <ph name="ACCOUNT">$1<ex>alexpark@gmail.com</ex></ph>.
   </message>
   <message name="IDS_AUTOFILL_ADDRESS_HOME_AND_WORK_RECORD_TYPE_NOTICE" desc="The footer message used to notify user that their Home/Work address is used to fill forms faster in Chrome." formatter_data="android_java">
-    Info from your Google Account <ph name="ACCOUNT">$1<ex>elisa.beckett@gmail.com</ex></ph> can help you fill forms faster in Chrome
+    Info from your Account <ph name="ACCOUNT">$1<ex>elisa.beckett@gmail.com</ex></ph> can help you fill forms faster in Chrome
   </message>
   <message name="IDS_AUTOFILL_EDIT_ADDRESS_REQUIRED_FIELD_FORM_ERROR" desc="The form error message shown to the user in case of a single required field missing.">
     A required field is empty. Fill it before saving.
@@ -464,7 +464,7 @@
     Edit, opens new window
   </message>
   <message name="IDS_AUTOFILL_SYNC_TOGGLE_LABEL" desc="The Sync Autofill toggle label on the Autofill Settings page.">
-    Use and save Addresses from your Google Account
+    Use and save Addresses from your Account
   </message>
   <message name="IDS_AUTOFILL_ADDRESSES_SETTINGS_TITLE" desc="Title for the Autofill settings page that allows user to manage their list of saved addresses and Autofill preferences for addresses. Sentence-Cased." formatter_data="android_java">
     Addresses and more
@@ -486,7 +486,7 @@
   Google isn’t your autofill provider
   </message>
   <message name="IDS_AUTOFILL_DISABLE_SETTINGS_EXPLANATION" desc="Explanation why the settings page was disabled. Sentence-Cased." formatter_data="android_java">
-    To enable these settings and use payment info from your Google Account, visit autofill services settings.
+    To enable these settings and use payment info from your Account, visit autofill services settings.
   </message>
   <message name="IDS_AUTOFILL_DISABLE_SETTINGS_BUTTON_LABEL" desc="Button that opens the autofill services settings page. Sentence-Cased." formatter_data="android_java">
     Autofill services settings
@@ -514,22 +514,22 @@
       Autofill using another service
     </message>
     <message name="IDS_AUTOFILL_THIRD_PARTY_FILLING_DEFAULT_DESCRIPTION" desc="Description shown on the option to use the default Chrome autofill experience." formatter_data="android_java">
-      Use info saved in your Google Account to autofill passwords, passkeys, addresses, payment methods, and other info
+      Use info saved in your Account to autofill passwords, passkeys, addresses, payment methods, and other info
     </message>
     <message name="IDS_AUTOFILL_THIRD_PARTY_FILLING_OPT_IN_DESCRIPTION" desc="Description shown on the option enabling the use of third-party autofill in Chrome." formatter_data="android_java">
       To use another autofill service in Chrome, choose your autofill provider in Android settings
     </message>
-    <message name="IDS_PAYMENT_METHODS_SETTINGS_LOYALTY_CARDS_TITLE" desc="Title for the payment methods settings page row that links the user to the Google Wallet app." formatter_data="android_java">
+    <message name="IDS_PAYMENT_METHODS_SETTINGS_LOYALTY_CARDS_TITLE" desc="Title for the payment methods settings page row that links the user to the Wallet app." formatter_data="android_java">
       Loyalty cards
     </message>
-    <message name="IDS_PAYMENT_METHODS_SETTINGS_LOYALTY_CARDS_DESCRIPTION" desc="Description shown below the loyalty cards link to the Google Wallet app." formatter_data="android_java">
-      Manage your loyalty cards in Google Wallet
+    <message name="IDS_PAYMENT_METHODS_SETTINGS_LOYALTY_CARDS_DESCRIPTION" desc="Description shown below the loyalty cards link to the Wallet app." formatter_data="android_java">
+      Manage your loyalty cards in Wallet
     </message>
   </if>
 
   <!-- Autofill/Wallet integration preferences -->
-  <message name="IDS_SYNC_DATATYPE_PAYMENTS_AND_INFO" desc="Label for the checkbox that controls the Autofill/Wallet integration feature used for Autofill. 'Google Wallet' should not be translated as it is the product name. Sentence-Cased.">
-    Payment methods and other info from Google Wallet
+  <message name="IDS_SYNC_DATATYPE_PAYMENTS_AND_INFO" desc="Label for the checkbox that controls the Autofill/Wallet integration feature used for Autofill. 'Wallet' should not be translated as it is the product name. Sentence-Cased.">
+    Payment methods and other info from Wallet
   </message>
 
   <!-- Manual filling (keyboard accessory) strings -->
@@ -537,7 +537,7 @@
     <message name="IDS_MANUAL_FILLING_CREDIT_CARD_SHEET_ALL_ADDRESSES_LINK" desc="The text of the link in the address sheet that opens the address management section.">
       Manage payment methods
     </message>
-    <message name="IDS_MANUAL_FILLING_CREDIT_CARD_SHEET_ALL_LOYALTY_CARDS_LINK" desc="The text of the link in the payments sheet that opens the Google Wallet loyalty card section.">
+    <message name="IDS_MANUAL_FILLING_CREDIT_CARD_SHEET_ALL_LOYALTY_CARDS_LINK" desc="The text of the link in the payments sheet that opens the Wallet loyalty card section.">
       Manage loyalty cards
     </message>
     <message name="IDS_MANUAL_FILLING_CREDIT_CARD_SHEET_EMPTY_MESSAGE" desc="Message indicating that no payment methods (e.g., credit cards) are available for filling.">
@@ -599,16 +599,16 @@
     No thanks
   </message>
   <message name="IDS_AUTOFILL_SAVE_IN_ACCOUNT_PROMPT_ADDRESS_SOURCE_NOTICE" desc="The footer message in the 'Save address' prompt informing the user that this address will be stored in their account.">
-    You can use saved addresses across Google products. This address will be saved in your Google Account, <ph name="ACCOUNT">$1<ex>alexpark@gmail.com</ex></ph>.
+    You can use saved addresses across products. This address will be saved in your Account, <ph name="ACCOUNT">$1<ex>alexpark@gmail.com</ex></ph>.
   </message>
   <message name="IDS_AUTOFILL_UPDATE_PROMPT_ACCOUNT_ADDRESS_SOURCE_NOTICE" desc="The footer message in the 'Update address' prompt informing the user that this address is stored in their account.">
-    You can use saved addresses across Google products. This address is saved in your Google Account, <ph name="ACCOUNT">$1<ex>alexpark@gmail.com</ex></ph>.
+    You can use saved addresses across products. This address is saved in your Account, <ph name="ACCOUNT">$1<ex>alexpark@gmail.com</ex></ph>.
   </message>
   <message name="IDS_AUTOFILL_SYNCABLE_PROFILE_MIGRATION_PROMPT_NOTICE" desc="The syncable profile prompt body text.">
-    This address is currently saved to Chrome. To use it across Google products, save it in your Google Account, <ph name="ACCOUNT">$1<ex>alexpark@gmail.com</ex></ph>.
+    This address is currently saved to Chrome. To use it across products, save it in your Account, <ph name="ACCOUNT">$1<ex>alexpark@gmail.com</ex></ph>.
   </message>
   <message name="IDS_AUTOFILL_LOCAL_PROFILE_MIGRATION_PROMPT_NOTICE" desc="The local profile prompt body text.">
-    This address is currently saved to this device. To use it across Google products, save it in your Google Account, <ph name="ACCOUNT">$1<ex>alexpark@gmail.com</ex></ph>.
+    This address is currently saved to this device. To use it across products, save it in your Account, <ph name="ACCOUNT">$1<ex>alexpark@gmail.com</ex></ph>.
   </message>
   <message name="IDS_AUTOFILL_SAVE_PROMPT_ADDRESS_SECTION_A11Y_LABEL" desc="The 'Save address' prompt address summary section a11y announcement, accompanied with a label to make it clear that the content being read is an address.">
     Address: <ph name="ADDRESS">$1<ex>345 Spear street</ex></ph>.
@@ -624,7 +624,7 @@
     <message name="IDS_AUTOFILL_SAVE_ADDRESS_PROMPT_TITLE" desc="Title shown at the top of prompt that offers the user to save a new address.">
       Save address?
     </message>
-    <message name="IDS_AUTOFILL_SAVE_ADDRESS_MIGRATION_PROMPT_TITLE" desc="Title shown at the top of prompt that offers the user to migrate a new address in their Google Account.">
+    <message name="IDS_AUTOFILL_SAVE_ADDRESS_MIGRATION_PROMPT_TITLE" desc="Title shown at the top of prompt that offers the user to migrate a new address in their Account.">
       Save in account?
     </message>
     <message name="IDS_AUTOFILL_UPDATE_ADDRESS_PROMPT_TITLE" desc="Title shown at the top of prompt that offers the user to update an existing address.">
@@ -666,7 +666,7 @@
     <message name="IDS_IOS_AUTOFILL_SAVE_ADDRESS_PROMPT_TITLE" desc="Title shown at the top of modal dialog that offers the user to save a new address." meaning="In Title Case for iOS">
       Save address
     </message>
-   <message name="IDS_IOS_AUTOFILL_SAVE_ADDRESS_IN_ACCOUNT_PROMPT_TITLE" desc="Title shown at the top of modal dialog that offers the user to save a new address in Google Account." meaning="In Title Case for iOS">
+   <message name="IDS_IOS_AUTOFILL_SAVE_ADDRESS_IN_ACCOUNT_PROMPT_TITLE" desc="Title shown at the top of modal dialog that offers the user to save a new address in Account." meaning="In Title Case for iOS">
       Save in account
     </message>
     <message name="IDS_IOS_AUTOFILL_UPDATE_ADDRESS_PROMPT_TITLE" desc="Title shown at the top of modal dialog that offers the user to update an existing address." meaning="In Title Case for iOS">
@@ -678,17 +678,17 @@
     <message name="IDS_IOS_AUTOFILL_ADDRESS_MIGRATION_TO_ACCOUNT_PROMPT_TITLE" desc="Title shown at the top of modal dialog that offers the user to migrate the profile to account." meaning="In Title Case for iOS">
       Save address in account
     </message>
-    <message name="IDS_IOS_AUTOFILL_SAVE_ADDRESS_IN_ACCOUNT_MESSAGE_SUBTITLE" desc="Subtitle shown in the messages UI view when a new profile is asked to be saved in the Google Account">
-       In your Google Account, <ph name="USER_EMAIL">$1<ex>janedoe@google.com</ex></ph>
+    <message name="IDS_IOS_AUTOFILL_SAVE_ADDRESS_IN_ACCOUNT_MESSAGE_SUBTITLE" desc="Subtitle shown in the messages UI view when a new profile is asked to be saved in the Account">
+       In your Account, <ph name="USER_EMAIL">$1<ex>janedoe@google.com</ex></ph>
     </message>
-    <message name="IDS_IOS_AUTOFILL_MIGRATE_ADDRESS_IN_ACCOUNT_MESSAGE_SUBTITLE" desc="Subtitle shown in the messages UI view when an existing profile is asked to be migrated to the Google Account">
-       You can use it across Google products
+    <message name="IDS_IOS_AUTOFILL_MIGRATE_ADDRESS_IN_ACCOUNT_MESSAGE_SUBTITLE" desc="Subtitle shown in the messages UI view when an existing profile is asked to be migrated to the Account">
+       You can use it across products
     </message>
-    <message name="IDS_IOS_AUTOFILL_SAVE_ADDRESS_IN_ACCOUNT_FOOTER" desc="Footer text shown in the save modal for saving a new address profile or migrating it in the Google Account">
-      You can use saved addresses across Google products. This address will be saved in your Google Account, <ph name="USER_EMAIL">$1<ex>janedoe@google.com</ex></ph>.
+    <message name="IDS_IOS_AUTOFILL_SAVE_ADDRESS_IN_ACCOUNT_FOOTER" desc="Footer text shown in the save modal for saving a new address profile or migrating it in the Account">
+      You can use saved addresses across products. This address will be saved in your Account, <ph name="USER_EMAIL">$1<ex>janedoe@google.com</ex></ph>.
     </message>
     <message name="IDS_IOS_AUTOFILL_HOME_WORK_PROFILE_FOOTER" desc="Footer text shown in the settings when home and work profile details are shown">
-      Info from your Google Account <ph name="USER_EMAIL">$1<ex>janedoe@google.com</ex></ph> can help you fill forms faster in Chrome
+      Info from your Account <ph name="USER_EMAIL">$1<ex>janedoe@google.com</ex></ph> can help you fill forms faster in Chrome
     </message>
   </if>
   <!-- Autofill Settings Pages -->
@@ -727,7 +727,7 @@
       You don't have any addresses saved. Add an address to use it in Chrome.
     </message>
     <message name="IDS_AUTOFILL_ADD_NEW_ADDRESS_INTO_ACCOUNT_PROMPT_BODY_TEXT" desc="The 'Add new address' bubble body text if the address will be save in the user's Google account.">
-      You don't have any addresses saved. Add an address to use it across Google products.
+      You don't have any addresses saved. Add an address to use it across products.
     </message>
     <message name="IDS_AUTOFILL_UPDATE_ADDRESS_PROMPT_CANCEL_BUTTON_LABEL" desc="Label of the Cancel button in the prompt that offers the user to update an existing address.">
       No thanks
@@ -771,10 +771,10 @@
     <message name="IDS_AUTOFILL_EXPANDABLE_SUGGESTION_SUBMENU_HINT" desc="Autofill desktop popup: additional screen reader info to let the user know that the suggestion can be expanded into a sub-menu.">
       Submenu available, use <ph name="SHORTCUT">$1<ex>right key</ex></ph> to navigate to additional options.
     </message>
-    <message name="IDS_AUTOFILL_SIGNIN_PROMO_TITLE_PASSWORD" desc="This is the body text of a confirmation message and means that the password was only saved locally to the user's device (not in their Google Account). It appears after a password save if the user is not signed in to Chrome or their sign-in credentials have expired. If the user wants to save this data to their Google Account, they can click the button at the bottom of this message. The tone should be motivating.">
+    <message name="IDS_AUTOFILL_SIGNIN_PROMO_TITLE_PASSWORD" desc="This is the body text of a confirmation message and means that the password was only saved locally to the user's device (not in their Account). It appears after a password save if the user is not signed in to Chrome or their sign-in credentials have expired. If the user wants to save this data to their Account, they can click the button at the bottom of this message. The tone should be motivating.">
     Password saved to this device
     </message>
-    <message name="IDS_AUTOFILL_VERIFY_PROMO_SUBTITLE_PASSWORD" desc="This is the body text of a confirmation message and means that the password was only saved locally to the user's device (not in their Google Account). It appears when the user was signed in to Chrome but their sign-in credentials have expired; now, they need to sign back in to Chrome. The string is after the 'Password saved to this device' string. If the user wants to save this data to their Google Account, they can click the 'Verify it's you' button at the bottom of this message. The tone should be motivating.">
+    <message name="IDS_AUTOFILL_VERIFY_PROMO_SUBTITLE_PASSWORD" desc="This is the body text of a confirmation message and means that the password was only saved locally to the user's device (not in their Account). It appears when the user was signed in to Chrome but their sign-in credentials have expired; now, they need to sign back in to Chrome. The string is after the 'Password saved to this device' string. If the user wants to save this data to their Account, they can click the 'Verify it's you' button at the bottom of this message. The tone should be motivating.">
     To get this password on all your devices, verify it's you
     </message>
     <message name="IDS_AUTOFILL_POPUP_SEARCH_BAR_CLEAR_SEARCH_BUTTON_A11Y_NAME" desc="The a11y name for the clear button accompanying the autofill popup search bar input.">
@@ -789,20 +789,20 @@
     <message name="IDS_AUTOFILL_POPUP_SEARCH_BAR_PASSWORDS_NOT_FOUND" desc="On the autofill popup for paswords, the label to be used when no passwords matching user's request were found.">
       No passwords found
     </message>
-    <message name="IDS_AUTOFILL_SIGNIN_PROMO_TITLE_ADDRESS" desc="This is the body text of a confirmation message and means that the address was only saved locally to the user's device (not in their Google Account). It appears after an address save if the user is not signed in to Chrome or their sign-in credentials have expired. If the user wants to save this data to their Google Account, they can click the button at the bottom of this message. The tone should be motivating.">
+    <message name="IDS_AUTOFILL_SIGNIN_PROMO_TITLE_ADDRESS" desc="This is the body text of a confirmation message and means that the address was only saved locally to the user's device (not in their Account). It appears after an address save if the user is not signed in to Chrome or their sign-in credentials have expired. If the user wants to save this data to their Account, they can click the button at the bottom of this message. The tone should be motivating.">
     Address saved to this device
     </message>
-    <message name="IDS_AUTOFILL_VERIFY_PROMO_SUBTITLE_ADDRESS" desc="This is the body text of a confirmation message and means that the address was only saved locally to the user's device (not in their Google Account). It appears when the user was signed in to Chrome but their sign-in credentials have expired; now, they need to sign back in to Chrome. The string is after the 'Address saved to this device' string. If the user wants to save this data to their Google Account, they can click the 'Verify it's you' button at the bottom of this message. The tone should be motivating.">
+    <message name="IDS_AUTOFILL_VERIFY_PROMO_SUBTITLE_ADDRESS" desc="This is the body text of a confirmation message and means that the address was only saved locally to the user's device (not in their Account). It appears when the user was signed in to Chrome but their sign-in credentials have expired; now, they need to sign back in to Chrome. The string is after the 'Address saved to this device' string. If the user wants to save this data to their Account, they can click the 'Verify it's you' button at the bottom of this message. The tone should be motivating.">
     To get this address on all your devices, verify it's you
     </message>
-    <message name="IDS_AUTOFILL_IPH_LOYALTY_CARD_SUGGESTION_TITLE" desc="IPH toast for a suggestion item with a loyalty card from Google Wallet.">
-    Now you can autofill loyalty cards from Google Wallet
+    <message name="IDS_AUTOFILL_IPH_LOYALTY_CARD_SUGGESTION_TITLE" desc="IPH toast for a suggestion item with a loyalty card from Wallet.">
+    Now you can autofill loyalty cards from Wallet
     </message>
-    <message name="IDS_AUTOFILL_IPH_LOYALTY_CARD_SUGGESTION_BODY" desc="IPH toast for a suggestion item with a loyalty card from Google Wallet.">
-    Manage loyalty cards or turn these suggestions off in Google Wallet
+    <message name="IDS_AUTOFILL_IPH_LOYALTY_CARD_SUGGESTION_BODY" desc="IPH toast for a suggestion item with a loyalty card from Wallet.">
+    Manage loyalty cards or turn these suggestions off in Wallet
     </message>
-    <message name="IDS_AUTOFILL_IPH_LOYALTY_CARD_SUGGESTION_SCREENREADER" is_accessibility_with_no_ui="true" desc="IPH toast for a suggestion item with a loyalty card from Google Wallet.">
-    Now you can autofill loyalty cards from Google Wallet
+    <message name="IDS_AUTOFILL_IPH_LOYALTY_CARD_SUGGESTION_SCREENREADER" is_accessibility_with_no_ui="true" desc="IPH toast for a suggestion item with a loyalty card from Wallet.">
+    Now you can autofill loyalty cards from Wallet
     </message>
     <message name="IDS_PASSWORD_MANAGER_UI_PASSWORD_RECOVERY_SHOWN_A11Y_ANNOUNCEMENT" is_accessibility_with_no_ui="true" desc="Text announced after a proactive password recovery popup is shown">
       Recovery password shown
@@ -1123,19 +1123,19 @@
   <message name="IDS_AUTOFILL_AI_OPT_IN_IPH_MAYBE_LATER" desc="The left of two buttons that’s essentially the user’s path to not learning more or turning on enhanced autofill. “Maybe later” conveys that the user won’t do it now but that they’ll have the choice to do it later. Localizer has existing translations of this button label.">
     Maybe later
   </message>
-  <message name="IDS_AUTOFILL_AI_VALUABLES_IPH_TITLE" desc="IPH toast for a suggestion item with an item from Google Wallet.">
-    Now you can autofill more info from Google Wallet
+  <message name="IDS_AUTOFILL_AI_VALUABLES_IPH_TITLE" desc="IPH toast for a suggestion item with an item from Wallet.">
+    Now you can autofill more info from Wallet
   </message>
-  <message name="IDS_AUTOFILL_AI_VALUABLES_IPH_BODY" desc="IPH toast for a suggestion item with an item from Google Wallet.">
+  <message name="IDS_AUTOFILL_AI_VALUABLES_IPH_BODY" desc="IPH toast for a suggestion item with an item from Wallet.">
     Manage your information or turn these suggestions off in Settings
   </message>
-  <message name="IDS_AUTOFILL_AI_VALUABLES_IPH_SCREENREADER" is_accessibility_with_no_ui="true" desc="IPH toast for a suggestion item with an item from Google Wallet.">
-    Now you can autofill more info from Google Wallet
+  <message name="IDS_AUTOFILL_AI_VALUABLES_IPH_SCREENREADER" is_accessibility_with_no_ui="true" desc="IPH toast for a suggestion item with an item from Wallet.">
+    Now you can autofill more info from Wallet
   </message>
 
   <!-- Save/ Update dialog-->
-  <message name="IDS_AUTOFILL_GOOGLE_WALLET_TITLE" desc="The name of the Google Wallet product. This is displayed in some enhanced autofill save and update prompts as a link. Upon clicking the user is taken to a their wallet passes pages. For example the user would see 'Your info is saved to Google Wallet for elisa.beckett@gmail.com'">
-    Google Wallet
+  <message name="IDS_AUTOFILL_GOOGLE_WALLET_TITLE" desc="The name of the Wallet product. This is displayed in some enhanced autofill save and update prompts as a link. Upon clicking the user is taken to a their wallet passes pages. For example the user would see 'Your info is saved to Wallet for elisa.beckett@gmail.com'">
+    Wallet
   </message>
   <!-- Prompt strings used on Desktop -->
   <if expr="not is_android">
@@ -1186,23 +1186,23 @@
     <message name="IDS_AUTOFILL_AI_UPDATE_ENTITY_DIALOG_SUBTITLE" desc="A description that appears beneath the Update title prompt asking users whether they want to update their data stored locally. For example, the user previously saved information related to their passport. Now, the user is filling out a new form either with additional details associated with the passport or with different values than what was previously saved. The interface shows new or modified values at the top with blue dots to indicate they’re new. Existing information associated with the passport that isn’t changing appears at the bottom without blue dots. Depending on the form and what Chrome recognizes, there might be just one or several pieces of data updated at this moment. This is a similar moment to updating a password or credit card with Chrome.">
       Saves to your device
     </message>
-    <message name="IDS_AUTOFILL_AI_UPDATE_ENTITY_TO_WALLET_DIALOG_SUBTITLE" desc="A description that appears beneath the Update title prompt asking users whether they want to update their data stored in Google Wallet. For example, the user previously saved information related to their passport. Now, the user is filling out a new form either with additional details associated with the passport or with different values than what was previously saved. The interface shows new or modified values at the top with blue dots to indicate they’re new. Existing information associated with the passport that isn’t changing appears at the bottom without blue dots. Depending on the form and what Chrome recognizes, there might be just one or several pieces of data updated at this moment. This is a similar moment to updating a password or credit card with Chrome.">
-      Your info is saved to <ph name="IDS_AUTOFILL_GOOGLE_WALLET_TITLE">$1<ex>Google Wallet</ex></ph> for <ph name="ACCOUNT">$2<ex>alexpark@gmail.com</ex></ph>
+    <message name="IDS_AUTOFILL_AI_UPDATE_ENTITY_TO_WALLET_DIALOG_SUBTITLE" desc="A description that appears beneath the Update title prompt asking users whether they want to update their data stored in Wallet. For example, the user previously saved information related to their passport. Now, the user is filling out a new form either with additional details associated with the passport or with different values than what was previously saved. The interface shows new or modified values at the top with blue dots to indicate they’re new. Existing information associated with the passport that isn’t changing appears at the bottom without blue dots. Depending on the form and what Chrome recognizes, there might be just one or several pieces of data updated at this moment. This is a similar moment to updating a password or credit card with Chrome.">
+      Your info is saved to <ph name="IDS_AUTOFILL_GOOGLE_WALLET_TITLE">$1<ex>Wallet</ex></ph> for <ph name="ACCOUNT">$2<ex>alexpark@gmail.com</ex></ph>
     </message>
     <message name="IDS_AUTOFILL_AI_SAVE_ENTITY_DIALOG_SUBTITLE" desc="A description that appears beneath the Save title prompt. This sentence essentially defines Autofill in Chrome. We prompt the user to save their information with Chrome with the promise that Chrome can then help the user fill out forms more quickly using their saved info.">
       Save your information and fill out forms more quickly. Saves to your device.
     </message>
-    <message name="IDS_AUTOFILL_AI_SAVE_ENTITY_TO_WALLET_DIALOG_SUBTITLE" desc="A description that appears beneath the Save title prompt asking users whether they want to save their data to Google Wallet. This sentence essentially defines Autofill in Chrome. We prompt the user to save their information with Google Wallet with the promise that Chrome can then help the user fill out forms across devices more quickly using their saved info.">
-      Save your info to get things done faster, across Google products. Your info is saved to <ph name="IDS_AUTOFILL_GOOGLE_WALLET_TITLE">$1<ex>Google Wallet</ex></ph> for <ph name="ACCOUNT">$2<ex>alexpark@gmail.com</ex></ph>.
+    <message name="IDS_AUTOFILL_AI_SAVE_ENTITY_TO_WALLET_DIALOG_SUBTITLE" desc="A description that appears beneath the Save title prompt asking users whether they want to save their data to Wallet. This sentence essentially defines Autofill in Chrome. We prompt the user to save their information with Wallet with the promise that Chrome can then help the user fill out forms across devices more quickly using their saved info.">
+      Save your info to get things done faster, across products. Your info is saved to <ph name="IDS_AUTOFILL_GOOGLE_WALLET_TITLE">$1<ex>Wallet</ex></ph> for <ph name="ACCOUNT">$2<ex>alexpark@gmail.com</ex></ph>.
     </message>
     <message name="IDS_AUTOFILL_MANAGE_YOUR_INFO_LINK" desc="Link text prompting users to manage their autofill information.">
       manage your info
     </message>
-    <message name="IDS_AUTOFILL_AI_SAVE_ENTITY_TO_WALLET_DIALOG_SUBTITLE_NEW" desc="A description that appears beneath the Save title prompt asking users whether they want to save their data to Google Wallet. This sentence essentially defines Autofill in Chrome. We prompt the user to save their information with Google Wallet with the promise that Chrome can then help the user fill out forms across devices more quickly using their saved info.">
-      Save your info and get things done faster, like filling forms across Google products. You can <ph name="MANAGE_INFO_LINK">$1<ex>manage your info</ex></ph> in <ph name="IDS_AUTOFILL_GOOGLE_WALLET_TITLE">$2<ex>Google Wallet</ex></ph> for <ph name="ACCOUNT">$3<ex>alexpark@gmail.com</ex></ph>.
+    <message name="IDS_AUTOFILL_AI_SAVE_ENTITY_TO_WALLET_DIALOG_SUBTITLE_NEW" desc="A description that appears beneath the Save title prompt asking users whether they want to save their data to Wallet. This sentence essentially defines Autofill in Chrome. We prompt the user to save their information with Wallet with the promise that Chrome can then help the user fill out forms across devices more quickly using their saved info.">
+      Save your info and get things done faster, like filling forms across products. You can <ph name="MANAGE_INFO_LINK">$1<ex>manage your info</ex></ph> in <ph name="IDS_AUTOFILL_GOOGLE_WALLET_TITLE">$2<ex>Wallet</ex></ph> for <ph name="ACCOUNT">$3<ex>alexpark@gmail.com</ex></ph>.
     </message>
-    <message name="IDS_AUTOFILL_AI_SAVE_ENTITY_TO_WALLET_SETTINGS_SUBTITLE" desc="A description that appears beneath the Save title prompt asking users whether they want to save their data to Google Wallet from Settings.">
-      Your info is saved to <ph name="IDS_AUTOFILL_GOOGLE_WALLET_TITLE">$1<ex>Google Wallet</ex></ph> for <ph name="ACCOUNT">$2<ex>alexpark@gmail.com</ex></ph>. You can use it across Google products to fill forms faster.
+    <message name="IDS_AUTOFILL_AI_SAVE_ENTITY_TO_WALLET_SETTINGS_SUBTITLE" desc="A description that appears beneath the Save title prompt asking users whether they want to save their data to Wallet from Settings.">
+      Your info is saved to <ph name="IDS_AUTOFILL_GOOGLE_WALLET_TITLE">$1<ex>Wallet</ex></ph> for <ph name="ACCOUNT">$2<ex>alexpark@gmail.com</ex></ph>. You can use it across products to fill forms faster.
     </message>
     <message name="IDS_AUTOFILL_AI_UPDATE_ENTITY_DIALOG_UPDATED_ATTRIBUTE_ACCESSIBLE_NAME" desc="Used in entity update dialogs, as the accessible names for rows with updated attributes">
       <ph name="ATTRIBUTE_NAME">$1<ex>Passport number</ex></ph> updated
@@ -1217,15 +1217,15 @@
       <ph name="ATTRIBUTE_VALUE">$1<ex>Jan 1, 2035</ex></ph>, was <ph name="PREVIOUS_VALUE">$2<ex>Jan 1, 2034</ex></ph>
     </message>
 
-    <message name="IDS_AUTOFILL_AI_WALLET_UPLOAD_THROBBER_ACCESSIBLE_NAME" desc="Announced when the loading throbber during upload to Google Wallet is shown.">
+    <message name="IDS_AUTOFILL_AI_WALLET_UPLOAD_THROBBER_ACCESSIBLE_NAME" desc="Announced when the loading throbber during upload to Wallet is shown.">
       Saving your info...
     </message>
 
-    <message name="IDS_AUTOFILL_AI_LOCAL_SAVE_NOTIFICATION_TITLE" desc="The title of an informational dialog. This dialog appears when a user attempts to save data (like a driver's license) to Google Wallet, but the request fails (e.g., due to server error or connection issues). The title clarifies that the information was not lost, but rather saved locally to the device instead.">
+    <message name="IDS_AUTOFILL_AI_LOCAL_SAVE_NOTIFICATION_TITLE" desc="The title of an informational dialog. This dialog appears when a user attempts to save data (like a driver's license) to Wallet, but the request fails (e.g., due to server error or connection issues). The title clarifies that the information was not lost, but rather saved locally to the device instead.">
       Info saved to device only
     </message>
-    <message name="IDS_AUTOFILL_AI_LOCAL_SAVE_NOTIFICATION_DESCRIPTION" desc="The body text of an informational dialog. The user sees this after a failed attempt to save to Google Wallet. 'Couldn't save...' acknowledges the server failure. 'Saved to Chrome...' confirms the safety of the data (local fallback). 'Chrome will offer...' sets expectations that the system will retry the cloud save the next time this data is accessed.">
-      Couldn't save this info to your Google Wallet. It's saved to Chrome on this device instead. Chrome will offer to save it to Wallet next time you use it.
+    <message name="IDS_AUTOFILL_AI_LOCAL_SAVE_NOTIFICATION_DESCRIPTION" desc="The body text of an informational dialog. The user sees this after a failed attempt to save to Wallet. 'Couldn't save...' acknowledges the server failure. 'Saved to Chrome...' confirms the safety of the data (local fallback). 'Chrome will offer...' sets expectations that the system will retry the cloud save the next time this data is accessed.">
+      Couldn't save this info to your Wallet. It's saved to Chrome on this device instead. Chrome will offer to save it to Wallet next time you use it.
     </message>
     <message name="IDS_AUTOFILL_AI_LOCAL_SAVE_NOTIFICATION_DISMISS_BUTTON_LABEL" desc="A button on an informational dialog. Clicking this button dismisses the dialog. The user accepts that the data is saved locally for now.">
       Got it
@@ -1233,8 +1233,8 @@
   </if>
 
 
-  <message name="IDS_AUTOFILL_AI_WALLET_UPDATE_OR_MIGRATE_FAILURE_NOTIFICATION" desc="A message that appears when an attempt to update or migrate data to Google Wallet fails.">
-    Couldn't save to Google Wallet
+  <message name="IDS_AUTOFILL_AI_WALLET_UPDATE_OR_MIGRATE_FAILURE_NOTIFICATION" desc="A message that appears when an attempt to update or migrate data to Wallet fails.">
+    Couldn't save to Wallet
   </message>
 
   <message name="IDS_AUTOFILL_AI_WALLET_FETCH_FAILURE_NOTIFICATION" desc="A snackbar (toast) message appearing at the top of the screen. The user sees this error if they attempt to autofill information but the request fails due to network connectivity issues.">
@@ -1284,14 +1284,14 @@
     <message name="IDS_AUTOFILL_AI_SAVE_ENTITY_MESSAGE_SUBTITLE" desc="A description that appears beneath the Save title message. This sentence notifies the user that their data will be stored locally. We prompt the user to save their information with Chrome with the promise that Chrome can then help the user fill out forms more quickly using their saved info.">
       Saves to your device
     </message>
-    <message name="IDS_AUTOFILL_AI_SAVE_ENTITY_TO_WALLET_MESSAGE_SUBTITLE" desc="A description that appears beneath the Save title message prompting the user to save their data to Google Wallet. This sentence essentially defines Autofill in Chrome. We prompt the user to save their information with Google Wallet with the promise that Chrome can then help the user fill out forms across devices more quickly using their saved info.">
-      In <ph name="IDS_AUTOFILL_GOOGLE_WALLET_TITLE">$1<ex>Google Wallet</ex></ph> for <ph name="ACCOUNT">$2<ex>alexpark@gmail.com</ex></ph>
+    <message name="IDS_AUTOFILL_AI_SAVE_ENTITY_TO_WALLET_MESSAGE_SUBTITLE" desc="A description that appears beneath the Save title message prompting the user to save their data to Wallet. This sentence essentially defines Autofill in Chrome. We prompt the user to save their information with Wallet with the promise that Chrome can then help the user fill out forms across devices more quickly using their saved info.">
+      In <ph name="IDS_AUTOFILL_GOOGLE_WALLET_TITLE">$1<ex>Wallet</ex></ph> for <ph name="ACCOUNT">$2<ex>alexpark@gmail.com</ex></ph>
     </message>
     <message name="IDS_AUTOFILL_AI_SAVE_OR_UPDATE_LOCAL_ENTITY_SOURCE_NOTICE" desc="A description that appears beneath the entity details notifying the user that their data is going to be stored locally on device.">
       Your info is saved to your device
     </message>
-    <message name="IDS_AUTOFILL_AI_SAVE_OR_UPDATE_ENTITY_IN_WALLET_SOURCE_NOTICE" desc="A description that appears beneath the entity details notifying the user that their data is going to be stored in Google Wallet.">
-      Save your info and get things done faster, like filling forms across Google products. You can <ph name="BEGIN_LINK">&lt;link&gt;</ph>manage your info<ph name="END_LINK">&lt;/link&gt;</ph> in <ph name="IDS_AUTOFILL_GOOGLE_WALLET_TITLE">$1<ex>Google Wallet</ex></ph> for <ph name="ACCOUNT">$2<ex>alexpark@gmail.com</ex></ph>
+    <message name="IDS_AUTOFILL_AI_SAVE_OR_UPDATE_ENTITY_IN_WALLET_SOURCE_NOTICE" desc="A description that appears beneath the entity details notifying the user that their data is going to be stored in Wallet.">
+      Save your info and get things done faster, like filling forms across products. You can <ph name="BEGIN_LINK">&lt;link&gt;</ph>manage your info<ph name="END_LINK">&lt;/link&gt;</ph> in <ph name="IDS_AUTOFILL_GOOGLE_WALLET_TITLE">$1<ex>Wallet</ex></ph> for <ph name="ACCOUNT">$2<ex>alexpark@gmail.com</ex></ph>
     </message>
     <message name="IDS_AUTOFILL_AI_SAVE_OR_UPDATE_ENTITY_NEW_ATTRIBUTE_ACCESSIBILITY_NAME" desc="Used in entity update dialogs, as the accessible names for rows with new attributes" formatter_data="android_java">
       <ph name="ATTRIBUTE_NAME">$1<ex>Passport number</ex></ph>, new
@@ -1312,8 +1312,8 @@
     <message name="IDS_AUTOFILL_AI_LOCAL_ENTITY_EDITOR_SOURCE_NOTICE" desc="The footer message in the editor dialog informing the user that their data will be stored locally on their device. 'To your device': helps the user understand that information is saved locally, not in the Cloud." formatter_data="android_java">
       Your info is saved only to your device. You'll have the chance to save it to Wallet the next time you fill a relevant form.
     </message>
-    <message name="IDS_AUTOFILL_AI_WALLET_ENTITY_EDITOR_SOURCE_NOTICE" desc="The footer message in the editor dialog informing the user that their data will be stored in the Google Wallet." formatter_data="android_java">
-      Your info gets saved to Google Wallet for <ph name="ACCOUNT">$1<ex>elisa.beckett@gmail.com</ex></ph>. You can use it across Google services to fill forms faster.
+    <message name="IDS_AUTOFILL_AI_WALLET_ENTITY_EDITOR_SOURCE_NOTICE" desc="The footer message in the editor dialog informing the user that their data will be stored in the Wallet." formatter_data="android_java">
+      Your info gets saved to Wallet for <ph name="ACCOUNT">$1<ex>elisa.beckett@gmail.com</ex></ph>. You can use it across services to fill forms faster.
     </message>
     <message name="IDS_AUTOFILL_AI_ENTITY_EDITOR_DATE_FIELD_MONTH_LABEL" desc="The default value in the date field month picker in the editor dialog." formatter_data="android_java">
       Month
@@ -1341,7 +1341,7 @@
     Enhanced autofill understands forms better and can autofill them faster for you
   </message>
   <message name="IDS_AUTOFILL_AI_FFR_CONSIDER_DESCRIPTION" desc="Body text beneath the “Things to consider” sub title. This describes to users things they might want to weigh before using this feature. Ideally, we lead with ‘To offer suggestions’, because it redefines the value of ‘enhanced autofill’ and offers a rationale for the data use that immediately follows. The data used includes 1) the URL of a page visited and 2) the content of that page. Both are shared from Chrome to a Google service that generates autofill suggestions. Inludes a placeholder for a learn more link, $1 = IDS_AUTOFILL_AI_FFR_CONSIDER_LEARN_MORE">
-    To offer suggestions and improve this feature, the page’s URL and content are shared with Google. Change your mind anytime and <ph name="LEARN_MORE">$1<ex>learn more about enhanced autofill in settings</ex></ph>.
+    To offer suggestions and improve this feature, the page’s URL and content are shared with Jatter. Change your mind anytime and <ph name="LEARN_MORE">$1<ex>learn more about enhanced autofill in settings</ex></ph>.
   </message>
   <message name="IDS_AUTOFILL_AI_FFR_CONSIDER_LEARN_MORE" desc="Link for the enhanced autofill settings page to learn more about this feature.">
     learn more about enhanced autofill in settings
@@ -1365,7 +1365,7 @@
     Autofill service provider
   </message>
   <message name="IDS_SETTINGS_AUTOFILL_AI_TO_CONSIDER_DATA_USAGE" desc="Bullet 1 of 2 that appears beneath the 'Things to consider' title. The point of this bullet is to convey to the user the types of data that get shared with Google to support this feature. There are 2 data types: 1) 'the page’s URL' and 2) 'content', by which we mean the words, visuals, and layout of the pages the user visits. This notion that Google is considering 'page content' is new. We want to lead with 'To offer suggestions' even though it might be a bit grammatically awkward, because we want to express the need / value before explaining the data that gets shared." formatter_data="android_java">
-    To offer suggestions and improve this feature, the page’s URL and content are shared with Google
+    To offer suggestions and improve this feature, the page’s URL and content are shared with Jatter
   </message>
   <if expr="_google_chrome">
     <message name="IDS_SETTINGS_AUTOFILL_AI_DESCRIPTION" desc="The description of the enhanced autofill button on chrome://settings/autofill." formatter_data="android_java">
@@ -1381,13 +1381,13 @@
   </if>
   <if expr="not _google_chrome">
     <message name="IDS_SETTINGS_AUTOFILL_AI_DESCRIPTION" desc="The description of the enhanced autofill button on chrome://settings/autofill." formatter_data="android_java">
-      Chromium understands forms better and can autofill them faster for you
+      Jatter understands forms better and can autofill them faster for you
     </message>
-    <message name="IDS_SETTINGS_AUTOFILL_AI_TOGGLE_SUB_LABEL" desc="The description of the setting. By 'understand forms better', we mean that when a user submits a form on a website, and if they're using enhanced autofill, this feature can offer to save the user's submitted info. When Chromium saves that info, we save the submitted values and consider the page context.">
-      Chromium understands forms better and can autofill them faster for you
+    <message name="IDS_SETTINGS_AUTOFILL_AI_TOGGLE_SUB_LABEL" desc="The description of the setting. By 'understand forms better', we mean that when a user submits a form on a website, and if they're using enhanced autofill, this feature can offer to save the user's submitted info. When Jatter saves that info, we save the submitted values and consider the page context.">
+      Jatter understands forms better and can autofill them faster for you
     </message>
     <message name="IDS_SETTINGS_AUTOFILL_AI_WHEN_ON_CAN_FILL_DIFFICULT_FIELDS" desc="Bullet point that appears beneath the 'When on' title when seeing the Enhanced Autofill description page. This string explains one of the advantages users will get from enabling the feature and serves as a way to incentivize the user to do so." formatter_data="android_java">
-      Chromium can autofill difficult fields that standard autofill might miss
+      Jatter can autofill difficult fields that standard autofill might miss
     </message>
   </if>
 </grit-part>

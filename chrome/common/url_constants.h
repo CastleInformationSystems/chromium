@@ -33,24 +33,24 @@ namespace chrome {
 
 // "Learn more" URL linked in the dialog to cast using a code.
 inline constexpr char kAccessCodeCastLearnMoreURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // "Learn more" URL for accessibility image labels, linked from the permissions
 // dialog shown when a user enables the feature.
 inline constexpr char kAccessibilityLabelsLearnMoreURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // "Learn more" URL for Ad Privacy.
 inline constexpr char kAdPrivacyLearnMoreURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // "Learn more" URL for when profile settings are automatically reset.
 inline constexpr char kAutomaticSettingsResetLearnMoreURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // "Learn more" URL for Advanced Protection download warnings.
 inline constexpr char kAdvancedProtectionDownloadLearnMoreURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // "Chrome Settings" URL for the appearance page.
 inline constexpr char kBrowserSettingsSearchEngineURL[] =
@@ -58,40 +58,40 @@ inline constexpr char kBrowserSettingsSearchEngineURL[] =
 
 // "Learn more" URL for Battery Saver Mode.
 inline constexpr const char16_t kBatterySaverModeLearnMoreUrl[] =
-    u"";
+    u"https://jatter.ai/help";
 
 // The URL for providing help when the Bluetooth adapter is off.
 inline constexpr char kBluetoothAdapterOffHelpURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // "Learn more" URL shown in the dialog to enable cloud services for Cast.
 inline constexpr char kCastCloudServicesHelpURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // The URL for the help center article to show when no Cast destination has been
 // found.
 inline constexpr char kCastNoDestinationFoundURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // The URL for the WebHID API help center article.
 inline constexpr char kChooserHidOverviewUrl[] =
-    "";
+    "https://jatter.ai/help";
 
 // The URL for the Web Serial API help center article.
 inline constexpr char kChooserSerialOverviewUrl[] =
-    "";
+    "https://jatter.ai/help";
 
 // The URL for the WebUsb help center article.
 inline constexpr char kChooserUsbOverviewURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // Link to the forum for Chrome Beta.
 inline constexpr char kChromeBetaForumURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // The URL for the help center article to fix Chrome update problems.
 inline constexpr char16_t kChromeFixUpdateProblems[] =
-    u"";
+    u"https://jatter.ai/help";
 
 // General help links for Chrome, opened using various actions.
 inline constexpr char kChromeHelpViaKeyboardURL[] =
@@ -99,10 +99,10 @@ inline constexpr char kChromeHelpViaKeyboardURL[] =
 #if BUILDFLAG(GOOGLE_CHROME_BRANDING)
     "chrome-extension://honijodknafkokifofgiaalefdiedpko/main.html";
 #else
-    "";
+    "https://jatter.ai/help";
 #endif  // BUILDFLAG(GOOGLE_CHROME_BRANDING)
 #else
-    "";
+    "https://jatter.ai/help";
 #endif  // BUILDFLAG(IS_CHROMEOS)
 
 inline constexpr char kChromeHelpViaMenuURL[] =
@@ -110,10 +110,10 @@ inline constexpr char kChromeHelpViaMenuURL[] =
 #if BUILDFLAG(GOOGLE_CHROME_BRANDING)
     "chrome-extension://honijodknafkokifofgiaalefdiedpko/main.html";
 #else
-    "";
+    "https://jatter.ai/help";
 #endif  // BUILDFLAG(GOOGLE_CHROME_BRANDING)
 #else
-    "";
+    "https://jatter.ai/help";
 #endif  // BUILDFLAG(IS_CHROMEOS)
 
 inline constexpr char kChromeHelpViaWebUIURL[] =
@@ -123,7 +123,7 @@ inline constexpr char kChromeOsHelpViaWebUIURL[] =
 #if BUILDFLAG(GOOGLE_CHROME_BRANDING)
     "chrome-extension://honijodknafkokifofgiaalefdiedpko/main.html";
 #else
-    "";
+    "https://jatter.ai/help";
 #endif  // BUILDFLAG(GOOGLE_CHROME_BRANDING)
 #endif  // BUILDFLAG(IS_CHROMEOS)
 
@@ -184,62 +184,62 @@ static_assert(std::u16string_view(kChromiumProjectURL) ==
 #if BUILDFLAG(GOOGLE_CHROME_BRANDING)
 // The URL for the "Clear browsing data in Chrome" help center article.
 inline constexpr char16_t kClearBrowsingDataHelpCenterURL[] =
-    u"";
+    u"https://jatter.ai/help";
 #endif
 
 inline constexpr char16_t kContentSettingsExceptionsLearnMoreURL[] =
-    u"";
+    u"https://jatter.ai/help";
 
 // "Learn more" URL for cookies.
 inline constexpr char kCookiesSettingsHelpCenterURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // "Learn more" URL for "Aw snap" page when showing "Reload" button.
 inline constexpr char kCrashReasonURL[] =
 #if BUILDFLAG(IS_CHROMEOS)
-    "";
+    "https://jatter.ai/help";
 #else
-    "";
+    "https://jatter.ai/help";
 #endif
 
 // "Learn more" URL for "Aw snap" page when showing "Send feedback" button.
 inline constexpr char kCrashReasonFeedbackDisplayedURL[] =
 #if BUILDFLAG(IS_CHROMEOS)
-    "";
+    "https://jatter.ai/help";
 #else
-    "";
+    "https://jatter.ai/help";
 #endif
 
 // "Learn more" URL for the inactive tabs appearance setting.
 inline constexpr const char16_t kDiscardRingTreatmentLearnMoreUrl[] =
-    u"";
+    u"https://jatter.ai/help";
 
 // "Learn more" URL for the "Do not track" setting in the privacy section.
 inline constexpr char16_t kDoNotTrackLearnMoreURL[] =
 #if BUILDFLAG(IS_CHROMEOS)
-    u"";
+    u"https://jatter.ai/help";
 #else
-    u"";
+    u"https://jatter.ai/help";
 #endif
 
 // The URL for the "Learn more" page for interrupted downloads.
 inline constexpr char kDownloadInterruptedLearnMoreURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // The URL for the "Learn more" page for download scanning.
 inline constexpr char kDownloadScanningLearnMoreURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // The URL for the "Learn more" page for blocked downloads.
 // Note: This is the same as the above URL. This is done to decouple the URLs,
 // in case the support page is split apart into separate pages in the future.
 inline constexpr char kDownloadBlockedLearnMoreURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // "Learn more" URL for the Settings API, NTP bubble and other settings bubbles
 // showing which extension is controlling them.
 inline constexpr char kExtensionControlledSettingLearnMoreURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // Link for creating family group with Google Families.
 inline constexpr char16_t kFamilyGroupCreateURL[] =
@@ -313,37 +313,37 @@ inline constexpr char kGooglePhotosURL[] = "https://photos.google.com";
 
 // The URL for the "Learn more" link for the Memory Saver Mode.
 inline constexpr const char16_t kMemorySaverModeLearnMoreUrl[] =
-    u"";
+    u"https://jatter.ai/help";
 
 // The URL in the help text for the Memory Saver Mode tab discarding
 // exceptions add dialog.
 inline constexpr char16_t kMemorySaverModeTabDiscardingHelpUrl[] =
-    u"";
+    u"https://jatter.ai/help";
 
 // The URL to the help center article of Incognito mode.
 inline constexpr char16_t kIncognitoHelpCenterURL[] =
-    u"";
+    u"https://jatter.ai/help";
 
 // The URL for the "Learn more" page for the usage/crash reporting option in the
 // first run dialog.
 inline constexpr char kLearnMoreReportingURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // The URL for the tab group sync help center page.
 inline constexpr char kTabGroupsLearnMoreURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // The URL for the Learn More page about policies and enterprise enrollment.
 inline constexpr char16_t kManagedUiLearnMoreUrl[] =
 #if BUILDFLAG(IS_CHROMEOS)
-    u"";
+    u"https://jatter.ai/help";
 #else
-    u"";
+    u"https://jatter.ai/help";
 #endif
 
 // The URL for the "Learn more" page for insecure download blocking.
 inline constexpr char kInsecureDownloadBlockingLearnMoreUrl[] =
-    "";
+    "https://jatter.ai/help";
 
 // "myactivity.google.com" URLs with their respective UTM sources.
 // - In the Clear Browsing Data footer.
@@ -377,17 +377,17 @@ inline constexpr char16_t kOnDeviceAiLearnMoreUrl[] =
 // Help URL for the Omnibox setting.
 inline constexpr char16_t kOmniboxLearnMoreURL[] =
 #if BUILDFLAG(IS_CHROMEOS)
-    u"";
+    u"https://jatter.ai/help";
 #else
-    u"";
+    u"https://jatter.ai/help";
 #endif
 
 // "What do these mean?" URL for the Page Info bubble.
 inline constexpr char kPageInfoHelpCenterURL[] =
 #if BUILDFLAG(IS_CHROMEOS)
-    "";
+    "https://jatter.ai/help";
 #else
-    "";
+    "https://jatter.ai/help";
 #endif
 
 // Help center article URL for automated password change.
@@ -410,7 +410,7 @@ inline constexpr char kPasswordGenerationLearnMoreURL[] =
 
 inline constexpr char16_t kPasswordManagerLearnMoreURL[] =
 #if BUILDFLAG(IS_CHROMEOS)
-    u"";
+    u"https://jatter.ai/help";
 #else
     u"https://jatter.ai/help";
 #endif
@@ -430,7 +430,7 @@ inline constexpr char kPasswordSharingTroubleshootURL[] =
 // The URL for the "Fill out forms automatically" support page.
 inline constexpr char kAddressesAndPaymentMethodsLearnMoreURL[] =
 #if BUILDFLAG(IS_CHROMEOS)
-    "";
+    "https://jatter.ai/help";
 #else
     "https://jatter.ai/help";
 #endif
@@ -439,33 +439,33 @@ inline constexpr char kAddressesAndPaymentMethodsLearnMoreURL[] =
 // TODO(crbug.com/395027230): Change URL once official support page is
 // finalized.
 inline constexpr char16_t kPayOverTimeLearnMoreUrl[] =
-    u"";
+    u"https://jatter.ai/help";
 
 // The URL for the Wallet website.
 inline constexpr char16_t kWalletUrl[] = u"https://wallet.google.com";
 
 // Help URL for Autofill AI.
 inline constexpr char16_t kAutofillAiLearnMoreURL[] =
-    u"";
+    u"https://jatter.ai/help";
 
 // "Learn more" URL for the autofill show card benefits setting.
 inline constexpr char16_t kCardBenefitsLearnMoreURL[] =
-    u"";
+    u"https://jatter.ai/help";
 
 // "Learn more" URL for the performance intervention notification setting.
 inline constexpr const char16_t kPerformanceInterventionLearnMoreUrl[] =
-    u"";
+    u"https://jatter.ai/help";
 
 // "Learn more" URL for the preloading section in Performance settings.
 inline constexpr const char16_t kPreloadingLearnMoreUrl[] =
-    u"";
+    u"https://jatter.ai/help";
 
 // "Learn more" URL for the Privacy section under Options.
 inline constexpr char kPrivacyLearnMoreURL[] =
 #if BUILDFLAG(IS_CHROMEOS)
-    "";
+    "https://jatter.ai/help";
 #else
-    "";
+    "https://jatter.ai/help";
 #endif
 
 // "Chrome Settings" URL for Ad Topics page
@@ -484,35 +484,35 @@ inline constexpr char16_t kPrivacySandboxURL[] =
 
 // The URL for the Learn More link of the non-CWS bubble.
 inline constexpr char kRemoveNonCWSExtensionURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // "Learn more" URL for resetting profile preferences.
 inline constexpr char kResetProfileSettingsLearnMoreURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // "Learn more" URL for Safebrowsing
 inline constexpr char kSafeBrowsingHelpCenterURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // Updated "Info icon" URL for Safebrowsing
 inline constexpr char kSafeBrowsingHelpCenterUpdatedURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // "Learn more" URL for Enhanced Protection
 inline constexpr char16_t kSafeBrowsingInChromeHelpCenterURL[] =
-    u"";
+    u"https://jatter.ai/help";
 
 // The URL for Safe Browsing link in Safety Check page.
 inline constexpr char16_t kSafeBrowsingUseInChromeURL[] =
-    u"";
+    u"https://jatter.ai/help";
 
 // "Learn more" URL for Safety Check page.
 inline constexpr char16_t kSafetyHubHelpCenterURL[] =
-    u"";
+    u"https://jatter.ai/help";
 
 // "Learn more" URL for safety tip bubble.
 inline constexpr char kSafetyTipHelpCenterURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // Google search history URL that leads users of the CBD dialog to their search
 // history in their Google account.
@@ -526,11 +526,11 @@ inline constexpr char kSeeMoreSecurityTipsURL[] =
 
 // Help URL for the settings page's search feature.
 inline constexpr char16_t kSettingsSearchHelpURL[] =
-    u"";
+    u"https://jatter.ai/help";
 
 // The URL for the Learn More page about Sync and Google services.
 inline constexpr char kSyncAndGoogleServicesLearnMoreURL[] =
-    "";
+    "https://jatter.ai/help";
 #if BUILDFLAG(IS_CHROMEOS)
 static_assert(std::string_view(kSyncAndGoogleServicesLearnMoreURL) ==
               ash::chrome_external_urls::kSyncAndGoogleServicesLearnMoreURL);
@@ -539,14 +539,14 @@ static_assert(std::string_view(kSyncAndGoogleServicesLearnMoreURL) ==
 // The URL for the "Learn more" page on sync encryption.
 inline constexpr char16_t kSyncEncryptionHelpURL[] =
 #if BUILDFLAG(IS_CHROMEOS)
-    u"";
+    u"https://jatter.ai/help";
 #else
-    u"";
+    u"https://jatter.ai/help";
 #endif
 
 // The URL for the "Learn more" link when there is a sync error.
 inline constexpr char kSyncErrorsHelpURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // Legacy URL to the sync google dashboard.
 inline constexpr char kLegacySyncGoogleDashboardURL[] =
@@ -566,7 +566,7 @@ static_assert(std::string_view(kNewSyncGoogleDashboardURL) ==
 
 // The URL for the "Learn more" page for sync setup on the personal stuff page.
 inline constexpr char16_t kSyncLearnMoreURL[] =
-    u"";
+    u"https://jatter.ai/help";
 
 // The URL for the "Learn more" page for signing in to chrome with expanded
 // section on "Sign in and turn on sync" in the Computer/Desktop tab.
@@ -576,28 +576,28 @@ inline constexpr char kSigninOnDesktopLearnMoreURL[] =
 
 // The URL for the "Learn more" page for adding a new profile to Chrome.
 inline constexpr char kAddNewProfileOnDesktopLearnMoreURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // The URL for the "Learn more" page for AI settings for managed users.
 inline constexpr char16_t kAiSettingsLearnMorePageManagedUrl[] =
-    u"";
+    u"https://jatter.ai/help";
 
 // The URL for the "Learn more" page for Help me Write.
 inline constexpr char kComposeLearnMorePageURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // The URL for the "Learn more" page for Help me Write for managed users.
 inline constexpr char kComposeLearnMorePageManagedURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // The URL for the "Learn more" links for pages related to History search.
 inline constexpr char kHistorySearchLearnMorePageURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // The URL for the "Learn more" links for pages related to History search for
 // managed users.
 inline constexpr char kHistorySearchLearnMorePageManagedURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // The URL for the Settings page to enable history search.
 inline constexpr char16_t kHistorySearchSettingURL[] =
@@ -605,7 +605,7 @@ inline constexpr char16_t kHistorySearchSettingURL[] =
 
 // The URL for the "Learn more" page for Wallpaper Search.
 inline constexpr char kWallpaperSearchLearnMorePageURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // The URL for the passed in Google Wallet.
 inline constexpr char kWalletPassesPageURL[] =
@@ -613,16 +613,16 @@ inline constexpr char kWalletPassesPageURL[] =
 
 // The URL for the "Learn more" page for Tab Organization.
 inline constexpr char kTabOrganizationLearnMorePageURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // The URL for the "Learn more" page for Tab Organization for managed users.
 inline constexpr char kTabOrganizationLearnMorePageManagedURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // The URL for the "Learn more" link in the enterprise disclaimer for managed
 // profile in the Signin Intercept bubble.
 inline constexpr char kSigninInterceptManagedDisclaimerLearnMoreURL[] =
-    "";
+    "https://jatter.ai/help";
 
 #if !BUILDFLAG(IS_ANDROID)
 // The URL for the trusted vault sync passphrase opt in.
@@ -633,11 +633,11 @@ inline constexpr char kSyncTrustedVaultOptInURL[] =
 
 // The URL for the "Learn more" link for the trusted vault sync passphrase.
 inline constexpr char kSyncTrustedVaultLearnMoreURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // The URL for the Help Center page about User Bypass.
 inline constexpr char16_t kUserBypassHelpCenterURL[] =
-    u"";
+    u"https://jatter.ai/help";
 
 inline constexpr char kUpgradeHelpCenterBaseURL[] =
     ""
@@ -645,19 +645,19 @@ inline constexpr char kUpgradeHelpCenterBaseURL[] =
 
 // The URL for the "Learn more" link for nearby share.
 inline constexpr char16_t kNearbyShareLearnMoreURL[] =
-    u"";
+    u"https://jatter.ai/help";
 
 // Help center URL for who the account administrator is.
 inline constexpr char16_t kWhoIsMyAdministratorHelpURL[] =
-    u"";
+    u"https://jatter.ai/help";
 
 // The URL for the "Learn more" link about CWS Enhanced Safe Browsing.
 inline constexpr char16_t kCwsEnhancedSafeBrowsingLearnMoreURL[] =
-    u"";
+    u"https://jatter.ai/help";
 
 // The URL path to Google's Privacy Policy page.
 inline constexpr char kPrivacyPolicyURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // The URL path to Google's Privacy Policy page for users in China.
 inline constexpr char kPrivacyPolicyURLChina[] =
@@ -665,7 +665,7 @@ inline constexpr char kPrivacyPolicyURLChina[] =
 
 // The URL path to Google's Embedded Privacy Policy page.
 inline constexpr char kPrivacyPolicyOnlineURLPath[] =
-    "";
+    "https://jatter.ai/help";
 
 // The URL path to Google's Embedded Privacy Policy page for users in China.
 inline constexpr char kPrivacyPolicyEmbeddedURLPathChina[] =
@@ -675,11 +675,11 @@ inline constexpr char kPrivacyPolicyEmbeddedURLPathChina[] =
 // "Learn more" URL for the enhanced playback notification dialog.
 inline constexpr char kEnhancedPlaybackNotificationLearnMoreURL[] =
 #if BUILDFLAG(IS_CHROMEOS)
-    "";
+    "https://jatter.ai/help";
 #else
     // Keep in sync with
     // chrome/browser/ui/android/strings/android_chrome_strings.grd
-    "";
+    "https://jatter.ai/help";
 #endif
 #endif
 
@@ -700,7 +700,7 @@ inline constexpr char16_t kAddNewUserURL[] =
 
 // Help center URL for ARC ADB sideloading.
 inline constexpr char16_t kArcAdbSideloadingLearnMoreURL[] =
-    u"";
+    u"https://jatter.ai/help";
 
 // The path format to the localized offline ARC++ Privacy Policy.
 // Relative to |kChromeOSAssetPath|.
@@ -725,17 +725,17 @@ inline constexpr char kEchoLearnMoreURL[] =
 
 // The URL for the Learn More page about enterprise enrolled devices.
 inline constexpr char kLearnMoreEnterpriseURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // The URL path to offline OEM EULA.
 inline constexpr char kOemEulaURLPath[] = "oem";
 
 inline constexpr char kOrcaSuggestionLearnMoreURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // Help URL for the OS settings page's search feature.
 inline constexpr char kOsSettingsSearchHelpURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // The URL path to offline ARC++ Terms of Service.
 inline constexpr char kArcTermsURLPath[] = "arc/terms";
@@ -752,11 +752,11 @@ inline constexpr char16_t kNearbyShareManageContactsURL[] =
 #if BUILDFLAG(IS_MAC)
 // "Learn more" URL for the enterprise sign-in confirmation dialog.
 inline constexpr char kChromeEnterpriseSignInLearnMoreURL[] =
-    "";
+    "https://jatter.ai/help";
 
 // The URL for the "learn more" link on the macOS version obsolescence infobar.
 inline constexpr char kMacOsObsoleteURL[] =
-    "";
+    "https://jatter.ai/help";
 #endif
 
 #if BUILDFLAG(IS_WIN)
@@ -767,30 +767,30 @@ inline constexpr char kWindowsXPVistaDeprecationURL[] =
 
 // The URL for the Windows 7/8.1 deprecation help center article.
 inline constexpr char kWindows78DeprecationURL[] =
-    "";
+    "https://jatter.ai/help";
 #endif
 
 #if BUILDFLAG(ENABLE_PLUGINS)
 // The URL for the "Learn more" page for the outdated plugin infobar.
 inline constexpr char kOutdatedPluginLearnMoreURL[] =
-    "";
+    "https://jatter.ai/help";
 #endif
 
 #if BUILDFLAG(IS_WIN) || BUILDFLAG(IS_MAC) || BUILDFLAG(IS_LINUX)
 // "Learn more" URL for the chrome apps deprecation dialog.
 inline constexpr char kChromeAppsDeprecationLearnMoreURL[] =
-    "";
+    "https://jatter.ai/help";
 #endif
 
 #if BUILDFLAG(CHROME_ROOT_STORE_SUPPORTED)
 inline constexpr char kChromeRootStoreSettingsHelpCenterURL[] =
-    "";
+    "https://jatter.ai/help";
 #endif
 
 #if BUILDFLAG(ENABLE_PDF_SAVE_TO_DRIVE)
 // "Learn more" URL for how to save PDF to Google Drive from the PDF viewer.
 inline constexpr char kPdfViewerSaveToDriveHelpCenterURL[] =
-    "";
+    "https://jatter.ai/help";
 #endif
 
 // Please do not append entries here. See the comments at the top of the file.

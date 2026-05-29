@@ -436,7 +436,7 @@ void BindCredentialManager(
 void BindJatterSendAuthToken(
     content::RenderFrameHost* frame_host,
     mojo::PendingReceiver<jatter::mojom::JatterAuthorization> receiver) {
-  new JatterAuthorizationImpl(std::move(receiver), frame_host);
+  new JatterAuthorizationImpl(*frame_host, std::move(receiver));
 }
 
 }  // namespace

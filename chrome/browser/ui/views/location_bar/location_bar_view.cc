@@ -17,6 +17,7 @@
 #include "base/i18n/rtl.h"
 #include "base/metrics/field_trial_params.h"
 #include "base/strings/utf_string_conversions.h"
+#include "base/task/sequenced_task_runner.h"
 #include "base/trace_event/trace_event.h"
 #include "base/trace_event/typed_macros.h"
 #include "build/build_config.h"
@@ -1218,8 +1219,9 @@ void LocationBarView::Update(WebContents* contents) {
       // 2. Force keyboard focus into the bar
       // We PostTask to make sure we win the focus fight against the webpage
       base::SequencedTaskRunner::GetCurrentDefault()->PostTask(
-          FROM_HERE, base::BindOnce(&LocationBarView::FocusLocation, 
-          base::Unretained(this), false));
+          FROM_HERE, base::BindOnce(
+              [](LocationBarView* view) { view->FocusLocation(false, false); },
+              base::Unretained(this)));
     }
   }
 }

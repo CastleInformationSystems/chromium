@@ -32,6 +32,7 @@ source_set("rag_ingestion_ui") {
   deps = [
     ":rag_ingestion_strings",
     "//base",
+    "//chrome/browser/jatter",
     "//chrome/browser/ui",
     "//components/strings:components_strings_grit",
     "//ui/base",

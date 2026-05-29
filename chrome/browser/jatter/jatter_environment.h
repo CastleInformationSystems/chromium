@@ -1,8 +1,6 @@
 #ifndef JATTER_ENVIRONMENT_H_
 #define JATTER_ENVIRONMENT_H_
 
-#define JATTER_STAGING_MODE 1
-
 namespace jatter {
 
 #if defined(JATTER_DEVELOPMENT_MODE)

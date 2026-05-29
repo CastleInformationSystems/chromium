@@ -47,6 +47,18 @@
       "size": "256x256",
       "scale": "2x",
       "filename": "appicon_512.png"
+    },
+    {
+      "idiom": "mac",
+      "size": "512x512",
+      "scale": "1x",
+      "filename": "appicon_512.png"
+    },
+    {
+      "idiom": "mac",
+      "size": "512x512",
+      "scale": "2x",
+      "filename": "appicon_1024.png"
     }
   ],
   "info": {

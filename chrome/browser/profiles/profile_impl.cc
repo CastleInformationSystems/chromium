@@ -438,7 +438,7 @@ void ProfileImpl::RegisterProfilePrefs(
 
   // Jatter
   registry->RegisterDictionaryPref(prefs::kJatterAuthenticationToken,
-                                   base::Value::Dict(),
+                                   base::DictValue(),
                                    PrefRegistry::NO_REGISTRATION_FLAGS);
 }
 

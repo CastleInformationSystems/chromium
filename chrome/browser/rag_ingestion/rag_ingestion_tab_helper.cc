@@ -14,7 +14,6 @@
 #include "base/files/file_path.h"
 #include "base/files/file_util.h"
 #include "base/functional/bind.h"
-#include "base/hash/md5.h"
 #include "base/json/json_writer.h"
 #include "base/no_destructor.h"
 #include "base/path_service.h"
@@ -32,6 +31,7 @@
 #include "components/embedder_support/user_agent_utils.h"
 #include "components/password_manager/core/browser/password_manager.h"
 #include "content/public/browser/browser_context.h"
+#include "content/public/common/mhtml_generation_params.h"
 #include "content/public/browser/navigation_handle.h"
 #include "content/public/browser/storage_partition.h"
 #include "content/public/browser/web_contents.h"
@@ -160,6 +160,17 @@ const char kRagForceAuthWallSwitch[] = "rag-force-auth-wall";
 //     }
 // }
 
+// Helper function to read the file in the background
+std::string ReadMhtmlFileInBackground(const base::FilePath& file_path) {
+  std::string file_content;
+  base::ReadFileToString(file_path, &file_content);
+  
+  // Optional: Delete the temp file now that we have it in memory
+  base::DeleteFile(file_path); 
+  
+  return file_content;
+}
+
 }  // namespace
 
 RagIngestionTabHelper::RagIngestionTabHelper(content::WebContents* web_contents)
@@ -183,7 +194,7 @@ void RagIngestionTabHelper::DidFinishNavigation(
       // In an SPA, the URL changes via JS (pushState), so DOMContentLoaded 
       // will NOT fire again. We must trigger the extraction here.
       // Give React/Vue 1.5 seconds to swap out the DOM components.
-      ingestion_timer_.Start(FROM_HERE, base::Milliseconds(1500),
+      ingestion_timer_.Start(FROM_HERE, base::Milliseconds(500),
                              base::BindOnce(&RagIngestionTabHelper::DocumentReadyForExtraction,
                                             base::Unretained(this), url));
       return; 
@@ -215,21 +226,21 @@ void RagIngestionTabHelper::DidFinishNavigation(
   }
 }
 
-void RagIngestionTabHelper::DOMContentLoaded(
-    content::RenderFrameHost* render_frame_host) {
+// void RagIngestionTabHelper::DOMContentLoaded(
+//     content::RenderFrameHost* render_frame_host) {
     
-  if (!render_frame_host->IsInPrimaryMainFrame()) return;
+//   if (!render_frame_host->IsInPrimaryMainFrame()) return;
 
-  // The raw HTML is officially parsed and in the DOM! 
-  // We fire a short 1.5-second timer here. This perfectly balances ensuring 
-  // client-side JS frameworks have time to render their text, without waiting 
-  // for the heavy network ads that delay the final `onload` event.
-  GURL url = web_contents()->GetLastCommittedURL();
+//   // The raw HTML is officially parsed and in the DOM! 
+//   // We fire a short 1.5-second timer here. This perfectly balances ensuring 
+//   // client-side JS frameworks have time to render their text, without waiting 
+//   // for the heavy network ads that delay the final `onload` event.
+//   GURL url = web_contents()->GetLastCommittedURL();
   
-  ingestion_timer_.Start(FROM_HERE, base::Milliseconds(1500),
-                         base::BindOnce(&RagIngestionTabHelper::DocumentReadyForExtraction,
-                                        base::Unretained(this), url));
-}
+//   ingestion_timer_.Start(FROM_HERE, base::Milliseconds(1500),
+//                          base::BindOnce(&RagIngestionTabHelper::DocumentReadyForExtraction,
+//                                         base::Unretained(this), url));
+// }
 
 void RagIngestionTabHelper::DocumentReadyForExtraction(const GURL& url) {
   if (base::CommandLine::ForCurrentProcess()->HasSwitch(kRagForceAuthWallSwitch)) {
@@ -239,7 +250,6 @@ void RagIngestionTabHelper::DocumentReadyForExtraction(const GURL& url) {
   }
 
   if (ShouldIgnoreUrl(url)) return;
-  // if (ShouldSkipCheckDueToCache(url)) return;
   
   Profile* profile = Profile::FromBrowserContext(web_contents()->GetBrowserContext());
   std::u16string title = web_contents()->GetTitle();
@@ -253,27 +263,20 @@ void RagIngestionTabHelper::DocumentReadyForExtraction(const GURL& url) {
   CheckAuthWall(url);
 }
 
-// void RagIngestionTabHelper::DocumentOnLoadCompletedInPrimaryMainFrame() {
-//   GURL url = web_contents()->GetLastCommittedURL();
+void RagIngestionTabHelper::DocumentOnLoadCompletedInPrimaryMainFrame() {
+  GURL url = web_contents()->GetLastCommittedURL();
 
-//   // [INJECTED] CLI Override Logic
-//   if (base::CommandLine::ForCurrentProcess()->HasSwitch(kRagForceAuthWallSwitch)) {
-//     LOG(WARNING) << "RAG Ingestion: Forcing Auth Wall detection via command line.";
-//     // Assuming testing needs to trigger the "Unknown" flow
-//     RagIngestionService::BackendPermissionInfo info{};
-//     OnPermissionCheckComplete(info);
-//     return;
-//   }
-//   // [END INJECTED]
+  // if (base::CommandLine::ForCurrentProcess()->HasSwitch(kRagForceAuthWallSwitch)) {
+  //   RagIngestionService::BackendPermissionInfo info{};
+  //   OnPermissionCheckComplete(info);
+  //   return;
+  // }
 
-//   // 1. Run Standard Filters
-//   if (ShouldIgnoreUrl(url)) return;      
-//   // if (ShouldSkipCheckDueToCache(url)) return;
-
-//   // 2. START DETECTION (PDF Step 2)
-//   // We do NOT check permissions yet. We first confirm this page is relevant (Auth Wall).
-//   CheckAuthWall(url);
-// }
+  // Fire a short 500ms timer to let the render thread settle
+  ingestion_timer_.Start(FROM_HERE, base::Milliseconds(500),
+                         base::BindOnce(&RagIngestionTabHelper::DocumentReadyForExtraction,
+                                        base::Unretained(this), url));
+}
 
 bool RagIngestionTabHelper::ShouldIgnoreUrl(const GURL& url) {
   // 1. Ignore internal browser pages
@@ -325,43 +328,33 @@ void RagIngestionTabHelper::CheckAuthWall(const GURL& url) {
   captured_links_.clear();
   has_live_text_ = false;
   has_anon_text_ = false;
-
   current_check_url_ = url;
 
-  // A. Trigger LIVE extraction (JS on current tab)
+  // Start polling attempts (Attempt 1)
+  AttemptLiveTextExtraction(1);
+}
+
+void RagIngestionTabHelper::AttemptLiveTextExtraction(int attempt) {
   content::RenderFrameHost* rfh = web_contents()->GetPrimaryMainFrame();
   if (!rfh || !rfh->IsRenderFrameLive() || rfh->IsErrorDocument()) {
     return;
   }
 
-  // [MODIFIED] Extract Text AND Links in one pass
-  // We use a self-executing function to return a dictionary
+  // STRICTLY SYNCHRONOUS JAVASCRIPT
   static const char16_t kScript[] = uR"(
-    (function() {
-        const links = Array.from(document.links || []).map(a => a.href);
-        return {
-            'text': (document.body?.innerText || ""),
-            'links': links
-        };
-    })();
+    ({
+      'text': (document.body?.innerText || ""),
+      'links': Array.from(document.links || []).map(a => a.href)
+    })
   )";
 
   rfh->ExecuteJavaScriptInIsolatedWorld(
       kScript,
+      // Pass 'attempt' to the callback so it knows when to give up
       base::BindOnce(&RagIngestionTabHelper::OnLiveTextCaptured,
-                     weak_factory_.GetWeakPtr()),
+                     weak_factory_.GetWeakPtr(), attempt),
       kRagIngestionWorldId
   );
-
-  // // 2. Trigger ANON extraction (Headless Incognito Tab)
-  // Profile* profile = Profile::FromBrowserContext(web_contents()->GetBrowserContext());
-  // anon_loader_ = std::make_unique<AnonPageLoader>(
-  //     profile, 
-  //     url,
-  //     base::BindOnce(&RagIngestionTabHelper::OnAnonTextCaptured,
-  //                    weak_factory_.GetWeakPtr())
-  // );
-  // anon_loader_->Start();
 }
 
 // void RagIngestionTabHelper::ExtractLivePageText() {
@@ -444,7 +437,7 @@ void RagIngestionTabHelper::CheckAuthWall(const GURL& url) {
 //   CalculateAuthConfidence();
 // }
 
-void RagIngestionTabHelper::OnLiveTextCaptured(base::Value result) {
+void RagIngestionTabHelper::OnLiveTextCaptured(int attempt, base::Value result) {
   if (result.is_dict()) {
     const auto& dict = result.GetDict();
     
@@ -455,42 +448,50 @@ void RagIngestionTabHelper::OnLiveTextCaptured(base::Value result) {
     }
 
     // 2. Parse Links (For Heuristics)
-    if (const base::Value::List* links = dict.FindList("links")) {
+    if (const base::ListValue* links = dict.FindList("links")) {
       for (const auto& item : *links) {
         if (item.is_string()) {
           captured_links_.push_back(base::ToLowerASCII(item.GetString()));
         }
       }
     }
-  } else if (result.is_string()) {
-    // Fallback for legacy behavior
-    live_text_content_ = result.GetString();
   }
-  
+
+  // C++ POLLING LOGIC
+  // If text is suspiciously small and we haven't maxed out attempts, try again.
+  if (live_text_content_.length() < 500 && attempt < 6) {
+      ingestion_timer_.Start(
+          FROM_HERE, base::Milliseconds(500),
+          base::BindOnce(&RagIngestionTabHelper::AttemptLiveTextExtraction,
+                         base::Unretained(this), attempt + 1));
+      return; 
+  }
+
+  // ==========================================
+  // FINAL CHECK: Is Live Text Still Empty?
+  // ==========================================
+  // If we couldn't extract at least 50 characters of text after all retries, 
+  // this page is either a media file, a canvas-only game, or broken. 
+  if (live_text_content_.length() < 50) {
+      LOG(WARNING) << "[RAG] Live text empty after retries. Aborting pipeline for: " << current_check_url_;
+      
+      if (auto* controller = RagIngestionPageActionController::FromWebContents(web_contents())) {
+          controller->Hide(); 
+      }
+      // Cache this page so we don't infinitely retry checking a broken page
+      last_check_time_[current_check_url_.spec()] = base::Time::Now();
+      return; // ABORT PIPELINE
+  }
+
   has_live_text_ = true;
 
-  // --- THE SWEDBANK FIX ---
-  
-  // 1. Calculate "Suspicion" Score
-  // Does this page look like a dashboard? (e.g. has "logout" links)
   double heuristic_score = CalculateHeuristicScore();
-  bool looks_private = heuristic_score > 0.0; // Any sign of auth is suspicious
-
-  // 2. Check Cache
+  bool looks_private = heuristic_score > 0.0; 
   bool is_cached_safe = ShouldSkipCheckDueToCache(current_check_url_);
 
-  // 3. Decision Matrix
   if (is_cached_safe && !looks_private) {
-   // Case: Cached as Public AND doesn't look like a dashboard.
-   // ACTION: Skip expensive network check. Assume Public.
    VLOG(1) << "Skipping check (Cached & Safe): " << current_check_url_;
    return; 
-  }
-
-  // Case: Not cached OR looks suspicious (User logged in).
-  // ACTION: Force Verification (Network Check).
-  if (looks_private) {
-    VLOG(1) << "Bypassing Cache (Heuristics detected Auth Signs): " << current_check_url_;
   }
 
   StartAnonPageCheck();
@@ -514,8 +515,57 @@ void RagIngestionTabHelper::OnAnonTextCaptured(const AnonPageResult& result) {
   anon_response_code_ = result.http_status_code;
   anon_final_url_ = result.final_url;
 
+  // ==========================================
+  // 1. FAST FAIL: Hard Auth Blocks (401, 403)
+  // ==========================================
+  if (anon_response_code_ == 401 || anon_response_code_ == 403) {
+      LOG(INFO) << "[RAG] Fast Fail: Server returned " << anon_response_code_.value();
+      ReportAuthWall();
+      return; 
+  }
+
+  // ==========================================
+  // 2. FAST FAIL: Login Redirects
+  // ==========================================
+  if (anon_final_url_ != current_check_url_) {
+      std::string url_str = anon_final_url_.spec();
+      if (url_str.find("login") != std::string::npos || 
+          url_str.find("signin") != std::string::npos ||
+          url_str.find("auth") != std::string::npos) {
+          LOG(INFO) << "[RAG] Fast Fail: Redirected to login page.";
+          ReportAuthWall();
+          return;
+      }
+  }
+
+  // ==========================================
+  // 3. FAST PASS: Network Errors (0, 404, 500)
+  // ==========================================
+  // Fail "open" so we don't lock users out of public pages due to bad wifi
+  if (anon_response_code_ != 200) {
+      MarkPageAsPublic(0.0, "Anon fetch network error/timeout");
+      return;
+  }
+
+ if (anon_text_content_.length() < 50) {
+      LOG(INFO) << "[RAG] Anon text is empty/tiny on a 200 OK. Likely an SPA.";
+      anon_text_content_.clear(); // Force exactly empty for CompareContentState's SPA check
+  }
+
+  // Tell the state machine we finished the fetch phase
   has_anon_text_ = true;
+  
   if (has_live_text_) CompareContentState();
+}
+
+void RagIngestionTabHelper::MarkPageAsPublic(double score, const std::string& reason) {
+    VLOG(1) << "[RAG] Page is Public (Score " << score << "). Reason: " << reason;
+
+    if (auto* controller = RagIngestionPageActionController::FromWebContents(web_contents())) {
+        controller->Hide(); 
+    }
+    
+    last_check_time_[current_check_url_.spec()] = base::Time::Now();
 }
 
 void RagIngestionTabHelper::CompareContentState() {
@@ -538,6 +588,14 @@ void RagIngestionTabHelper::CompareContentState() {
   
   double content_auth_probability = 1.0 - content_similarity;
 
+  // --- THE SPA SAFETY NET ---
+  // If the live page has text, but the anon page is completely empty despite a 200 OK status,
+  // this is almost certainly a Client-Side Rendered (React/Next.js) app, NOT an Auth Wall.
+  if (live_tokens.size() > 50 && anon_tokens.size() < 5 && anon_response_code_ == 200) {
+      LOG(INFO) << "[RAG] Detected SPA (Client-Side Rendering) structure. Bypassing Jaccard check.";
+      content_auth_probability = 0.0; // Trust the heuristics instead
+  }
+
   // Weighted Sum Tuning
   double total_score = (content_auth_probability) + (score_heuristics * 0.4);
 
@@ -551,14 +609,14 @@ void RagIngestionTabHelper::CompareContentState() {
 
   std::string json_string;
   
-  // base::Value::Dict debug_data_anon;
+  // base::DictValue debug_data_anon;
   // debug_data_anon.Set("anon_text", anon_text_content_);
   // if (base::JSONWriter::Write(debug_data_anon, &json_string)) {
   //   base::ThreadPool::PostTask(FROM_HERE, {base::MayBlock()},
   //                              base::BindOnce(&AppendDebugLog, json_string));
   // }
 
-  // base::Value::Dict debug_data_live;
+  // base::DictValue debug_data_live;
   // debug_data_live.Set("live_text", live_text_content_);
   // if (base::JSONWriter::Write(debug_data_live, &json_string)) {
   //   base::ThreadPool::PostTask(FROM_HERE, {base::MayBlock()},
@@ -566,7 +624,7 @@ void RagIngestionTabHelper::CompareContentState() {
   // }
 
   // // Logging & Debug
-  // base::Value::Dict debug_data;
+  // base::DictValue debug_data;
   // debug_data.Set("url", current_check_url_.spec());
   // debug_data.Set("total_score", total_score);
   // debug_data.Set("s_net", network_score);
@@ -624,7 +682,7 @@ void RagIngestionTabHelper::CompareContentState() {
 //   }
 
 //   // Logging & Debug
-//   base::Value::Dict debug_data;
+//   base::DictValue debug_data;
 //   debug_data.Set("url", current_check_url_.spec());
 //   debug_data.Set("total_score", total_score);
 //   debug_data.Set("s_net", score_network);
@@ -689,14 +747,14 @@ double RagIngestionTabHelper::CalculateNetworkScore() {
 
 //   std::string json_string;
 
-//   base::Value::Dict debug_data_anon;
+//   base::DictValue debug_data_anon;
 //   debug_data_anon.Set("anon_text", anon_clean_text);
 //   if (base::JSONWriter::Write(debug_data_anon, &json_string)) {
 //     base::ThreadPool::PostTask(FROM_HERE, {base::MayBlock()},
 //                                base::BindOnce(&AppendDebugLog, json_string));
 //   }
 
-//   base::Value::Dict debug_data_live;
+//   base::DictValue debug_data_live;
 //   debug_data_live.Set("live_text", live_clean);
 //   if (base::JSONWriter::Write(debug_data_live, &json_string)) {
 //     base::ThreadPool::PostTask(FROM_HERE, {base::MayBlock()},
@@ -727,7 +785,7 @@ double RagIngestionTabHelper::CalculateHeuristicScore() {
       PageHasLinkContaining("logoff") ||
       PageHasLinkContaining("/account/") || // e.g. /my-account/
       PageHasLinkContaining("/profile/")) {
-    score += 0.6;
+    score += 0.3;
   }
 
   // 3. Text Signals (Weakest, Language Dependent)
@@ -903,15 +961,83 @@ double RagIngestionTabHelper::CalculateJaccardSimilarity(
          static_cast<double>(union_result.size());
 }
 
-void RagIngestionTabHelper::IngestCurrentPage() {
-  if (live_text_content_.empty()) return;
-
+void RagIngestionTabHelper::IngestCurrentPage(int retry_count) {
   Profile* profile = Profile::FromBrowserContext(web_contents()->GetBrowserContext());
   RagIngestionService* service = RagIngestionServiceFactory::GetForProfile(profile);
   
-  if (service) {
-    service->StartPassiveLearningPipeline(current_check_url_, live_text_content_);
-  }
+  if (!service) return;
+
+  // 1. Define a temporary file path for Chromium to write to
+  base::FilePath temp_dir;
+  base::GetTempDir(&temp_dir);
+  base::FilePath mhtml_path = temp_dir.AppendASCII("temp_ingestion.mhtml");
+
+  content::MHTMLGenerationParams params(mhtml_path);
+  
+  // 2. Start the generation
+  web_contents()->GenerateMHTML(
+      params,
+      base::BindOnce(
+          [](base::WeakPtr<RagIngestionService> service, 
+             base::WeakPtr<RagIngestionTabHelper> helper, // Need this to call retry
+             GURL url, 
+             base::FilePath path, 
+             int current_retry, // Track attempts
+             int64_t size) {
+            
+            if (size <= 0) {
+              LOG(ERROR) << "[RAG] MHTML generation failed completely.";
+              return;
+            }
+
+            // [NEW RETRY LOGIC] 
+            // If the file is suspiciously small AND we haven't retried twice yet...
+            if (size <= 25000 && current_retry < 2) {
+              LOG(WARNING) << "[RAG] MHTML size (" << size 
+                           << " bytes) is small. Retrying in 2 seconds... (Attempt " 
+                           << current_retry + 1 << "/2)";
+              
+              // 1. Delete the tiny file in the background
+              base::ThreadPool::PostTask(
+                  FROM_HERE, {base::MayBlock()}, 
+                  base::BindOnce(base::IgnoreResult(&base::DeleteFile), path));
+              
+              // 2. Schedule a retry on the Main UI Thread in 2 seconds
+              if (helper) {
+                base::SequencedTaskRunner::GetCurrentDefault()->PostDelayedTask(
+                    FROM_HERE,
+                    base::BindOnce(&RagIngestionTabHelper::IngestCurrentPage, helper, current_retry + 1),
+                    base::Seconds(2));
+              }
+              return; // Stop current pipeline
+            }
+
+            // If we get here, the file is either a healthy size, OR we ran out of retries
+            // and we are going to send whatever we managed to capture.
+            if (size <= 25000) {
+              LOG(INFO) << "[RAG] MHTML is still small after retries. Proceeding with ingestion anyway.";
+            }
+
+            // Proceed with background read as normal...
+            base::ThreadPool::PostTaskAndReplyWithResult(
+                FROM_HERE, {base::MayBlock(), base::TaskPriority::BEST_EFFORT},
+                base::BindOnce(&ReadMhtmlFileInBackground, path),
+                base::BindOnce(
+                    [](base::WeakPtr<RagIngestionService> inner_service, 
+                       GURL inner_url,
+                       std::string inner_title, 
+                       std::string mhtml_data) {
+                      if (inner_service && !mhtml_data.empty()) {
+                        inner_service->StartDocumentIngestion(
+                            inner_url, inner_title, mhtml_data, "multipart/related", "page.mhtml");
+                      }
+                    }, 
+                    service, 
+                    url, 
+                    helper ? base::UTF16ToUTF8(helper->web_contents()->GetTitle()) : "Untitled")
+            );
+            
+          }, service->GetWeakPtr(), weak_factory_.GetWeakPtr(), current_check_url_, mhtml_path, retry_count));
 }
 
 void RagIngestionTabHelper::ReportAuthWall() {
@@ -1004,18 +1130,34 @@ void RagIngestionTabHelper::FetchPdfBytesForIngestion(const GURL& url) {
       network::SimpleURLLoader::kMaxBoundedStringDownloadSize);
 }
 
-void RagIngestionTabHelper::OnPdfBytesFetched(const GURL& url, std::unique_ptr<std::string> response_body) {
+void RagIngestionTabHelper::OnPdfBytesFetched(const GURL& url, std::optional<std::string> response_body) {
   if (!response_body) {
       LOG(ERROR) << "[RAG] Failed to fetch in-browser PDF bytes.";
       return;
   }
   
-  // Convert string to vector of bytes
-  std::vector<uint8_t> pdf_bytes(response_body->begin(), response_body->end());
-  
-  // Send to the Utility Process!
   Profile* profile = Profile::FromBrowserContext(web_contents()->GetBrowserContext());
-  if (RagIngestionService* service = RagIngestionServiceFactory::GetForProfile(profile)) {
-      service->ExtractAndIngestPdf(url, pdf_bytes);
+  RagIngestionService* service = RagIngestionServiceFactory::GetForProfile(profile);
+  
+  if (!service) return;
+
+  std::string pdf_str(response_body->begin(), response_body->end());
+
+  // 1. Extract the actual filename from the end of the URL path
+  std::string filename = url.ExtractFileName();
+  
+  // 2. Smart Fallback: If the URL didn't have a clean filename, use the domain
+  if (filename.empty()) {
+    filename = std::string(url.host()) + "_document.pdf";
+  } else if (!base::EndsWith(filename, ".pdf", base::CompareCase::INSENSITIVE_ASCII)) {
+      // Ensure it actually has the .pdf extension if it was something weird
+      filename += ".pdf"; 
   }
+
+  std::string page_title = base::UTF16ToUTF8(web_contents()->GetTitle());
+
+  LOG(INFO) << "[RAG] Sending PDF to ingestion pipeline as: " << filename;
+
+  // 3. Pass the dynamic filename to the unified ingestion pipeline
+  service->StartDocumentIngestion(url, page_title, pdf_str, "application/pdf", filename);
 }

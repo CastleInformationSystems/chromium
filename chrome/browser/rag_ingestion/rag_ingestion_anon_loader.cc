@@ -56,6 +56,16 @@ void AnonPageLoader::DidFinishNavigation(content::NavigationHandle* handle) {
   // We only care about the primary main frame (ignore iframes/ads)
   if (!handle->IsInPrimaryMainFrame() || !handle->HasCommitted()) return;
 
+  // ==========================================
+  // Ignore Same-Document Navigations
+  // ==========================================
+  // If JavaScript just changed the #hash or pushed a history state, 
+  // there are no new HTTP headers. Keep the old URL and status code!
+  if (handle->IsSameDocument()) {
+      last_committed_url_ = handle->GetURL(); // Update URL just in case
+      return; // Do NOT touch last_http_status_code_!
+  }
+
   last_committed_url_ = handle->GetURL();
 
   if (handle->GetResponseHeaders()) {
@@ -114,45 +124,110 @@ void AnonPageLoader::DOMContentLoaded(content::RenderFrameHost* render_frame_hos
   // client-side rendering (React/Vue) before we scrape it.
   extraction_timer_.Start(
       FROM_HERE, base::Milliseconds(1500),
-      base::BindOnce(&AnonPageLoader::ExecuteExtraction, base::Unretained(this)));
+      base::BindOnce(&AnonPageLoader::ExecuteExtraction, base::Unretained(this), 1));
 }
 
-// [NEW] This holds the logic that used to be inside DocumentOnLoadCompleted...
-void AnonPageLoader::ExecuteExtraction() {
+void AnonPageLoader::ExecuteExtraction(int attempt) {
   if (callback_run_) return;
 
   content::RenderFrameHost* rfh = headless_contents_->GetPrimaryMainFrame();
 
-  // Safety Checks
   if (!rfh || !rfh->IsRenderFrameLive() || rfh->IsErrorDocument()) {
     if (!callback_run_ && callback_) {
       callback_run_ = true;
-      AnonPageResult fail_result{"", last_http_status_code_, last_committed_url_};
-      std::move(callback_).Run(fail_result);
+      std::move(callback_).Run({"", last_http_status_code_, last_committed_url_});
     }
     return;
   }
 
-  // Mark run to prevent double-firing
-  callback_run_ = true;
-
-  // Execute JS to get the text
+  static const char16_t kScript[] = uR"(
+    (() => {
+      if (!document.body) return "";
+      
+      // 1. Clone the body in memory so we don't destroy the live page
+      let clone = document.body.cloneNode(true);
+      
+      // 2. Destroy all non-text tags from the clone
+      let badTags = clone.querySelectorAll(
+          'script, style, noscript, svg, img, video, ' + 
+          'select, template, dialog, ' +
+          '[aria-hidden="true"], [hidden], ' + 
+          '[style*="display: none"], [style*="display:none"]'
+      );
+      badTags.forEach(tag => tag.remove());
+      
+      // 3. Extract textContent (which ignores CSS visibility completely)
+      // and collapse the massive whitespaces into single spaces.
+      return clone.textContent.replace(/\s+/g, ' ').trim();
+    })();
+  )";
+  
   rfh->ExecuteJavaScriptInIsolatedWorld(
-      u"document.body.innerText",
+      kScript,
       base::BindOnce(
-          [](base::WeakPtr<AnonPageLoader> loader, base::Value result) {
+          [](base::WeakPtr<AnonPageLoader> loader, int attempt, base::Value result) {
             if (!loader) return;
             
-            AnonPageResult final_result;
-            final_result.inner_text = result.is_string() ? result.GetString() : "";
-            final_result.http_status_code = loader->last_http_status_code_;
-            final_result.final_url = loader->last_committed_url_;
+            std::string text = result.is_string() ? result.GetString() : "";
 
+            // C++ POLLING LOGIC
+            // If the text is empty and we haven't maxed out our 6 attempts, wait 500ms and try again
+            if (text.length() < 500 && attempt < 6) {
+                loader->extraction_timer_.Start(
+                    FROM_HERE, base::Milliseconds(500),
+                    base::BindOnce(&AnonPageLoader::ExecuteExtraction, loader, attempt + 1));
+                return;
+            }
+
+            // We either got the text, or we hit our attempt limit. Fire the callback.
+            loader->callback_run_ = true;
+            AnonPageResult final_result{text, loader->last_http_status_code_, loader->last_committed_url_};
+            
             if (loader->callback_) {
               std::move(loader->callback_).Run(final_result);
             }
           },
-          weak_factory_.GetWeakPtr()),
+          weak_factory_.GetWeakPtr(), attempt),
       kAnonLoaderWorldId 
   );
 }
+
+// // [NEW] This holds the logic that used to be inside DocumentOnLoadCompleted...
+// void AnonPageLoader::ExecuteExtraction() {
+//   if (callback_run_) return;
+
+//   content::RenderFrameHost* rfh = headless_contents_->GetPrimaryMainFrame();
+
+//   // Safety Checks
+//   if (!rfh || !rfh->IsRenderFrameLive() || rfh->IsErrorDocument()) {
+//     if (!callback_run_ && callback_) {
+//       callback_run_ = true;
+//       AnonPageResult fail_result{"", last_http_status_code_, last_committed_url_};
+//       std::move(callback_).Run(fail_result);
+//     }
+//     return;
+//   }
+
+//   // Mark run to prevent double-firing
+//   callback_run_ = true;
+
+//   // Execute JS to get the text
+//   rfh->ExecuteJavaScriptInIsolatedWorld(
+//       u"document.body.innerText",
+//       base::BindOnce(
+//           [](base::WeakPtr<AnonPageLoader> loader, base::Value result) {
+//             if (!loader) return;
+            
+//             AnonPageResult final_result;
+//             final_result.inner_text = result.is_string() ? result.GetString() : "";
+//             final_result.http_status_code = loader->last_http_status_code_;
+//             final_result.final_url = loader->last_committed_url_;
+
+//             if (loader->callback_) {
+//               std::move(loader->callback_).Run(final_result);
+//             }
+//           },
+//           weak_factory_.GetWeakPtr()),
+//       kAnonLoaderWorldId 
+//   );
+// }

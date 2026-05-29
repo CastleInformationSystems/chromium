@@ -8,6 +8,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <optional>
 
 #include "base/functional/callback.h"
 #include "base/memory/raw_ptr.h"
@@ -50,7 +51,7 @@ class HiddenCrawlJob : public content::WebContentsObserver,
  private:
   // --- Step 1: Target URL Validation ---
   void StartAnonFetch();
-  void OnAnonFetchComplete(std::unique_ptr<std::string> response_body);
+  void OnAnonFetchComplete(std::optional<std::string> response_body);
 
   // --- Step 2: Auth Replication ---
   void CopyCookiesAndNavigate();

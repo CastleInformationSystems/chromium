@@ -4,6 +4,8 @@
 
 #include "chrome/browser/rag_ingestion/rag_ingestion_service.h"
 
+#include <string_view>
+
 #include "base/auto_reset.h"
 #include "base/base64.h"
 #include "base/containers/span.h"
@@ -20,7 +22,9 @@
 #include "chrome/browser/content_settings/host_content_settings_map_factory.h"
 #include "chrome/browser/favicon/favicon_service_factory.h"
 #include "chrome/browser/profiles/profile.h"
+#include "chrome/browser/ui/browser.h"
 #include "chrome/browser/ui/browser_list.h"
+#include "chrome/browser/ui/browser_window/public/browser_window_interface_iterator.h"
 #include "chrome/browser/ui/tabs/tab_strip_model.h"
 #include "chrome/browser/ui/rag_ingestion/rag_ingestion_page_action_controller.h"
 #include "chrome/services/rag_ingestion_pdf/public/mojom/rag_ingestion_pdf.mojom.h"
@@ -49,6 +53,38 @@ inline sandbox::mojom::Sandbox GetServiceSandboxType<rag_ingestion::mojom::PdfTe
 }
 }  // namespace content
 
+namespace {
+
+std::string GetIngestionMimeType(download::DownloadItem* item) {
+  std::string network_mime = base::ToLowerASCII(item->GetMimeType());
+  
+  // Always prefer the final target path on disk.
+  base::FilePath path = item->GetTargetFilePath();
+  if (path.empty()) {
+    path = base::FilePath::FromUTF8Unsafe(item->GetSuggestedFilename());
+  }
+
+  // path.Extension() returns std::wstring on Windows and std::string on Mac.
+  // By wrapping it in base::FilePath(), we can safely call AsUTF8Unsafe() everywhere.
+  std::string ext = base::ToLowerASCII(base::FilePath(path.Extension()).AsUTF8Unsafe());
+
+  // Extension is the source of truth, network mime is the fallback
+  if (ext == ".pdf" || network_mime == "application/pdf") {
+    return "application/pdf";
+  } else if (ext == ".docx") {
+    return "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
+  } else if (ext == ".xlsx") {
+    return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+  } else if (ext == ".pptx") {
+    return "application/vnd.openxmlformats-officedocument.presentationml.presentation";
+  } else if (ext == ".rtf" || network_mime == "application/rtf" || network_mime == "text/rtf") {
+    return "application/rtf"; 
+  }
+  
+  return ""; 
+}
+
+} // namespace
 
 // // Loop 1: How often to trigger the "Re-crawl check" (The "N hours")
 // constexpr base::TimeDelta kIngestTriggerInterval = base::Hours(1);
@@ -209,7 +245,7 @@ void RagIngestionService::Shutdown() {
 //     return;
 //   }
 
-//   const base::Value::Dict& root = result->GetDict();
+//   const base::DictValue& root = result->GetDict();
 
 //   // 1. PROTOCOL CHECK: "If isIngesting set to false then stop the timer"
 //   std::optional<bool> is_ingesting = root.FindBool("isIngesting");
@@ -221,7 +257,7 @@ void RagIngestionService::Shutdown() {
 
 //   // 2. PROCESS MESSAGES
 //   // JSON: { "messages": [ ... ], "isIngesting": true }
-//   const base::Value::List* messages = root.FindList("messages");
+//   const base::ListValue* messages = root.FindList("messages");
 //   if (messages) {
 //     LOG(INFO) << "[RAG] Heartbeat: Processing " << messages->size() << " jobs.";
 //     for (const auto& item : *messages) {
@@ -236,7 +272,7 @@ void RagIngestionService::Shutdown() {
 // // PHASE 3: EXECUTION
 // // ===========================================================================
 
-// void RagIngestionService::ProcessIngestionJob(const base::Value::Dict& message_item) {
+// void RagIngestionService::ProcessIngestionJob(const base::DictValue& message_item) {
 //   // STRUCTURE from ingestion.ts 'IdentifiableIngestionMessage':
 //   // {
 //   //   "messageId": "...",
@@ -251,7 +287,7 @@ void RagIngestionService::Shutdown() {
 //   if (!msg_id) return;
 
 //   // Traverse: target -> url
-//   const base::Value::Dict* target_obj = message_item.FindDict("target");
+//   const base::DictValue* target_obj = message_item.FindDict("target");
 //   if (!target_obj) return;
 
 //   const std::string* url_str = target_obj->FindString("url");
@@ -323,7 +359,8 @@ void RagIngestionService::OnContentSettingChanged(
   std::string active_tab_title;
 
   // Loop through all tabs to update UI AND grab title
-  for (Browser* browser : *BrowserList::GetInstance()) {
+  for (BrowserWindowInterface* bwi : GetAllBrowserWindowInterfaces()) {
+    Browser* browser = bwi->GetBrowserForMigrationOnly();
     for (int i = 0; i < browser->tab_strip_model()->count(); ++i) {
       content::WebContents* wc = browser->tab_strip_model()->GetWebContentsAt(i);
       
@@ -520,12 +557,15 @@ void RagIngestionService::FetchRootPageMetadata(const GURL& root_url,
 void RagIngestionService::OnRootPageFetched(network::SimpleURLLoader* loader_ptr,
                                             const GURL& original_url,
                                             const std::string& active_tab_title, 
-                                            std::unique_ptr<std::string> response_body) {
+                                            std::optional<std::string> response_body) {
   RagSiteMetadata metadata;
   
   // 1. THE BROWSER IS THE SOURCE OF TRUTH. Use it first!
   metadata.title = active_tab_title;
   metadata.site_name = active_tab_title;
+
+  std::string icon_url_str;
+  std::string manifest_url_str;
 
   if (response_body) {
     std::string html = *response_body;
@@ -546,30 +586,38 @@ void RagIngestionService::OnRootPageFetched(network::SimpleURLLoader* loader_ptr
 
     metadata.keywords = ExtractMetaTag(html, "keywords");
 
-    std::string icon_url_str = ExtractIconUrl(html, original_url.DeprecatedGetOriginAsURL());
-    std::string manifest_url_str = ExtractManifestUrl(html, original_url.DeprecatedGetOriginAsURL());
-
-    // Clean up this root loader
-    auto it = metadata_loaders_.find(loader_ptr);
-    if (it != metadata_loaders_.end()) metadata_loaders_.erase(it);
-
-    // If a manifest exists, fetch it to check Priority #1 (name / short_name)
-    if (!manifest_url_str.empty()) {
-      FetchManifest(original_url, manifest_url_str, icon_url_str, std::move(metadata));
-      return; 
-    } 
-    // Otherwise, skip straight to the Favicon
-    else if (!icon_url_str.empty()) {
-      FetchFavicon(original_url, GURL(icon_url_str), std::move(metadata));
-      return; 
-    }
+    icon_url_str = ExtractIconUrl(html, original_url.DeprecatedGetOriginAsURL());
+    manifest_url_str = ExtractManifestUrl(html, original_url.DeprecatedGetOriginAsURL());
   } else {
+    // 3. FALLBACK: No HTML. Guess the standard paths using the Origin.
+    if (metadata.site_name.empty()) {
       metadata.site_name = original_url.host();
-      
-      auto it = metadata_loaders_.find(loader_ptr);
-      if (it != metadata_loaders_.end()) metadata_loaders_.erase(it);
+    }
+    
+    GURL origin = original_url.DeprecatedGetOriginAsURL();
+    manifest_url_str = origin.Resolve("manifest.json").spec();
+    icon_url_str = origin.Resolve("favicon.ico").spec();
   }
 
+  // Clean up this root loader
+  auto it = metadata_loaders_.find(loader_ptr);
+  if (it != metadata_loaders_.end()) {
+    metadata_loaders_.erase(it);
+  }
+
+  // 4. ROUTING: Always try to fetch Manifest -> Favicon -> Finalize
+  // If a manifest exists (or we guessed one), fetch it to check Priority #1
+  if (!manifest_url_str.empty()) {
+    FetchManifest(original_url, manifest_url_str, icon_url_str, std::move(metadata));
+    return; 
+  } 
+  // Otherwise, skip straight to the Favicon
+  else if (!icon_url_str.empty()) {
+    FetchFavicon(original_url, GURL(icon_url_str), std::move(metadata));
+    return; 
+  }
+
+  // Failsafe if everything was somehow empty
   FinalizePermissionGrant(original_url, RagPermissionStatus::kAllowed, std::move(metadata));
 }
 
@@ -647,7 +695,7 @@ void RagIngestionService::OnFaviconFetched(network::SimpleURLLoader* loader_ptr,
                                            const GURL& original_url, 
                                            const GURL& icon_url,
                                            RagSiteMetadata metadata, 
-                                           std::unique_ptr<std::string> response_body) {
+                                           std::optional<std::string> response_body) {
   
   std::string network_mime_type;
   if (loader_ptr && loader_ptr->ResponseInfo()) {
@@ -725,7 +773,7 @@ void RagIngestionService::OnManifestFetched(network::SimpleURLLoader* loader_ptr
                                             const GURL& original_url, 
                                             const std::string& icon_url,
                                             RagSiteMetadata metadata, 
-                                            std::unique_ptr<std::string> response_body) {
+                                            std::optional<std::string> response_body) {
   // Priority 1: name or short_name from link[rel="manifest"]
   if (response_body) {
     std::optional<base::Value> parsed = base::JSONReader::Read(*response_body, 
@@ -744,7 +792,7 @@ void RagIngestionService::OnManifestFetched(network::SimpleURLLoader* loader_ptr
       }
 
       if (icon_url.empty()) {
-        const base::Value::List* icons = dict.FindList("icons");
+        const base::ListValue* icons = dict.FindList("icons");
         if (icons && !icons->empty() && icons->front().is_dict()) {
           const std::string* src = icons->front().GetDict().FindString("src");
           if (src) {
@@ -887,6 +935,166 @@ void RagIngestionService::SetPrivateKey(const std::string& private_key_base64) {
   private_key_base64_ = private_key_base64;
 }
 
+std::string RagIngestionService::FilterMhtmlToTextOnly(const std::string& mhtml) {
+  if (mhtml.empty()) return mhtml;
+
+  // Use string_view for zero-copy parsing of the massive input string
+  std::string_view mhtml_view(mhtml);
+
+  // 1. Extract the multipart boundary marker from the global headers
+  std::string boundary_marker = "boundary=\"";
+  size_t boundary_start = mhtml_view.find(boundary_marker);
+  std::string_view boundary;
+
+  if (boundary_start != std::string_view::npos) {
+    boundary_start += boundary_marker.length();
+    size_t boundary_end = mhtml_view.find("\"", boundary_start);
+    if (boundary_end != std::string_view::npos) {
+      boundary = mhtml_view.substr(boundary_start, boundary_end - boundary_start);
+    }
+  } else {
+    // Fallback: Sometimes boundaries aren't wrapped in quotes
+    boundary_marker = "boundary=";
+    boundary_start = mhtml_view.find(boundary_marker);
+    if (boundary_start != std::string_view::npos) {
+      boundary_start += boundary_marker.length();
+      size_t boundary_end = mhtml_view.find("\r\n", boundary_start);
+      if (boundary_end != std::string_view::npos) {
+        boundary = mhtml_view.substr(boundary_start, boundary_end - boundary_start);
+      }
+    }
+  }
+
+  if (boundary.empty()) {
+    LOG(WARNING) << "[RAG] Failed to parse MHTML boundary. Sending full file.";
+    return mhtml;
+  }
+
+  std::string part_separator = "--" + std::string(boundary);
+  
+  // Pre-allocate memory for the filtered string to prevent reallocations.
+  // We don't know the exact size, but reserving a fraction of the original is safe.
+  std::string filtered_mhtml;
+  filtered_mhtml.reserve(mhtml.size() / 4); 
+
+  size_t pos = 0;
+  size_t next_pos = mhtml_view.find(part_separator, pos);
+
+  if (next_pos == std::string_view::npos) {
+    return mhtml; // Malformed MHTML, bail out
+  }
+
+  // 2. Preserve the global MIME headers
+  filtered_mhtml += mhtml_view.substr(0, next_pos);
+
+  // 3. Iterate through every MIME part safely using string_view
+  while (next_pos != std::string_view::npos) {
+    pos = next_pos + part_separator.length();
+
+    if (pos < mhtml_view.length() && mhtml_view[pos] == '-' && mhtml_view[pos + 1] == '-') {
+      break; 
+    }
+
+    next_pos = mhtml_view.find(part_separator, pos);
+    size_t part_end = (next_pos != std::string_view::npos) ? next_pos : mhtml_view.length();
+    
+    // ZERO COPY: We just create a window looking at the original string
+    std::string_view part = mhtml_view.substr(pos, part_end - pos);
+
+    size_t headers_end = part.find("\r\n\r\n");
+    if (headers_end == std::string_view::npos) {
+        headers_end = part.find("\n\n"); 
+    }
+    
+    if (headers_end != std::string_view::npos) {
+      std::string_view headers = part.substr(0, headers_end);
+      
+      // Convert only the small headers to a lower-case std::string for the search, 
+      // rather than the entire multi-megabyte base64 payload.
+      std::string headers_lower = base::ToLowerASCII(headers);
+
+      // Spec Requirement: Filter out any part that is NOT text/html
+      if (headers_lower.find("content-type: text/html") != std::string::npos) {
+        // ONLY NOW do we copy the bytes into our new string
+        filtered_mhtml += part_separator;
+        filtered_mhtml += part;
+      }
+    }
+  }
+
+  // 4. Properly seal the MIME structure
+  filtered_mhtml += part_separator + "--\r\n";
+  
+  // Re-shrink the capacity of the string to free up unused reserved memory
+  filtered_mhtml.shrink_to_fit();
+
+  LOG(INFO) << "[RAG] MHTML filtered from " << mhtml.size() 
+            << " bytes to " << filtered_mhtml.size() << " bytes.";
+            
+  return filtered_mhtml;
+}
+
+void RagIngestionService::StartDocumentIngestion(const GURL& url,
+                                                 const std::string& page_title,
+                                                 const std::string& file_bytes, 
+                                                 const std::string& mime_type,
+                                                 const std::string& filename) {
+  // 1. HARD CEILING: Prevent OOM crashes on massive MHTML blobs (e.g., > 50MB)
+  // Even before filtering, we shouldn't regex/split infinitely large strings.
+  constexpr size_t kMaxProcessableBytes = 50 * 1024 * 1024; 
+  if (file_bytes.size() > kMaxProcessableBytes) {
+    LOG(WARNING) << "[RAG] File catastrophically large (" << file_bytes.size() 
+                 << " bytes). Skipping to prevent memory exhaustion.";
+    return;
+  }
+
+  // 2. FILTERING
+  std::string filtered_bytes = file_bytes;
+  if (mime_type == "multipart/related") {
+    filtered_bytes = FilterMhtmlToTextOnly(file_bytes); 
+  }
+
+  // 3. SPEC REQUIREMENT: 10MB Limit on the final payload
+  if (filtered_bytes.size() > 10 * 1024 * 1024) {
+    LOG(WARNING) << "[RAG] Filtered text still too large (" << filtered_bytes.size() 
+                 << " bytes). Skipping upload.";
+    return;
+  }
+
+  if (!network_client_) return;
+
+  // Step 4: Upload to ingestDocument
+  network_client_->UploadRawDocument(
+      url, page_title, filtered_bytes, mime_type, filename,
+      base::BindOnce(&RagIngestionService::OnDocumentParsed,
+                     weak_factory_.GetWeakPtr(), url));
+}
+
+void RagIngestionService::OnDocumentParsed(const GURL& url, std::optional<base::Value> result) {
+  if (!result || !result->is_dict()) return;
+
+  base::DictValue& document_text = result->GetDict();
+  base::ListValue* text_records = document_text.FindList("textRecords");
+  if (!text_records) return;
+
+  // Iterate through records and encrypt the "text" field
+  for (auto& item : *text_records) {
+    if (item.is_dict()) {
+      base::DictValue& record = item.GetDict();
+      const std::string* clear_text = record.FindString("text");
+      
+      if (clear_text) {
+        // Use your existing BoringSSL AES-CTR logic here!
+        std::string encrypted_text = EncryptSingleString(*clear_text); 
+        record.Set("text", encrypted_text); // Replace clear text with encrypted
+      }
+    }
+  }
+
+  // Step 2: Upload the encrypted JSON back to ingestEncryptedDocumentText
+  network_client_->IngestEncryptedDocument(url, std::move(document_text), base::DoNothing());
+}
+
 void RagIngestionService::StartPassiveLearningPipeline(const GURL& url, 
                                                        const std::string& inner_text) {
   if (!network_client_) return;
@@ -912,7 +1120,7 @@ void RagIngestionService::OnDocumentChunked(const GURL& url, std::optional<base:
     return;
   }
 
-  const base::Value::List* chunks_list = result->GetDict().FindList("chunks");
+  const base::ListValue* chunks_list = result->GetDict().FindList("chunks");
   if (!chunks_list || chunks_list->empty()) {
     LOG(WARNING) << "[RAG] chunkDocument returned no chunks.";
     return;
@@ -943,7 +1151,7 @@ void RagIngestionService::OnChunksEmbedded(const GURL& url,
     return;
   }
 
-  const base::Value::List* vectors_list = result->GetDict().FindList("vectors");
+  const base::ListValue* vectors_list = result->GetDict().FindList("vectors");
   if (!vectors_list || vectors_list->size() != chunks.size()) {
     LOG(ERROR) << "[RAG] embedChunks returned mismatched or empty vectors.";
     return;
@@ -1054,42 +1262,95 @@ std::vector<std::string> RagIngestionService::EncryptChunks(
   return encrypted_chunks;
 }
 
+std::string RagIngestionService::EncryptSingleString(const std::string& clear_text) {
+  if (clear_text.empty()) {
+    return "";
+  }
+
+  // 1. Decode the Base64 Private Key
+  std::string raw_key;
+  if (!base::Base64Decode(private_key_base64_, &raw_key)) {
+    LOG(ERROR) << "[RAG] Failed to decode base64 private key.";
+    return "";
+  }
+
+  // The Dart backend uses a 32-byte (256-bit) derived key
+  if (raw_key.size() != 32) { 
+    LOG(ERROR) << "[RAG] Invalid key length. Expected 32 bytes, got " << raw_key.size();
+    return "";
+  }
+
+  // 2. Generate a 16-byte random IV to match Dart's IV.fromLength(16)
+  std::vector<uint8_t> iv_bytes(16);
+  crypto::RandBytes(iv_bytes);
+  std::string iv(iv_bytes.begin(), iv_bytes.end());
+
+  // 3. Apply PKCS7 Padding
+  // Dart's package:encrypt defaults to AESMode.sic (CTR mode) WITH PKCS7 padding.
+  // Because CTR is a stream cipher, BoringSSL doesn't pad it automatically, 
+  // so we apply the PKCS7 padding manually before encryption.
+  size_t block_size = 16;
+  uint8_t pad_val = block_size - (clear_text.length() % block_size);
+  std::string padded_text = clear_text;
+  padded_text.append(pad_val, static_cast<char>(pad_val));
+
+  // 4. Initialize BoringSSL EVP Context for AES-256-CTR
+  bssl::ScopedEVP_CIPHER_CTX ctx;
+  if (!EVP_EncryptInit_ex(ctx.get(), EVP_aes_256_ctr(), nullptr, 
+                          reinterpret_cast<const uint8_t*>(raw_key.data()), 
+                          reinterpret_cast<const uint8_t*>(iv.data()))) {
+    LOG(ERROR) << "[RAG] Failed to initialize AES-CTR encryption.";
+    return ""; 
+  }
+
+  if (!ctx.get()) {
+    LOG(ERROR) << "[RAG] Failed to create BoringSSL context.";
+    return "";
+  }
+
+  // 5. Allocate output buffer (safely sized for the padded input)
+  std::vector<uint8_t> ciphertext(padded_text.size() + block_size);
+  int out_len1 = 0;
+  int out_len2 = 0;
+
+  // 6. Encrypt the payload
+  EVP_EncryptUpdate(ctx.get(), ciphertext.data(), &out_len1,
+                    reinterpret_cast<const uint8_t*>(padded_text.data()),
+                    padded_text.size());
+                    
+  EVP_EncryptFinal_ex(ctx.get(), 
+                      base::span(ciphertext).subspan(base::checked_cast<size_t>(out_len1)).data(), 
+                      &out_len2);
+
+  // Slice the exact written length to avoid trailing null bytes
+  std::string cipher_str(ciphertext.begin(), ciphertext.begin() + out_len1 + out_len2);
+
+  // 7. Format exactly as Dart expects: "Base64(IV):Base64(Ciphertext)"
+  return base::Base64Encode(iv) + ":" + base::Base64Encode(cipher_str);
+}
+
 // ===========================================================================
-// PDF INTERCEPTION & EXTRACTION
+// DOCUMENT INTERCEPTION & EXTRACTION
 // ===========================================================================
 
 void RagIngestionService::OnDownloadCreated(content::DownloadManager* manager,
                                             download::DownloadItem* item) {
+  // Ignore historical downloads loaded from the database at startup
   if (!manager->IsManagerInitialized() && 
       (item->GetState() == download::DownloadItem::COMPLETE || 
        item->GetState() == download::DownloadItem::CANCELLED ||
        item->GetState() == download::DownloadItem::INTERRUPTED)) {
-      return; // Completely ignore this historical item
+      return; 
   }
 
-  // 1. Check the explicitly provided MIME type
-  bool is_pdf = (item->GetMimeType() == "application/pdf");
-
-  // 2. Fallback: Check the suggested filename extension (fixes GitHub / octet-stream issue)
-  if (!is_pdf) {
-      base::FilePath suggested_path = base::FilePath::FromUTF8Unsafe(item->GetSuggestedFilename());
-      is_pdf = suggested_path.MatchesExtension(FILE_PATH_LITERAL(".pdf"));
-  }
-
-  // 3. Fallback: Check the final target path (if already known)
-  if (!is_pdf && !item->GetTargetFilePath().empty()) {
-      is_pdf = item->GetTargetFilePath().MatchesExtension(FILE_PATH_LITERAL(".pdf"));
-  }
-
-  // If any of our heuristics detected a PDF, attach the observer!
-  if (is_pdf) {
-      item->AddObserver(this);
-      
-      // Race Condition Check: Was it so fast that it's already done?
-      if (item->GetState() == download::DownloadItem::COMPLETE) {
-          LOG(INFO) << "[RAG DEBUG] Download was already COMPLETE at creation!";
-          OnDownloadUpdated(item); // Manually push it through the pipeline
-      }
+  // Google Drive and other complex web apps often use 'application/octet-stream' 
+  // and delay filename resolution. We cannot judge the file type accurately here.
+  // ALWAYS observe the item, and make the decision when the download completes.
+  item->AddObserver(this);
+  
+  // Race Condition Check: Was it so fast that it's already done?
+  if (item->GetState() == download::DownloadItem::COMPLETE) {
+      OnDownloadUpdated(item); 
   }
 }
 
@@ -1098,54 +1359,63 @@ void RagIngestionService::OnDownloadDestroyed(download::DownloadItem* item) {
 }
 
 void RagIngestionService::OnDownloadUpdated(download::DownloadItem* item) {
-  // [DIAGNOSTIC] Log every single update to the console to see what state it's stuck in
-  LOG(INFO) << "[RAG DEBUG] OnDownloadUpdated fired. State: " 
-            << static_cast<int>(item->GetState()) 
-            << " | URL: " << item->GetURL();
-
   if (item->GetState() == download::DownloadItem::IN_PROGRESS) {
       return; 
   }
 
   if (item->GetState() == download::DownloadItem::COMPLETE) {
-      item->RemoveObserver(this); // Unhook
+      item->RemoveObserver(this); // Unhook immediately
 
-      bool is_pdf = (item->GetMimeType() == "application/pdf");
-      if (!is_pdf) {
-          base::FilePath suggested_path = base::FilePath::FromUTF8Unsafe(item->GetSuggestedFilename());
-          is_pdf = suggested_path.MatchesExtension(FILE_PATH_LITERAL(".pdf"));
-      }
-      if (!is_pdf && !item->GetTargetFilePath().empty()) {
-          is_pdf = item->GetTargetFilePath().MatchesExtension(FILE_PATH_LITERAL(".pdf"));
-      }
+      std::string mime_type = GetIngestionMimeType(item);
 
-      if (is_pdf) {
-          GURL site_url = item->GetTabUrl();
-          if (site_url.is_empty() || !site_url.is_valid()) {
-              site_url = item->GetURL(); 
-          }
+      if (!mime_type.empty()) {
           
-          // [FIX] Extract the clean origin for the backend
-          GURL clean_origin = url::Origin::Create(site_url).GetURL();
+          // [CROSS-ORIGIN FIX] Traverse the origin chain to find the authorized domain
+          GURL granted_origin;
+          std::vector<GURL> candidate_urls = {
+              item->GetTabUrl(),          // The URL of the tab
+              item->GetTabReferrerUrl(),  // The page that opened the tab
+              item->GetReferrerUrl(),     // The HTTP Referrer of the download request
+              item->GetOriginalUrl()      // The first URL in the redirect chain
+          };
 
-          // Verify Permission 
-          if (GetUserPermission(clean_origin) == UserPermission::kGranted) {
-              LOG(INFO) << "[RAG] Intercepted PDF Download for granted site. Reading...";
+          for (const GURL& candidate : candidate_urls) {
+              if (candidate.is_valid() && !candidate.is_empty()) {
+                  GURL origin = url::Origin::Create(candidate).GetURL();
+                  // If ANY hop in the chain is authorized, we accept the download!
+                  if (GetUserPermission(origin) == UserPermission::kGranted) {
+                      granted_origin = origin;
+                      break;
+                  }
+              }
+          }
+
+          if (!granted_origin.is_empty()) {
+              LOG(INFO) << "[RAG] Intercepted Download (" << mime_type << ") linked to granted site: " << granted_origin.spec();
               
+              std::string filename = item->GetTargetFilePath().BaseName().AsUTF8Unsafe();
+              if (filename.empty()) filename = "downloaded_document";
+
               base::ThreadPool::PostTaskAndReplyWithResult(
                   FROM_HERE, {base::MayBlock(), base::TaskPriority::BEST_EFFORT},
                   base::BindOnce([](const base::FilePath& path) {
                       std::string file_content;
                       base::ReadFileToString(path, &file_content);
-                      return std::vector<uint8_t>(file_content.begin(), file_content.end());
-                  }, item->GetFullPath()),
-                  // Pass the clean origin to the backend!
-                  base::BindOnce(&RagIngestionService::ExtractAndIngestPdf, 
-                                 weak_factory_.GetWeakPtr(), clean_origin) 
+                      return file_content;
+                  }, item->GetTargetFilePath()),
+                  
+                  base::BindOnce(
+                      [](base::WeakPtr<RagIngestionService> svc, GURL url, std::string mime, std::string fname, std::string bytes) {
+                          if (svc && !bytes.empty()) {
+                              svc->StartDocumentIngestion(url, fname, bytes, mime, fname);
+                          }
+                      }, weak_factory_.GetWeakPtr(), granted_origin, mime_type, filename) // Pass the original granted origin to the backend!
               );
           } else {
-              LOG(INFO) << "[RAG] Ignored downloaded PDF: Domain not granted. (" << clean_origin.spec() << ")";
+              LOG(INFO) << "[RAG] Ignored downloaded document: No authorized domain found in the download chain.";
           }
+      } else {
+          VLOG(1) << "[RAG] Ignored completed download: Unsupported format.";
       }
   } 
   else if (item->GetState() == download::DownloadItem::CANCELLED || 

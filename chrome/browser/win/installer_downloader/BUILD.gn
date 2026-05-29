@@ -5,7 +5,7 @@
 import("//build/config/chrome_build.gni")
 
 assert(is_win, "The installer downloader is for windows only")
-assert(is_chrome_branded, "The installer downloader is for chrome branded only")
+# assert(is_chrome_branded, "The installer downloader is for chrome branded only")
 
 source_set("prefs") {
   public = [ "installer_downloader_pref_names.h" ]

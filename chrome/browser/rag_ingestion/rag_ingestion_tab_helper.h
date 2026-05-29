@@ -39,10 +39,10 @@ class RagIngestionTabHelper
   // content::WebContentsObserver overrides:
   void DidFinishNavigation(
       content::NavigationHandle* navigation_handle) override;
-//   void DocumentOnLoadCompletedInPrimaryMainFrame() override;
-  void DOMContentLoaded(content::RenderFrameHost* render_frame_host) override;
+  void DocumentOnLoadCompletedInPrimaryMainFrame() override;
+  // void DOMContentLoaded(content::RenderFrameHost* render_frame_host) override;
 
-  void IngestCurrentPage();
+  void IngestCurrentPage(int retry_count = 0);
 
  private:
   explicit RagIngestionTabHelper(content::WebContents* web_contents);
@@ -74,13 +74,15 @@ class RagIngestionTabHelper
   // [ZAP Integration] - "Indicator Pattern" & "Verification Detection"
   double CalculateHeuristicScore();
 
+  void AttemptLiveTextExtraction(int attempt);
+
   // Helper to trigger the network check after heuristics pass
   void StartAnonPageCheck();
 
   bool PageHasLinkContaining(const std::string& partial_text);
 
   void FetchPdfBytesForIngestion(const GURL& url);
-  void OnPdfBytesFetched(const GURL& url, std::unique_ptr<std::string> response_body);
+  void OnPdfBytesFetched(const GURL& url, std::optional<std::string> response_body);
 
   // --- Text Utilities ---
   // std::string CleanText(const std::string& input);
@@ -95,8 +97,9 @@ class RagIngestionTabHelper
       RagIngestionService::BackendPermissionInfo info);
 
   // [NEW] Parallel Extraction Callbacks
-  void OnLiveTextCaptured(base::Value result);
+  void OnLiveTextCaptured(int attempt, base::Value result);
   void OnAnonTextCaptured(const AnonPageResult& result);
+  void MarkPageAsPublic(double score, const std::string& reason);
   
   // [NEW] Convergence Point
   void CompareContentState();

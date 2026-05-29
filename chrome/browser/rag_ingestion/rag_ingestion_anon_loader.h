@@ -42,7 +42,7 @@ class AnonPageLoader : public content::WebContentsObserver {
   // void DocumentOnLoadCompletedInPrimaryMainFrame() override;
 
   void DOMContentLoaded(content::RenderFrameHost* render_frame_host) override;
-  void ExecuteExtraction();
+  void ExecuteExtraction(int attempt = 1);
 
   raw_ptr<Profile> profile_;
   GURL url_;

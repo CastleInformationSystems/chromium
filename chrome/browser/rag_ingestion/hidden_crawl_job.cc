@@ -124,7 +124,7 @@ void HiddenCrawlJob::StartAnonFetch() {
       1024);
 }
 
-void HiddenCrawlJob::OnAnonFetchComplete(std::unique_ptr<std::string> response_body) {
+void HiddenCrawlJob::OnAnonFetchComplete(std::optional<std::string> response_body) {
   is_anon_complete_ = true;
 
   if (anon_loader_->ResponseInfo() && anon_loader_->ResponseInfo()->headers) {

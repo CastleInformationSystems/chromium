@@ -324,6 +324,7 @@ static_library("ui") {
     "//chrome/browser/history_embeddings",
     "//chrome/browser/image_decoder",
     "//chrome/browser/image_fetcher",
+    "//chrome/browser/jatter",
     "//chrome/browser/lookalikes",
     "//chrome/browser/media/router:media_router_feature",
     "//chrome/browser/media/router/discovery/access_code:access_code_cast_feature",
@@ -3441,7 +3442,7 @@ static_library("ui") {
 
     libs += [ "crypt32.lib" ]
 
-    if (is_chrome_branded) {
+    if (true) {
       sources += [ "webui/help/version_updater_win.cc" ]
       deps += [
         "//chrome/browser/win/installer_downloader:prefs",

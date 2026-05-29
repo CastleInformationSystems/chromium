@@ -1,5 +1,7 @@
 #include "chrome/browser/jatter/jatter_authorization_impl.h"
 
+#include <optional>
+
 #include "base/json/json_reader.h"
 #include "base/json/json_writer.h"
 #include "base/logging.h"
@@ -11,6 +13,7 @@
 #include "chrome/browser/rag_ingestion/rag_ingestion_service_factory.h"
 #include "chrome/browser/rag_ingestion/rag_ingestion_service.h"
 #include "content/public/browser/browser_context.h"
+#include "content/public/browser/global_routing_id.h"
 #include "content/public/browser/render_process_host.h"
 #include "content/public/browser/storage_partition.h"
 #include "net/http/http_response_headers.h"
@@ -44,14 +47,18 @@ class DownloadHelper : public base::RefCounted<DownloadHelper> {
   static void Start(content::RenderFrameHost* render_frame_host,
                     std::unique_ptr<network::SimpleURLLoader> loader,
                     network::mojom::URLLoaderFactory* factory) {
-    auto helper = base::MakeRefCounted<DownloadHelper>(render_frame_host,
+    // 1. Grab the safe ID synchronously while the pointer is guaranteed valid.
+    content::GlobalRenderFrameHostId safe_frame_id = render_frame_host->GetGlobalId();
+
+    // 2. Pass the ID (NOT the pointer) into the constructor
+    auto helper = base::MakeRefCounted<DownloadHelper>(safe_frame_id,
                                                        std::move(loader));
     helper->StartDownload(factory);
   }
 
-  DownloadHelper(content::RenderFrameHost* render_frame,
+  DownloadHelper(content::GlobalRenderFrameHostId frame_id,
                  std::unique_ptr<network::SimpleURLLoader> loader)
-      : render_frame_host(render_frame),
+      : frame_id_(frame_id),
         simple_url_loader_(std::move(loader)) {}
 
  private:
@@ -65,7 +72,7 @@ class DownloadHelper : public base::RefCounted<DownloadHelper> {
         1024 * 1024);
   }
 
-  void OnDownloadComplete(std::unique_ptr<std::string> response_body) {
+  void OnDownloadComplete(std::optional<std::string> response_body) {
     int net_error = simple_url_loader_->NetError();
   
     if (net_error != net::OK) {
@@ -89,16 +96,21 @@ class DownloadHelper : public base::RefCounted<DownloadHelper> {
           base::JSONReader::Read(*response_body, base::JSON_PARSE_CHROMIUM_EXTENSIONS);
 
       if (value && value->is_dict()) {
-        const base::Value::Dict& dict = value->GetDict();
+        const base::DictValue& dict = value->GetDict();
         const std::string* id_token = dict.FindString("idToken");
         const std::string* refresh_token = dict.FindString("refreshToken");
         if (id_token && refresh_token) {
 #ifndef JATTER_PRODUCTION_MODE
           LOG(INFO) << "id_token: " << *id_token;
           LOG(INFO) << "refresh_token: " << *refresh_token;
-#endif
-          Profile* profile = Profile::FromBrowserContext(
-              render_frame_host->GetProcess()->GetBrowserContext());
+#endif  
+          // 4. Safely resolve the ID back to a pointer inside the callback
+          content::RenderFrameHost* rfh = content::RenderFrameHost::FromID(frame_id_);
+          if (!rfh) {
+            LOG(WARNING) << "Tab closed during Firebase auth. Aborting.";
+            return; // Safe exit!
+          }
+          Profile* profile = Profile::FromBrowserContext(rfh->GetBrowserContext());
 
           JatterTokenStorage* storage =
               JatterTokenStorage::GetOrCreate(profile);
@@ -113,14 +125,14 @@ class DownloadHelper : public base::RefCounted<DownloadHelper> {
     }
   }
 
-  raw_ptr<content::RenderFrameHost> render_frame_host;
+  content::GlobalRenderFrameHostId frame_id_;
   std::unique_ptr<network::SimpleURLLoader> simple_url_loader_;
 };
 
 JatterAuthorizationImpl::JatterAuthorizationImpl(
-    mojo::PendingReceiver<jatter::mojom::JatterAuthorization> receiver,
-    content::RenderFrameHost* rfh)
-    : render_frame_host(rfh), receiver_(this, std::move(receiver)) {}
+    content::RenderFrameHost& rfh,
+    mojo::PendingReceiver<jatter::mojom::JatterAuthorization> receiver)
+    : content::DocumentService<jatter::mojom::JatterAuthorization>(rfh, std::move(receiver)) {}
 
 JatterAuthorizationImpl::~JatterAuthorizationImpl() = default;
 
@@ -137,7 +149,7 @@ void JatterAuthorizationImpl::SendPrivateKey(const std::string& private_key) {
   LOG(INFO) << "Received Firebase private_key from renderer: " << private_key;
 #endif
   Profile* profile = Profile::FromBrowserContext(
-              render_frame_host->GetProcess()->GetBrowserContext());
+              render_frame_host().GetBrowserContext());
   RagIngestionService* service = 
       RagIngestionServiceFactory::GetForProfile(profile);
   
@@ -162,7 +174,7 @@ void JatterAuthorizationImpl::SendCustomTokenRequest(
   resource_request->method = "POST";
   resource_request->headers.SetHeader("Content-Type", "application/json");
 
-  base::Value::Dict body;
+  base::DictValue body;
   body.Set("token", custom_token);
   body.Set("returnSecureToken", true);
 
@@ -173,10 +185,10 @@ void JatterAuthorizationImpl::SendCustomTokenRequest(
                                                  kFirebaseAuthAnnotation);
   loader->AttachStringForUpload(json_body, "application/json");
 
-  auto url_loader_factory = render_frame_host->GetBrowserContext()
+  auto url_loader_factory = render_frame_host().GetBrowserContext()
                                 ->GetDefaultStoragePartition()
                                 ->GetURLLoaderFactoryForBrowserProcess();
 
-  DownloadHelper::Start(render_frame_host, std::move(loader),
+  DownloadHelper::Start(&render_frame_host(), std::move(loader),
                         url_loader_factory.get());
 }

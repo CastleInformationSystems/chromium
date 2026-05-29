@@ -90,6 +90,12 @@ class RagIngestionService : public KeyedService,
   // Starts the 4-step pipeline: Chunk -> Embed -> Encrypt -> Ingest
   void StartPassiveLearningPipeline(const GURL& url, const std::string& inner_text);
 
+  void StartDocumentIngestion(const GURL& url,
+                              const std::string& page_title, 
+                              const std::string& file_bytes, 
+                              const std::string& mime_type,
+                              const std::string& filename);
+
   // The entry point for PDF bytes
   void ExtractAndIngestPdf(const GURL& url, const std::vector<uint8_t>& pdf_bytes);
 
@@ -100,6 +106,8 @@ class RagIngestionService : public KeyedService,
   void OnContentSettingChanged(const ContentSettingsPattern& primary_pattern,
                                const ContentSettingsPattern& secondary_pattern,
                                ContentSettingsTypeSet content_type_set) override;
+
+  base::WeakPtr<RagIngestionService> GetWeakPtr() { return weak_factory_.GetWeakPtr(); }
 
  private:
   // // Starts both the Maintenance Loop (Hours) and the Polling Loop (Seconds).
@@ -119,7 +127,7 @@ class RagIngestionService : public KeyedService,
   
   // // 3. The Processor
   // void OnMessagesReceived(std::optional<base::Value> result);
-  // void ProcessIngestionJob(const base::Value::Dict& message_dict);
+  // void ProcessIngestionJob(const base::DictValue& message_dict);
   
   // // Job Execution
   // void RunHiddenCrawl(const GURL& url, const std::string& message_id);
@@ -140,14 +148,14 @@ class RagIngestionService : public KeyedService,
   void OnRootPageFetched(network::SimpleURLLoader* loader_ptr, 
                        const GURL& original_url, 
                        const std::string& active_tab_title,
-                       std::unique_ptr<std::string> response_body);
+                       std::optional<std::string> response_body);
 
   void FetchFavicon(const GURL& original_url, const GURL& icon_url, RagSiteMetadata metadata);
   void OnFaviconFetched(network::SimpleURLLoader* loader_ptr,
                         const GURL& original_url, 
                         const GURL& icon_url,
                         RagSiteMetadata metadata, 
-                        std::unique_ptr<std::string> response_body);
+                        std::optional<std::string> response_body);
   void OnNativeFaviconFetched(const GURL& original_url,
                               RagSiteMetadata metadata,
                               const favicon_base::FaviconImageResult& result);
@@ -158,7 +166,7 @@ class RagIngestionService : public KeyedService,
                          const GURL& original_url, 
                          const std::string& icon_url, 
                          RagSiteMetadata metadata, 
-                         std::unique_ptr<std::string> response_body);
+                         std::optional<std::string> response_body);
 
   // The final step that actually calls the Network Client
   void FinalizePermissionGrant(const GURL& url, RagPermissionStatus status, const RagSiteMetadata& metadata);
@@ -189,6 +197,12 @@ class RagIngestionService : public KeyedService,
   // --- DownloadItem::Observer ---
   void OnDownloadUpdated(download::DownloadItem* item) override;
   void OnDownloadDestroyed(download::DownloadItem* item) override;
+
+  // Strips images, CSS, and other non-HTML assets from the MHTML string.
+  // Maintains the multipart boundary structure for backend parsing.
+  std::string FilterMhtmlToTextOnly(const std::string& mhtml_data);
+  void OnDocumentParsed(const GURL& url, std::optional<base::Value> result);
+  std::string EncryptSingleString(const std::string& clear_text);
 
   base::CancelableTaskTracker favicon_task_tracker_;
 

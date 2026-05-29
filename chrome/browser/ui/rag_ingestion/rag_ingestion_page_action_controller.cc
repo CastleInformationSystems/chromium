@@ -4,16 +4,17 @@
 
 #include "chrome/browser/ui/rag_ingestion/rag_ingestion_page_action_controller.h"
 
-#include "base/hash/md5.h"
 #include "chrome/browser/jatter/jatter_environment.h"
 #include "chrome/browser/profiles/profile.h"
 #include "chrome/browser/rag_ingestion/rag_ingestion_service_factory.h"
 #include "chrome/browser/rag_ingestion/rag_ingestion_tab_helper.h"
+#include "chrome/browser/ui/browser.h" 
 #include "chrome/browser/ui/browser_finder.h"
 #include "chrome/browser/ui/browser_list.h"
 #include "chrome/browser/ui/browser_navigator.h"
 #include "chrome/browser/ui/browser_navigator_params.h"
 #include "chrome/browser/ui/browser_window.h"
+#include "chrome/browser/ui/browser_window/public/browser_window_interface_iterator.h"
 #include "chrome/browser/ui/chrome_pages.h"
 #include "chrome/browser/ui/location_bar/location_bar.h"
 #include "chrome/browser/ui/tabs/tab_strip_model.h"
@@ -34,7 +35,8 @@ Browser* RagIngestionPageActionController::GetBrowser() const {
   content::WebContents* wc = web_contents();
   if (!wc) return nullptr;
 
-  for (Browser* browser : *BrowserList::GetInstance()) {
+  for (BrowserWindowInterface* bwi : GetAllBrowserWindowInterfaces()) {
+    Browser* browser = bwi->GetBrowserForMigrationOnly();
     if (browser->tab_strip_model()->GetIndexOfWebContents(wc) !=
         TabStripModel::kNoTab) {
       return browser;

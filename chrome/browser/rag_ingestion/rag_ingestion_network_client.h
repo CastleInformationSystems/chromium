@@ -68,13 +68,13 @@ class RagIngestionNetworkClient {
                               RagPermissionStatus permission,
                               const RagSiteMetadata& metadata);
 
-  // // [NEW] Matches PDF "ragIngestionAddUrl"
+  // //  Matches PDF "ragIngestionAddUrl"
   // // Replaces RegisterPageDiscovery.
   // void AddIngestionUrl(const GURL& url, base::OnceClosure callback);
 
   // // --- Flow B APIs (Background Ingestion) ---
 
-  // // [NEW] Handshake signal called at startup and periodically.
+  // //  Handshake signal called at startup and periodically.
   // // API: POST /ingest
   // void TriggerIngestion(ApiCallback callback);
   
@@ -105,24 +105,47 @@ class RagIngestionNetworkClient {
                       const std::vector<std::string>& encrypted_chunks,
                       const std::vector<std::vector<double>>& vectors,
                       base::OnceClosure callback);
+  
+  // API: POST /ingestDocument
+  // Submits the raw file (MHTML, PDF, DOCX, etc.) as multipart/form-data.
+  void UploadRawDocument(const GURL& url,
+                         const std::string& page_title,
+                         const std::string& file_bytes,
+                         const std::string& mime_type,
+                         const std::string& filename,
+                         ApiCallback callback);
+
+  // API: POST /ingestEncryptedDocumentText
+  // Submits the modified DocumentText JSON containing the encrypted text records.
+  void IngestEncryptedDocument(const GURL& url,
+                               base::DictValue document_text_json,
+                               base::OnceClosure callback);
 
  private:
   // Helper to get or generate the persistent GUID for this profile/device.
   std::string GetProfileGuid() const;
 
-  // [NEW] Helper to match server's siteId logic (MD5 of Origin)
+  // Helper to match server's siteId logic (MD5 of Origin)
   std::string GenerateSiteId(const GURL& url) const;
 
   void MakeAuthorizedRequest(
       const GURL& endpoint,
       const std::string& method,
-      std::optional<base::Value::Dict> payload,
+      std::optional<base::DictValue> payload,
+      ApiCallback callback);
+  
+  // Core Overload: Accepts raw string payloads and custom Content-Types
+  void MakeAuthorizedRequest(
+      const GURL& endpoint,
+      const std::string& method,
+      const std::string& payload,
+      const std::string& content_type,
       ApiCallback callback);
 
   // void OnTokenFetched(
   //     const GURL& endpoint,
   //     const std::string& method,
-  //     std::optional<base::Value::Dict> payload,
+  //     std::optional<base::DictValue> payload,
   //     ApiCallback client_callback,
   //     const std::string& access_token);
 

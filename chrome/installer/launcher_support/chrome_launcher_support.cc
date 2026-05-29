@@ -28,31 +28,30 @@ const wchar_t kUpdateClientsRegKey[] = L"Software\\Google\\Update\\Clients";
 const wchar_t kBrowserAppGuid[] = L"{8A69D345-D564-463c-AFF1-A69D9E530F96}";
 const wchar_t kSxSBrowserAppGuid[] = L"{4ea16ac7-fd5a-47c3-875b-dbf4a2008c20}";
 #else
-const wchar_t kInstallationRegKey[] = L"Software\\Chromium";
+const wchar_t kInstallationRegKey[] = L"Software\\Jatter\\Update\\ClientState";
+const wchar_t kUpdateClientStateRegKey[] =
+    L"Software\\Jatter\\Update\\ClientState";
+
+const wchar_t kUpdateClientsRegKey[] = L"Software\\Jatter\\Update\\Clients";
+
+// Copied from google_chrome_install_modes.cc.
+const wchar_t kBrowserAppGuid[] = L"site.beacon.staging";
 #endif
 
 // Copied from util_constants.cc.
-const wchar_t kChromeExe[] = L"chrome.exe";
+const wchar_t kChromeExe[] = L"jatter.exe";
 const wchar_t kUninstallStringField[] = L"UninstallString";
 const wchar_t kVersionStringField[] = L"pv";
 
 // Returns the registry path to where Client state is stored.
 std::wstring GetClientStateRegKey() {
-#if BUILDFLAG(GOOGLE_CHROME_BRANDING)
   return kUpdateClientStateRegKey;
-#else
-  return kInstallationRegKey;
-#endif
 }
 
 // Returns the registry path to where basic information about the Clients
 // like name and version information are stored.
 std::wstring GetClientsRegKey() {
-#if BUILDFLAG(GOOGLE_CHROME_BRANDING)
   return kUpdateClientsRegKey;
-#else
-  return kInstallationRegKey;
-#endif
 }
 
 // Reads a string value from the specified product's registry key. Returns true
@@ -96,13 +95,7 @@ base::FilePath GetSetupExeFromRegistry(InstallationLevel level,
 // Returns the path to an existing setup.exe at the specified level, if it can
 // be found via the registry.
 base::FilePath GetSetupExeForInstallationLevel(InstallationLevel level) {
-#if BUILDFLAG(GOOGLE_CHROME_BRANDING)
-  // Look in the registry for Chrome.
   return GetSetupExeFromRegistry(level, kBrowserAppGuid);
-#else
-  // For Chromium, there are no GUIDs. Just look in the Chromium registry key.
-  return GetSetupExeFromRegistry(level, nullptr);
-#endif
 }
 
 // Returns the path to an installed |exe_file| (e.g. chrome.exe) at the
@@ -155,7 +148,7 @@ base::FilePath GetAnyChromePath(bool is_sxs) {
 
 base::Version GetChromeVersionForInstallationLevel(InstallationLevel level,
                                                    bool is_sxs) {
-  const wchar_t* app_guid = nullptr;  // Chromium doesn't use App GUIDs.
+  const wchar_t* app_guid = kBrowserAppGuid;  // Chromium doesn't use App GUIDs.
 #if BUILDFLAG(GOOGLE_CHROME_BRANDING)
   app_guid = is_sxs ? kSxSBrowserAppGuid : kBrowserAppGuid;
 #else

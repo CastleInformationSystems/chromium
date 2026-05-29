@@ -56,12 +56,12 @@ void JatterFirebaseClient::ObservePageVisit(Profile* profile,
         JatterFirebaseClient::SetAuthorizationnHeader(profile,
                                                       resource_request.get());
 
-        base::Value::Dict metadata;
+        base::DictValue metadata;
         metadata.Set("title", title);
 
         base::Time now = base::Time::Now();
 
-        base::Value::Dict body;
+        base::DictValue body;
         body.Set("date", base::TimeFormatAsIso8601(now));
         body.Set("url", url);
         body.Set("metadata", std::move(metadata));
@@ -120,9 +120,9 @@ void JatterFirebaseClient::Invoke(
 //           [](Profile* profile,
 //              std::function<std::unique_ptr<network::SimpleURLLoader>()>
 //                  loader_factory,
-//              std::function<void(std::unique_ptr<std::string> response_body)>
+//              std::function<void(std::optional<std::string> response_body)>
 //                  callback,
-//              std::unique_ptr<std::string> response_body) {
+//              std::optional<std::string> response_body) {
 //             bool did_attempt_refresh = false;
 
 //             if (response_body) {
@@ -134,7 +134,7 @@ void JatterFirebaseClient::Invoke(
 //                                          base::JSON_PARSE_CHROMIUM_EXTENSIONS);
 
 //               if (value && value->is_dict()) {
-//                 const base::Value::Dict& dict = value->GetDict();
+//                 const base::DictValue& dict = value->GetDict();
 //                 const std::string* status = dict.FindString("status");
 //                 if (status) {
 //                   if (*status == "UNAUTHENTICATED") {
@@ -246,7 +246,7 @@ void JatterFirebaseClient::OnResponseReceivedWithRetry(
     Profile* profile,
     JatterFirebaseClient::CreateUrlLoaderCallback url_loader_creator,
     JatterFirebaseClient::ResponseCallback callback,
-    std::unique_ptr<std::string> response_body) {
+    std::optional<std::string> response_body) {
   bool did_attempt_refresh = false;
 
   // 1. Grab the actual HTTP Status Code from the network layer
@@ -302,7 +302,7 @@ void JatterFirebaseClient::OnResponseReceivedWithRetry(
 void JatterFirebaseClient::OnResponseReceived(
     network::SimpleURLLoader* loader,
     JatterFirebaseClient::ResponseCallback callback,
-    std::unique_ptr<std::string> response_body) {
+    std::optional<std::string> response_body) {
   std::optional<std::string> result;
   if (response_body) {
     result = std::move(*response_body);
@@ -347,7 +347,7 @@ void JatterFirebaseClient::OnAuthenticationResponseReceived(
     Profile* profile,
     JatterFirebaseClient::CreateUrlLoaderCallback url_loader_creator,
     JatterFirebaseClient::ResponseCallback callback,
-    std::unique_ptr<std::string> response_body) {
+    std::optional<std::string> response_body) {
   bool success = false;
 
   if (response_body) {
@@ -357,7 +357,7 @@ void JatterFirebaseClient::OnAuthenticationResponseReceived(
         base::JSONReader::Read(*response_body, base::JSON_PARSE_CHROMIUM_EXTENSIONS);
 
     if (value && value->is_dict()) {
-      const base::Value::Dict& dict = value->GetDict();
+      const base::DictValue& dict = value->GetDict();
       const std::string* id_token = dict.FindString("id_token");
       const std::string* refresh_token = dict.FindString("refresh_token");
       if (id_token && refresh_token) {
