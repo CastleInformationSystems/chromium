@@ -215,4 +215,15 @@ void RagIngestionPageActionController::OnVisibilityChanged(content::Visibility v
   }
 }
 
+void RagIngestionPageActionController::PrimaryPageChanged(content::Page& page) {
+  // 1. Hide the icon for the new page load
+  Hide();
+  
+  // 2. Wipe the stale backend data (including requires_upgrade)
+  backend_info_ = RagIngestionService::BackendPermissionInfo();
+  
+  // 3. Clear any pending bubble flags
+  is_bubble_pending_ = false;
+}
+
 WEB_CONTENTS_USER_DATA_KEY_IMPL(RagIngestionPageActionController);

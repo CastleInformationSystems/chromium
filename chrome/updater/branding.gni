@@ -6,26 +6,34 @@ import("//build/config/chrome_build.gni")
 import("//build/config/jatter_args.gni")
 
 if (jatter_build_environment == "staging") {
-  jatter_server_url = "https://us-central1-beacon-staging-df5f2.cloudfunctions.net/"
+  jatter_server_url = "https://us-central1-beacon-staging-df5f2.cloudfunctions.net"
+  jatter_app_id = "site.beacon.staging"
+  name = "JatterStaging"
+  updater_name = "JatterUpdaterStaging"
+  updater_display_name = "Jatter Updater Staging"
 } else {
-  jatter_server_url = "https://us-central1-beacon-dd0a1.cloudfunctions.net/"
+  jatter_server_url = "https://us-central1-beacon-dd0a1.cloudfunctions.net"
+  jatter_app_id = "site.beacon.jatter"
+  name = "Jatter"
+  updater_name = "JatterUpdater"
+  updater_display_name = "Jatter Updater"
 }
 
 if (is_chrome_branded) {
   import("//chrome/updater/internal/branding_google.gni")
 } else {
-  browser_name = "Jatter"
-  browser_product_name = "Jatter"
-  crash_product_name = "JatterUpdater"
+  browser_name = name
+  browser_product_name = name
+  crash_product_name = updater_name
   crash_upload_url = ""
   help_center_url = "https://jatter.ai/help"
   app_logo_url = "https://chat.jatter.ai/favicon.png"
-  keystone_app_name = "JatterSoftwareUpdate"
+  keystone_app_name = "${name}SoftwareUpdate"
   keystone_bundle_identifier = "site.beacon.Keystone"
-  mac_browser_bundle_identifier = "site.beacon.staging"
-  mac_updater_bundle_identifier = "site.beacon.JatterUpdater"
-  privileged_helper_bundle_name = "JatterUpdaterPrivilegedHelper"
-  privileged_helper_name = "site.beacon.staging.UpdaterPrivilegedHelper"
+  mac_browser_bundle_identifier = jatter_app_id
+  mac_updater_bundle_identifier = "site.beacon.${updater_name}"
+  privileged_helper_bundle_name = "${updater_name}PrivilegedHelper"
+  privileged_helper_name = "${jatter_app_id}.UpdaterPrivilegedHelper"
   updater_app_icon_path = "//chrome/app/theme/chromium/mac/app.icns"
   updater_company_full_name = "Jatter"
   updater_company_short_name = "Jatter"
@@ -33,13 +41,13 @@ if (is_chrome_branded) {
   updater_company_short_name_uppercase = "JATTER"
   updater_copyright =
       "Copyright 2026 Jatter. All rights reserved."
-  updater_product_full_name = "JatterUpdater"
+  updater_product_full_name = updater_name
   updater_product_full_name_dashed_lowercase = "jatter-updater"
-  updater_product_full_display_name = "Jatter Updater"
-  updater_metainstaller_name = "Jatter Installer"
+  updater_product_full_display_name = updater_display_name
+  updater_metainstaller_name = "${name} Installer"
   mac_team_identifier = "LY2B8BGZJC"
   updater_appid = "{6e8ffa8f-e7e2-4000-9884-589283c27015}"
-  browser_appid = "site.beacon.staging"
+  browser_appid = jatter_app_id
   qualification_appid = "{43f3a046-04b3-4443-a770-d67dae90e440}"
   platform_experience_helper_appid = "{b84ca560-bb0c-4ec9-a288-df67e15354c7}"
   crx_pkhash = ""

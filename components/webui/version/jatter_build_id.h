@@ -1,1 +1,1 @@
-#define JATTER_BUILD_ID "88"
+#define JATTER_BUILD_ID "94"

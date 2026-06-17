@@ -12,16 +12,25 @@
 #include "chrome/app/chrome_dll_resource.h"
 #include "chrome/common/chrome_icon_resources_win.h"
 #include "chrome/install_static/install_constants.h"
+#include "chrome/install_static/jatter_buildflags.h"
+
+#if BUILDFLAG(IS_JATTER_PROD)
+#define JATTER_APP_GUID L"site.beacon.jatter"
+#define JATTER_NAME L"Jatter"
+#else
+#define JATTER_APP_GUID L"site.beacon.staging"
+#define JATTER_NAME L"JatterStaging"
+#endif
 
 namespace install_static {
 
 // The brand-specific company name to be included as a component of the install
 // and user data directory paths. May be empty if no such dir is to be used.
-inline constexpr wchar_t kCompanyPathName[] = L"Jatter";
+inline constexpr wchar_t kCompanyPathName[] = JATTER_NAME;
 
 // The brand-specific product name to be included as a component of the install
 // and user data directory paths.
-inline constexpr wchar_t kProductPathName[] = L"Jatter";
+inline constexpr wchar_t kProductPathName[] = JATTER_NAME;
 
 // The brand-specific safe browsing client name.
 inline constexpr char kSafeBrowsingName[] = "jatter";
@@ -44,9 +53,9 @@ inline constexpr auto kInstallModes = std::to_array<InstallConstants>({
             L"",  // Empty install_suffix for the primary install mode.
         .logo_suffix = L"",  // No logo suffix for the primary install mode.
         .app_guid =
-            L"site.beacon.staging",  // Empty app_guid since no integration with Google Update.
-        .base_app_name = L"Jatter",              // A distinct base_app_name.
-        .base_app_id = L"Jatter",                // A distinct base_app_id.
+            JATTER_APP_GUID,  // Empty app_guid since no integration with Google Update.
+        .base_app_name = JATTER_NAME,              // A distinct base_app_name.
+        .base_app_id = JATTER_NAME,                // A distinct base_app_id.
         .browser_prog_id_prefix = L"JatterHTM",  // Browser ProgID prefix.
         .browser_prog_id_description =
             L"Jatter HTML Document",  // Browser ProgID description.
@@ -55,7 +64,7 @@ inline constexpr auto kInstallModes = std::to_array<InstallConstants>({
         .pdf_prog_id_description =
             L"Jatter PDF Document",  // PDF ProgID description.
         .active_setup_guid =
-            L"site.beacon.staging",  // Active Setup
+            JATTER_APP_GUID,  // Active Setup
                                                         // GUID.
         .legacy_command_execute_clsid =
             L"{A2DF06F9-A21A-44A8-8A99-8B9C84F29160}",  // CommandExecuteImpl

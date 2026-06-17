@@ -2,6 +2,18 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
+import("//build/buildflag_header.gni")
+import("//build/config/jatter_args.gni")
+
+_is_jatter_prod = jatter_build_environment == "prod"
+
+buildflag_header("jatter_buildflags") {
+  header = "jatter_buildflags.h"
+  flags = [
+    "IS_JATTER_PROD=$_is_jatter_prod",
+  ]
+}
+
 source_set("launcher_support") {
   sources = [
     "chrome_launcher_support.cc",
@@ -9,6 +21,7 @@ source_set("launcher_support") {
   ]
 
   deps = [
+    ":jatter_buildflags",
     "//base",
     "//build:branding_buildflags",
   ]

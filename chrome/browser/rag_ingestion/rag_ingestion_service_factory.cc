@@ -46,5 +46,5 @@ void RagIngestionServiceFactory::RegisterProfilePrefs(
     user_prefs::PrefRegistrySyncable* registry) {
   // Registers the GUID pref with a default empty string value.
   // This prevents the "Preference not registered" crash.
-  registry->RegisterStringPref("beacon.rag_ingestion.profile_guid", "");
+  // registry->RegisterStringPref("beacon.rag_ingestion.profile_guid", "");
 }

@@ -130,6 +130,10 @@ class RagIngestionTabHelper
   const base::TimeDelta kCacheDuration = base::Minutes(10);
   base::OneShotTimer ingestion_timer_;
 
+  // [NEW] Micro-cache to prevent API spam on Auth Walls
+  std::map<std::string, base::Time> last_auth_ping_time_;
+  static constexpr base::TimeDelta kAuthPingCooldown = base::Seconds(3);
+
   base::WeakPtrFactory<RagIngestionTabHelper> weak_factory_{this};
 
   WEB_CONTENTS_USER_DATA_KEY_DECL();

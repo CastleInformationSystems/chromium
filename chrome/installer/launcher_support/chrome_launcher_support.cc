@@ -12,6 +12,13 @@
 #include "base/strings/utf_string_conversions.h"
 #include "base/win/registry.h"
 #include "build/branding_buildflags.h"
+#include "chrome/installer/launcher_support/jatter_buildflags.h"
+
+#if BUILDFLAG(IS_JATTER_PROD)
+#define JATTER_APP_GUID L"site.beacon.jatter"
+#else
+#define JATTER_APP_GUID L"site.beacon.staging"
+#endif
 
 namespace chrome_launcher_support {
 
@@ -35,7 +42,7 @@ const wchar_t kUpdateClientStateRegKey[] =
 const wchar_t kUpdateClientsRegKey[] = L"Software\\Jatter\\Update\\Clients";
 
 // Copied from google_chrome_install_modes.cc.
-const wchar_t kBrowserAppGuid[] = L"site.beacon.staging";
+const wchar_t kBrowserAppGuid[] = JATTER_APP_GUID;
 #endif
 
 // Copied from util_constants.cc.

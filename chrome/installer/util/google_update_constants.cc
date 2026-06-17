@@ -3,10 +3,18 @@
 // found in the LICENSE file.
 
 #include "chrome/installer/util/google_update_constants.h"
+#include "chrome/installer/util/jatter_buildflags.h"
+
+#if BUILDFLAG(IS_JATTER_PROD)
+#define JATTER_APP_GUID L"site.beacon.jatter"
+#else
+#define JATTER_APP_GUID L"site.beacon.staging"
+#endif
+
 
 namespace google_update {
 
-const wchar_t kChromeUpgradeCode[] = L"site.beacon.staging";
+const wchar_t kChromeUpgradeCode[] = JATTER_APP_GUID;
 
 const wchar_t kGoogleUpdateUpgradeCode[] =
     L"{6e8ffa8f-e7e2-4000-9884-589283c27015}";

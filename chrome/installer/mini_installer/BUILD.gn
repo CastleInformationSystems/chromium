@@ -2,7 +2,9 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
+import("//build/buildflag_header.gni")
 import("//build/config/compiler/compiler.gni")
+import("//build/config/jatter_args.gni")
 import("//build/config/python.gni")
 import("//build/config/ui.gni")
 import("//build/timestamp.gni")
@@ -14,6 +16,15 @@ import("//third_party/icu/config.gni")
 import("//tools/v8_context_snapshot/v8_context_snapshot.gni")
 import("//ui/base/ui_features.gni")
 import("//v8/gni/v8.gni")
+
+_is_jatter_prod = jatter_build_environment == "prod"
+
+buildflag_header("jatter_buildflags") {
+  header = "jatter_buildflags.h"
+  flags = [
+    "IS_JATTER_PROD=$_is_jatter_prod",
+  ]
+}
 
 declare_args() {
   # The Chrome archive is maximally compressed in official builds to reduce the
@@ -69,7 +80,10 @@ source_set("lib") {
     "write_to_disk.h",
   ]
 
-  deps = [ "//build:branding_buildflags" ]
+  deps = [ 
+    ":jatter_buildflags",
+    "//build:branding_buildflags" 
+  ]
 
   # Initialization may insert unexpected memset calls.
   configs -= [ "//build/config/compiler:default_init_stack_vars" ]

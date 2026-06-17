@@ -2,11 +2,21 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
+import("//build/config/jatter_args.gni")
 import("//build/config/python.gni")
 import("//build/timestamp.gni")
 import("//chrome/updater/branding.gni")
 import("//chrome/updater/updater_process_version_rc_template.gni")
 import("//testing/test.gni")
+
+# Determine the exact strings based on the environment
+if (jatter_build_environment == "prod") {
+  _app_guid = "site.beacon.jatter"
+  _app_name = "Jatter"
+} else {
+  _app_guid = "site.beacon.staging"
+  _app_name = "JatterStaging"
+}
 
 source_set("msi_custom_action_sources") {
   sources = [
@@ -236,13 +246,13 @@ action("tag_updater_setup_action") {
   ]
   
   # The final, ready-to-ship installer!
-  outputs = [ "$root_out_dir/JatterSetup_Tagged.exe" ]
+  outputs = [ "$root_out_dir/${_app_name}Setup_Tagged.exe" ]
 
   args = [
     "--tagger", rebase_path("$root_out_dir/tag.exe", root_build_dir),
     "--in-file", rebase_path("$root_out_dir/UpdaterSetup.exe", root_build_dir),
     "--out-file", rebase_path(outputs[0], root_build_dir),
-    "--tag-string", "appguid=site.beacon.staging&appname=Jatter&needsadmin=Prefers",
+    "--tag-string", "appguid=${_app_guid}&appname=${_app_name}&needsadmin=Prefers",
   ]
 
   deps = [

@@ -304,7 +304,7 @@ bool RagIngestionTabHelper::ShouldSkipCheckDueToCache(const GURL& url) {
       return true;
     }
   }
-  last_check_time_[spec] = base::Time::Now();
+  // last_check_time_[spec] = base::Time::Now();
   return false;
 }
 
@@ -515,38 +515,6 @@ void RagIngestionTabHelper::OnAnonTextCaptured(const AnonPageResult& result) {
   anon_response_code_ = result.http_status_code;
   anon_final_url_ = result.final_url;
 
-  // ==========================================
-  // 1. FAST FAIL: Hard Auth Blocks (401, 403)
-  // ==========================================
-  if (anon_response_code_ == 401 || anon_response_code_ == 403) {
-      LOG(INFO) << "[RAG] Fast Fail: Server returned " << anon_response_code_.value();
-      ReportAuthWall();
-      return; 
-  }
-
-  // ==========================================
-  // 2. FAST FAIL: Login Redirects
-  // ==========================================
-  if (anon_final_url_ != current_check_url_) {
-      std::string url_str = anon_final_url_.spec();
-      if (url_str.find("login") != std::string::npos || 
-          url_str.find("signin") != std::string::npos ||
-          url_str.find("auth") != std::string::npos) {
-          LOG(INFO) << "[RAG] Fast Fail: Redirected to login page.";
-          ReportAuthWall();
-          return;
-      }
-  }
-
-  // ==========================================
-  // 3. FAST PASS: Network Errors (0, 404, 500)
-  // ==========================================
-  // Fail "open" so we don't lock users out of public pages due to bad wifi
-  if (anon_response_code_ != 200) {
-      MarkPageAsPublic(0.0, "Anon fetch network error/timeout");
-      return;
-  }
-
  if (anon_text_content_.length() < 50) {
       LOG(INFO) << "[RAG] Anon text is empty/tiny on a 200 OK. Likely an SPA.";
       anon_text_content_.clear(); // Force exactly empty for CompareContentState's SPA check
@@ -732,7 +700,7 @@ double RagIngestionTabHelper::CalculateNetworkScore() {
     if (url_str.find("login") != std::string::npos || 
         url_str.find("signin") != std::string::npos ||
         url_str.find("auth") != std::string::npos) {
-      return 0.9; // Strong signal
+      return 0.5; // Strong signal
     }
     // Generic redirect (e.g. trailing slash) is ignored
   }
@@ -774,7 +742,7 @@ double RagIngestionTabHelper::CalculateHeuristicScore() {
   std::string url_lower = base::ToLowerASCII(current_check_url_.spec());
   if (url_lower.find("logout") != std::string::npos || 
       url_lower.find("signout") != std::string::npos) {
-    return 1.0; // Immediate trigger
+    score += 0.2; // Immediate trigger
   }
 
   // 2. Link Destination Signals (Language Agnostic)
@@ -785,7 +753,7 @@ double RagIngestionTabHelper::CalculateHeuristicScore() {
       PageHasLinkContaining("logoff") ||
       PageHasLinkContaining("/account/") || // e.g. /my-account/
       PageHasLinkContaining("/profile/")) {
-    score += 0.3;
+    score += 0.2;
   }
 
   // 3. Text Signals (Weakest, Language Dependent)
@@ -795,7 +763,7 @@ double RagIngestionTabHelper::CalculateHeuristicScore() {
   // Or simple manual checks:
   if (text_lower.find("sign out") != std::string::npos || 
       text_lower.find("log out") != std::string::npos) {
-    score += 0.3;
+    score += 0.2;
   }
 
   return score;
@@ -1042,6 +1010,25 @@ void RagIngestionTabHelper::IngestCurrentPage(int retry_count) {
 
 void RagIngestionTabHelper::ReportAuthWall() {
   if (!web_contents()) return;
+
+  // [NEW] The Micro-Cache Check
+  std::string url_spec = current_check_url_.spec();
+  auto it = last_auth_ping_time_.find(url_spec);
+  if (it != last_auth_ping_time_.end() && 
+     (base::Time::Now() - it->second < kAuthPingCooldown)) {
+      
+      LOG(WARNING) << "[RAG] Auth Wall API throttled (Micro-cache). Try again in a few seconds.";
+      
+      // We still need to ensure the UI is drawn! 
+      // If the controller was wiped by PrimaryPageChanged, we can just 
+      // let the UI sit empty for 3 seconds, or force a 'kUnknown' state here.
+      // Usually, just returning is fine because a spam-reloader won't care about UI.
+      return; 
+  }
+
+  // Record the ping time
+  last_auth_ping_time_[url_spec] = base::Time::Now();
+
   Profile* profile = Profile::FromBrowserContext(web_contents()->GetBrowserContext());
   RagIngestionService* service = RagIngestionServiceFactory::GetForProfile(profile);
   if (!service) return;
@@ -1076,21 +1063,38 @@ void RagIngestionTabHelper::OnPermissionCheckComplete(
 
   // 3. Handle Status & Passively Update Local Cache
   if (info.status == RagIngestionService::BackendStatus::kKnownAllowed) {
+    // BACKEND SSOT: Explicit ALLOW overwrites local cache
     // Safely force the local cache to match the backend without triggering a network loop
     service->SyncLocalSettingFromBackend(current_check_url_, RagIngestionService::UserPermission::kGranted);
     
     controller->ShowActiveState();
     
-    // [NEW] Now that we confirmed it's allowed, trigger the passive learning!
+    // Now that we confirmed it's allowed, trigger the passive learning!
     IngestCurrentPage(); 
   } 
   else if (info.status == RagIngestionService::BackendStatus::kKnownBlocked) {
+    // BACKEND SSOT: Explicit DENY overwrites local cache
     service->SyncLocalSettingFromBackend(current_check_url_, RagIngestionService::UserPermission::kDenied);
     controller->ShowDisabledState(); 
   }
   else if (info.status == RagIngestionService::BackendStatus::kUnknown) {
-    service->SyncLocalSettingFromBackend(current_check_url_, RagIngestionService::UserPermission::kUndecided);
-    controller->ShowOfferState(); 
+    // SOFT SSOT: The backend has no data. Do NOT aggressively wipe the local cache.
+    // Instead, just read what the local cache currently says.
+    RagIngestionService::UserPermission local_status = service->GetUserPermission(current_check_url_);
+    
+    if (local_status == RagIngestionService::UserPermission::kGranted) {
+      // The user previously allowed this, and the backend hasn't explicitly revoked it.
+      controller->ShowActiveState();
+    } 
+    else if (local_status == RagIngestionService::UserPermission::kDenied) {
+      // The user previously denied this.
+      controller->ShowDisabledState();
+    } 
+    else {
+      // Both the backend AND the local cache have no idea what this is.
+      // Now it is finally safe to show the prompt.
+      controller->ShowOfferState(); 
+    }
   }
 }
 

@@ -1,0 +1,22 @@
+source_set("analytics") {
+  sources = [
+    "jatter_analytics_service.cc",
+    "jatter_analytics_service.h",
+    "jatter_analytics_service_factory.cc",
+    "jatter_analytics_service_factory.h",
+  ]
+
+  deps = [
+    "//base",
+    "//chrome/browser/jatter",
+    "//components/keyed_service/content",
+    "//components/prefs",
+    "//content/public/browser",
+    "//net",
+    "//services/network/public/cpp",
+    
+    # Note: We intentionally do NOT depend on "//chrome/browser" here.
+    # Depending on the parent creates a circular dependency in GN, 
+    # since the parent is about to depend on us!
+  ]
+}

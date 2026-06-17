@@ -60,6 +60,8 @@ class RagIngestionPageActionController
 
   void OpenSettings();
 
+  void PrimaryPageChanged(content::Page& page) override;
+
  private:
   friend class content::WebContentsUserData<RagIngestionPageActionController>;
   explicit RagIngestionPageActionController(content::WebContents* web_contents);
