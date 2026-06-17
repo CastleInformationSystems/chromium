@@ -24,8 +24,8 @@ const char kArticlesListVisible[] = "ntp_snippets.list_visible";
 const char kEnableSnippetsByDse[] = "ntp_snippets_by_dse.enable";
 
 void RegisterFeedSharedProfilePrefs(PrefRegistrySimple* registry) {
-  registry->RegisterBooleanPref(kEnableSnippets, true);
-  registry->RegisterBooleanPref(kArticlesListVisible, true);
+  registry->RegisterBooleanPref(kEnableSnippets, false);
+  registry->RegisterBooleanPref(kArticlesListVisible, false);
   registry->RegisterBooleanPref(kEnableSnippetsByDse, true);
 }
 

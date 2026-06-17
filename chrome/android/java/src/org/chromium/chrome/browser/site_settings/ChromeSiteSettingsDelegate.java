@@ -244,7 +244,7 @@ public class ChromeSiteSettingsDelegate implements SiteSettingsDelegate {
 
     @Override
     public boolean isHelpAndFeedbackEnabled() {
-        return true;
+        return false;
     }
 
     @Override

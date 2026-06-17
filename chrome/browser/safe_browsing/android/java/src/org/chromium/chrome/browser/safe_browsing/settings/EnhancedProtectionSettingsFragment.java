@@ -29,18 +29,18 @@ public class EnhancedProtectionSettingsFragment extends SafeBrowsingSettingsFrag
 
     @Override
     protected void onCreatePreferencesInternal(@Nullable Bundle bundle, @Nullable String s) {
-        findPreference(PREF_LEARN_MORE)
-                .setSummary(
-                        SpanApplier.applySpans(
-                                getResources()
-                                        .getString(
-                                                R.string
-                                                        .safe_browsing_enhanced_protection_learn_more_label),
-                                new SpanApplier.SpanInfo(
-                                        "<link>",
-                                        "</link>",
-                                        new ChromeClickableSpan(
-                                                getContext(), this::onLearnMoreClicked))));
+        // findPreference(PREF_LEARN_MORE)
+        //         .setSummary(
+        //                 SpanApplier.applySpans(
+        //                         getResources()
+        //                                 .getString(
+        //                                         R.string
+        //                                                 .safe_browsing_enhanced_protection_learn_more_label),
+        //                         new SpanApplier.SpanInfo(
+        //                                 "<link>",
+        //                                 "</link>",
+        //                                 new ChromeClickableSpan(
+        //                                         getContext(), this::onLearnMoreClicked))));
     }
 
     private void onLearnMoreClicked(View view) {

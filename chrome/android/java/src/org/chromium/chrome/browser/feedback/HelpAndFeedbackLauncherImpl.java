@@ -38,7 +38,7 @@ import java.util.Map;
 @NullMarked
 public class HelpAndFeedbackLauncherImpl implements HelpAndFeedbackLauncher {
     protected static final String FALLBACK_SUPPORT_URL =
-            "https://support.google.com/chrome/topic/6069782";
+            "https://docs.jatter.ai/contact";
 
     private static @Nullable ProfileKeyedMap<HelpAndFeedbackLauncher> sProfileToLauncherMap;
     private final HelpAndFeedbackLauncherDelegate mDelegate;

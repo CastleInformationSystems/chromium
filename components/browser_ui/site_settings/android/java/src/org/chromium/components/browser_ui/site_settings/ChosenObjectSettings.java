@@ -151,17 +151,17 @@ public class ChosenObjectSettings extends BaseSiteSettingsFragment
                 };
         mSearchView.setOnQueryTextListener(queryTextListener);
 
-        if (getSiteSettingsDelegate().isHelpAndFeedbackEnabled()) {
-            MenuItem help =
-                    menu.add(
-                            Menu.NONE,
-                            R.id.menu_id_site_settings_help,
-                            Menu.NONE,
-                            R.string.menu_help);
-            help.setIcon(
-                    TraceEventVectorDrawableCompat.create(
-                            getResources(), R.drawable.ic_help_24dp, getContext().getTheme()));
-        }
+        // if (getSiteSettingsDelegate().isHelpAndFeedbackEnabled()) {
+        //     MenuItem help =
+        //             menu.add(
+        //                     Menu.NONE,
+        //                     R.id.menu_id_site_settings_help,
+        //                     Menu.NONE,
+        //                     R.string.menu_help);
+        //     help.setIcon(
+        //             TraceEventVectorDrawableCompat.create(
+        //                     getResources(), R.drawable.ic_help_24dp, getContext().getTheme()));
+        // }
     }
 
     @Override

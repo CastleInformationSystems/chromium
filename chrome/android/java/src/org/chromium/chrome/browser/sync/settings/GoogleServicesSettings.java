@@ -113,14 +113,14 @@ public class GoogleServicesSettings extends ChromeBaseSettingsFragment
 
         mAllowSignin = (ChromeSwitchPreference) findPreference(PREF_ALLOW_SIGNIN);
 
-        if (!shouldShowAllowSignIn(getProfile())) {
+        // if (!shouldShowAllowSignIn(getProfile())) {
             // Do not display option to allow / disallow sign-in for supervised accounts since
             // these require the user to be signed-in and syncing.
             mAllowSignin.setVisible(false);
-        } else {
-            mAllowSignin.setOnPreferenceChangeListener(this);
-            mAllowSignin.setManagedPreferenceDelegate(mManagedPreferenceDelegate);
-        }
+        // } else {
+        //     mAllowSignin.setOnPreferenceChangeListener(this);
+        //     mAllowSignin.setManagedPreferenceDelegate(mManagedPreferenceDelegate);
+        // }
 
         mSearchSuggestions = (ChromeSwitchPreference) findPreference(PREF_SEARCH_SUGGESTIONS);
         mSearchSuggestions.setOnPreferenceChangeListener(this);
@@ -130,11 +130,13 @@ public class GoogleServicesSettings extends ChromeBaseSettingsFragment
                 (ChromeSwitchPreference) findPreference(PREF_USAGE_AND_CRASH_REPORTING);
         mUsageAndCrashReporting.setOnPreferenceChangeListener(this);
         mUsageAndCrashReporting.setManagedPreferenceDelegate(mManagedPreferenceDelegate);
+        mUsageAndCrashReporting.setVisible(false);
 
         mUrlKeyedAnonymizedData =
                 (ChromeSwitchPreference) findPreference(PREF_URL_KEYED_ANONYMIZED_DATA);
         mUrlKeyedAnonymizedData.setOnPreferenceChangeListener(this);
         mUrlKeyedAnonymizedData.setManagedPreferenceDelegate(mManagedPreferenceDelegate);
+        mUrlKeyedAnonymizedData.setVisible(false);
 
         mContextualSearch = findPreference(PREF_CONTEXTUAL_SEARCH);
         if (!shouldShowContextualSearch()) {
@@ -161,7 +163,7 @@ public class GoogleServicesSettings extends ChromeBaseSettingsFragment
         }
 
         mUsageStatsReporting = findPreference(PREF_USAGE_STATS_REPORTING);
-        mUsageStatsReporting.setVisible(true);
+        mUsageStatsReporting.setVisible(false);
 
         updatePreferences();
     }
@@ -174,9 +176,9 @@ public class GoogleServicesSettings extends ChromeBaseSettingsFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
-        MenuItem help =
-                menu.add(Menu.NONE, R.id.menu_id_targeted_help, Menu.NONE, R.string.menu_help);
-        help.setIcon(R.drawable.ic_help_24dp);
+        // MenuItem help =
+        //         menu.add(Menu.NONE, R.id.menu_id_targeted_help, Menu.NONE, R.string.menu_help);
+        // help.setIcon(R.drawable.ic_help_24dp);
     }
 
     @Override

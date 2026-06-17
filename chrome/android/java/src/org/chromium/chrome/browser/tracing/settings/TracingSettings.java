@@ -70,7 +70,7 @@ public class TracingSettings extends ChromeBaseSettingsFragment
 
     @VisibleForTesting
     static final String MSG_NOTIFICATIONS_DISABLED =
-            "Please enable Chrome browser notifications to record a trace.";
+            "Please enable Jatter browser notifications to record a trace.";
 
     // Ordered map that maps tracing mode string to resource id for its description.
     private static final Map<String, String> TRACING_MODES = createTracingModesMap();
