@@ -19,14 +19,17 @@
 #include "base/task/single_thread_task_runner.h"
 #include "base/task/thread_pool.h"
 #include "base/time/time.h"
+#include "build/build_config.h"
 #include "chrome/browser/content_settings/host_content_settings_map_factory.h"
 #include "chrome/browser/favicon/favicon_service_factory.h"
 #include "chrome/browser/profiles/profile.h"
+#if !BUILDFLAG(IS_ANDROID)
 #include "chrome/browser/ui/browser.h"
 #include "chrome/browser/ui/browser_list.h"
 #include "chrome/browser/ui/browser_window/public/browser_window_interface_iterator.h"
 #include "chrome/browser/ui/tabs/tab_strip_model.h"
 #include "chrome/browser/ui/rag_ingestion/rag_ingestion_page_action_controller.h"
+#endif
 #include "chrome/services/rag_ingestion_pdf/public/mojom/rag_ingestion_pdf.mojom.h"
 #include "components/content_settings/core/browser/host_content_settings_map.h"
 #include "components/content_settings/core/common/content_settings_types.h"
@@ -357,7 +360,7 @@ void RagIngestionService::OnContentSettingChanged(
 
   UserPermission status = GetUserPermission(url);
   std::string active_tab_title;
-
+#if !BUILDFLAG(IS_ANDROID)
   // Loop through all tabs to update UI AND grab title
   for (BrowserWindowInterface* bwi : GetAllBrowserWindowInterfaces()) {
     Browser* browser = bwi->GetBrowserForMigrationOnly();
@@ -381,6 +384,7 @@ void RagIngestionService::OnContentSettingChanged(
       }
     }
   }
+#endif
 
   // Sync to Backend immediately
   if (network_client_) {

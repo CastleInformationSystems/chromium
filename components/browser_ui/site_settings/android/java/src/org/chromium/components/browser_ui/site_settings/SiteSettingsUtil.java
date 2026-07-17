@@ -57,6 +57,7 @@ public class SiteSettingsUtil {
         ContentSettingsType.LOCAL_NETWORK_ACCESS,
         ContentSettingsType.LOCAL_NETWORK,
         ContentSettingsType.LOOPBACK_NETWORK,
+        ContentSettingsType.RAG_INGESTION,
     };
 
     static final int[] CHOOSER_PERMISSIONS = {

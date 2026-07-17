@@ -384,6 +384,23 @@ public class AdaptiveToolbarButtonController
     public void showDynamicAction(@AdaptiveToolbarButtonVariant int action) {
         int actionToShow =
                 action != AdaptiveToolbarButtonVariant.UNKNOWN ? action : mSessionButtonVariant;
+
+        // --- HIGH PRIORITY DETERMINISTIC OVERRIDE ---
+        // If RAG Ingestion is active for this tab, it must override ML-predicted actions
+        // (like Reader Mode) and session defaults (like New Tab/Share).
+        if (actionToShow != AdaptiveToolbarButtonVariant.RAG_INGESTION) {
+            ButtonDataProvider ragProvider =
+                    mButtonDataProviderMap.get(AdaptiveToolbarButtonVariant.RAG_INGESTION);
+            if (ragProvider != null) {
+                // ragProvider.get() will now correctly return canShow() == false on normal tabs
+                ButtonData ragData = ragProvider.get(null);
+                if (ragData != null && ragData.canShow()) {
+                    actionToShow = AdaptiveToolbarButtonVariant.RAG_INGESTION;
+                }
+            }
+        }
+        // ---------------------------------------------
+
         RecordHistogram.recordEnumeratedHistogram(
                 "Android.AdaptiveToolbarButton.Variant.OnPageLoad",
                 actionToShow,

@@ -54,10 +54,8 @@ JatterAnalyticsService::JatterAnalyticsService(Profile* profile)
   
   client_id_ = GetOrCreateClientId();
 
-  auto* duration_tracker = metrics::DesktopSessionDurationTracker::Get();
-  if (duration_tracker) {
-    duration_tracker->AddObserver(this);
-  }
+  // Call the platform-specific initialization hook
+  StartPlatformSessionTracking();
 
   base::DictValue open_params;
   open_params.Set("timestamp_micros", 
@@ -73,10 +71,8 @@ JatterAnalyticsService::~JatterAnalyticsService() = default;
 void JatterAnalyticsService::Shutdown() {
   flush_timer_.Stop();
 
-  auto* duration_tracker = metrics::DesktopSessionDurationTracker::Get();
-  if (duration_tracker) {
-    duration_tracker->RemoveObserver(this);
-  }
+  // Call the platform-specific teardown hook
+  StopPlatformSessionTracking();
 
   FlushEvents();
 }
@@ -121,8 +117,8 @@ void JatterAnalyticsService::RecordCustomEvent(const std::string& event_name,
   QueueEvent(event_name, std::move(params));
 }
 
-void JatterAnalyticsService::OnSessionEnded(base::TimeDelta session_length,
-                                            base::TimeTicks session_end) {
+// Replaces OnSessionEnded. Triggered by the platform bridges.
+void JatterAnalyticsService::RecordSessionEnded(base::TimeDelta session_length) {
   base::DictValue params;
   params.Set("engagement_time_msec", static_cast<double>(session_length.InMilliseconds()));
   params.Set("timestamp_micros", 
@@ -195,7 +191,5 @@ void JatterAnalyticsService::FlushEvents() {
 void JatterAnalyticsService::OnFlushCompleted(std::optional<std::string> response_body) {
   if (!response_body) {
     LOG(WARNING) << "[Jatter Analytics] Failed to flush events to Firebase (Network or Auth error).";
-    // Optional: If you want to build a retry mechanism, you would push the 
-    // failed payload back into event_queue_ here.
   }
 }

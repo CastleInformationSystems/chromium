@@ -337,6 +337,14 @@ bool GetBooleanForContentSetting(
     ContentSettingsType type) {
   HostContentSettingsMap* content_settings =
       GetHostContentSettingsMap(jbrowser_context_handle);
+
+  if (type == ContentSettingsType::RAG_INGESTION) {
+    ContentSetting default_setting =
+        content_settings->GetDefaultContentSetting(type);
+    return default_setting == CONTENT_SETTING_ALLOW ||
+           default_setting == CONTENT_SETTING_ASK;
+  }
+  
   auto* info = PermissionSettingsRegistry::GetInstance()->Get(type);
 
   return !info->delegate().IsBlocked(
@@ -1039,6 +1047,7 @@ static void JNI_WebsitePreferenceBridge_SetContentSettingEnabled(
       case ContentSettingsType::MEDIASTREAM_MIC:
       case ContentSettingsType::NFC:
       case ContentSettingsType::NOTIFICATIONS:
+      case ContentSettingsType::RAG_INGESTION:
       case ContentSettingsType::SERIAL_GUARD:
       case ContentSettingsType::STORAGE_ACCESS:
       case ContentSettingsType::USB_GUARD:

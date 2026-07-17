@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="rag_ingestion_bubble_title">Enable personal answers for %1$s?</string>
+    <string name="rag_ingestion_bubble_text">Jatter can securely learn about websites you log into in order to provide personal answers and assistance.</string>
+    <string name="rag_ingestion_allow_button">Enable</string>
+    <string name="rag_ingestion_block_button">Never</string>
+</resources>

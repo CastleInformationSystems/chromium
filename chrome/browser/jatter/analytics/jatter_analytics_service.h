@@ -1,10 +1,7 @@
-// Copyright 2024 The Chromium Authors
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 #ifndef CHROME_BROWSER_JATTER_ANALYTICS_JATTER_ANALYTICS_SERVICE_H_
 #define CHROME_BROWSER_JATTER_ANALYTICS_JATTER_ANALYTICS_SERVICE_H_
 
+#include <memory>
 #include <optional>
 #include <string>
 
@@ -12,7 +9,6 @@
 #include "base/memory/weak_ptr.h"
 #include "base/timer/timer.h"
 #include "base/values.h"
-#include "chrome/browser/metrics/desktop_session_duration/desktop_session_duration_tracker.h"
 #include "components/keyed_service/core/keyed_service.h"
 #include "services/network/public/cpp/simple_url_loader.h"
 
@@ -22,47 +18,51 @@ namespace user_prefs {
 class PrefRegistrySyncable;
 }
 
-class JatterAnalyticsService 
-    : public KeyedService,
-      public metrics::DesktopSessionDurationTracker::Observer {
+// [NEW] Forward declare an opaque helper class to hide platform-specific observers
+class JatterSessionObserverBridge;
+
+class JatterAnalyticsService : public KeyedService {
  public:
   explicit JatterAnalyticsService(Profile* profile);
   JatterAnalyticsService(const JatterAnalyticsService&) = delete;
   JatterAnalyticsService& operator=(const JatterAnalyticsService&) = delete;
   ~JatterAnalyticsService() override;
 
+  struct BridgeDeleter {
+    void operator()(JatterSessionObserverBridge* ptr) const;
+  };
+
   static void RegisterProfilePrefs(user_prefs::PrefRegistrySyncable* registry);
 
   // KeyedService implementation:
   void Shutdown() override;
 
-  // DesktopSessionDurationTracker::Observer implementation:
-  void OnSessionEnded(base::TimeDelta session_length,
-                      base::TimeTicks session_end) override;
+  // Called by our platform-specific bridges
+  void RecordSessionEnded(base::TimeDelta session_length);
 
-  // Public API for other Chromium components to queue events
   void RecordNavigationEvent();
   void RecordDefaultBrowserSet();
   void RecordCustomEvent(const std::string& event_name, base::DictValue params);
 
  private:
-  // Core queuing and networking
   void QueueEvent(const std::string& event_name, base::DictValue params);
   void FlushEvents();
   void OnFlushCompleted(std::optional<std::string> response_body);
-
-  // Generates or retrieves the persistent UUID for this installation
   std::string GetOrCreateClientId();
+
+  // Platform-specific implementation hooks
+  void StartPlatformSessionTracking();
+  void StopPlatformSessionTracking();
 
   raw_ptr<Profile> profile_;
   std::string client_id_;
 
-  // In-memory queue
   base::ListValue event_queue_;
-  size_t queued_event_count_ = 0; // Tracks size safely across API versions
-  
-  // Timer to flush the queue to the backend
+  size_t queued_event_count_ = 0;
   base::RepeatingTimer flush_timer_;
+
+  // Holds our platform-specific observer so it dies with the service
+  std::unique_ptr<JatterSessionObserverBridge, BridgeDeleter> session_observer_bridge_;
 
   base::WeakPtrFactory<JatterAnalyticsService> weak_factory_{this};
 };

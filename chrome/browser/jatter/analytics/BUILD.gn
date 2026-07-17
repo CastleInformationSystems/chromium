@@ -6,6 +6,13 @@ source_set("analytics") {
     "jatter_analytics_service_factory.h",
   ]
 
+  # Inject the correct platform implementation
+  if (is_android) {
+    sources += [ "jatter_analytics_service_android.cc" ]
+  } else {
+    sources += [ "jatter_analytics_service_desktop.cc" ]
+  }
+
   deps = [
     "//base",
     "//chrome/browser/jatter",
@@ -19,4 +26,9 @@ source_set("analytics") {
     # Depending on the parent creates a circular dependency in GN, 
     # since the parent is about to depend on us!
   ]
+
+  # The Desktop Session Duration Tracker is a sibling dependency needed only on Desktop
+  if (!is_android) {
+    deps += [ "//chrome/browser/metrics/desktop_session_duration" ]
+  }
 }

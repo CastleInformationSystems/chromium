@@ -51,6 +51,7 @@ import org.chromium.chrome.browser.toolbar.adaptive.AdaptiveButtonActionMenuCoor
 import org.chromium.chrome.browser.toolbar.adaptive.AdaptiveToolbarBehavior;
 import org.chromium.chrome.browser.toolbar.adaptive.AdaptiveToolbarButtonController;
 import org.chromium.chrome.browser.toolbar.adaptive.AdaptiveToolbarButtonVariant;
+import org.chromium.chrome.browser.toolbar.adaptive.RagIngestionButtonController;
 import org.chromium.chrome.browser.toolbar.adaptive.TranslateToolbarButtonController;
 import org.chromium.chrome.browser.toolbar.optional_button.ButtonDataProvider;
 import org.chromium.chrome.browser.ui.messages.snackbar.SnackbarManager;
@@ -230,6 +231,16 @@ public class AdaptiveToolbarUiCoordinator {
                 AdaptiveToolbarButtonVariant.READER_MODE, readerModeToolbarButtonController);
         adaptiveToolbarButtonController.addButtonVariant(
                 AdaptiveToolbarButtonVariant.READ_ALOUD, readAloudButtonController);
+
+        RagIngestionButtonController ragIngestionButtonController =
+                new RagIngestionButtonController(
+                        mContext, 
+                        mActivityTabProvider.asObservable(),
+                        adaptiveToolbarButtonController); // <-- NEW 3RD PARAMETER
+                        
+        adaptiveToolbarButtonController.addButtonVariant(
+                AdaptiveToolbarButtonVariant.RAG_INGESTION, ragIngestionButtonController);
+
         mContextualPageActionController =
                 new ContextualPageActionController(
                         profileSupplier,

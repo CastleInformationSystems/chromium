@@ -565,19 +565,11 @@ public class PrivacySettings extends ChromeBaseSettingsFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
-<<<<<<< HEAD
-        MenuItem help =
-                menu.add(Menu.NONE, R.id.menu_id_targeted_help, Menu.NONE, R.string.menu_help);
-        help.setIcon(
-                TraceEventVectorDrawableCompat.create(
-                        getResources(), R.drawable.ic_help_24dp, getActivity().getTheme()));
-=======
         // MenuItem help =
         //         menu.add(Menu.NONE, R.id.menu_id_targeted_help, Menu.NONE, R.string.menu_help);
         // help.setIcon(
         //         TraceEventVectorDrawableCompat.create(
-        //                 getResources(), R.drawable.ic_help_and_feedback, getActivity().getTheme()));
->>>>>>> 65a970ab87a8e ([M143] [Jatter-Android] Transfer Android branding and UI implementation)
+        //                 getResources(), R.drawable.ic_help_24dp, getActivity().getTheme()));
     }
 
     @Override

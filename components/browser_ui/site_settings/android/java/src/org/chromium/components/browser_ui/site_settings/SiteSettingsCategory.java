@@ -62,6 +62,7 @@ public class SiteSettingsCategory {
         Type.NOTIFICATIONS,
         Type.POPUPS,
         Type.PROTECTED_MEDIA,
+        Type.RAG_INGESTION,
         Type.SENSORS,
         Type.SOUND,
         Type.USB,
@@ -128,9 +129,10 @@ public class SiteSettingsCategory {
         int AUTO_PICTURE_IN_PICTURE = 36;
         int LOCAL_NETWORK = 37;
         int LOOPBACK_NETWORK = 38;
+        int RAG_INGESTION = 39;
 
         /** Number of handled categories used for calculating array sizes. */
-        int NUM_ENTRIES = 39;
+        int NUM_ENTRIES = 40;
     }
 
     private final BrowserContextHandle mBrowserContextHandle;
@@ -277,6 +279,8 @@ public class SiteSettingsCategory {
                 return ContentSettingsType.POPUPS;
             case Type.PROTECTED_MEDIA:
                 return ContentSettingsType.PROTECTED_MEDIA_IDENTIFIER;
+            case Type.RAG_INGESTION:
+                return ContentSettingsType.RAG_INGESTION;
             case Type.SENSORS:
                 return ContentSettingsType.SENSORS;
             case Type.SERIAL_PORT:
@@ -377,6 +381,8 @@ public class SiteSettingsCategory {
                 return "popups";
             case Type.PROTECTED_MEDIA:
                 return "protected_content";
+            case Type.RAG_INGESTION:
+                return "rag_ingestion";
             case Type.SENSORS:
                 return "sensors";
             case Type.SERIAL_PORT:

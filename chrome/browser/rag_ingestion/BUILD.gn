@@ -1,43 +1,55 @@
 import("//tools/grit/grit_rule.gni")
-
-# Define the list of locales explicitly to match the GRD file
-rag_ingestion_locales = [
-  "af", "am", "ar", "ar-XB", "bg", "bn", "ca", "cs", "da", "de", "el", "en-GB", 
-  "en-US", "en-XA", "es", "es-419", "et", "fa", "fi", "fil", "fr", "gu", "he", 
-  "hi", "hr", "hu", "id", "it", "ja", "kn", "ko", "lt", "lv", "ml", "mr", "ms", 
-  "nb", "nl", "pl", "pt-BR", "pt-PT", "ro", "ru", "sk", "sl", "sr", "sv", "sw", 
-  "ta", "te", "th", "tr", "uk", "ur", "vi", "zh-CN", "zh-TW"
-]
+import("//ui/base/ui_features.gni")
+import("//build/config/locales.gni") # 1. Import global locales
 
 grit("rag_ingestion_strings") {
   source = "rag_ingestion_strings.grd"
   outputs = [ "grit/rag_ingestion_strings.h" ]
 
-  # Programmatically generate all required .pak files
-  foreach(locale, rag_ingestion_locales) {
-    outputs += [ "rag_ingestion_strings_${locale}.pak" ]
-    
-    # [CRITICAL FIX] The build system expects these variants for ALL locales
-    outputs += [ "rag_ingestion_strings_${locale}_FEMININE.pak" ]
-    outputs += [ "rag_ingestion_strings_${locale}_MASCULINE.pak" ]
-    outputs += [ "rag_ingestion_strings_${locale}_NEUTER.pak" ]
+  # [CRITICAL FIX] Subtraction (-) removes pseudo-locales if they exist, 
+  # and addition (+) appends them back once. This guarantees zero duplicates
+  # regardless of whether you are in Debug or Release mode!
+  _all_locales = platform_pak_locales - [ "en-XA", "ar-XB" ] + [ "en-XA", "ar-XB" ]
+
+  foreach(locale, _all_locales) {
+    outputs += [
+      "rag_ingestion_strings_${locale}.pak",
+      "rag_ingestion_strings_${locale}_FEMININE.pak",
+      "rag_ingestion_strings_${locale}_MASCULINE.pak",
+      "rag_ingestion_strings_${locale}_NEUTER.pak",
+    ]
   }
 }
 
+java_strings_grd("java_strings_grd") {
+  grd_file = "rag_ingestion_strings.grd"
+  outputs = [ "values/rag_ingestion_strings.xml" ]
+}
+
 source_set("rag_ingestion_ui") {
-  sources = [
-    "//chrome/browser/ui/views/rag_ingestion/rag_ingestion_bubble_view.cc",
-    "//chrome/browser/ui/views/rag_ingestion/rag_ingestion_bubble_view.h",
-  ]
+  # Base dependencies that are safe for all platforms (including Android)
   deps = [
     ":rag_ingestion_strings",
     "//base",
-    "//chrome/browser/jatter",
-    "//chrome/browser/ui",
-    "//components/strings:components_strings_grit",
-    "//ui/base",
-    "//ui/views",
-    "//ui/views/controls/webview",
-    "//url",
   ]
+
+  # Only compile the desktop UI files and pull desktop dependencies if supported
+  if (toolkit_views) {
+    sources = [
+      "//chrome/browser/ui/views/rag_ingestion/rag_ingestion_bubble_view.cc",
+      "//chrome/browser/ui/views/rag_ingestion/rag_ingestion_bubble_view.h",
+    ]
+    
+    deps += [
+      "//chrome/browser/jatter",
+      "//chrome/browser/ui",
+      "//components/strings:components_strings_grit",
+      "//ui/base",
+      "//ui/views",
+      "//ui/views/controls/webview",
+      "//url",
+    ]
+  }
+  
+  # On Android (toolkit_views == false), this safely resolves to an empty module!
 }

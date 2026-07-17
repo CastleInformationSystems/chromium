@@ -550,6 +550,7 @@ if (_is_default_toolchain) {
       "//chrome/browser/ui/android/pdf:pdf_provider_java",
       "//chrome/browser/ui/android/preloading:java",
       "//chrome/browser/ui/android/quickactionsearchwidget:java",
+      "//chrome/browser/ui/android/rag_ingestion:java",
       "//chrome/browser/ui/android/searchactivityutils:java",
       "//chrome/browser/ui/android/settings_promo_card:java",
       "//chrome/browser/ui/android/signin:java",
