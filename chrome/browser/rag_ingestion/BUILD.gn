@@ -5,16 +5,33 @@ import("//build/config/locales.gni") # 1. Import global locales
 grit("rag_ingestion_strings") {
   source = "rag_ingestion_strings.grd"
   outputs = [ "grit/rag_ingestion_strings.h" ]
-  
-  _all_locales = platform_pak_locales
-  
-  if (!enable_pseudolocales) {
+
+  _all_locales = all_chrome_locales
+
+  # 1. Safely handle pseudo-locales
+  _all_locales += [ "en-XA", "ar-XB" ]
+  _all_locales -= [ "en-XA", "ar-XB" ]
+  if (enable_pseudolocales) {
     _all_locales += [ "en-XA", "ar-XB" ]
   }
 
-  # Strip out locales that are missing from your .grd file (from macOS/Desktop build)
+  # 2. THE FIX: Explicitly add the 26 iOS-specific locales that are 
+  # hardcoded in the merged .grd file so Windows GN expects them.
+  _ios_extra = [
+    "as", "az", "be", "bs", "eu", "fr-CA", "gl", "hy", "is", "ka", 
+    "kk", "km", "ky", "lo", "mk", "mn", "my", "ne", "or", "pa", 
+    "si", "sq", "sr-Latn", "uz", "zh-HK", "zu"
+  ]
+  
+  # Add them safely without creating duplicates
+  _all_locales -= _ios_extra
+  _all_locales += _ios_extra
+
+  # 3. Safely remove Welsh ('cy') since it is NOT in your .grd file.
+  _all_locales += [ "cy" ]
   _all_locales -= [ "cy" ]
 
+  # 4. Generate the exact list, including the gendered variants the repacker needs.
   foreach(locale, _all_locales) {
     outputs += [
       "rag_ingestion_strings_${locale}.pak",
