@@ -7,6 +7,7 @@
 #include "base/uuid.h"
 #include "base/json/json_writer.h"
 #include "base/logging.h"
+#include "base/system/sys_info.h"
 #include "base/time/time.h"
 #include "chrome/browser/jatter/jatter_environment.h"
 #include "chrome/browser/jatter/jatter_firebase_client.h"
@@ -54,10 +55,8 @@ JatterAnalyticsService::JatterAnalyticsService(Profile* profile)
   
   client_id_ = GetOrCreateClientId();
 
-  auto* duration_tracker = metrics::DesktopSessionDurationTracker::Get();
-  if (duration_tracker) {
-    duration_tracker->AddObserver(this);
-  }
+  // Call the platform-specific initialization hook
+  StartPlatformSessionTracking();
 
   base::DictValue open_params;
   open_params.Set("timestamp_micros", 
@@ -73,10 +72,8 @@ JatterAnalyticsService::~JatterAnalyticsService() = default;
 void JatterAnalyticsService::Shutdown() {
   flush_timer_.Stop();
 
-  auto* duration_tracker = metrics::DesktopSessionDurationTracker::Get();
-  if (duration_tracker) {
-    duration_tracker->RemoveObserver(this);
-  }
+  // Call the platform-specific teardown hook
+  StopPlatformSessionTracking();
 
   FlushEvents();
 }
@@ -121,14 +118,17 @@ void JatterAnalyticsService::RecordCustomEvent(const std::string& event_name,
   QueueEvent(event_name, std::move(params));
 }
 
-void JatterAnalyticsService::OnSessionEnded(base::TimeDelta session_length,
-                                            base::TimeTicks session_end) {
+// Replaces OnSessionEnded. Triggered by the platform bridges.
+void JatterAnalyticsService::RecordSessionEnded(base::TimeDelta session_length) {
   base::DictValue params;
   params.Set("engagement_time_msec", static_cast<double>(session_length.InMilliseconds()));
   params.Set("timestamp_micros", 
              std::to_string(base::Time::Now().ToDeltaSinceWindowsEpoch().InMicroseconds()));
              
   QueueEvent("session_duration", std::move(params));
+
+  // IMMEDIATELY flush because the app is going to sleep!
+  FlushEvents();
 }
 
 // ===========================================================================
@@ -137,6 +137,9 @@ void JatterAnalyticsService::OnSessionEnded(base::TimeDelta session_length,
 
 void JatterAnalyticsService::QueueEvent(const std::string& event_name, 
                                         base::DictValue params) {
+  // Centrally inject the operating system name into every event's parameters
+  params.Set("os", base::SysInfo::OperatingSystemName());
+
   base::DictValue event_node;
   event_node.Set("name", event_name);
   event_node.Set("params", std::move(params));
@@ -144,7 +147,13 @@ void JatterAnalyticsService::QueueEvent(const std::string& event_name,
   event_queue_.Append(std::move(event_node));
   queued_event_count_++;
 
+  // --- ADDED LOGGING HERE ---
+  LOG(INFO) << "[JatterAnalytics] Queued event: '" << event_name 
+            << "' | Queue size is now: " << queued_event_count_ 
+            << "/" << kMaxQueueSize;
+
   if (queued_event_count_ >= kMaxQueueSize) {
+    LOG(INFO) << "[JatterAnalytics] Max queue size reached. Flushing events to backend.";
     FlushEvents();
   }
 }
@@ -195,7 +204,5 @@ void JatterAnalyticsService::FlushEvents() {
 void JatterAnalyticsService::OnFlushCompleted(std::optional<std::string> response_body) {
   if (!response_body) {
     LOG(WARNING) << "[Jatter Analytics] Failed to flush events to Firebase (Network or Auth error).";
-    // Optional: If you want to build a retry mechanism, you would push the 
-    // failed payload back into event_queue_ here.
   }
 }

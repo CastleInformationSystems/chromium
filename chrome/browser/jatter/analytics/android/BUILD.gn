@@ -1,0 +1,19 @@
+import("//build/config/android/rules.gni")
+import("//third_party/jni_zero/jni_zero.gni")
+
+generate_jni("jni_headers") {
+  sources = [
+    "java/src/org/chromium/chrome/browser/jatter/analytics/JatterAnalyticsServiceBridge.java",
+  ]
+}
+
+android_library("java") {
+  sources = [
+    "java/src/org/chromium/chrome/browser/jatter/analytics/JatterAnalyticsServiceBridge.java",
+  ]
+  deps = [
+    "//chrome/browser/profiles/android:java",
+    "//third_party/jni_zero:jni_zero_java",
+  ]
+  srcjar_deps = [ ":jni_headers" ]
+}
