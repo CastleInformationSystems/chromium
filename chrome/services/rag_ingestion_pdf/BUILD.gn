@@ -1,13 +1,22 @@
-source_set("rag_ingestion_pdf") {
-  sources = [
-    "rag_ingestion_pdf_extractor_impl.cc",
-    "rag_ingestion_pdf_extractor_impl.h",
-  ]
+import("//pdf/features.gni")
 
+source_set("rag_ingestion_pdf") {
+  # Base dependencies that are safe for all platforms
   deps = [
     "//base",
     "//chrome/services/rag_ingestion_pdf/public/mojom",
     "//mojo/public/cpp/bindings",
-    "//third_party/pdfium",
   ]
+
+  # Only compile the PDF extractor and link PDFium if the platform supports PDFs
+  if (enable_pdf) {
+    sources = [
+      "rag_ingestion_pdf_extractor_impl.cc",
+      "rag_ingestion_pdf_extractor_impl.h",
+    ]
+
+    deps += [
+      "//third_party/pdfium",
+    ]
+  }
 }

@@ -201,7 +201,8 @@ public class ToolbarTabControllerImpl implements ToolbarTabController {
         RecordUserAction.record("Home");
         Tab currentTab = mTabSupplier.get();
         if (currentTab == null) return;
-        String homePageUrl = mHomepageUrlSupplier.get();
+        // String homePageUrl = mHomepageUrlSupplier.get();
+        String homePageUrl = UrlConstants.NTP_URL;
         boolean isChromeInternal =
                 homePageUrl.startsWith(ContentUrlConstants.ABOUT_URL_SHORT_PREFIX)
                         || homePageUrl.startsWith(UrlConstants.CHROME_URL_SHORT_PREFIX)

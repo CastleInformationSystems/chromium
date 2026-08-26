@@ -1,0 +1,12 @@
+source_set("url_rewriter") {
+  sources = [
+    "jatter_url_rewriter.h",
+    "jatter_url_rewriter.mm",
+  ]
+  deps = [
+    "//ios/chrome/browser/jatter:jatter_core",  # For jatter_environment.h
+    "//ios/chrome/browser/shared/model/url:constants", # For kChromeUINewTabHost
+    "//ios/web/public",             # For web::BrowserState
+    "//url",                        # For GURL
+  ]
+}

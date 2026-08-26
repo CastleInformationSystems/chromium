@@ -8,6 +8,12 @@
 #include <iterator>
 #include <vector>
 
+#include "base/timer/elapsed_timer.h"
+#include "base/logging.h"
+#include "base/time/time.h"
+
+static base::TimeTicks g_rag_debug_start;
+
 #include "base/command_line.h" // [INJECTED] For CLI switch
 #include "base/containers/span.h"
 #include "base/files/file.h"
@@ -27,7 +33,11 @@
 #include "chrome/browser/jatter/jatter_firebase_client.h"
 #include "chrome/browser/rag_ingestion/rag_ingestion_service.h"
 #include "chrome/browser/rag_ingestion/rag_ingestion_service_factory.h"
+#if BUILDFLAG(IS_ANDROID)
+#include "chrome/browser/ui/android/rag_ingestion/rag_ingestion_controller_android.h"
+#else
 #include "chrome/browser/ui/rag_ingestion/rag_ingestion_page_action_controller.h"
+#endif
 #include "components/embedder_support/user_agent_utils.h"
 #include "components/password_manager/core/browser/password_manager.h"
 #include "content/public/browser/browser_context.h"
@@ -322,6 +332,9 @@ bool RagIngestionTabHelper::PageHasLinkContaining(const std::string& partial_tex
 }
 
 void RagIngestionTabHelper::CheckAuthWall(const GURL& url) {
+  g_rag_debug_start = base::TimeTicks::Now();
+  LOG(INFO) << "[RAG-DEBUG] [ 0 ms ] Pipeline Started - Forking Live JS and Anon Fetch concurrently...";
+  
   // Reset State
   live_text_content_.clear();
   anon_text_content_.clear();
@@ -330,8 +343,11 @@ void RagIngestionTabHelper::CheckAuthWall(const GURL& url) {
   has_anon_text_ = false;
   current_check_url_ = url;
 
-  // Start polling attempts (Attempt 1)
+  // 1. Start Branch A: Live DOM polling
   AttemptLiveTextExtraction(1);
+
+  // 2. Start Branch B: Anonymous Network Fetch concurrently!
+  StartAnonPageCheck();
 }
 
 void RagIngestionTabHelper::AttemptLiveTextExtraction(int attempt) {
@@ -438,16 +454,14 @@ void RagIngestionTabHelper::AttemptLiveTextExtraction(int attempt) {
 // }
 
 void RagIngestionTabHelper::OnLiveTextCaptured(int attempt, base::Value result) {
+  LOG(INFO) << "[RAG-DEBUG] [ " << (base::TimeTicks::Now() - g_rag_debug_start).InMilliseconds() 
+            << " ms ] Live JS Captured (Attempt " << attempt << ").";
+            
   if (result.is_dict()) {
     const auto& dict = result.GetDict();
-    
-    // 1. Parse Text
     if (const std::string* text = dict.FindString("text")) {
-      live_text_content_ = *text;
-      live_text_content_ = base::CollapseWhitespaceASCII(live_text_content_, false);
+      live_text_content_ = base::CollapseWhitespaceASCII(*text, false);
     }
-
-    // 2. Parse Links (For Heuristics)
     if (const base::ListValue* links = dict.FindList("links")) {
       for (const auto& item : *links) {
         if (item.is_string()) {
@@ -457,44 +471,42 @@ void RagIngestionTabHelper::OnLiveTextCaptured(int attempt, base::Value result) 
     }
   }
 
-  // C++ POLLING LOGIC
-  // If text is suspiciously small and we haven't maxed out attempts, try again.
-  if (live_text_content_.length() < 500 && attempt < 6) {
+  // REFINED POLLING: 
+  // Lowered threshold from 500 to 100 chars, and max attempts from 6 to 3 (300ms intervals).
+  // A legitimate Auth Wall or sparse dashboard will now pass immediately!
+  if (live_text_content_.length() < 100 && attempt < 3) {
       ingestion_timer_.Start(
-          FROM_HERE, base::Milliseconds(500),
+          FROM_HERE, base::Milliseconds(300),
           base::BindOnce(&RagIngestionTabHelper::AttemptLiveTextExtraction,
                          base::Unretained(this), attempt + 1));
       return; 
   }
 
-  // ==========================================
-  // FINAL CHECK: Is Live Text Still Empty?
-  // ==========================================
-  // If we couldn't extract at least 50 characters of text after all retries, 
-  // this page is either a media file, a canvas-only game, or broken. 
   if (live_text_content_.length() < 50) {
-      LOG(WARNING) << "[RAG] Live text empty after retries. Aborting pipeline for: " << current_check_url_;
-      
+      LOG(WARNING) << "[RAG] Live text empty after retries. Aborting pipeline.";
+#if !BUILDFLAG(IS_ANDROID)
       if (auto* controller = RagIngestionPageActionController::FromWebContents(web_contents())) {
           controller->Hide(); 
       }
-      // Cache this page so we don't infinitely retry checking a broken page
+#endif
+      anon_loader_.reset(); // Cancel background network fetch if running
       last_check_time_[current_check_url_.spec()] = base::Time::Now();
-      return; // ABORT PIPELINE
+      return;
   }
-
-  has_live_text_ = true;
 
   double heuristic_score = CalculateHeuristicScore();
   bool looks_private = heuristic_score > 0.0; 
   bool is_cached_safe = ShouldSkipCheckDueToCache(current_check_url_);
 
   if (is_cached_safe && !looks_private) {
-   VLOG(1) << "Skipping check (Cached & Safe): " << current_check_url_;
-   return; 
+    VLOG(1) << "Skipping check (Cached & Safe): " << current_check_url_;
+    anon_loader_.reset(); // Cancel background network fetch immediately to save cellular data
+    return; 
   }
 
-  StartAnonPageCheck();
+  // Mark Branch A as complete and attempt to pass through the Join Gate
+  has_live_text_ = true;
+  CompareContentState();
 }
 
 void RagIngestionTabHelper::StartAnonPageCheck() {
@@ -509,34 +521,48 @@ void RagIngestionTabHelper::StartAnonPageCheck() {
 }
 
 void RagIngestionTabHelper::OnAnonTextCaptured(const AnonPageResult& result) {
+  LOG(INFO) << "[RAG-DEBUG] [ " << (base::TimeTicks::Now() - g_rag_debug_start).InMilliseconds() 
+            << " ms ] Anon Fetch complete.";
+            
   anon_text_content_ = base::CollapseWhitespaceASCII(result.inner_text, false);
-  
-  // Store these for CalculateNetworkScore()
   anon_response_code_ = result.http_status_code;
   anon_final_url_ = result.final_url;
 
- if (anon_text_content_.length() < 50) {
+  if (anon_text_content_.length() < 50) {
       LOG(INFO) << "[RAG] Anon text is empty/tiny on a 200 OK. Likely an SPA.";
-      anon_text_content_.clear(); // Force exactly empty for CompareContentState's SPA check
+      anon_text_content_.clear();
   }
 
-  // Tell the state machine we finished the fetch phase
+  // Mark Branch B as complete and attempt to pass through the Join Gate
   has_anon_text_ = true;
-  
-  if (has_live_text_) CompareContentState();
+  CompareContentState();
 }
 
 void RagIngestionTabHelper::MarkPageAsPublic(double score, const std::string& reason) {
     VLOG(1) << "[RAG] Page is Public (Score " << score << "). Reason: " << reason;
 
+#if !BUILDFLAG(IS_ANDROID)
     if (auto* controller = RagIngestionPageActionController::FromWebContents(web_contents())) {
         controller->Hide(); 
     }
+#endif
     
     last_check_time_[current_check_url_.spec()] = base::Time::Now();
 }
 
 void RagIngestionTabHelper::CompareContentState() {
+  // --- THE JOIN GATE ---
+  if (!has_live_text_ || !has_anon_text_) {
+    LOG(INFO) << "[RAG-DEBUG] [ " << (base::TimeTicks::Now() - g_rag_debug_start).InMilliseconds() 
+              << " ms ] Join Gate holding... (Live Ready: " << (has_live_text_ ? "YES" : "NO") 
+              << ", Anon Ready: " << (has_anon_text_ ? "YES" : "NO") << ")";
+    return;
+  }
+
+  LOG(INFO) << "[RAG-DEBUG] [ " << (base::TimeTicks::Now() - g_rag_debug_start).InMilliseconds() 
+            << " ms ] Both parallel branches complete! Running Jaccard comparison.";
+            
+  base::ElapsedTimer jaccard_timer;
   // --- A. Network Score (Did Anon get 403 or Redirected?) ---
   double network_score = CalculateNetworkScore(); 
 
@@ -606,7 +632,12 @@ void RagIngestionTabHelper::CompareContentState() {
 
   // --- Final Weighted Decision ---
   // We can weight them, or simple cascading (as done above) is often more robust.
+  LOG(INFO) << "[RAG-DEBUG] [ " << (base::TimeTicks::Now() - g_rag_debug_start).InMilliseconds() 
+            << " ms ] Jaccard calculation took: " << jaccard_timer.Elapsed().InMilliseconds() << " ms.";
+
   if (total_score > 0.8) {
+    LOG(INFO) << "[RAG-DEBUG] [ " << (base::TimeTicks::Now() - g_rag_debug_start).InMilliseconds() 
+               << " ms ] Pinging Firebase Backend...";
      // AUTH WALL DETECTED
      VLOG(1) << "RagIngestion: Detected Auth Wall on " << current_check_url_;
      ReportAuthWall(); 
@@ -617,10 +648,12 @@ void RagIngestionTabHelper::CompareContentState() {
      
      VLOG(1) << "RagIngestion: Page is Public (Score " << total_score << "). Caching result.";
 
+#if !BUILDFLAG(IS_ANDROID)
      // We must tell the controller "This page is no longer interesting"
      if (auto* controller = RagIngestionPageActionController::FromWebContents(web_contents())) {
          controller->Hide(); // Or controller->ResetState(); depending on your API
      }
+#endif
      
      // [NEW] SET THE CACHE HERE
      last_check_time_[current_check_url_.spec()] = base::Time::Now();
@@ -1047,55 +1080,97 @@ void RagIngestionTabHelper::ReportAuthWall() {
 
 void RagIngestionTabHelper::OnPermissionCheckComplete(
     RagIngestionService::BackendPermissionInfo info) {
-  RagIngestionPageActionController::CreateForWebContents(web_contents());
-  
-  auto* controller = RagIngestionPageActionController::FromWebContents(web_contents());
-  if (!controller || info.is_error) {
-      if (controller) controller->Hide();
-      return;
+  LOG(INFO) << "[RAG-DEBUG] [ " << (base::TimeTicks::Now() - g_rag_debug_start).InMilliseconds() 
+      << " ms ] Backend check complete. Drawing Android UI NOW.";
+  // =========================================================================
+  // 1. CROSS-PLATFORM ERROR HANDLING
+  // =========================================================================
+  if (info.is_error) {
+#if BUILDFLAG(IS_ANDROID)
+    if (auto* controller = RagIngestionControllerAndroid::FromWebContents(web_contents())) {
+      controller->Hide();
+    }
+#else
+    if (auto* controller = RagIngestionPageActionController::FromWebContents(web_contents())) {
+      controller->Hide();
+    }
+#endif
+    return;
   }
 
   Profile* profile = Profile::FromBrowserContext(web_contents()->GetBrowserContext());
   RagIngestionService* service = RagIngestionServiceFactory::GetForProfile(profile);
   if (!service) return;
 
-  controller->SetBackendInfo(info);
-
-  // 3. Handle Status & Passively Update Local Cache
+  // =========================================================================
+  // 2. CROSS-PLATFORM BUSINESS LOGIC (No UI)
+  // =========================================================================
   if (info.status == RagIngestionService::BackendStatus::kKnownAllowed) {
-    // BACKEND SSOT: Explicit ALLOW overwrites local cache
-    // Safely force the local cache to match the backend without triggering a network loop
-    service->SyncLocalSettingFromBackend(current_check_url_, RagIngestionService::UserPermission::kGranted);
-    
-    controller->ShowActiveState();
-    
-    // Now that we confirmed it's allowed, trigger the passive learning!
+    service->SyncLocalSettingFromBackend(current_check_url_, 
+                                         RagIngestionService::UserPermission::kGranted);
     IngestCurrentPage(); 
+  } else if (info.status == RagIngestionService::BackendStatus::kKnownBlocked) {
+    service->SyncLocalSettingFromBackend(current_check_url_, 
+                                         RagIngestionService::UserPermission::kDenied);
+  }
+
+  // =========================================================================
+  // 3. PLATFORM-SPECIFIC UI LOGIC
+  // =========================================================================
+#if BUILDFLAG(IS_ANDROID)
+  // --- ANDROID UI ---
+  // Ensure the Android controller is created to manage the adaptive toolbar button.
+  RagIngestionControllerAndroid::CreateForWebContents(web_contents());
+  auto* controller = RagIngestionControllerAndroid::FromWebContents(web_contents());
+  if (!controller) return;
+
+  if (info.status == RagIngestionService::BackendStatus::kKnownAllowed) {
+    controller->ShowActiveState();
   } 
   else if (info.status == RagIngestionService::BackendStatus::kKnownBlocked) {
-    // BACKEND SSOT: Explicit DENY overwrites local cache
-    service->SyncLocalSettingFromBackend(current_check_url_, RagIngestionService::UserPermission::kDenied);
-    controller->ShowDisabledState(); 
-  }
+    controller->ShowDisabledState();
+  } 
   else if (info.status == RagIngestionService::BackendStatus::kUnknown) {
-    // SOFT SSOT: The backend has no data. Do NOT aggressively wipe the local cache.
-    // Instead, just read what the local cache currently says.
     RagIngestionService::UserPermission local_status = service->GetUserPermission(current_check_url_);
     
     if (local_status == RagIngestionService::UserPermission::kGranted) {
-      // The user previously allowed this, and the backend hasn't explicitly revoked it.
       controller->ShowActiveState();
-    } 
-    else if (local_status == RagIngestionService::UserPermission::kDenied) {
-      // The user previously denied this.
+    } else if (local_status == RagIngestionService::UserPermission::kDenied) {
       controller->ShowDisabledState();
-    } 
-    else {
-      // Both the backend AND the local cache have no idea what this is.
-      // Now it is finally safe to show the prompt.
+    } else {
+      // For undecided pages, trigger the ephemeral bottom sheet offer prompt
+      controller->ShowOfferPrompt(current_check_url_); 
+    }
+  }
+
+#else
+  // --- DESKTOP UI ---
+  // Desktop has a persistent Omnibox icon that must be initialized and updated 
+  // for every state.
+  RagIngestionPageActionController::CreateForWebContents(web_contents());
+  auto* controller = RagIngestionPageActionController::FromWebContents(web_contents());
+  if (!controller) return;
+
+  controller->SetBackendInfo(info);
+
+  if (info.status == RagIngestionService::BackendStatus::kKnownAllowed) {
+    controller->ShowActiveState();
+  } 
+  else if (info.status == RagIngestionService::BackendStatus::kKnownBlocked) {
+    controller->ShowDisabledState();
+  } 
+  else if (info.status == RagIngestionService::BackendStatus::kUnknown) {
+    RagIngestionService::UserPermission local_status = service->GetUserPermission(current_check_url_);
+    
+    if (local_status == RagIngestionService::UserPermission::kGranted) {
+      controller->ShowActiveState();
+    } else if (local_status == RagIngestionService::UserPermission::kDenied) {
+      controller->ShowDisabledState();
+    } else {
       controller->ShowOfferState(); 
     }
   }
+#endif
 }
 
 void RagIngestionTabHelper::FetchPdfBytesForIngestion(const GURL& url) {

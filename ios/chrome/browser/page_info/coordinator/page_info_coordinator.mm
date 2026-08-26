@@ -79,6 +79,10 @@
   self.viewController = [[PageInfoViewController alloc]
       initWithSiteSecurityDescription:_siteSecurityDescription];
 
+  // [NEW] Set the properties immediately before the view loads!
+  self.viewController.profile = self.browser->GetProfile(); // or self.browserState
+  self.viewController.pageInfoURL = webState->GetVisibleURL();
+
   self.viewController.pageInfoPresentationHandler = self;
 
   self.navigationController = [[UINavigationController alloc]

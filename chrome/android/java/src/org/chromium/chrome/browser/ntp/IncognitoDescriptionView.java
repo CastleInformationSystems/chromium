@@ -425,7 +425,8 @@ public class IncognitoDescriptionView extends LinearLayout {
                         mLearnMore.getSpanColor(), (view) -> mLearnMore.callOnClick());
 
         boolean learnMoreInSubtitle = mWidthDp > WIDE_LAYOUT_THRESHOLD_DP;
-        mLearnMore.setVisibility(learnMoreInSubtitle ? View.GONE : View.VISIBLE);
+        // mLearnMore.setVisibility(learnMoreInSubtitle ? View.GONE : View.VISIBLE);
+        mLearnMore.setVisibility(View.GONE);
 
         if (!learnMoreInSubtitle) {
             // Format the "Learn more" link.

@@ -90,6 +90,7 @@ public class WebsitePermissionsFetcher {
             case ContentSettingsType.JAVASCRIPT_JIT:
             case ContentSettingsType.JAVASCRIPT_OPTIMIZER:
             case ContentSettingsType.POPUPS:
+            case ContentSettingsType.RAG_INGESTION:
             case ContentSettingsType.REQUEST_DESKTOP_SITE:
             case ContentSettingsType.SOUND:
                 return WebsitePermissionsType.CONTENT_SETTING_EXCEPTION;

@@ -435,7 +435,7 @@
 <translation id="2523295204312809179">ನೀವು ಟ್ಯಾಬ್ ಗುಂಪನ್ನು ಮುಚ್ಚಿದಾಗ, ಅದನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಇಲ್ಲಿ ಸೇವ್ ಮಾಡಲಾಗುತ್ತದೆ</translation>
 <translation id="2524699375503213836">Safari ನಿಂದ ನಿಮ್ಮ ಡೇಟಾವನ್ನು ಒಟ್ಟುಗೂಡಿಸಿ</translation>
 <translation id="2529021024822217800">ಎಲ್ಲವನ್ನೂ ತೆರೆಯಿರಿ</translation>
-<translation id="2536991091671391962">ಸೇವ್ ಮಾಡಿದ ಪಾಸ್‌ವರ್ಡ್‌ಗಳನ್ನು ನೀವು ಯಾವುದೇ ಸಾಧನದಲ್ಲಿ ಬಳಸಬಹುದು. ಅವುಗಳನ್ನು <ph name="EMAIL" /> ನ Google Password Manager ನಲ್ಲಿ ಸೇವ್ ಮಾಡಲಾಗಿದೆ.</translation>
+<translation id="2536991091671391962">ಸೇವ್ ಮಾಡಿದ ಪಾಸ್‌ವರ್ಡ್‌ಗಳನ್ನು ನೀವು ಯಾವುದೇ ಸಾಧನದಲ್ಲಿ ಬಳಸಬಹುದು. ಅವುಗಳನ್ನು <ph name="EMAIL" /> ನ Password Manager ನಲ್ಲಿ ಸೇವ್ ಮಾಡಲಾಗಿದೆ.</translation>
 <translation id="2538103551183528357">ಪಾಸ್‌ವರ್ಡ್ ಮರೆಮಾಡಲಾಗಿದೆ</translation>
 <translation id="2538705697765638552">ನಿಮ್ಮ ಮಾಹಿತಿಯನ್ನು ಸೇವ್ ಮಾಡಿ ಮತ್ತು Google ಉತ್ಪನ್ನಗಳಾದ್ಯಂತ ಫಾರ್ಮ್‌ಗಳನ್ನು ಭರ್ತಿ ಮಾಡುವಂತಹ ಕೆಲಸಗಳನ್ನು ವೇಗವಾಗಿ ಮಾಡಿ. <ph name="USER_EMAIL" /> ಗಾಗಿ Google Wallet ನಲ್ಲಿ ನಿಮ್ಮ ಮಾಹಿತಿಯನ್ನು ನೀವು ನಿರ್ವಹಿಸಬಹುದು.</translation>
 <translation id="2539748786028143624">ವರ್ಧಿತ ಸುರಕ್ಷತೆಯನ್ನು ಆನ್ ಮಾಡಿ…</translation>
@@ -464,7 +464,7 @@
 <translation id="2640733327287333451">ಯಾವುದೇ ಬಳಕೆದಾರರ ಹೆಸರಿಲ್ಲ ••••••</translation>
 <translation id="264215785133931186">ಇದೀಗ ಪರಿಶೀಲಿಸಲಾಗಿರುವುದು</translation>
 <translation id="2647434099613338025">ಭಾಷೆಯನ್ನು ಸೇರಿಸಿ</translation>
-<translation id="2649592894792404568">ನೀವು ನಿಮ್ಮ Google Password Manager ಗೆ ಸಂಬಂಧಿಸಿದ ಡೇಟಾವನ್ನು ಅಳಿಸಲಿದ್ದೀರಿ</translation>
+<translation id="2649592894792404568">ನೀವು ನಿಮ್ಮ Password Manager ಗೆ ಸಂಬಂಧಿಸಿದ ಡೇಟಾವನ್ನು ಅಳಿಸಲಿದ್ದೀರಿ</translation>
 <translation id="2652129567809778422">ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ಆಯ್ಕೆಮಾಡಿ</translation>
 <translation id="2658056020748144467">ಫೈಲ್‌ ಅನ್ನು ತೆರೆಯಲು ಸಾಧ್ಯವಿಲ್ಲ</translation>
 <translation id="2661809266906115479"><ph name="TITLE" />, <ph name="STATE" />, ಈ ಸಾಧನದಲ್ಲಿ ಮಾತ್ರ, <ph name="URL" /></translation>
@@ -1128,7 +1128,7 @@
 <translation id="508645147179720015">ಟಿಪ್ಪಣಿಯು 1000 ಅಕ್ಷರಗಳಿಗಿಂತ ಹೆಚ್ಚಿದೆ</translation>
 <translation id="5087098519049306025">ದರ ಟ್ರ್ಯಾಕಿಂಗ್</translation>
 <translation id="5090832849094901128">ಈ ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ಅಳಿಸುವುದರಿಂದ <ph name="WEBSITE" /> ನಲ್ಲಿ ನಿಮ್ಮ ಖಾತೆಯನ್ನು ಅಳಿಸಲಾಗುವುದಿಲ್ಲ.</translation>
-<translation id="5096619236864235">ಪಾಸ್‌ಕೀಗಳನ್ನು Google Password Manager ನಲ್ಲಿ ಸೇವ್ ಮಾಡಲಾಗಿದೆ</translation>
+<translation id="5096619236864235">ಪಾಸ್‌ಕೀಗಳನ್ನು Password Manager ನಲ್ಲಿ ಸೇವ್ ಮಾಡಲಾಗಿದೆ</translation>
 <translation id="510580293474170715">ಏನನ್ನೂ ಇಂಪೋರ್ಟ್ ಮಾಡಿಕೊಳ್ಳಲಾಗಿಲ್ಲ</translation>
 <translation id="5113960131843706315">ನಿಮ್ಮ ವಿಷಯಗಳನ್ನು ಪಡೆದುಕೊಳ್ಳಲಾಗುತ್ತಿದೆ…</translation>
 <translation id="5118462200606189584">ಖಾತೆಯನ್ನು ಸೇರಿಸಿ…</translation>
@@ -1174,7 +1174,7 @@
 <translation id="5233638681132016545">ಹೊಸ ಟ್ಯಾಬ್</translation>
 <translation id="5234094073825090254">{count,plural, =1{ಬುಕ್‌ಮಾರ್ಕ್ ಅನ್ನು ನಿಮ್ಮ Google ಖಾತೆಯಲ್ಲಿ ಸೇವ್ ಮಾಡಲಾಗಿದೆ, {email}.}one{ನಿಮ್ಮ Google ಖಾತೆಯಲ್ಲಿ ಬುಕ್‌ಮಾರ್ಕ್‌ಗಳನ್ನು ಸೇವ್ ಮಾಡಲಾಗಿದೆ, {email}.}other{ನಿಮ್ಮ Google ಖಾತೆಯಲ್ಲಿ ಬುಕ್‌ಮಾರ್ಕ್‌ಗಳನ್ನು ಸೇವ್ ಮಾಡಲಾಗಿದೆ, {email}.}}</translation>
 <translation id="5234764350956374838">ವಜಾಗೊಳಿಸಿ</translation>
-<translation id="5238596603078743134"><ph name="BEGIN_BOLD" /><ph name="USERNAME" /><ph name="END_BOLD" /> ಅವರು <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" /> ಗೆ ಸೈನ್ ಇನ್ ಮಾಡಲು Google Password Manager ಅನ್ನು ಬಳಸುವಾಗ, ಅವರು ನಿಮ್ಮ ಬಳಕೆದಾರರ ಹೆಸರು ಮತ್ತು ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ಬಳಸಬಹುದು.</translation>
+<translation id="5238596603078743134"><ph name="BEGIN_BOLD" /><ph name="USERNAME" /><ph name="END_BOLD" /> ಅವರು <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" /> ಗೆ ಸೈನ್ ಇನ್ ಮಾಡಲು Password Manager ಅನ್ನು ಬಳಸುವಾಗ, ಅವರು ನಿಮ್ಮ ಬಳಕೆದಾರರ ಹೆಸರು ಮತ್ತು ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ಬಳಸಬಹುದು.</translation>
 <translation id="5241106044372754566"><ph name="NAME" />, <ph name="EMAIL" />, ಪ್ರಸ್ತುತ ಆಯ್ಕೆ ಮಾಡಲಾದ ನಿಮ್ಮ ಸಂಸ್ಥೆಯಿಂದ ನಿರ್ವಹಿಸಲ್ಪಡುತ್ತದೆ. ಖಾತೆಯೊಂದನ್ನು ಆಯ್ಕೆಮಾಡಿ.</translation>
 <translation id="5242899254250321823">ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ಪಾಸ್‌ವರ್ಡ್‌ ಅನ್ನು ಬದಲಾಯಿಸಿ</translation>
 <translation id="5248640482715684545">ಈ ಸೈಟ್ ಇನ್ನೊಂದು ಆ್ಯಪ್‌ ತೆರೆಯಲು ಪ್ರಯತ್ನಿಸುತ್ತಿದೆ.</translation>
@@ -1299,7 +1299,7 @@
 <translation id="5684761169742812828">ಇಂಟರ್ನೆಟ್‌ನಲ್ಲಿನ ಡೇಟಾ ಉಲ್ಲಂಘನೆಯ ಮೂಲಕ ಈ ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ಬಹಿರಂಗಪಡಿಸಲಾಗಿದೆ. ಈಗಲೇ ಅದನ್ನು ಬದಲಾಯಿಸಲು ನಿಮಗೆ ಸಮಯವಿಲ್ಲದಿದ್ದರೆ, ನಂತರದ ಸಮಯದಲ್ಲಿ ನಿಮಗೆ ರಿಮೈಂಡ್ ಮಾಡುವುದಕ್ಕೆ ಈ ಎಚ್ಚರಿಕೆಯನ್ನು ಇರಿಸಿಕೊಳ್ಳಲು Google ಶಿಫಾರಸು ಮಾಡುತ್ತದೆ.</translation>
 <translation id="5694848685995373177"><ph name="USER_EMAIL" /> ಗಾಗಿ Drive ನಲ್ಲಿ ಸೇವ್ ಮಾಡಲಾಗಿದೆ.</translation>
 <translation id="570209299585559496">ನೀವು ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ನಂತರ ಕಂಟೆಂಟ್‌ ಸೆಟ್ಟಿಂಗ್‌ಗಳಲ್ಲಿ ಡೀಫಾಲ್ಟ್‌ ಸೈಟ್‌ ವೀಕ್ಷಣೆಯನ್ನು ಡೆಸ್ಕ್‌ಟಾಪ್‌ಗೆ ಬದಲಾಯಿಸಬಹುದು</translation>
-<translation id="5702108177581350218">ನಿಮ್ಮ ಬಳಕೆದಾರರ ಹೆಸರು ಮತ್ತು ಪಾಸ್‌ವರ್ಡ್‌ನ ಕಾಪಿ ಅನ್ನು ನೀವು ಹಂಚಿಕೊಂಡಾಗ, ನಿಮ್ಮ ಕುಟುಂಬದ ಸದಸ್ಯರು Google Password Manager ಅನ್ನು ಬಳಸಿಕೊಂಡು ಅವುಗಳನ್ನು ಭರ್ತಿ ಮಾಡಬಹುದು.</translation>
+<translation id="5702108177581350218">ನಿಮ್ಮ ಬಳಕೆದಾರರ ಹೆಸರು ಮತ್ತು ಪಾಸ್‌ವರ್ಡ್‌ನ ಕಾಪಿ ಅನ್ನು ನೀವು ಹಂಚಿಕೊಂಡಾಗ, ನಿಮ್ಮ ಕುಟುಂಬದ ಸದಸ್ಯರು Password Manager ಅನ್ನು ಬಳಸಿಕೊಂಡು ಅವುಗಳನ್ನು ಭರ್ತಿ ಮಾಡಬಹುದು.</translation>
 <translation id="5704908597376970822">ಸೈನ್ ಇನ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗುತ್ತಿಲ್ಲ.</translation>
 <translation id="5709005673595820640">{count,plural, =1{ನಿಮ್ಮ ಭದ್ರತೆಯನ್ನು ಅಪಾಯಕ್ಕೀಡು ಮಾಡಬಹುದಾದ {count} ಮರುಬಳಕೆ ಮಾಡಲಾದ ಪಾಸ್‌ವರ್ಡ್‌ ಅನ್ನು ನೀವು ಹೊಂದಿದ್ದೀರಿ. ಸುರಕ್ಷಿತವಾಗಿರಲು ಈಗಲೇ ಅದನ್ನು ಸರಿಪಡಿಸಿ.}one{ನಿಮ್ಮ ಭದ್ರತೆಯನ್ನು ಅಪಾಯಕ್ಕೀಡು ಮಾಡಬಹುದಾದ {count} ಮರುಬಳಕೆ ಮಾಡಲಾದ ಪಾಸ್‌ವರ್ಡ್‌ಗಳನ್ನು ನೀವು ಹೊಂದಿದ್ದೀರಿ. ಸುರಕ್ಷಿತವಾಗಿರಲು ಈಗಲೇ ಅವುಗಳನ್ನು ಸರಿಪಡಿಸಿ.}other{ನಿಮ್ಮ ಭದ್ರತೆಯನ್ನು ಅಪಾಯಕ್ಕೀಡು ಮಾಡಬಹುದಾದ {count} ಮರುಬಳಕೆ ಮಾಡಲಾದ ಪಾಸ್‌ವರ್ಡ್‌ಗಳನ್ನು ನೀವು ಹೊಂದಿದ್ದೀರಿ. ಸುರಕ್ಷಿತವಾಗಿರಲು ಈಗಲೇ ಅವುಗಳನ್ನು ಸರಿಪಡಿಸಿ.}}</translation>
 <translation id="57094364128775171">ಸದೃಢವಾದ ಪಾಸ್‌ವರ್ಡ್ ಸೂಚಿಸಿ…</translation>
@@ -1406,7 +1406,7 @@
 <translation id="6077126322656614846">ಕ್ಯಾಮರಾ ಪ್ರವೇಶವನ್ನು ಅನುಮತಿಸಲಾಗಿದೆ</translation>
 <translation id="6078236141387574983">ಶೀಟ್‌ನ ಎತ್ತರವನ್ನು ಮರುಹೊಂದಿಸಿ</translation>
 <translation id="6084848228346514841">ಟ್ಯಾಬ್‌ಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ</translation>
-<translation id="6089212833343035912">Google Password Manager ಪಿನ್</translation>
+<translation id="6089212833343035912">Password Manager ಪಿನ್</translation>
 <translation id="6090760257419195752">ವಜಾಗೊಳಿಸಿದ ಎಚ್ಚರಿಕೆಗಳು</translation>
 <translation id="6094325891006032858">ವರ್ಧಿತ ಸುರಕ್ಷಿತ ಬ್ರೌಸಿಂಗ್‌ ಆನ್ ಮಾಡಿ</translation>
 <translation id="6096965253650248286"><ph name="COUNT" /> ಕಂಡುಬಂದಿದೆ</translation>
@@ -1897,7 +1897,7 @@
 <translation id="78146569776629510">ಡೌನ್‌ಲೋಡ್‌ಗಳು</translation>
 <translation id="7815852444315004084">ಸದ್ಯಕ್ಕೆ ಮರೆಮಾಡಿ</translation>
 <translation id="7825973332242257878">ಟ್ಯಾಬ್ ಗುಂಪುಗಳು</translation>
-<translation id="7839994177130598711">ನಿಮ್ಮ ಕುಟುಂಬದ ಸದಸ್ಯರು <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" /> ಗೆ ಸೈನ್ ಇನ್ ಮಾಡಲು Google Password Manager ಅನ್ನು ಬಳಸುವಾಗ, ಅವರು ನಿಮ್ಮ ಬಳಕೆದಾರರ ಹೆಸರು ಮತ್ತು ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ಬಳಸಬಹುದು.</translation>
+<translation id="7839994177130598711">ನಿಮ್ಮ ಕುಟುಂಬದ ಸದಸ್ಯರು <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" /> ಗೆ ಸೈನ್ ಇನ್ ಮಾಡಲು Password Manager ಅನ್ನು ಬಳಸುವಾಗ, ಅವರು ನಿಮ್ಮ ಬಳಕೆದಾರರ ಹೆಸರು ಮತ್ತು ಪಾಸ್‌ವರ್ಡ್ ಅನ್ನು ಬಳಸಬಹುದು.</translation>
 <translation id="7841180087127694526">ಕಾಪಿ ಮಾಡಿದ ಪಠ್ಯವನ್ನು ಹುಡುಕಿ</translation>
 <translation id="7841418003178675048">ನಿಮ್ಮ ಹೊಸ ಟ್ಯಾಬ್ ಪುಟದಲ್ಲಿ ನೀವು ಯಾವ ಕಾರ್ಡ್‌ಗಳನ್ನು ನೋಡುತ್ತೀರಿ ಎಂಬುದನ್ನು ಆರಿಸಿ.</translation>
 <translation id="7845466610722898">ಓದುವ ಪಟ್ಟಿಯನ್ನು ತೋರಿಸಿ</translation>
@@ -1921,7 +1921,7 @@
 <translation id="7887198238286927132">ನಿಮ್ಮ ಗೌಪ್ಯತೆಯನ್ನು ರಕ್ಷಿಸಲು, Chrome ಈ ಫೀಲ್ಡ್ ಅನ್ನು ಸ್ವಯಂ ಭರ್ತಿ ಮಾಡುವುದಿಲ್ಲ.</translation>
 <translation id="7887552845761062935">ಹೆಚ್ಚಿನ ಆಯ್ಕೆಗಳನ್ನು ತೆರೆಯಲು ಡಬಲ್ ಟ್ಯಾಪ್ ಮಾಡಿ ಮತ್ತು ಹಿಡಿದುಕೊಳ್ಳಿ</translation>
 <translation id="7888562068293422208">ಎಲ್ಲವನ್ನೂ ಮುಚ್ಚಬೇಕೇ?</translation>
-<translation id="7889910613639381518">Google Password Manager ವಿಜೆಟ್ ಮೂಲಕ ಸುಲಭ ಮತ್ತು ಸುರಕ್ಷಿತ ಆ್ಯಕ್ಸೆಸ್.</translation>
+<translation id="7889910613639381518">Password Manager ವಿಜೆಟ್ ಮೂಲಕ ಸುಲಭ ಮತ್ತು ಸುರಕ್ಷಿತ ಆ್ಯಕ್ಸೆಸ್.</translation>
 <translation id="7899199123054742721">ಎಲ್ಲಾ ಓದದೇ ಇರುವವುಗಳನ್ನು ಗುರುತಿಸಿ</translation>
 <translation id="7911190106180361398">ಎಲ್ಲವನ್ನೂ ಸಿಂಕ್ ಮಾಡಲು ನಿಮ್ಮ ಸಂಸ್ಥೆ ನಿಮಗೆ ಅನುಮತಿಸುವುದಿಲ್ಲ.</translation>
 <translation id="7918999344502274923"><ph name="SEARCH_ENGINE_NAME" /> ವಿವರಗಳನ್ನು ಮರೆಮಾಡಿ</translation>
@@ -1958,7 +1958,7 @@
 <translation id="8010488806779226127">ನೀವು ಬ್ರೌಸ್ ಮಾಡುವಾಗ ಇನ್ನಷ್ಟು ಮಾಡಲು ಸಹಾಯ ಮಾಡುವ ಫೀಚರ್‌ಗಳನ್ನು ಎಕ್ಸ್‌ಪ್ಲೋರ್ ಮಾಡಿ</translation>
 <translation id="8011489434346330032">ವೆಬ್ ಇನ್ಸ್‌ಪೆಕ್ಟರ್</translation>
 <translation id="8015826420689927262">ಲಗತ್ತನ್ನು ಅಳಿಸಿ</translation>
-<translation id="8017015647846870183">Google Password Manager ನಲ್ಲಿ ಸೇವ್ ಮಾಡಿದ ಪಾಸ್‌ವರ್ಡ್‌ಗಳು ಮತ್ತು ಪಾಸ್‌ಕೀಗಳು ಸೇರಿದಂತೆ</translation>
+<translation id="8017015647846870183">Password Manager ನಲ್ಲಿ ಸೇವ್ ಮಾಡಿದ ಪಾಸ್‌ವರ್ಡ್‌ಗಳು ಮತ್ತು ಪಾಸ್‌ಕೀಗಳು ಸೇರಿದಂತೆ</translation>
 <translation id="802154636333426148">ಡೌನ್‌ಲೋಡ್‌ ವಿಫಲಗೊಂಡಿದೆ</translation>
 <translation id="8023170444051056234">ನೀವು ತಕ್ಷಣವೇ "<ph name="GROUP_NAME" />" ಟ್ಯಾಬ್ ಗುಂಪಿಗೆ ಆ್ಯಕ್ಸೆಸ್ ಅನ್ನು ಕಳೆದುಕೊಳ್ಳುತ್ತೀರಿ ಮತ್ತು ಅದನ್ನು ನಿಮ್ಮ ಎಲ್ಲಾ ಸಾಧನಗಳಿಂದ ಅಳಿಸಲಾಗುತ್ತದೆ</translation>
 <translation id="8023878949384262191">ವಿಭಾಗವನ್ನು ವಿಸ್ತರಿಸುತ್ತದೆ.</translation>

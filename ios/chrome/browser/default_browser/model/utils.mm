@@ -21,10 +21,13 @@
 #import "components/prefs/pref_service.h"
 #import "ios/chrome/browser/default_browser/model/features.h"
 #import "ios/chrome/browser/default_browser/promo/public/features.h"
+#import "ios/chrome/browser/jatter/analytics/jatter_analytics_service.h"
+#import "ios/chrome/browser/jatter/analytics/jatter_analytics_service_factory.h"
 #import "ios/chrome/browser/picture_in_picture/public/picture_in_picture_configuration.h"
 #import "ios/chrome/browser/picture_in_picture/public/picture_in_picture_constants.h"
 #import "ios/chrome/browser/shared/model/application_context/application_context.h"
 #import "ios/chrome/browser/shared/model/prefs/pref_names.h"
+#import "ios/chrome/browser/shared/model/profile/profile_manager_ios.h"
 #import "ios/chrome/browser/shared/public/commands/picture_in_picture_commands.h"
 #import "ios/chrome/browser/shared/public/features/features.h"
 #import "ios/chrome/browser/signin/model/signin_util.h"
@@ -350,6 +353,20 @@ void SetObjectIntoStorageForKey(NSString* key, NSObject* data) {
 
 void LogOpenHTTPURLFromExternalURL() {
   SetObjectIntoStorageForKey(kLastHTTPURLOpenTime, [NSDate date]);
+
+  // If the browser was NOT likely the default browser 7 days ago, but we just
+  // successfully received an external HTTP link intent, we consider this a conversion.
+  if (!IsChromeLikelyDefaultBrowserXDays(7)) {
+    std::vector<ProfileIOS*> loaded_profiles =
+        GetApplicationContext()->GetProfileManager()->GetLoadedProfiles();
+        
+    if (!loaded_profiles.empty()) {
+      ProfileIOS* profile = loaded_profiles.front();
+      if (JatterAnalyticsService* service = JatterAnalyticsServiceFactory::GetForProfile(profile)) {
+        service->RecordDefaultBrowserSet();
+      }
+    }
+  }
 }
 
 void LogLikelyInterestedDefaultBrowserUserActivity(DefaultPromoType type) {

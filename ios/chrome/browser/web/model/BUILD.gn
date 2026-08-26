@@ -295,6 +295,8 @@ source_set("web_internal") {
     "//ios/chrome/browser/intelligence/actuation/model/tools:java_script_features",
     "//ios/chrome/browser/intelligence/features",
     "//ios/chrome/browser/intelligence/proto_wrappers:page_context_extractor_feature",
+    "//ios/chrome/browser/jatter",
+    "//ios/chrome/browser/jatter/url_rewriter",
     "//ios/chrome/browser/link_to_text/model",
     "//ios/chrome/browser/metrics/model:accessor",
     "//ios/chrome/browser/metrics/model:expired_histograms_array",

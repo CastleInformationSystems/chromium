@@ -168,6 +168,8 @@ public class SingleWebsiteSettings extends BaseSiteSettingsFragment
                 return "javascript_optimizer";
             case ContentSettingsType.POPUPS:
                 return "popup_permission_list";
+            case ContentSettingsType.RAG_INGESTION:
+                return "rag_ingestion_permission_list";    
             case ContentSettingsType.SOUND:
                 return "sound_permission_list";
             case ContentSettingsType.AR:

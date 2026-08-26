@@ -373,7 +373,7 @@
 <translation id="2287614783861766820">{count,plural, =1{ఈ అడ్రస్ ఈ పరికరం నుండి తొలగించబడుతుంది.}other{ఈ అడ్రస్‌లు ఈ పరికరం నుండి తొలగించబడతాయి.}}</translation>
 <translation id="2295236662082735391">Geminiతో ఎడిట్ చేయడానికి వెబ్‌లోని ఇమేజ్‌ను ఎక్కువసేపు నొక్కి, ఉంచండి</translation>
 <translation id="2297989278479054870">మీరు సైన్ అవుట్ చేసిన తర్వాత, మీ Google ఖాతాలోని బుక్‌మార్క్‌లు, పాస్‌వర్డ్‌లు, ఇంకా మరిన్ని ఈ పరికరం నుండి తీసివేయబడతాయి.</translation>
-<translation id="2299218006564889602">మీ పాస్‌వర్డ్‌లు Google Password Managerలో సేవ్ కావడానికి ముందు, అవి మీ పరికరంలో ఎన్‌క్రిప్ట్ చేయబడ్డాయి.</translation>
+<translation id="2299218006564889602">మీ పాస్‌వర్డ్‌లు Password Managerలో సేవ్ కావడానికి ముందు, అవి మీ పరికరంలో ఎన్‌క్రిప్ట్ చేయబడ్డాయి.</translation>
 <translation id="2306265833370324042"><ph name="SEARCH_ENGINE_NAME" /> వివరాలను చూడండి</translation>
 <translation id="2309265394777270359">ట్యాబ్‌ను మూసివేయండి</translation>
 <translation id="2311077293164383652">పిన్ చేసిన ట్యాబ్‌ను మూసివేయండి</translation>
@@ -435,7 +435,7 @@
 <translation id="2523295204312809179">మీరు ట్యాబ్ గ్రూప్‌ను మూసివేసినప్పుడు, అది ఆటోమేటిక్‌గా ఇక్కడ సేవ్ అవుతుంది</translation>
 <translation id="2524699375503213836">Safari నుండి మీ డేటాను దిగుమతి చేసుకోండి</translation>
 <translation id="2529021024822217800">అన్నీ తెరువు</translation>
-<translation id="2536991091671391962">మీరు సేవ్ చేసిన పాస్‌వర్డ్‌లను ఏ పరికరంలోనైనా ఉపయోగించవచ్చు. <ph name="EMAIL" /> కోసం అవి Google Password Managerలో సేవ్ చేయబడతాయి.</translation>
+<translation id="2536991091671391962">మీరు సేవ్ చేసిన పాస్‌వర్డ్‌లను ఏ పరికరంలోనైనా ఉపయోగించవచ్చు. <ph name="EMAIL" /> కోసం అవి Password Managerలో సేవ్ చేయబడతాయి.</translation>
 <translation id="2538103551183528357">దాచబడింది, పాస్‌వర్డ్</translation>
 <translation id="2538705697765638552">మీ సమాచారాన్ని సేవ్ చేయండి, Google ప్రోడక్ట్‌లలో ఫారమ్‌లను ఫిల్ చేయడం వంటి పనులను వేగంగా పూర్తి చేయండి. మీరు Google Walletలో <ph name="USER_EMAIL" />‌కు సంబంధించి మీ సమాచారాన్ని మేనేజ్ చేయవచ్చు.</translation>
 <translation id="2539748786028143624">మెరుగైన రక్షణను ఆన్ చేయండి…</translation>
@@ -464,7 +464,7 @@
 <translation id="2640733327287333451">యూజర్‌నేమ్, •••••• సేవ్ చేసి లేవు</translation>
 <translation id="264215785133931186">ఇప్పుడే చెక్ చేయడం జరిగింది</translation>
 <translation id="2647434099613338025">భాషను జోడించండి</translation>
-<translation id="2649592894792404568">మీ Google Password Manager డేటాను మీరు తొలగించబోతున్నారు</translation>
+<translation id="2649592894792404568">మీ Password Manager డేటాను మీరు తొలగించబోతున్నారు</translation>
 <translation id="2652129567809778422">పాస్‌వర్డ్‌ను ఎంచుకోండి</translation>
 <translation id="2658056020748144467">ఫైల్‌ను తెరవలేకపోయింది</translation>
 <translation id="2661809266906115479"><ph name="TITLE" />, <ph name="STATE" />, ఈ పరికరంలో మాత్రమే, <ph name="URL" /></translation>
@@ -1128,7 +1128,7 @@
 <translation id="508645147179720015">గమనికలో 1000 కంటే ఎక్కువ అక్షరాలు ఉన్నాయి</translation>
 <translation id="5087098519049306025">ధర ట్రాకింగ్</translation>
 <translation id="5090832849094901128">ఈ పాస్‌వర్డ్‌ను తొలగించడం వలన <ph name="WEBSITE" />లో మీ ఖాతా తొలగించబడదు.</translation>
-<translation id="5096619236864235">పాస్-కీలు Google Password Managerలో కింది వాటి కోసం సేవ్ చేయబడతాయి</translation>
+<translation id="5096619236864235">పాస్-కీలు Password Managerలో కింది వాటి కోసం సేవ్ చేయబడతాయి</translation>
 <translation id="510580293474170715">ఏదీ దిగుమతి కాలేదు</translation>
 <translation id="5113960131843706315">మీ డేటాను పొందుతోంది…</translation>
 <translation id="5118462200606189584">ఖాతాను జోడించండి…</translation>
@@ -1174,7 +1174,7 @@
 <translation id="5233638681132016545">కొత్త‌ ట్యాబ్</translation>
 <translation id="5234094073825090254">{count,plural, =1{మీ Google ఖాతా, {email}‌లో బుక్‌మార్క్ సేవ్ అయింది.}other{మీ Google ఖాతా, {email}‌లో బుక్‌మార్క్‌లు సేవ్ అయ్యాయి.}}</translation>
 <translation id="5234764350956374838">తొలగించండి</translation>
-<translation id="5238596603078743134"><ph name="BEGIN_BOLD" /><ph name="USERNAME" /><ph name="END_BOLD" />, <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" />‌కు సైన్ ఇన్ చేయడానికి Google Password Managerను ఉపయోగించినప్పుడు, వారు ఇప్పుడు మీ యూజర్‌నేమ్‌ను, పాస్‌వర్డ్‌ను ఉపయోగించవచ్చు.</translation>
+<translation id="5238596603078743134"><ph name="BEGIN_BOLD" /><ph name="USERNAME" /><ph name="END_BOLD" />, <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" />‌కు సైన్ ఇన్ చేయడానికి Password Managerను ఉపయోగించినప్పుడు, వారు ఇప్పుడు మీ యూజర్‌నేమ్‌ను, పాస్‌వర్డ్‌ను ఉపయోగించవచ్చు.</translation>
 <translation id="5241106044372754566">ప్రస్తుతం <ph name="NAME" />, <ph name="EMAIL" />, ప్రస్తుతంఎంపిక చేయబడింది, ఇది మీ సంస్థ ద్వారా మేనేజ్ చేయబడుతోంది. ఒక ఖాతాను ఎంచుకోండి.</translation>
 <translation id="5242899254250321823">వెబ్‌సైట్‌లో పాస్‌వర్డ్‌ను మార్చండి</translation>
 <translation id="5248640482715684545">ఈ సైట్ మరొక యాప్‌ను తెరవడానికి ట్రై చేస్తోంది.</translation>
@@ -1299,7 +1299,7 @@
 <translation id="5684761169742812828">డేటా ఉల్లంఘన కారణంగా ఈ పాస్‌వర్డ్ ఇంటర్నెట్‌లో బహిర్గతమైంది. ఈ హెచ్చరికను మార్చడానికి మీకు ఇప్పుడు సమయం లేకుంటే దాన్ని సేవ్ చేయమని Google సిఫార్సు చేస్తోంది, ఇది మీ పాస్‌వర్డ్‌ను తర్వాత మార్చమని మీకు గుర్తు చేస్తుంది.</translation>
 <translation id="5694848685995373177"><ph name="USER_EMAIL" /> కోసం Driveలో సేవ్ అయింది.</translation>
 <translation id="570209299585559496">మీరు సెట్టింగ్‌లు ఆ తర్వాత కంటెంట్ సెట్టింగ్‌లు ఆప్షన్‌లో ఆటోమేటిక్ సైట్ వీక్షణను డెస్క్‌టాప్‌కు మార్చవచ్చు</translation>
-<translation id="5702108177581350218">మీ యూజర్‌నేమ్, పాస్‌వర్డ్ కాపీని మీరు షేర్ చేసినప్పుడు, మీ ఫ్యామిలీ మెంబర్ వాటిని Google Password Managerను ఉపయోగించి పూరించగలరు.</translation>
+<translation id="5702108177581350218">మీ యూజర్‌నేమ్, పాస్‌వర్డ్ కాపీని మీరు షేర్ చేసినప్పుడు, మీ ఫ్యామిలీ మెంబర్ వాటిని Password Managerను ఉపయోగించి పూరించగలరు.</translation>
 <translation id="5704908597376970822">సైన్ ఇన్ చేయడం సాధ్యపడలేదు.</translation>
 <translation id="5709005673595820640">{count,plural, =1{మీ సెక్యూరిటీని ప్రమాదంలో ఉంచే {count} వేరే చోట వాడిన పాస్‌వర్డ్‌లు మీ వద్ద ఉన్నాయి. సురక్షితంగా ఉండటానికి ఇప్పుడే దాన్ని పరిష్కరించండి.}other{మీ సెక్యూరిటీని ప్రమాదంలో ఉంచే {count} వేరే చోట వాడిన పాస్‌వర్డ్‌లు మీ వద్ద ఉన్నాయి. సురక్షితంగా ఉండటానికి ఇప్పుడే వాటిని పరిష్కరించండి.}}</translation>
 <translation id="57094364128775171">శక్తివంతమైన పాస్‌వర్డ్‌ సూచన</translation>
@@ -1406,7 +1406,7 @@
 <translation id="6077126322656614846">కెమెరా యాక్సెస్ అనుమతించబడింది</translation>
 <translation id="6078236141387574983">షీట్ ఎత్తును తిరిగి సర్దుబాటు చేయండి</translation>
 <translation id="6084848228346514841">ట్యాబ్‌లను ఎంచుకోండి</translation>
-<translation id="6089212833343035912">Google Password Manager PIN</translation>
+<translation id="6089212833343035912">Password Manager PIN</translation>
 <translation id="6090760257419195752">విస్మరించిన హెచ్చరికలు</translation>
 <translation id="6094325891006032858">మెరుగైన సురక్షిత బ్రౌజింగ్‌ను ఆన్ చేయండి</translation>
 <translation id="6096965253650248286"><ph name="COUNT" /> కనుగొనబడింది</translation>
@@ -1459,7 +1459,7 @@
 <translation id="6234310016144827337">మీ కనెక్షన్‌ను చెక్ చేసి, మళ్లీ ట్రై చేయండి</translation>
 <translation id="6236952928980352967">హెచ్చరికను రీస్టోర్ చేయండి</translation>
 <translation id="6241132809279377987">Google యాప్‌లతో మీ iPhone కోసం మరిన్ని ఫీచర్‌లను అన్‌లాక్ చేయండి</translation>
-<translation id="6247557882553405851">Google Password Manager</translation>
+<translation id="6247557882553405851">Password Manager</translation>
 <translation id="6251835855431997163"><ph name="VALUE" />‌ను ఆటోఫిల్ చేయండి</translation>
 <translation id="6254066287920239840">లింక్‌లను బ్రౌజర్‌కు బదులుగా యాప్‌లో తెరవండి.</translation>
 <translation id="6259928806013786178">రీడింగ్ మోడ్ విఫలమైంది</translation>
@@ -1503,7 +1503,7 @@
 <translation id="6372558618707314581">మీకు నచ్చిన ఏ పేజీకైనా వెళ్లండి</translation>
 <translation id="6374469231428023295">మళ్లీ ట్రై చేయండి</translation>
 <translation id="6383719166112032471">లొకేషన్‌ను తెరవండి…</translation>
-<translation id="6387994324662817823">పాస్‌వర్డ్‌లు ఈ పరికరంలోని Google Password Managerలో మాత్రమే సేవ్ చేయబడతాయి.</translation>
+<translation id="6387994324662817823">పాస్‌వర్డ్‌లు ఈ పరికరంలోని Password Managerలో మాత్రమే సేవ్ చేయబడతాయి.</translation>
 <translation id="6393156038355142111">శక్తివంతమైన పాస్‌వర్డ్‌ని సూచించు</translation>
 <translation id="6404422529625928907">Google Driveలో తెరవండి</translation>
 <translation id="6404511346730675251">బుక్‌మార్క్‌ను ఎడిట్ చేయండి</translation>
@@ -1703,7 +1703,7 @@
 <translation id="7080806333218412752">URLలను చెక్ చేయడానికి వాటిని సురక్షిత బ్రౌజింగ్‌కు పంపుతుంది. కొత్త రకం ప్రమాదాలను గుర్తించడంలో సహాయపడటానికి కొన్ని నమూనా పేజీలు, డౌన్‌లోడ్‌లు, ఎక్స్‌టెన్షన్ యాక్టివిటీ, సిస్టమ్ సమాచారాన్ని కూడా పంపుతుంది. మీరు సైన్ ఇన్ చేసి ఉన్నప్పుడు, మిమ్మల్ని అన్ని Google యాప్‌లలో కాపాడటానికి ఈ డేటాను తాత్కాలికంగా మీ Google ఖాతాకు లింక్ చేస్తుంది.</translation>
 <translation id="7082853213442715471">ఆన్ చేసినప్పుడు, కొన్ని వెబ్ టెక్నాలజీలు బ్లాక్ చేయబడతాయి, దీని కారణంగా, కొన్ని వెబ్‌సైట్‌లు నెమ్మదిగా లోడ్ కావచ్చు లేదా సరిగ్గా పని చేయకపోవచ్చు.</translation>
 <translation id="7091023926159231962">{count,plural, =1{{count} పాస్‌వర్డ్‌ను దిగుమతి చేయడం సాధ్యం కాలేదు}other{{count} పాస్‌వర్డ్‌లను దిగుమతి చేయడం సాధ్యం కాలేదు}}</translation>
-<translation id="7095110968493193530"><ph name="EMAIL" /> కోసం Google Password Managerకు</translation>
+<translation id="7095110968493193530"><ph name="EMAIL" /> కోసం Password Managerకు</translation>
 <translation id="7097046145876891318">అడ్రస్ బార్‌లో, కాలానుగుణంగా ధర మార్పులను చూడటానికి ధర హిస్టరీని ట్యాప్ చేయండి</translation>
 <translation id="7102005569666697658">డౌన్‌లోడ్ చేస్తోంది… <ph name="FILE_SIZE" /></translation>
 <translation id="7104701424653979232">మెనూ → సెట్టింగ్‌లు → పేమెంట్ ఆప్షన్‌లు</translation>
@@ -1897,7 +1897,7 @@
 <translation id="78146569776629510">డౌన్‌లోడ్‌లు</translation>
 <translation id="7815852444315004084">ప్రస్తుతానికి దాచండి</translation>
 <translation id="7825973332242257878">ట్యాబ్ గ్రూప్‌లు</translation>
-<translation id="7839994177130598711">మీ ఫ్యామిలీ మెంబర్‌లు, <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" />‌కు సైన్ ఇన్ చేయడానికి Google Password Managerను ఉపయోగించినప్పుడు, వారు ఇప్పుడు మీ యూజర్‌నేమ్‌ను, పాస్‌వర్డ్‌ను ఉపయోగించవచ్చు.</translation>
+<translation id="7839994177130598711">మీ ఫ్యామిలీ మెంబర్‌లు, <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" />‌కు సైన్ ఇన్ చేయడానికి Password Managerను ఉపయోగించినప్పుడు, వారు ఇప్పుడు మీ యూజర్‌నేమ్‌ను, పాస్‌వర్డ్‌ను ఉపయోగించవచ్చు.</translation>
 <translation id="7841180087127694526">కాపీ చేసిన టెక్స్ట్ కోసం సెర్చ్ చేయండి</translation>
 <translation id="7841418003178675048">మీ కొత్త ట్యాబ్ పేజీలో మీకు ఏ కార్డ్స్ కనిపించాలో ఎంచుకోండి.</translation>
 <translation id="7845466610722898">చదవాల్సిన లిస్ట్‌ను చూడండి</translation>
@@ -1921,7 +1921,7 @@
 <translation id="7887198238286927132">మీ గోప్యతను సంరక్షించడానికి, Chrome ఈ ఫీల్డ్‌ను ఆటోమేటిక్‌గా పూరించదు.</translation>
 <translation id="7887552845761062935">మరిన్ని ఆప్షన్‌లను తెరవడానికి డబుల్ ట్యాప్ చేసి ఉంచండి</translation>
 <translation id="7888562068293422208">అన్నింటినీ మూసివేయాలా?</translation>
-<translation id="7889910613639381518">Google Password Manager విడ్జెట్‌తో సులభమైన, సురక్షితమైన యాక్సెస్.</translation>
+<translation id="7889910613639381518">Password Manager విడ్జెట్‌తో సులభమైన, సురక్షితమైన యాక్సెస్.</translation>
 <translation id="7899199123054742721">అన్నీ చదవనివిగా మార్క్ చేయండి</translation>
 <translation id="7911190106180361398">అన్నింటిని సింక్ చేయడానికి మీ సంస్థ మిమ్మల్ని అనుమతించదు.</translation>
 <translation id="7918999344502274923"><ph name="SEARCH_ENGINE_NAME" /> వివరాలను దాచండి</translation>
@@ -1949,16 +1949,16 @@
 <translation id="797874245254030665">ఏ యాప్ నుండి అయినా మీ పాస్‌వర్డ్‌లు, పాస్-కీలను యాక్సెస్ చేయండి</translation>
 <translation id="7982789257301363584">నెట్‌వర్క్</translation>
 <translation id="798299424881500862">నారింజ రంగు థీమ్</translation>
-<translation id="7987685713885608670">అదనపు భద్రత కోసం, పాస్‌వర్డ్‌లు Google Password Managerలో సేవ్ కావడానికి ముందు, వాటిని మీ పరికరంలో ఎన్‌క్రిప్ట్ చేయండి.</translation>
+<translation id="7987685713885608670">అదనపు భద్రత కోసం, పాస్‌వర్డ్‌లు Password Managerలో సేవ్ కావడానికి ముందు, వాటిని మీ పరికరంలో ఎన్‌క్రిప్ట్ చేయండి.</translation>
 <translation id="798991908416757345">ట్యాబ్ గ్రూప్‌లు అందుబాటులో లేవు</translation>
 <translation id="7993170188789685695">ఈ నోటిఫికేషన్‌ను మూసివేయడానికి డబుల్ ట్యాప్ చేయండి.</translation>
 <translation id="7996239959906074962">సెటప్ చేయండి…</translation>
 <translation id="800361585186029508">ఇన్‌పుట్ చేసిన URLలను Google Chromeలో తెరుస్తుంది.</translation>
-<translation id="8005666035647241369">ఈ పరికరంలో Google Password Managerకు</translation>
+<translation id="8005666035647241369">ఈ పరికరంలో Password Managerకు</translation>
 <translation id="8010488806779226127">మీరు బ్రౌజ్ చేస్తున్నప్పుడు మరిన్ని చేయడంలో మీకు సహాయపడే ఫీచర్‌లను అన్వేషించండి</translation>
 <translation id="8011489434346330032">వెబ్ ఇన్స్‌పెక్టర్</translation>
 <translation id="8015826420689927262">అటాచ్‌మెంట్‌ను తొలగించండి</translation>
-<translation id="8017015647846870183">పాస్‌వర్డ్‌లు ఇంకా పాస్‌కీలతో సహా, Google Password Manager నుండి</translation>
+<translation id="8017015647846870183">పాస్‌వర్డ్‌లు ఇంకా పాస్‌కీలతో సహా, Password Manager నుండి</translation>
 <translation id="802154636333426148">డౌన్‌లోడ్ విఫలమైంది</translation>
 <translation id="8023170444051056234">మీరు వెంటనే "<ph name="GROUP_NAME" />" ట్యాబ్ గ్రూప్‌నకు యాక్సెస్‌ను కోల్పోతారు, అది మీ అన్ని పరికరాల నుండి తొలగించబడుతుంది</translation>
 <translation id="8023878949384262191">విభాగాన్ని విస్తరింపజేస్తుంది.</translation>

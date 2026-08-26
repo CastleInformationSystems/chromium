@@ -8,8 +8,10 @@
 #include <utility>
 
 #include "build/build_config.h"
+#if !BUILDFLAG(IS_ANDROID)
 #include "chrome/services/rag_ingestion_pdf/rag_ingestion_pdf_extractor_impl.h"
 #include "chrome/services/rag_ingestion_pdf/public/mojom/rag_ingestion_pdf.mojom.h"
+#endif
 #include "chrome/services/speech/buildflags/buildflags.h"
 #include "components/on_device_translation/buildflags/buildflags.h"
 #include "components/paint_preview/buildflags/buildflags.h"
@@ -166,11 +168,13 @@ auto ContentBookmarkParser(
       std::move(receiver));
 }
 
+#if !BUILDFLAG(IS_ANDROID)
 auto RunRagIngestionPdfExtractor(
     mojo::PendingReceiver<rag_ingestion::mojom::PdfTextExtractor> receiver) {
   return std::make_unique<rag_ingestion::PdfTextExtractorImpl>(
       std::move(receiver));
 }
+#endif
 
 #if BUILDFLAG(IS_WIN)
 auto RunProcessorMetrics(
@@ -454,9 +458,9 @@ void RegisterMainThreadServices(mojo::ServiceFactory& services) {
   services.Add(RunCSVPasswordParser);
   services.Add(ContentBookmarkParser);
   services.Add(RunPassageEmbeddingsService);
-
+#if !BUILDFLAG(IS_ANDROID)
   services.Add(RunRagIngestionPdfExtractor);
-
+#endif
 #if !BUILDFLAG(IS_ANDROID)
   services.Add(RunOakSessionService);
   services.Add(RunProfileImporter);

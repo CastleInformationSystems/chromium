@@ -115,7 +115,7 @@ declare_args() {
 
   # The iOS app bundle id.
   ios_chromium_bundle_id =
-      "$ios_app_bundle_id_prefix.chrome.ios$apple_mobile_app_bundle_id_suffix"
+      "$ios_app_bundle_id_prefix$apple_mobile_app_bundle_id_suffix"
 
   # Path to a PrivacyInfo.xcprivacy file to be included in app extensions.
   ios_app_extension_privacy_manifest = ""
@@ -165,10 +165,10 @@ if (is_chrome_branded) {
   url_unsecure_scheme = "googlechrome"
   url_x_callback_scheme = "googlechrome-x-callback"
 } else {
-  chromium_short_name = "Chromium"
-  url_channel_scheme = "chromium-dev"
-  url_secure_scheme = "chromiums"
-  url_ssoauth_scheme = "$ios_app_bundle_id_prefix.sso.chromium"
-  url_unsecure_scheme = "chromium"
-  url_x_callback_scheme = "chromium-x-callback"
+  chromium_short_name = "Jatter"
+  url_channel_scheme = "jatter-dev"
+  url_secure_scheme = "jatters"
+  url_ssoauth_scheme = "$ios_app_bundle_id_prefix.sso.jatter"
+  url_unsecure_scheme = "jatter"
+  url_x_callback_scheme = "jatter-x-callback"
 }

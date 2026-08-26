@@ -236,7 +236,8 @@ public class FirstRunActivity extends FirstRunActivityBase implements FirstRunPa
 
     /** Creates first page and sets up adapter. Should result UI being shown on the screen. */
     private void createFirstPage() {
-        BooleanSupplier showWelcomePage = () -> !FirstRunStatus.shouldSkipWelcomePage();
+        // BooleanSupplier showWelcomePage = () -> !FirstRunStatus.shouldSkipWelcomePage();
+        BooleanSupplier showWelcomePage = () -> false;
         mPages.add(new FirstRunPage<>(SigninFirstRunFragment.class, showWelcomePage));
         mFreProgressStates.add(MobileFreProgress.WELCOME_SHOWN);
         mPagerAdapter = new FirstRunPagerAdapter(FirstRunActivity.this, mPages);

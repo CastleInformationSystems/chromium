@@ -64,8 +64,6 @@ static_library("ui") {
     "incognito_allowed_url.h",
     "managed_ui.cc",
     "managed_ui.h",
-    "rag_ingestion/rag_ingestion_page_action_controller.cc",
-    "rag_ingestion/rag_ingestion_page_action_controller.h",
     "recently_audible_helper.cc",
     "recently_audible_helper.h",
     "screen_capture_notification_ui.h",
@@ -83,8 +81,6 @@ static_library("ui") {
     "tab_ui_helper.cc",
     "tab_ui_helper.h",
     "uninstall_browser_prompt.h",
-    "views/rag_ingestion/rag_ingestion_page_action_icon_view.cc",
-    "views/rag_ingestion/rag_ingestion_page_action_icon_view.h",
     "view_ids.h",
     "webui/browsing_topics/browsing_topics_internals_page_handler.cc",
     "webui/browsing_topics/browsing_topics_internals_page_handler.h",
@@ -219,6 +215,15 @@ static_library("ui") {
     "webui/webui_load_timer.cc",
     "webui/webui_load_timer.h",
   ]
+
+  if (toolkit_views) {
+    sources += [
+      "rag_ingestion/rag_ingestion_page_action_controller.cc",
+      "rag_ingestion/rag_ingestion_page_action_controller.h",
+      "views/rag_ingestion/rag_ingestion_page_action_icon_view.cc",
+      "views/rag_ingestion/rag_ingestion_page_action_icon_view.h",
+  ]
+}
 
   if (enable_session_service) {
     sources += [

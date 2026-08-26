@@ -146,7 +146,7 @@ public class UrlConstants {
      * Clients should not use these constants directly, and instead should use UrlConstantResolver
      * to ensure URL overrides from extensions are respected.
      */
-    @Deprecated public static final String NTP_URL = "chrome-native://newtab/";
+    @Deprecated public static final String NTP_URL = "https://beacon-staging-df5f2.firebaseapp.com";
     @Deprecated public static final String NTP_NON_NATIVE_URL = "chrome://newtab/";
     @Deprecated public static final String BOOKMARKS_URL = "chrome://bookmarks/";
     @Deprecated public static final String BOOKMARKS_NATIVE_URL = "chrome-native://bookmarks/";

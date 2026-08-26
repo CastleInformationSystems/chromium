@@ -92,7 +92,7 @@ class CodeSignConfig(object):
     def enable_updater(self):
         """Returns True if the build should use updater-related resources.
         """
-        raise ConfigError('enable_updater')
+        return True
 
     @property
     def identity(self):

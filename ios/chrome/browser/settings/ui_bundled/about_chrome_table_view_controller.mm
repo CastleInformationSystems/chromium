@@ -93,21 +93,21 @@ const CGFloat kDefaultHeight = 70;
   credits.accessibilityIdentifier = kSettingsOpenSourceLicencesCellId;
   [model addItem:credits toSectionWithIdentifier:SectionIdentifierLinks];
 
-  TableViewDetailTextItem* terms =
-      [[TableViewDetailTextItem alloc] initWithType:ItemTypeLinksTerms];
-  terms.text = l10n_util::GetNSString(IDS_IOS_TERMS_OF_SERVICE);
-  terms.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-  terms.accessibilityTraits = UIAccessibilityTraitButton;
-  terms.accessibilityIdentifier = kSettingsTOSCellId;
-  [model addItem:terms toSectionWithIdentifier:SectionIdentifierLinks];
+  // TableViewDetailTextItem* terms =
+  //     [[TableViewDetailTextItem alloc] initWithType:ItemTypeLinksTerms];
+  // terms.text = l10n_util::GetNSString(IDS_IOS_TERMS_OF_SERVICE);
+  // terms.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  // terms.accessibilityTraits = UIAccessibilityTraitButton;
+  // terms.accessibilityIdentifier = kSettingsTOSCellId;
+  // [model addItem:terms toSectionWithIdentifier:SectionIdentifierLinks];
 
-  TableViewDetailTextItem* privacy =
-      [[TableViewDetailTextItem alloc] initWithType:ItemTypeLinksPrivacy];
-  privacy.text = l10n_util::GetNSString(IDS_IOS_PRIVACY_POLICY);
-  privacy.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-  privacy.accessibilityTraits = UIAccessibilityTraitButton;
-  privacy.accessibilityIdentifier = kSettingsPrivacyNoticeCellId;
-  [model addItem:privacy toSectionWithIdentifier:SectionIdentifierLinks];
+  // TableViewDetailTextItem* privacy =
+  //     [[TableViewDetailTextItem alloc] initWithType:ItemTypeLinksPrivacy];
+  // privacy.text = l10n_util::GetNSString(IDS_IOS_PRIVACY_POLICY);
+  // privacy.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+  // privacy.accessibilityTraits = UIAccessibilityTraitButton;
+  // privacy.accessibilityIdentifier = kSettingsPrivacyNoticeCellId;
+  // [model addItem:privacy toSectionWithIdentifier:SectionIdentifierLinks];
 
   VersionItem* version = [[VersionItem alloc] initWithType:ItemTypeVersion];
   version.text = [self versionDescriptionString];

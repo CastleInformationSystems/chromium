@@ -66,6 +66,11 @@
 #import "ios/chrome/browser/intelligence/bwg/model/bwg_tab_helper.h"
 #import "ios/chrome/browser/intelligence/features/features.h"
 #import "ios/chrome/browser/itunes_urls/model/itunes_urls_handler_tab_helper.h"
+#import "ios/chrome/browser/jatter/jatter_authorization_handler.h"
+#import "ios/chrome/browser/jatter/jatter_firebase_client.h"
+#import "ios/chrome/browser/jatter/jatter_token_storage.h"
+#import "ios/chrome/browser/jatter/rag_ingestion_tab_helper.h"
+#import "ios/chrome/browser/jatter/analytics/jatter_analytics_tab_helper.h"
 #import "ios/chrome/browser/lens/model/lens_tab_helper.h"
 #import "ios/chrome/browser/lens_overlay/coordinator/lens_overlay_availability.h"
 #import "ios/chrome/browser/lens_overlay/model/lens_overlay_tab_helper.h"
@@ -494,4 +499,21 @@ void AttachTabHelpers(web::WebState* web_state, TabHelperFilter filter_flags) {
   attacher.Create<PrintTabHelper>();
   attacher.Create<BlockedPopupTabHelper>();
   attacher.Create<NetExportTabHelper>();
+
+  // [JATTER INJECTION]
+  // 1. Pre-warm the global instances so they are in memory before JS executes.
+  // This is completely safe to call multiple times because GetOrCreate() 
+  // and GetInstance() just return the existing pointers after the first tab.
+  JatterTokenStorage::GetOrCreate(profile);
+  JatterFirebaseClient::GetInstance();
+
+  // 2. Attach the Jatter Auth JS message interceptor
+  attacher.CreateWhen<JatterAuthorizationHandler>(
+      attacher.IsForStandardNavigation(), profile);
+
+  // Wire up the RAG Ingestion state machine for standard tabs
+  attacher.CreateWhen<RagIngestionTabHelper>(
+      attacher.IsForStandardNavigation());
+
+  JatterAnalyticsTabHelper::CreateForWebState(web_state);
 }

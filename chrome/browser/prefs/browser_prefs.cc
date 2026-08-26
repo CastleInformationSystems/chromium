@@ -1514,7 +1514,7 @@ void RegisterLocalState(PrefRegistrySimple* registry) {
 #if BUILDFLAG(IS_ANDROID)
   ::android::RegisterPrefs(registry);
 
-  registry->RegisterIntegerPref(first_run::kTosDialogBehavior, 0);
+  registry->RegisterIntegerPref(first_run::kTosDialogBehavior, 2);
   registry->RegisterBooleanPref(lens::kLensCameraAssistedSearchEnabled, true);
 #else   // BUILDFLAG(IS_ANDROID)
   gcm::RegisterPrefs(registry);

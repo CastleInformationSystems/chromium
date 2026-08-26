@@ -144,7 +144,7 @@ NSString* const kCollaborationSigninHeaderBackground =
       break;
     }
   }
-  [self generateDisclaimer];
+  // [self generateDisclaimer];
 
   // Add `self.identityControl` if needed.
   if (self.signinStatus != SigninScreenConsumerSigninStatusDisabled) {

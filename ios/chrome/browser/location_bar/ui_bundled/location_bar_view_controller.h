@@ -29,6 +29,7 @@
 @protocol PageActionMenuCommands;
 @protocol PageActionMenuEntryPointCommands;
 class PrefService;
+@protocol RagLocationBarCommands;
 @protocol ReaderModeChipVisibilityDelegate;
 @protocol SceneCommands;
 @protocol TextFieldViewContaining;
@@ -149,6 +150,9 @@ class Tracker;
 // Whether Lens overlay is currently visible.
 @property(nonatomic, assign) BOOL lensOverlayVisible;
 
+@property(nonatomic, strong) UIButton* jatterButton;
+@property(nonatomic, weak) id<RagLocationBarCommands> ragLocationBarHandler;
+
 // Sets the edit view to use in the editing state. This must be set before the
 // view of this view controller is initialized. This must only be called once.
 - (void)setEditView:(UIView<TextFieldViewContaining>*)editView;
@@ -225,6 +229,8 @@ class Tracker;
 
 // Creates a visual copy of the location bar steady view.
 - (UIView*)locationBarSteadyViewVisualCopy;
+
+- (void)updateJatterIconWithState:(int)state;
 
 @end
 

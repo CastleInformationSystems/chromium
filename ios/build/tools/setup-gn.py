@@ -131,7 +131,7 @@ class GnGenerator(object):
 
     is_debug = self._config == 'Debug'
     official = self._config == 'Official'
-    is_optim = self._config in ('Profile', 'Official')
+    is_optim = self._config in ('Profile', 'Official', 'Release')
 
     args.append(('target_os', '"ios"'))
     args.append(('is_debug', is_debug))

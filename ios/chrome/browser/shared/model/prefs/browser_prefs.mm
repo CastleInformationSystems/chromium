@@ -419,7 +419,7 @@ void RegisterLocalStatePrefs(PrefRegistrySimple* registry) {
   registry->RegisterListPref(prefs::kRestrictAccountsToPatterns);
   registry->RegisterIntegerPref(prefs::kBrowserSigninPolicy,
                                 static_cast<int>(BrowserSigninMode::kEnabled));
-  registry->RegisterBooleanPref(prefs::kSigninAllowedOnDevice, true);
+  registry->RegisterBooleanPref(prefs::kSigninAllowedOnDevice, false);
   registry->RegisterBooleanPref(prefs::kAppStoreRatingPolicyEnabled, true);
   registry->RegisterBooleanPref(kIosParcelTrackingPolicyEnabled, false);
 
@@ -652,10 +652,10 @@ void RegisterProfilePrefs(user_prefs::PrefRegistrySyncable* registry) {
       translate::prefs::kOfferTranslateEnabled, true,
       user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);
   registry->RegisterBooleanPref(
-      prefs::kTrackPricesOnTabsEnabled, true,
+      prefs::kTrackPricesOnTabsEnabled, false,
       user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);
   registry->RegisterBooleanPref(
-      prefs::kNTPContentSuggestionsEnabled, true,
+      prefs::kNTPContentSuggestionsEnabled, false,
       user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);
   registry->RegisterBooleanPref(
       prefs::kArticlesForYouEnabled, true,
@@ -685,8 +685,7 @@ void RegisterProfilePrefs(user_prefs::PrefRegistrySyncable* registry) {
   // Register prefs used by Clear Browsing Data UI.
   browsing_data::prefs::RegisterBrowserUserPrefs(registry);
 
-  registry->RegisterStringPref(prefs::kNewTabPageLocationOverride,
-                               std::string());
+  registry->RegisterStringPref(prefs::kNewTabPageLocationOverride, std::string());
 
   registry->RegisterIntegerPref(
       policy::policy_prefs::kIncognitoModeAvailability,
@@ -1041,6 +1040,7 @@ void RegisterProfilePrefs(user_prefs::PrefRegistrySyncable* registry) {
   // Deprecated 12/2025.
   registry->RegisterStringPref(kAutofillStatesDataDir, std::string());
   registry->RegisterBooleanPref(prefs::kIosMiniMapShowNativeMap, true);
+  registry->RegisterDictionaryPref("jatter.authentication_token");
 }
 
 // This method should be periodically pruned of year+ old migrations.

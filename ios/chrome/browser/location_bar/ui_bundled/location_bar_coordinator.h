@@ -5,6 +5,7 @@
 #ifndef IOS_CHROME_BROWSER_LOCATION_BAR_UI_BUNDLED_LOCATION_BAR_COORDINATOR_H_
 #define IOS_CHROME_BROWSER_LOCATION_BAR_UI_BUNDLED_LOCATION_BAR_COORDINATOR_H_
 
+#import "ios/chrome/browser/jatter/rag_commands.h"
 #import "ios/chrome/browser/location_bar/ui_bundled/location_bar_url_loader.h"
 #import "ios/chrome/browser/omnibox/model/omnibox_position/omnibox_state_provider.h"
 #import "ios/chrome/browser/shared/coordinator/chrome_coordinator/chrome_coordinator.h"
@@ -20,6 +21,7 @@
 @protocol OmniboxPopupPresenterDelegate;
 @protocol OmniboxFocusDelegate;
 @protocol ToolbarOmniboxConsumer;
+@protocol RagLocationBarCommands;
 
 // Location bar coordinator.
 @interface LocationBarCoordinator
@@ -27,7 +29,8 @@
                          LocationBarBadgeCommands,
                          LocationBarURLLoader,
                          OmniboxCommands,
-                         OmniboxStateProvider>
+                         OmniboxStateProvider,
+                         RagLocationBarCommands>
 
 // View controller containing the omnibox.
 @property(nonatomic, strong, readonly)

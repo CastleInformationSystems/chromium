@@ -218,7 +218,7 @@
       <message name="IDS_IOS_ACCOUNT_CONSISTENCY_SETUP_SKIP_BUTTON" desc="Title of the button to skip the selection of an account. [Length: 20em] [iOS only]">
         Cancel
       </message>
-      <message name="IDS_IOS_ACCOUNT_IDENTITY_CHOOSER_ADD_ACCOUNT" desc="Button is displayed in the account picker dialog. Users can click it to add another account to the device, which can be used to sign in to Chrome. [iOS only]">
+      <message name="IDS_IOS_ACCOUNT_IDENTITY_CHOOSER_ADD_ACCOUNT" desc="Button is displayed in the account picker dialog. Users can click it to add another account to the device, which can be used to sign in to Jatter. [iOS only]">
         Add account…
       </message>
       <message name="IDS_IOS_ACCOUNT_IDENTITY_CHOOSER_CHOOSE_ACCOUNT" desc="Label at the top an account list. The user has to select one of the accounts to sign-in. [Length: 20em] [iOS only]">
@@ -267,7 +267,7 @@
         To sync and personalize across devices, turn on sync.
       </message>
       <message name="IDS_IOS_ACCOUNT_UNIFIED_CONSENT_SYNC_SUBTITLE" desc="Subtitle of the sync description section on the sync consent dialog to explain why sync can be useful for the user. [iOS only]">
-        Google may use your history to personalize Search and other Google services.
+        Google may use your history to personalize Search and other Services.
       </message>
       <message name="IDS_IOS_ACCOUNT_UNIFIED_CONSENT_SYNC_TITLE" desc="Title of the sync description section on the sync consent dialog to explain why sync can be useful for the user. [iOS only]">
         Sync your passwords, history &amp; more on all devices
@@ -279,7 +279,7 @@
         Turn on sync?
       </message>
       <message name="IDS_IOS_ADDRESSES_NOT_ENCRYPTED_DIALOG_TEXT" desc="Text of a dialog shown to users when they turn on the ability to use and save addresses in their Google Account. This is shown to users who encrypt their data with their own passphrase in order to explain that addresses they will save in the future will not be encrypted. [iOS only]">
-        Addresses aren't encrypted with your passphrase. This lets you use them in other Google services.
+        Addresses aren't encrypted with your passphrase. This lets you use them in other Services.
       </message>
       <message name="IDS_IOS_ADDRESS_BAR_SETTING" desc="Tag label title displayed in the address bar setting section. [iOS only]">
         Address bar
@@ -401,7 +401,7 @@
       <message name="IDS_IOS_AI_PROTOTYPING_MODEL_PICKER" translateable="false" desc="Model picker button text for the AI prototyping menu [Length: unlimited].">
         Choose A Model (unspecified uses the default)
       </message>
-      <message name="IDS_IOS_AI_PROTOTYPING_MQLS_SWITCH" translateable="false" desc="Switch indicating whether logs is uploaded to Chrome Model Quality Logging Service (MQLS) server [Length: unlimited].">
+      <message name="IDS_IOS_AI_PROTOTYPING_MQLS_SWITCH" translateable="false" desc="Switch indicating whether logs is uploaded to Jatter Model Quality Logging Service (MQLS) server [Length: unlimited].">
         Upload to MQLS
       </message>
       <message name="IDS_IOS_AI_PROTOTYPING_ON_DEVICE_SUBMIT" translateable="false" desc="On device submit button text for AI prototyping menu [Length: unlimited].">
@@ -517,7 +517,7 @@
            =1 {{count} option for address available above your keyboard.}
            other {{count} options for address available above your keyboard.}}
       </message>
-      <message name="IDS_IOS_AUTOFILL_ADD_CREDIT_CARD_OPEN_CAMERA_BUTTON_LABEL" desc="The text shown on a button to open the camera scanner to scan a credit card and extract the card number and expiry date, when adding a new credit card to Chrome Autofill [iOS only]">
+      <message name="IDS_IOS_AUTOFILL_ADD_CREDIT_CARD_OPEN_CAMERA_BUTTON_LABEL" desc="The text shown on a button to open the camera scanner to scan a credit card and extract the card number and expiry date, when adding a new credit card to Jatter Autofill [iOS only]">
         Use Camera
       </message>
       <message name="IDS_IOS_AUTOFILL_ADMIN_LEVEL2" desc="Title of the field of a profile address representing the administrative area level 2. A sub-division of a state, e.g. a Municipio in Brazil or Mexico. [Length: 15em] [iOS only]">
@@ -763,22 +763,22 @@
       <message name="IDS_IOS_BANNER_PROMO_CLOSE_BUTTON_ACCESSIBILITY_LABEL" desc="Accessibility label for the close button on the banner promo [iOS only]">
         Close banner promo
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_ADDRESS_BAR_POSITION_TITLE" desc="Title for the Address Bar Position Chrome iOS Best Features Promo">
+      <message name="IDS_IOS_BEST_FEATURES_ADDRESS_BAR_POSITION_TITLE" desc="Title for the Address Bar Position Jatter iOS Best Features Promo">
         Address Bar Position
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_CONTINUE_BUTTON" desc="The label of the Continue button featured on the Chrome iOS Best Features Promo">
+      <message name="IDS_IOS_BEST_FEATURES_CONTINUE_BUTTON" desc="The label of the Continue button featured on the Jatter iOS Best Features Promo">
         Continue
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_ENHANCED_SAFE_BROWSING_CAPTION" desc="Caption for the Enhanced Safe Browsing button on the Chrome iOS Best Features Promo">
+      <message name="IDS_IOS_BEST_FEATURES_ENHANCED_SAFE_BROWSING_CAPTION" desc="Caption for the Enhanced Safe Browsing button on the Jatter iOS Best Features Promo">
         Protection against online threats
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_ENHANCED_SAFE_BROWSING_SUBTITLE" desc="Subtitle for the Enhanced Safe Browsing Chrome iOS Best Features Promo">
+      <message name="IDS_IOS_BEST_FEATURES_ENHANCED_SAFE_BROWSING_SUBTITLE" desc="Subtitle for the Enhanced Safe Browsing Jatter iOS Best Features Promo">
         Add an extra layer of protection against online threats
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_ENHANCED_SAFE_BROWSING_TITLE" desc="Title for the Enhanced Safe Browsing Chrome iOS Best Features Promo">
+      <message name="IDS_IOS_BEST_FEATURES_ENHANCED_SAFE_BROWSING_TITLE" desc="Title for the Enhanced Safe Browsing Jatter iOS Best Features Promo">
         Enhanced Safe Browsing
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_LENS_CAPTION" desc="Caption for the Lens button on the Chrome iOS Best Features Promo">
+      <message name="IDS_IOS_BEST_FEATURES_LENS_CAPTION" desc="Caption for the Lens button on the Jatter iOS Best Features Promo">
         Shop and translate with your camera
       </message>
       <message name="IDS_IOS_BEST_FEATURES_LENS_STEP_1" desc="The first step to use Lens">
@@ -790,34 +790,34 @@
       <message name="IDS_IOS_BEST_FEATURES_LENS_STEP_3" desc="The third step to use Lens">
         Take a photo of your search
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_LENS_SUBTITLE" desc="Subtitle for the Lens Chrome iOS Best Features Promo">
+      <message name="IDS_IOS_BEST_FEATURES_LENS_SUBTITLE" desc="Subtitle for the Lens Jatter iOS Best Features Promo">
         Shop, translate, and identify what you see using your camera and photo gallery
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_LENS_TITLE" desc="Title for the Lens Chrome iOS Best Features Promo">
+      <message name="IDS_IOS_BEST_FEATURES_LENS_TITLE" desc="Title for the Lens Jatter iOS Best Features Promo">
         Search with Google Lens
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_LOCKED_INCOGNITO_CAPTION" desc="Caption for the Locked Incognito tabs button on the Chrome iOS Best Features Promo">
+      <message name="IDS_IOS_BEST_FEATURES_LOCKED_INCOGNITO_CAPTION" desc="Caption for the Locked Incognito tabs button on the Jatter iOS Best Features Promo">
         Keep your browsing private
       </message>
       <message name="IDS_IOS_BEST_FEATURES_LOCKED_INCOGNITO_SECOND_STEP" desc="The second step to setting up Locked Incognito tabs">
         Tap "Privacy and Security"
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_LOCKED_INCOGNITO_TITLE" desc="Title for the Locked Incognito tabs Chrome iOS Best Features Promo">
+      <message name="IDS_IOS_BEST_FEATURES_LOCKED_INCOGNITO_TITLE" desc="Title for the Locked Incognito tabs Jatter iOS Best Features Promo">
         Locked Incognito tabs
       </message>
       <message name="IDS_IOS_BEST_FEATURES_NEVER_FORGET_PASSWORDS_FIRST_STEP" desc="The first step to set up saving and autofill passwords">
         Sign in to a website
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_NEVER_FORGET_PASSWORDS_SUBTITLE" desc="Subtitle for the Never Forget Passwords Chrome iOS Best Features Promo">
+      <message name="IDS_IOS_BEST_FEATURES_NEVER_FORGET_PASSWORDS_SUBTITLE" desc="Subtitle for the Never Forget Passwords Jatter iOS Best Features Promo">
         Save and autofill your passwords to easily sign in to sites and apps
       </message>
       <message name="IDS_IOS_BEST_FEATURES_NEVER_FORGET_PASSWORDS_THIRD_STEP" desc="The third step to set up saving and autofill passwords">
         Tap "Save" to easily access this password the next time you sign in
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_NEVER_FORGET_PASSWORDS_TITLE" desc="Title for the Never Forget Passwords Chrome iOS Best Features Promo">
+      <message name="IDS_IOS_BEST_FEATURES_NEVER_FORGET_PASSWORDS_TITLE" desc="Title for the Never Forget Passwords Jatter iOS Best Features Promo">
         Never forget your passwords
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_PASSWORDS_IN_OTHER_APPS_CAPTION" desc="Caption for the Passwords in other apps button on the Chrome iOS Best Features Promo">
+      <message name="IDS_IOS_BEST_FEATURES_PASSWORDS_IN_OTHER_APPS_CAPTION" desc="Caption for the Passwords in other apps button on the Jatter iOS Best Features Promo">
         Get saved passwords in other apps
       </message>
       <message name="IDS_IOS_BEST_FEATURES_PASSWORDS_IN_OTHER_APPS_STEP_1" desc="The first step to enable Passwords in other apps">
@@ -835,19 +835,19 @@
       <message name="IDS_IOS_BEST_FEATURES_PASSWORDS_IN_OTHER_APPS_STEP_3_PASSWORD_OPTIONS" desc="The third step to enable Passwords in other apps. OS must be below iOS 18.">
         Open Password Options
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_PASSWORDS_IN_OTHER_APPS_TITLE" desc="Title for the Passwords in other apps Chrome iOS Best Features Promo">
+      <message name="IDS_IOS_BEST_FEATURES_PASSWORDS_IN_OTHER_APPS_TITLE" desc="Title for the Passwords in other apps Jatter iOS Best Features Promo">
         Passwords in other apps
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_PRICE_TRACKING_ANIMATION_TEXT_1" desc="Text featured on the Price Tracking animation used by Chrome iOS Best Features.">
+      <message name="IDS_IOS_BEST_FEATURES_PRICE_TRACKING_ANIMATION_TEXT_1" desc="Text featured on the Price Tracking animation used by Jatter iOS Best Features.">
         Smart Watch
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_PRICE_TRACKING_ANIMATION_TEXT_2" desc="Text featured on the Price Tracking animation used by Chrome iOS Best Features. The rendered text is 'Price $100 - $150'">
+      <message name="IDS_IOS_BEST_FEATURES_PRICE_TRACKING_ANIMATION_TEXT_2" desc="Text featured on the Price Tracking animation used by Jatter iOS Best Features. The rendered text is 'Price $100 - $150'">
         Price &#36;100 - &#36;180
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_PRICE_TRACKING_ANIMATION_TEXT_3" desc="Text featured on the Price Tracking animation used by Chrome iOS Best Features.">
+      <message name="IDS_IOS_BEST_FEATURES_PRICE_TRACKING_ANIMATION_TEXT_3" desc="Text featured on the Price Tracking animation used by Jatter iOS Best Features.">
         Track Price
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_PRICE_TRACKING_CAPTION" desc="Caption for the Price Tracking button on the Chrome iOS Best Features Promo">
+      <message name="IDS_IOS_BEST_FEATURES_PRICE_TRACKING_CAPTION" desc="Caption for the Price Tracking button on the Jatter iOS Best Features Promo">
         Track price drops of products
       </message>
       <message name="IDS_IOS_BEST_FEATURES_PRICE_TRACKING_STEP_1" desc="The first step to use the price tracking feature">
@@ -859,16 +859,16 @@
       <message name="IDS_IOS_BEST_FEATURES_PRICE_TRACKING_STEP_3" desc="The third step to use the price tracking feature">
         To track the product, tap Track
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_PRICE_TRACKING_SUBTITLE" desc="Subtitle for the Price Tracking Chrome iOS Best Features Promo">
+      <message name="IDS_IOS_BEST_FEATURES_PRICE_TRACKING_SUBTITLE" desc="Subtitle for the Price Tracking Jatter iOS Best Features Promo">
         Track prices of products and get alerts when the price drops on any site
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_PRICE_TRACKING_TITLE" desc="Title for the Price Tracking Chrome iOS Best Features Promo">
+      <message name="IDS_IOS_BEST_FEATURES_PRICE_TRACKING_TITLE" desc="Title for the Price Tracking Jatter iOS Best Features Promo">
         Price tracking and insights
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_SHARE_PASSWORDS_ANIMATION_TEXT_1" desc="Text featured on the Share Passwords animation used by Chrome iOS Best Features.">
+      <message name="IDS_IOS_BEST_FEATURES_SHARE_PASSWORDS_ANIMATION_TEXT_1" desc="Text featured on the Share Passwords animation used by Jatter iOS Best Features.">
         Share Your Passwords
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_SHARE_PASSWORDS_ANIMATION_TEXT_2" desc="Text featured on the Share Passwords animation used by Chrome iOS Best Features.">
+      <message name="IDS_IOS_BEST_FEATURES_SHARE_PASSWORDS_ANIMATION_TEXT_2" desc="Text featured on the Share Passwords animation used by Jatter iOS Best Features.">
         Share
       </message>
       <message name="IDS_IOS_BEST_FEATURES_SHARE_PASSWORDS_CAPTION" desc="Detail text for the Share Passwords row in the Best Features Screen">
@@ -883,22 +883,22 @@
       <message name="IDS_IOS_BEST_FEATURES_SHARE_PASSWORDS_STEP_4" desc="The fourth step to share passwords with others">
         Select a password and tap the "share" icon
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_SHARE_PASSWORDS_TITLE" desc="Title for the Share Passwords Chrome iOS Best Features Promo">
+      <message name="IDS_IOS_BEST_FEATURES_SHARE_PASSWORDS_TITLE" desc="Title for the Share Passwords Jatter iOS Best Features Promo">
         Share passwords
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_SKIP_BUTTON" desc="The label of the Skip button featured on the Chrome iOS Best Features Promo">
+      <message name="IDS_IOS_BEST_FEATURES_SKIP_BUTTON" desc="The label of the Skip button featured on the Jatter iOS Best Features Promo">
         Skip
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_START_BROWSING_BUTTON" desc="The label of the Start browsing button featured on the Chrome iOS Best Features Promo">
+      <message name="IDS_IOS_BEST_FEATURES_START_BROWSING_BUTTON" desc="The label of the Start browsing button featured on the Jatter iOS Best Features Promo">
         Start browsing
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_SUBTITLE" desc="Subtitle for the Chrome iOS Best Features Promo">
+      <message name="IDS_IOS_BEST_FEATURES_SUBTITLE" desc="Subtitle for the Jatter iOS Best Features Promo">
         Explore features that can help you do more as you browse
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_TAB_GROUPS_ANIMATION_TEXT_1" desc="Text featured on the Tab Groups animation used by Chrome iOS Best Features." meaning="The name of the demonstrated Tab Group.">
+      <message name="IDS_IOS_BEST_FEATURES_TAB_GROUPS_ANIMATION_TEXT_1" desc="Text featured on the Tab Groups animation used by Jatter iOS Best Features." meaning="The name of the demonstrated Tab Group.">
         Trip to Tokyo
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_TAB_GROUPS_CAPTION" desc="Caption for the Tab Groups button on the Chrome iOS Best Features Promo">
+      <message name="IDS_IOS_BEST_FEATURES_TAB_GROUPS_CAPTION" desc="Caption for the Tab Groups button on the Jatter iOS Best Features Promo">
         Stay organized by creating tab groups
       </message>
       <message name="IDS_IOS_BEST_FEATURES_TAB_GROUPS_STEP_1" desc="The first step for using Tab Groups">
@@ -913,13 +913,13 @@
       <message name="IDS_IOS_BEST_FEATURES_TAB_GROUPS_STEP_4" desc="The fourth step for using Tab Groups">
         Create your new tab group by giving it a name and color
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_TAB_GROUPS_SUBTITLE" desc="Subtitle for the Tab Groups Chrome iOS Best Features Promo">
+      <message name="IDS_IOS_BEST_FEATURES_TAB_GROUPS_SUBTITLE" desc="Subtitle for the Tab Groups Jatter iOS Best Features Promo">
         Create tab groups to organize your open tabs
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_TAB_GROUPS_TITLE" desc="Title for the Tab Groups Chrome iOS Best Features Promo">
+      <message name="IDS_IOS_BEST_FEATURES_TAB_GROUPS_TITLE" desc="Title for the Tab Groups Jatter iOS Best Features Promo">
         Tab groups
       </message>
-      <message name="IDS_IOS_BEST_FEATURES_TITLE" desc="Title for the Chrome iOS Best Features Promo">
+      <message name="IDS_IOS_BEST_FEATURES_TITLE" desc="Title for the Jatter iOS Best Features Promo">
         A safer, more powerful browser for you
       </message>
       <message name="IDS_IOS_BLOCK_POPUPS" desc="Title for the view and option in Settings for blocking pop-ups. [Length: 15em] [iOS only]">
@@ -1104,12 +1104,12 @@
       <message name="IDS_IOS_BOOKMARK_NEW_ZERO_ITEM_LABEL" desc="Text that indicates that a user has selected zero bookmarks for editing. [Length: 30em.]">
         0 selected
       </message>
-      <message name="IDS_IOS_BOOKMARK_PAGE_BULK_SAVED_FOLDER" desc="This confirmation message is intended to help users understand that a bookmark has been saved in Chrome. These users are not signed in to a Google Account and are not syncing their data, so we do not specify where the bookmark is saved. The confirmation message appears at the bottom of the page after users choose to bookmark a page. The tone should be informative.">
+      <message name="IDS_IOS_BOOKMARK_PAGE_BULK_SAVED_FOLDER" desc="This confirmation message is intended to help users understand that a bookmark has been saved in Jatter. These users are not signed in to a Google Account and are not syncing their data, so we do not specify where the bookmark is saved. The confirmation message appears at the bottom of the page after users choose to bookmark a page. The tone should be informative.">
           {count, plural,
           =1 {Bookmark saved to "{title}"}
           other {{count} bookmarks saved to "{title}"}}
       </message>
-      <message name="IDS_IOS_BOOKMARK_PAGE_BULK_SAVED_FOLDER_TO_DEVICE" desc="This confirmation message is intended to help users understand that a bookmark has been saved in Chrome. These users are not signed in to a Google Account and are not syncing their data, so we do not specify where the bookmark is saved. The confirmation message appears at the bottom of the page after users choose to bookmark a page. The tone should be informative.">
+      <message name="IDS_IOS_BOOKMARK_PAGE_BULK_SAVED_FOLDER_TO_DEVICE" desc="This confirmation message is intended to help users understand that a bookmark has been saved in Jatter. These users are not signed in to a Google Account and are not syncing their data, so we do not specify where the bookmark is saved. The confirmation message appears at the bottom of the page after users choose to bookmark a page. The tone should be informative.">
           {count, plural,
           =1 {Bookmark saved to "{title}". It is saved only to this device.}
           other {{count} bookmarks saved to "{title}". They are saved only to this device.}}
@@ -1124,12 +1124,12 @@
          =1 {Bookmark saved to "{title}" in your account, {email}}
          other {{count} bookmarks saved to "{title}" in your account, {email}}}
       </message>
-      <message name="IDS_IOS_BOOKMARK_PAGE_SAVED_FOLDER" desc="This confirmation message is intended to help users understand that a bookmark has been saved in Chrome. These users are not signed in to a Google Account and are not syncing their data, so we do not specify where the bookmark is saved. The confirmation message appears at the bottom of the page after users choose to bookmark a page. The tone should be informative.">
+      <message name="IDS_IOS_BOOKMARK_PAGE_SAVED_FOLDER" desc="This confirmation message is intended to help users understand that a bookmark has been saved in Jatter. These users are not signed in to a Google Account and are not syncing their data, so we do not specify where the bookmark is saved. The confirmation message appears at the bottom of the page after users choose to bookmark a page. The tone should be informative.">
           {count, plural,
           =1 {Bookmark saved to "{title}"}
           other {Bookmarks saved to "{title}"}}
       </message>
-      <message name="IDS_IOS_BOOKMARK_PAGE_SAVED_FOLDER_TO_DEVICE" desc="This confirmation message is intended to help users understand that a bookmark has been saved in Chrome. These users are not signed in to a Google Account and are not syncing their data, so we do not specify where the bookmark is saved. The confirmation message appears at the bottom of the page after users choose to bookmark a page. The tone should be informative.">
+      <message name="IDS_IOS_BOOKMARK_PAGE_SAVED_FOLDER_TO_DEVICE" desc="This confirmation message is intended to help users understand that a bookmark has been saved in Jatter. These users are not signed in to a Google Account and are not syncing their data, so we do not specify where the bookmark is saved. The confirmation message appears at the bottom of the page after users choose to bookmark a page. The tone should be informative.">
           {count, plural,
           =1 {Bookmark saved to "{title}". It is saved only to this device.}
           other {Bookmarks saved to "{title}". They are only saved to this device.}}
@@ -1191,18 +1191,18 @@
       <message name="IDS_IOS_BRING_ANDROID_TABS_REVIEW_TABLE_TITLE" desc="Title of the table that shows a list of recently active tabs from Android for the Android switcher to review and open. [iOS only]">
         Tabs from Android
       </message>
-      <message name="IDS_IOS_BULK_UPLOAD_BOOKMARK_TITLE" desc="The text appears as a note in a confirmation dialog where the user can choose to save some data to their Google Account. When data is saved to the Google Account, it's backed up safely and is available on any device where they're signed in to Chrome. This switch label explains how many  bookmarks are saved locally.">
+      <message name="IDS_IOS_BULK_UPLOAD_BOOKMARK_TITLE" desc="The text appears as a note in a confirmation dialog where the user can choose to save some data to their Google Account. When data is saved to the Google Account, it's backed up safely and is available on any device where they're signed in to Jatter. This switch label explains how many  bookmarks are saved locally.">
         {count, plural,
           =1 {{count} bookmark}
           other {{count} bookmarks}}
       </message>
-      <message name="IDS_IOS_BULK_UPLOAD_BUTTON_TITLE" desc="The text is the primary button in a confirmation dialog where the user can choose to save some data to their Google Account. When data is saved to the Google Account, it's backed up safely and is available on any device where they're signed in to Chrome.">
+      <message name="IDS_IOS_BULK_UPLOAD_BUTTON_TITLE" desc="The text is the primary button in a confirmation dialog where the user can choose to save some data to their Google Account. When data is saved to the Google Account, it's backed up safely and is available on any device where they're signed in to Jatter.">
         Save in account
       </message>
-      <message name="IDS_IOS_BULK_UPLOAD_ON_THIS_DEVICE_SETTINGS_HEADER" desc="The text appears as a note in a confirmation dialog where the user can choose to save some data to their Google Account. When data is saved to the Google Account, it's backed up safely and is available on any device where they're signed in to Chrome. This note explains where the user can go to view and manage individual items. like individual bookmarks or passwords.">
+      <message name="IDS_IOS_BULK_UPLOAD_ON_THIS_DEVICE_SETTINGS_HEADER" desc="The text appears as a note in a confirmation dialog where the user can choose to save some data to their Google Account. When data is saved to the Google Account, it's backed up safely and is available on any device where they're signed in to Jatter. This note explains where the user can go to view and manage individual items. like individual bookmarks or passwords.">
         You can also view and manage these items in your bookmarks, reading list, or password manager.
       </message>
-      <message name="IDS_IOS_BULK_UPLOAD_ON_THIS_DEVICE_TITLE" desc="The text appears as the title of a confirmation dialog where the user can choose to save some data to their Google Account. When data is saved to the Google Account, it's backed up safely and is available on any device where they're signed in to Chrome.">
+      <message name="IDS_IOS_BULK_UPLOAD_ON_THIS_DEVICE_TITLE" desc="The text appears as the title of a confirmation dialog where the user can choose to save some data to their Google Account. When data is saved to the Google Account, it's backed up safely and is available on any device where they're signed in to Jatter.">
         On this device
       </message>
       <message name="IDS_IOS_BULK_UPLOAD_PASSWORD_AND_OTHER_TYPE_AUTHENTIFY_MESSAGE" desc="After the user selected to bulk upload passwords and one other type of items, the iPhone request the user to identify, and this message explains what will occurs if they identify.">
@@ -1211,19 +1211,19 @@
       <message name="IDS_IOS_BULK_UPLOAD_PASSWORD_AUTHENTIFY_MESSAGE" desc="After the user selected to bulk upload passwords, the iPhone request the user to identify, and this message explains what will occurs if they identify.">
         Save passwords in account
       </message>
-      <message name="IDS_IOS_BULK_UPLOAD_PASSWORD_SUBTITLE" desc="The text appears as a note in a confirmation dialog where the user can choose to save some data to their Google Account. When data is saved to the Google Account, it's backed up safely and is available on any device where they're signed in to Chrome. This line give the number of sites with local passwords and two examples of such sites.">
+      <message name="IDS_IOS_BULK_UPLOAD_PASSWORD_SUBTITLE" desc="The text appears as a note in a confirmation dialog where the user can choose to save some data to their Google Account. When data is saved to the Google Account, it's backed up safely and is available on any device where they're signed in to Jatter. This line give the number of sites with local passwords and two examples of such sites.">
         {count, plural,
           =1 {For {website_1}}
           =2 {For {website_1}, {website_2}}
           =3 {For {website_1}, {website_2}, and 1 more}
           other {For {website_1}, {website_2}, and {more_count} more}}
       </message>
-      <message name="IDS_IOS_BULK_UPLOAD_PASSWORD_TITLE" desc="The text appears as a note in a confirmation dialog where the user can choose to save some data to their Google Account. When data is saved to the Google Account, it's backed up safely and is available on any device where they're signed in to Chrome. This switch label explains how many passwords are saved locally.">
+      <message name="IDS_IOS_BULK_UPLOAD_PASSWORD_TITLE" desc="The text appears as a note in a confirmation dialog where the user can choose to save some data to their Google Account. When data is saved to the Google Account, it's backed up safely and is available on any device where they're signed in to Jatter. This switch label explains how many passwords are saved locally.">
         {count, plural,
           =1 {{count} password}
           other {{count} passwords}}
       </message>
-      <message name="IDS_IOS_BULK_UPLOAD_READING_LIST_TITLE" desc="The text appears as a note in a confirmation dialog where the user can choose to save some data to their Google Account. When data is saved to the Google Account, it's backed up safely and is available on any device where they're signed in to Chrome. This switch label explains how many local reading list pages are saved locally.">
+      <message name="IDS_IOS_BULK_UPLOAD_READING_LIST_TITLE" desc="The text appears as a note in a confirmation dialog where the user can choose to save some data to their Google Account. When data is saved to the Google Account, it's backed up safely and is available on any device where they're signed in to Jatter. This switch label explains how many local reading list pages are saved locally.">
         {count, plural,
           =1 {{count} page on your reading list}
           other {{count} pages on your reading list}}
@@ -1324,7 +1324,7 @@
           Gemini
       </message>
       <message name="IDS_IOS_BWG_PROMO_MAIN_TITLE" desc="Main title text for the Gemini Promo page.">
-          Do more with Gemini in Chrome
+          Do more with Gemini in Jatter
       </message>
       <message name="IDS_IOS_BWG_PROMO_PRIMARY_BUTTON" desc="Primary button text for the Gemini Promo page.">
           Get started
@@ -1783,17 +1783,17 @@
       <message name="IDS_IOS_CONTENT_NOTIFICATIONS_SPORTS_SETTINGS_TOGGLE_TITLE" desc="The label for the notification settings item title for sports notifications.">
         Sports
       </message>
-      <message name="IDS_IOS_CONTENT_NOTIFICATION_SNACKBAR_ACTION_MANAGE" desc="Text for the Chrome content notifications confirmation snackbar action.">
+      <message name="IDS_IOS_CONTENT_NOTIFICATION_SNACKBAR_ACTION_MANAGE" desc="Text for the Jatter content notifications confirmation snackbar action.">
         Manage
       </message>
-      <message name="IDS_IOS_CONTENT_NOTIFICATION_SNACKBAR_TITLE" desc="Title for the Chrome content notifications confirmation snackbar.">
+      <message name="IDS_IOS_CONTENT_NOTIFICATION_SNACKBAR_TITLE" desc="Title for the Jatter content notifications confirmation snackbar.">
         You'll now receive content notifications
       </message>
       <message name="IDS_IOS_CONTENT_SETTINGS_TITLE" desc="Title for content settings dialog [Length: 29em] [iOS only]">
         Content settings
       </message>
       <message name="IDS_IOS_CONTENT_SUGGESTIONS_ACCESSIBILITY_LABEL_SUGGESTION" desc="The accessibility label of a suggestion. Summarizes fields in the reading list entry (title, publisher informations, status and informations). Read by Text-to-Speech.">
-        <ph name="TITLE"><ex>Learn about the new Chromium projects</ex>$1</ph>, <ph name="PUBLISHER_INFORMATION"><ex>The Chromium organization</ex>$2</ph>, <ph name="PUBLICATION_DATE"><ex>January 1 2017</ex>$3</ph>
+        <ph name="TITLE"><ex>Learn about the new Jatter projects</ex>$1</ph>, <ph name="PUBLISHER_INFORMATION"><ex>The Jatter organization</ex>$2</ph>, <ph name="PUBLICATION_DATE"><ex>January 1 2017</ex>$3</ph>
       </message>
       <message name="IDS_IOS_CONTENT_SUGGESTIONS_ADD_PINNED_SITE" desc="The title of the button to add a pinned site on the new tab page [Length: 10em]">
         Add Site
@@ -2068,7 +2068,7 @@
       <message name="IDS_IOS_COPY_LINK_ACTION_TITLE" desc="Title of the action used to copy a link to the pasteboard. [iOS only]">
         Copy Link
       </message>
-      <message name="IDS_IOS_COPY_VERSION_HINT" desc="The accessibility hint for the label showing the Chrome version. [iOS only]">
+      <message name="IDS_IOS_COPY_VERSION_HINT" desc="The accessibility hint for the label showing the Jatter version. [iOS only]">
         Double tap to copy.
       </message>
       <message name="IDS_IOS_CREDENTIAL_BOTTOM_SHEET_CONTINUE" desc="The action button to use the selected credentials to fill the username on a username only form without password.">
@@ -2083,7 +2083,7 @@
       <message name="IDS_IOS_CREDENTIAL_BOTTOM_SHEET_RECOVERY_PASSWORD_LABEL" desc="Text shown for a recovery password suggestion available in the Credential Bottom Sheet. Indicates to the user that the recovery password can be used to log in if the main password doesn't work. A recovery password is a temporary backup of an old password that is kept after an automated password change occurred. It acts as a safety net in case the new password doesn't work. [iOS only]">
         Temp recovery in case of trouble
       </message>
-      <message name="IDS_IOS_CREDENTIAL_BOTTOM_SHEET_SELECT_PASSWORD" desc="This message is mentioned right after the title when the Credential Bottom Sheet opens. For example, in English, it would say: 'Google Password Manager. Select a password to fill.'. This is spoken by VoiceOver. [iOS only]">
+      <message name="IDS_IOS_CREDENTIAL_BOTTOM_SHEET_SELECT_PASSWORD" desc="This message is mentioned right after the title when the Credential Bottom Sheet opens. For example, in English, it would say: 'Password Manager. Select a password to fill.'. This is spoken by VoiceOver. [iOS only]">
         Select a password to fill.
       </message>
       <message name="IDS_IOS_CREDENTIAL_BOTTOM_SHEET_SHOW_DETAILS" desc="The credential bottom sheet's long press menu item to open the password details page, which displays more information, like username, password and associated website.">
@@ -2113,10 +2113,10 @@
       <message name="IDS_IOS_CREDENTIAL_EXCHANGE_NOTHING_IMPORTED_TITLE" desc="Title of the alert shown during credential import flow when the other password manager did not share any passwords or passkeys. [iOS only]">
         Nothing imported
       </message>
-      <message name="IDS_IOS_CREDENTIAL_IMPORT_CONFLICT_RESOLUTION_TITLE" desc="Title modal that enables user to resolve conflict between existing credentials in Google Password Manager and those that are currently being imported. [iOS only]">
+      <message name="IDS_IOS_CREDENTIAL_IMPORT_CONFLICT_RESOLUTION_TITLE" desc="Title modal that enables user to resolve conflict between existing credentials in Password Manager and those that are currently being imported. [iOS only]">
         Merge duplicates
       </message>
-      <message name="IDS_IOS_CREDENTIAL_PROVIDER_NEW_PASSWORD_SUGGEST_STRONG_PASSWORD" desc="Button allowing users to request Chrome suggest a strong password">
+      <message name="IDS_IOS_CREDENTIAL_PROVIDER_NEW_PASSWORD_SUGGEST_STRONG_PASSWORD" desc="Button allowing users to request Jatter suggest a strong password">
         Suggest strong password
       </message>
       <message name="IDS_IOS_CREDENTIAL_PROVIDER_PASSKEY_SAVED" desc="Notification that a newly created passkey was synced to the user's account. [iOS only]">
@@ -2152,16 +2152,16 @@
       <message name="IDS_IOS_CREDIT_CARD_SETTINGS_ADD_PAYMENT_METHOD_TITLE" desc="Title of the view that allow user to enter the details for a new credit card to add it to the list the credit cards. [iOS only]">
           Add payment method
       </message>
-      <message name="IDS_IOS_DATA_NOT_UPLOADED_DIALOG_BUTTON" desc="Button of a dialog that is shown when the user starts to sign out; the user chooses to sync some or all data types, but some data hasn't been saved in their Google Account yet (for example, if there was an error). This string follows the heading 'Some Data Isn't Saved Yet' and the body text 'Some of your Chrome data hasn't been saved to your Google Account yet. Try waiting a few minutes before signing out. If you sign out now, this data will be deleted.'; the user can choose to tap on the buttons 'Cancel' or 'Delete and Sign Out'. If the user chooses to continue to sign out, then any of their data (such as bookmarks, passwords, history, settings, and more) that isn't saved in their account will be deleted. The tone should be helpful and instructive. [iOS only]">
+      <message name="IDS_IOS_DATA_NOT_UPLOADED_DIALOG_BUTTON" desc="Button of a dialog that is shown when the user starts to sign out; the user chooses to sync some or all data types, but some data hasn't been saved in their Google Account yet (for example, if there was an error). This string follows the heading 'Some Data Isn't Saved Yet' and the body text 'Some of your Jatter data hasn't been saved to your Google Account yet. Try waiting a few minutes before signing out. If you sign out now, this data will be deleted.'; the user can choose to tap on the buttons 'Cancel' or 'Delete and Sign Out'. If the user chooses to continue to sign out, then any of their data (such as bookmarks, passwords, history, settings, and more) that isn't saved in their account will be deleted. The tone should be helpful and instructive. [iOS only]">
         Delete and sign out
       </message>
-      <message name="IDS_IOS_DATA_NOT_UPLOADED_DIALOG_TITLE" desc="Title of a dialog that is shown when the user starts to sign out; the user chooses to sync some or all data types, but some data hasn't been saved in their Google Account yet (for example, if there was an error). This string precedes the body text 'Some of your Chrome data hasn't been saved to your Google Account yet. Try waiting a few minutes before signing out. If you sign out now, this data will be deleted.', and the user can choose to tap on the buttons 'Cancel' or 'Delete and Sign Out'. If the user chooses to continue to sign out, then any of their data (such as bookmarks, passwords, history, settings, and more) that isn't saved in their account will be deleted. The tone should be helpful and instructive. [iOS only]">
+      <message name="IDS_IOS_DATA_NOT_UPLOADED_DIALOG_TITLE" desc="Title of a dialog that is shown when the user starts to sign out; the user chooses to sync some or all data types, but some data hasn't been saved in their Google Account yet (for example, if there was an error). This string precedes the body text 'Some of your Jatter data hasn't been saved to your Google Account yet. Try waiting a few minutes before signing out. If you sign out now, this data will be deleted.', and the user can choose to tap on the buttons 'Cancel' or 'Delete and Sign Out'. If the user chooses to continue to sign out, then any of their data (such as bookmarks, passwords, history, settings, and more) that isn't saved in their account will be deleted. The tone should be helpful and instructive. [iOS only]">
         Some data isn't saved yet
       </message>
       <message name="IDS_IOS_DATA_NOT_UPLOADED_SWITCH_DIALOG_BUTTON" desc="Button of a dialog that is shown when the user starts to switch accounts; the user chooses to sync some or all data types, but some data hasn't been saved in their Google Account yet (for example, if there was an error). This string follows the heading 'Some data isn't saved yet' or the heading ‘Unsaved account data will be deleted’; the user can choose to tap on the buttons 'Cancel' or 'Delete and Switch'. If the user chooses to continue to switch accounts, then any of their data (such as bookmarks, passwords, history, settings, and more) that isn't saved in their account will be deleted. The tone should be helpful and instructive. [iOS only]">
                 Switch and Delete
       </message>
-      <message name="IDS_IOS_DEFAULT_BROWSER_NON_MODAL_1P_APP_TITLE" desc="Title for the non-modal default browser promotion banner when Chrome is opened from a first-party app.">
+      <message name="IDS_IOS_DEFAULT_BROWSER_NON_MODAL_1P_APP_TITLE" desc="Title for the non-modal default browser promotion banner when Jatter is opened from a first-party app.">
         Better browsing by default
       </message>
       <message name="IDS_IOS_DEFAULT_BROWSER_PROMO_PRIMARY_BUTTON_TEXT" desc="Text of button that will take users to iOS settings, where they can change the default browser. Used in the default browser promos [iOS only]">
@@ -2188,7 +2188,7 @@
       <message name="IDS_IOS_DEFAULT_BROWSER_VIDEO_PROMO_DEFAULT_BROWSER_APP" desc="Text in the default browser promo animation mimicking the iOS settings page for the current app. [iOS only]">
         Default Browser App
       </message>
-      <message name="IDS_IOS_DEFAULT_NON_MODAL_PRIMARY_BUTTON_TEXT" desc="Text of button that will take users to Chrome or iOS settings where they can change the default browser. Used in the non-modal default browser promo [iOS only]">
+      <message name="IDS_IOS_DEFAULT_NON_MODAL_PRIMARY_BUTTON_TEXT" desc="Text of button that will take users to Jatter or iOS settings where they can change the default browser. Used in the non-modal default browser promo [iOS only]">
         Set…
       </message>
       <message name="IDS_IOS_DEFAULT_PAGE_MODE_DESKTOP" desc="The label used to let the user choose that their pages will be loaded using the Desktop mode (vs Mobile)" meaning="The pages will be loaded in Desktop mode">
@@ -2224,8 +2224,8 @@
       <message name="IDS_IOS_DELETE_BROWSING_DATA_CONFIRM" desc="Label for the option to confirm selection of browsing data types to be deleted. [iOS only]">
         Confirm
       </message>
-      <message name="IDS_IOS_DELETE_BROWSING_DATA_PAGE_FOOTER" desc="The text is displayed in a footer in the delete browsing data page which allows selection of data types to be deleted. The link ‘sign out of Chrome’ opens a dialog where the user can confirm if they want to sign out of Chrome.">
-        Deleting your browsing data doesn't sign you out of your Google Account. To do so, <ph name="BEGIN_LINK">BEGIN_LINK</ph>sign out of Chrome<ph name="END_LINK">END_LINK</ph>.
+      <message name="IDS_IOS_DELETE_BROWSING_DATA_PAGE_FOOTER" desc="The text is displayed in a footer in the delete browsing data page which allows selection of data types to be deleted. The link ‘sign out of Jatter’ opens a dialog where the user can confirm if they want to sign out of Jatter.">
+        Deleting your browsing data doesn't sign you out of your Google Account. To do so, <ph name="BEGIN_LINK">BEGIN_LINK</ph>sign out of Jatter<ph name="END_LINK">END_LINK</ph>.
       </message>
       <message name="IDS_IOS_DELETE_BROWSING_DATA_SUMMARY_ADRESSES" desc="Summary of the addresses to be deleted when deleting browsing data. [iOS only]">
        {COUNT, plural,
@@ -2347,7 +2347,7 @@
       <message name="IDS_IOS_DISCONNECT_DIALOG_TITLE_UNITY" desc="The title of the disconnect dialog [Length: 30em].">
         Sign out and turn off sync?
       </message>
-      <message name="IDS_IOS_DISCOVER_FEED_HEADER_IPH" desc="In-product help that points at the menu icon for the news feed on Chrome's new tab page. This string instructs the user to open the menu for settings that let them control the content that appears on the feed.">
+      <message name="IDS_IOS_DISCOVER_FEED_HEADER_IPH" desc="In-product help that points at the menu icon for the news feed on Jatter's new tab page. This string instructs the user to open the menu for settings that let them control the content that appears on the feed.">
         Control your stories and activity here
       </message>
       <message name="IDS_IOS_DISCOVER_FEED_MENU_ACCESSIBILITY_LABEL" desc="The accessibility label for the Discover feed header's menu button.">
@@ -2389,7 +2389,7 @@
       <message name="IDS_IOS_DISMISS_WARNING_DIALOG_TITLE" desc="Title of the dialog presented to the user when they want to dismiss a compromised password warning. [iOS only]" meaning="Title-cased">
         Dismiss warning?
       </message>
-      <message name="IDS_IOS_DOCKING_EDIT_HOME_SCREEN_LOTTIE_INSTRUCTION" desc="Title of the instruction shown in the Docking Promo Lottie, which describes the Edit Home Screen text when the user long presses on the Chrome app.">
+      <message name="IDS_IOS_DOCKING_EDIT_HOME_SCREEN_LOTTIE_INSTRUCTION" desc="Title of the instruction shown in the Docking Promo Lottie, which describes the Edit Home Screen text when the user long presses on the Jatter app.">
         Edit Home Screen
       </message>
       <message name="IDS_IOS_DOCKING_PROMO_PRIMARY_BUTTON_TITLE" desc="Title of the primary button in the Docking Promo, which confirms the promo has been seen by the user.">
@@ -2877,7 +2877,7 @@
        A separate space for work
       </message>
       <message name="IDS_IOS_ENTERPRISE_PROFILE_MIGRATION_SUBTITLE" desc="Message displayed on a screen where the user is notified about the personal profile migration to a work profile.">
-        Using Chrome with your managed account helps you keep browsing related to your organization (including tabs, history, and passwords) separate from your other browsing
+        Using Jatter with your managed account helps you keep browsing related to your organization (including tabs, history, and passwords) separate from your other browsing
       </message>
       <message name="IDS_IOS_ENTERPRISE_RESTRICTED_ACCOUNTS_TO_PATTERNS_MESSAGE" desc="Text displayed in the popover to inform the user that the browser is managed by Enterprise policies. (Restrict Accounts To Patterns) [iOS only]">
           Your organization allows you to sign in only with certain accounts. Accounts that aren't allowed are hidden.
@@ -2962,7 +2962,7 @@
       <message name="IDS_IOS_FACETIME_BUTTON" desc="Text in the confirmation dialog button that will initiate a FaceTime call for the presented number. [Length: 10em] [iOS only]">
         FaceTime
       </message>
-      <message name="IDS_IOS_FEED_CARD_SIGN_IN_ONLY_PROMO_LABEL" desc="This string is on a promo intended to promote signing in to Chrome with the user's Google Account. It appears at the bottom of the Discover news feed on the New Tab Page when the user is not signed in. It explains that the user can sign in to see content suggestions related to their existing content interests and preferences. [iOS only].">
+      <message name="IDS_IOS_FEED_CARD_SIGN_IN_ONLY_PROMO_LABEL" desc="This string is on a promo intended to promote signing in to Jatter with the user's Google Account. It appears at the bottom of the Discover news feed on the New Tab Page when the user is not signed in. It explains that the user can sign in to see content suggestions related to their existing content interests and preferences. [iOS only].">
         Manage your interests and preferences.
       </message>
       <message name="IDS_IOS_FEED_CUSTOM_SEARCH_ENGINE_LABEL" desc="Message informing users with custom search engines that the feed is provided by Google.">
@@ -3067,22 +3067,22 @@
       <message name="IDS_IOS_FIRST_RUN_SCREEN_READ_MORE" desc="The label on the primary button of some screens in the first run experience if the content requires scrolling to the end [iOS only]">
         More
       </message>
-      <message name="IDS_IOS_FIRST_RUN_SIGNIN_BENEFITS_SUBTITLE_SHORT" desc="This string is on a promotion about signing in to Chrome with the user's Google Account. It explains the overarching user benefit of signing in (access to bookmarks, passwords, history, settings, etc.). We want users to understand why signing in is beneficial, and click 'Continue as name' to sign in to their Google Account. The tone should be informative and lightweight.">
+      <message name="IDS_IOS_FIRST_RUN_SIGNIN_BENEFITS_SUBTITLE_SHORT" desc="This string is on a promotion about signing in to Jatter with the user's Google Account. It explains the overarching user benefit of signing in (access to bookmarks, passwords, history, settings, etc.). We want users to understand why signing in is beneficial, and click 'Continue as name' to sign in to their Google Account. The tone should be informative and lightweight.">
         Sign in to get your bookmarks, passwords, and more on all your devices.
       </message>
-      <message name="IDS_IOS_FIRST_RUN_SIGNIN_CONTINUE" desc="Button on the very first screen of Chrome to continue into Chrome. [iOS only]">
+      <message name="IDS_IOS_FIRST_RUN_SIGNIN_CONTINUE" desc="Button on the very first screen of Jatter to continue into Jatter. [iOS only]">
         Continue
       </message>
-      <message name="IDS_IOS_FIRST_RUN_SIGNIN_CONTINUE_AS" desc="Button to sign into Chrome with the displayed account and without having to reenter a password. Jessica is replaced with the user’s given name, or the user’s full name if the given name is not available. Ensure consistency with related OneGoogle sign-in buttons (TC ID 5569230012177947065). [iOS only]">
+      <message name="IDS_IOS_FIRST_RUN_SIGNIN_CONTINUE_AS" desc="Button to sign into Jatter with the displayed account and without having to reenter a password. Jessica is replaced with the user’s given name, or the user’s full name if the given name is not available. Ensure consistency with related OneGoogle sign-in buttons (TC ID 5569230012177947065). [iOS only]">
         Continue as <ph name="FIRST_RUN_ACCOUNT_NAME">$1<ex>Jessica</ex></ph>
       </message>
-      <message name="IDS_IOS_FIRST_RUN_SIGNIN_DONT_SIGN_IN" desc="Button on the very first screen of Chrome to continue without signing into Chrome. [iOS only]">
+      <message name="IDS_IOS_FIRST_RUN_SIGNIN_DONT_SIGN_IN" desc="Button on the very first screen of Jatter to continue without signing into Jatter. [iOS only]">
         Don’t sign in
       </message>
-      <message name="IDS_IOS_FIRST_RUN_SIGNIN_SIGN_IN_ACTION" desc="Button on the very first screen of Chrome for users to sign in when there is no Google Account on the device. [iOS only]">
+      <message name="IDS_IOS_FIRST_RUN_SIGNIN_SIGN_IN_ACTION" desc="Button on the very first screen of Jatter for users to sign in when there is no Google Account on the device. [iOS only]">
         Sign in…
       </message>
-      <message name="IDS_IOS_FIRST_RUN_SIGNIN_STAY_SIGNED_OUT" desc="Button on the sign in screen of the FRE to stay signed out on Chrome. [iOS only]">
+      <message name="IDS_IOS_FIRST_RUN_SIGNIN_STAY_SIGNED_OUT" desc="Button on the sign in screen of the FRE to stay signed out on Jatter. [iOS only]">
         Stay signed out
       </message>
       <message name="IDS_IOS_FIRST_RUN_SIGNIN_TITLE_1" desc="Variations option 2. Title of the screen suggesting to the user to sign in. [iOS only]">
@@ -3100,10 +3100,10 @@
       <message name="IDS_IOS_FIRST_RUN_SYNC_SCREEN_TITLE" desc="Title on the sync screen presented to the user on First Run [iOS only]">
         Keep your devices in sync
       </message>
-      <message name="IDS_IOS_FIRST_RUN_WELCOME_SCREEN_BROWSER_MANAGED" desc="Text to indicate that Chrome is managed by the user’s organization. [iOS only]">
+      <message name="IDS_IOS_FIRST_RUN_WELCOME_SCREEN_BROWSER_MANAGED" desc="Text to indicate that Jatter is managed by the user’s organization. [iOS only]">
         Your browser is managed by your organization.
       </message>
-      <message name="IDS_IOS_FIRST_RUN_WELCOME_SCREEN_TERMS_OF_SERVICE" desc="The text is displayed in a footer on the very first screen of Chrome. The link ‘Terms of Service’ opens the Google Terms of Service. [iOS only]">
+      <message name="IDS_IOS_FIRST_RUN_WELCOME_SCREEN_TERMS_OF_SERVICE" desc="The text is displayed in a footer on the very first screen of Jatter. The link ‘Terms of Service’ opens the Google Terms of Service. [iOS only]">
         By continuing, you agree to the <ph name="BEGIN_LINK">BEGIN_LINK</ph>Terms of Service<ph name="END_LINK">END_LINK</ph>.
       </message>
       <message name="IDS_IOS_FIRST_RUN_WELCOME_SCREEN_TITLE_IPAD" desc="The title of the welcome screen presented to the user on First Run when on iPad [iOS only]">
@@ -3112,7 +3112,7 @@
       <message name="IDS_IOS_FIRST_RUN_WELCOME_SCREEN_TITLE_IPHONE" desc="The title of the welcome screen presented to the user on First Run when on iPhone [iOS only]">
         Built for Your iPhone
       </message>
-      <message name="IDS_IOS_GEMINI_IMAGE_CONTEXT_MENU_ENTRY_POINT" desc="The entry point for Gemini when the user long-presses an image. Invites the user to create an image using Gemini in Chrome.">
+      <message name="IDS_IOS_GEMINI_IMAGE_CONTEXT_MENU_ENTRY_POINT" desc="The entry point for Gemini when the user long-presses an image. Invites the user to create an image using Gemini in Jatter.">
         Edit Image with Gemini
       </message>
       <message name="IDS_IOS_GEMINI_IMAGE_REMIX_ENTRY_POINT_IPH" desc="Main text in the in-product help tooltip suggesting to users that they can create an image with Gemini.">
@@ -3226,10 +3226,10 @@
       <message name="IDS_IOS_GOOGLE_SERVICES_SETTINGS_BETTER_SEARCH_AND_BROWSING_TEXT" desc="Title for a feature in the settings for the user to enable/disable, to make searches andn browsing better. Related to 'Sends URLs of pages you visit to Google'. [iOS only]">
         Make searches and browsing better
       </message>
-      <message name="IDS_IOS_GOOGLE_SERVICES_SETTINGS_IMPROVE_CHROME_DETAIL" desc="Feature detail text in the settings for the user enable or disable. Related with 'Help improve Chrome's features and performance' feature. [iOS only]">
+      <message name="IDS_IOS_GOOGLE_SERVICES_SETTINGS_IMPROVE_CHROME_DETAIL" desc="Feature detail text in the settings for the user enable or disable. Related with 'Help improve Jatter's features and performance' feature. [iOS only]">
         Automatically sends usage statistics and crash reports to Google.
       </message>
-      <message name="IDS_IOS_GOOGLE_SERVICES_SETTINGS_IMPROVE_SEARCH_SUGGESTIONS_TEXT" desc="Feature title in the settings for the user to enable/disable, to send omnibox input to the user's default search engine to get additional suggestions. Text related to 'When you type in the address bar or search box, Chrome sends what you type to your default search engine to get better suggestions. This is off in Incognito.' [iOS only]">
+      <message name="IDS_IOS_GOOGLE_SERVICES_SETTINGS_IMPROVE_SEARCH_SUGGESTIONS_TEXT" desc="Feature title in the settings for the user to enable/disable, to send omnibox input to the user's default search engine to get additional suggestions. Text related to 'When you type in the address bar or search box, Jatter sends what you type to your default search engine to get better suggestions. This is off in Incognito.' [iOS only]">
         Improve search suggestions
       </message>
       <message name="IDS_IOS_GOOGLE_SERVICES_SETTINGS_SAFE_BROWSING_DETAIL" desc="Feature detail text in the setting to enable/disable safe browsing">
@@ -3238,7 +3238,7 @@
       <message name="IDS_IOS_GOOGLE_SERVICES_SETTINGS_SAFE_BROWSING_TEXT" desc="The section title of 'Protects you and your device from dangerous sites'">
         Safe Browsing (protects you and your device from dangerous sites)
       </message>
-      <message name="IDS_IOS_GOOGLE_SERVICES_SETTINGS_SIGNIN_DISABLED_BY_ADMINISTRATOR" desc="Feature detail text in the Google services Settings that notifies the user that express sign-in was disabled by their administrator [iOS only]">
+      <message name="IDS_IOS_GOOGLE_SERVICES_SETTINGS_SIGNIN_DISABLED_BY_ADMINISTRATOR" desc="Feature detail text in the Services Settings that notifies the user that express sign-in was disabled by their administrator [iOS only]">
         Turned off by your administrator
       </message>
       <message name="IDS_IOS_GOOGLE_SERVICES_SETTINGS_SYNC_DISABLBED_BY_ADMINISTRATOR_TITLE" desc="Error displayed as title when the sync is disabled by the enterprise policy. The user doesn't have a regular gmail account.">
@@ -3253,8 +3253,8 @@
       <message name="IDS_IOS_GOOGLE_SERVICES_SETTINGS_SYNC_FIX_RECOVERABILITY_DEGRADED_FOR_PASSWORDS" desc="Title button to ask the user to reauthenticate, in order to add recovery options, affecting passwords only.">
         To make sure you can always access your saved passwords, verify it's you
       </message>
-      <message name="IDS_IOS_GOOGLE_SERVICES_SETTINGS_TITLE" desc="Title for the view in the Settings for enabling/disabling Google services. [Length: 26em] [iOS only]">
-        Google services
+      <message name="IDS_IOS_GOOGLE_SERVICES_SETTINGS_TITLE" desc="Title for the view in the Settings for enabling/disabling Services. [Length: 26em] [iOS only]">
+        Services
       </message>
       <message name="IDS_IOS_GO_TO_LENS" desc="Text of the primary button to go to the Lens camera experience. [iOS only]">
         Go to Lens
@@ -3268,7 +3268,7 @@
       <message name="IDS_IOS_HISTORY_EMPTY_TITLE" desc="Title shown on the History screen when there are no History entries.">
           You'll find your history here
       </message>
-      <message name="IDS_IOS_HISTORY_OTHER_FORMS_OF_HISTORY" desc="The notification at the top of the history page indicating that deleting Chrome browsing history will not delete other forms of history stored at Google My Activity.">
+      <message name="IDS_IOS_HISTORY_OTHER_FORMS_OF_HISTORY" desc="The notification at the top of the history page indicating that deleting Jatter browsing history will not delete other forms of history stored at Google My Activity.">
         Your Google Account may have other forms of browsing history at <ph name="BEGIN_LINK">BEGIN_LINK</ph>history.google.com<ph name="END_LINK">END_LINK</ph>.
       </message>
       <message name="IDS_IOS_HISTORY_SELECT_BUTTON" desc="Text for select button contained in the history page toolbar.">
@@ -3433,10 +3433,10 @@
       <message name="IDS_IOS_IDENTITY_DISC_SIGNED_OUT_ACCESSIBILITY_LABEL" desc="The content description for a toolbar button displaying the signed-out avatar. Tapping on this button opens the sign-in sheet [iOS only].">
         Signed out. Opens options to sign in.
       </message>
-      <message name="IDS_IOS_IDENTITY_DISC_SIGN_IN_PROMO_LABEL" desc="Text in the sheet that offers the user to sign-in to Chrome [iOS only].">
+      <message name="IDS_IOS_IDENTITY_DISC_SIGN_IN_PROMO_LABEL" desc="Text in the sheet that offers the user to sign-in to Jatter [iOS only].">
         Get your bookmarks, passwords, and more on all your devices.
       </message>
-      <message name="IDS_IOS_IDENTITY_DISC_WITH_EMAIL" desc="The content description for a toolbar button displaying user profile picture. Tapping on this button navigates to 'Sync and Google services' page in settings [iOS only].">
+      <message name="IDS_IOS_IDENTITY_DISC_WITH_EMAIL" desc="The content description for a toolbar button displaying user profile picture. Tapping on this button navigates to 'Sync and Services' page in settings [iOS only].">
         Signed in as <ph name="USER_EMAIL">$1<ex>peter.parker@gmail.com</ex></ph>. Opens settings.
       </message>
       <message name="IDS_IOS_IDENTITY_DISC_WITH_EMAIL_OPEN_ACCOUNT_MENU" desc="The content description for a toolbar button displaying user profile picture. Tapping on this button opens the account menu [iOS only].">
@@ -3445,7 +3445,7 @@
       <message name="IDS_IOS_IDENTITY_DISC_WITH_EMAIL_OPEN_ACCOUNT_MENU_WITH_ERROR" desc="The content description for a toolbar button displaying user profile picture. Tapping on this button opens the account menu [iOS only].">
           Signed in as <ph name="USER_EMAIL">$1<ex>peter.parker@gmail.com</ex></ph>. Google Account error. Open account menu.
       </message>
-      <message name="IDS_IOS_IDENTITY_DISC_WITH_NAME_AND_EMAIL" desc="The content description for a toolbar button displaying user profile picture. Tapping on this button navigates to 'Sync and Google services' page in settings [iOS only].">
+      <message name="IDS_IOS_IDENTITY_DISC_WITH_NAME_AND_EMAIL" desc="The content description for a toolbar button displaying user profile picture. Tapping on this button navigates to 'Sync and Services' page in settings [iOS only].">
         Signed in as <ph name="USER_NAME">$1<ex>Peter Parker</ex></ph>. <ph name="USER_EMAIL">$2<ex>peter.parker@gmail.com</ex></ph>. Opens settings.
       </message>
       <message name="IDS_IOS_IDENTITY_DISC_WITH_NAME_AND_EMAIL_OPEN_ACCOUNT_MENU" desc="The content description for a toolbar button displaying user profile picture. Tapping on this button opens the account menu [iOS only].">
@@ -3779,11 +3779,11 @@
       <message name="IDS_IOS_INTENTS_ADD_READING_LIST_ITEM_PARAMETER_COMBINATION_TITLE" desc="Apple Shortcuts.app format for displaying the URL input [iOS only].">
         Add ${url} to reading list
       </message>
-      <message name="IDS_IOS_INTENTS_ADD_READING_LIST_ITEM_PROMPT_DIALOG" desc="Prompt dialog shown or spoken to the user (by Siri) asking them to clarify which URL they'd like to add to their reading list for the Add Reading List Item Shortcut [iOS only]. This is actually never shown to the Chrome for iOS, which is why the corresponding uploaded screenshot is blank, yet it is required by iOS.">
+      <message name="IDS_IOS_INTENTS_ADD_READING_LIST_ITEM_PROMPT_DIALOG" desc="Prompt dialog shown or spoken to the user (by Siri) asking them to clarify which URL they'd like to add to their reading list for the Add Reading List Item Shortcut [iOS only]. This is actually never shown to the Jatter for iOS, which is why the corresponding uploaded screenshot is blank, yet it is required by iOS.">
         What URL would you like to add to your reading list?
       </message>
-      <message name="IDS_IOS_INTENTS_OPEN_IN_CHROME_DESCRIPTION" desc="Shortcut description to open URLs in Chrome [iOS only].">
-        Opens the inputted URLs in Google Chrome.
+      <message name="IDS_IOS_INTENTS_OPEN_IN_CHROME_DESCRIPTION" desc="Shortcut description to open URLs in Jatter [iOS only].">
+        Opens the inputted URLs in Google Jatter.
       </message>
       <message name="IDS_IOS_INTENTS_OPEN_IN_CHROME_INCOGNITO_PARAMETER_COMBINATION_TITLE" desc="Apple Shortcuts.app format for displaying the URL input [iOS only].">
         Open ${url} in Incognito
@@ -3791,8 +3791,8 @@
       <message name="IDS_IOS_INTENTS_OPEN_IN_CHROME_PARAMETER_COMBINATION_TITLE" desc="Apple Shortcuts.app format for displaying the URL input [iOS only].">
         Open ${url}
       </message>
-      <message name="IDS_IOS_INTENTS_OPEN_IN_CHROME_TITLE" desc="Shortcut name to open URL in Chrome [iOS only].">
-        Open URLs in Chrome
+      <message name="IDS_IOS_INTENTS_OPEN_IN_CHROME_TITLE" desc="Shortcut name to open URL in Jatter [iOS only].">
+        Open URLs in Jatter
       </message>
       <message name="IDS_IOS_INTENTS_URL_PARAMETER" desc="The URL the user would like to pass as input parameter to Shortcuts that require a URL as input [iOS only].">
         URL
@@ -4148,11 +4148,11 @@
       <message name="IDS_IOS_MAGIC_STACK_TIP_AUTOFILL_PASSWORDS_TUTORIAL_STEP_3" desc="The third step of the Autofill Saved Passwords tutorial for the Magic Stack.">
         Tap "Use Password" to sign in securely.
       </message>
-      <message name="IDS_IOS_MAGIC_STACK_TIP_CONTEXT_MENU_HIDE_CHROME_TIPS" desc="The description of the Hide Chrome Tips button located in the Chrome Tips Magic Stack context menu.">
-        Hide "<ph name="Module_Name"><ex>Chrome Tips</ex>$1</ph>"
+      <message name="IDS_IOS_MAGIC_STACK_TIP_CONTEXT_MENU_HIDE_CHROME_TIPS" desc="The description of the Hide Jatter Tips button located in the Jatter Tips Magic Stack context menu.">
+        Hide "<ph name="Module_Name"><ex>Jatter Tips</ex>$1</ph>"
       </message>
-      <message name="IDS_IOS_MAGIC_STACK_TIP_CONTEXT_MENU_TURN_ON_NOTIFICATIONS" desc="The description of the Turn On Chrome Tips button located in the Chrome Tips Magic Stack context menu.">
-        Turn on notifications for <ph name="Module_Name"><ex>Chrome Tips</ex>$1</ph>
+      <message name="IDS_IOS_MAGIC_STACK_TIP_CONTEXT_MENU_TURN_ON_NOTIFICATIONS" desc="The description of the Turn On Jatter Tips button located in the Jatter Tips Magic Stack context menu.">
+        Turn on notifications for <ph name="Module_Name"><ex>Jatter Tips</ex>$1</ph>
       </message>
       <message name="IDS_IOS_MAGIC_STACK_TIP_GOT_IT" desc="Button label to dismiss a full-screen tip promo triggered via the Magic Stack.">
         Got It
@@ -4193,7 +4193,7 @@
       <message name="IDS_IOS_MANAGED_SIGNIN_TITLE" desc="The title of the Sign in to a managed account dialog. [40em]">
         Sign in with managed account
       </message>
-      <message name="IDS_IOS_MANAGE_DATA_IN_YOUR_ACCOUNT_DESCRIPTION" desc="Subtitle for the cell to open 'Data from Chromium sync' web page where the user can control all their data data from sync.">
+      <message name="IDS_IOS_MANAGE_DATA_IN_YOUR_ACCOUNT_DESCRIPTION" desc="Subtitle for the cell to open 'Data from Jatter sync' web page where the user can control all their data data from sync.">
         Review your account data
       </message>
       <message name="IDS_IOS_MANAGE_STORAGE_ALERT_MANAGE_STORAGE_BUTTON" desc="Label of the primary action button in an alert presented when the user tries to select a destination for an upload, without sufficient storage space in the destination. The button opens a page where the user can manage their storage space. [iOS only] [Length: 12em]" meaning="Label of the primary action button in an alert presented when the user tries to select a destination for an upload, without sufficient storage space in the destination. The button opens a page where the user can manage their storage space. [iOS only] [Length: 12em]">
@@ -4205,7 +4205,7 @@
       <message name="IDS_IOS_MANAGE_STORAGE_ALERT_TITLE" desc="Title of an alert presented when the user tries to select a destination for an upload, without sufficient storage space in the destination. [iOS only]">
         Your storage is full
       </message>
-      <message name="IDS_IOS_MANAGE_SYNC_DATA_FROM_CHROME_SYNC_DESCRIPTION" desc="Subtitle for the cell to open 'Data from Chromium sync' web page where the user can control all their data data from sync.">
+      <message name="IDS_IOS_MANAGE_SYNC_DATA_FROM_CHROME_SYNC_DESCRIPTION" desc="Subtitle for the cell to open 'Data from Jatter sync' web page where the user can control all their data data from sync.">
         Review your synced data
       </message>
       <message name="IDS_IOS_MANAGE_SYNC_ENCRYPTION" desc="Title for the cell to open the encryption dialog.">
@@ -4217,13 +4217,13 @@
       <message name="IDS_IOS_MANAGE_SYNC_GOOGLE_ACTIVITY_CONTROLS_TITLE" desc="Title for the cell to open 'Google Activity Controls' dialog.">
         Google Activity Controls
       </message>
-      <message name="IDS_IOS_MANAGE_SYNC_PERSONALIZE_GOOGLE_SERVICES_DESCRIPTION" desc="This is the subtitle of a setting that directs users to other settings where they can control how Chrome history can be used to personalize other Google services. This subtitle appears in Chrome’s Advanced Sync settings, after the “Personalization &amp; linking” or “Personalization” string.">
-        Control how browsing history is used with your other data across Google services
+      <message name="IDS_IOS_MANAGE_SYNC_PERSONALIZE_GOOGLE_SERVICES_DESCRIPTION" desc="This is the subtitle of a setting that directs users to other settings where they can control how Jatter history can be used to personalize other Services. This subtitle appears in Jatter’s Advanced Sync settings, after the “Personalization &amp; linking” or “Personalization” string.">
+        Control how browsing history is used with your other data across Services
       </message>
-      <message name="IDS_IOS_MANAGE_SYNC_PERSONALIZE_GOOGLE_SERVICES_TITLE" desc="This is the title of a setting that directs users to other settings where they can control how Chrome history can be used to personalize other Google services. It appears in Chrome’s Advanced Sync settings and is before the “Control how browsing history is used with your other data across Google services” string. [CHAR_LIMIT=30]">
+      <message name="IDS_IOS_MANAGE_SYNC_PERSONALIZE_GOOGLE_SERVICES_TITLE" desc="This is the title of a setting that directs users to other settings where they can control how Jatter history can be used to personalize other Services. It appears in Jatter’s Advanced Sync settings and is before the “Control how browsing history is used with your other data across Services” string. [CHAR_LIMIT=30]">
         Personalization
       </message>
-      <message name="IDS_IOS_MANAGE_SYNC_PERSONALIZE_GOOGLE_SERVICES_TITLE_EEA" desc="This is the title of a setting that directs users to other settings where they can control how Chrome history can be used to personalize other Google services. It appears in Chrome’s Advanced Sync settings and is before the “Control how browsing history is used with your other data across Google services” string. “Linking” refers to the ability to link Google services; this verb should align with the verb for the branded term “linked Google services” in Glossary Manager: https://localization.google.com/glossary/termset?gid=27517723&amp;tsid=517bace2. [CHAR_LIMIT=30]">
+      <message name="IDS_IOS_MANAGE_SYNC_PERSONALIZE_GOOGLE_SERVICES_TITLE_EEA" desc="This is the title of a setting that directs users to other settings where they can control how Jatter history can be used to personalize other Services. It appears in Jatter’s Advanced Sync settings and is before the “Control how browsing history is used with your other data across Services” string. “Linking” refers to the ability to link Services; this verb should align with the verb for the branded term “linked Services” in Glossary Manager: https://localization.google.com/glossary/termset?gid=27517723&amp;tsid=517bace2. [CHAR_LIMIT=30]">
         Personalization &amp; linking
       </message>
       <message name="IDS_IOS_MANAGE_YOUR_GOOGLE_ACCOUNT_TITLE" desc="Title for the view in the Settings to open 'Google Account' web page.">
@@ -4274,13 +4274,13 @@
         Manage settings…
       </message>
       <message name="IDS_IOS_MANUAL_FALLBACK_NOT_SECURE_GENERIC_BODY" desc="The body of the alert informing a user the content they selected won't be filled on the form." meaning="The form is not secure [80em]">
-        To protect your privacy, Chrome will not autofill this field.
+        To protect your privacy, Jatter will not autofill this field.
       </message>
       <message name="IDS_IOS_MANUAL_FALLBACK_NOT_SECURE_OK_BUTTON" desc="The title of the OK button of the 'Not Secure' alert in manual fallback." meaning="The user will dismiss the alert [20em]">
         OK
       </message>
       <message name="IDS_IOS_MANUAL_FALLBACK_NOT_SECURE_PASSWORD_BODY" desc="The body of the alert informing a user the password they selected won't be filled on the form." meaning="The field the user is trying to fill is not of password type  [80em]">
-        To protect your privacy, Chrome will not autofill your password in this field.
+        To protect your privacy, Jatter will not autofill your password in this field.
       </message>
       <message name="IDS_IOS_MANUAL_FALLBACK_NOT_SECURE_TITLE" desc="The title of the alert informing a user the content they selected won't be filled on the form." meaning="The form is not secure [20em]">
         Not secure
@@ -4455,10 +4455,10 @@
         Turn on notifications?
       </message>
       <message name="IDS_IOS_NOTIFICATIONS_CONFIRMATION_MESSAGE" desc="The snackbar message that confirms that notifications have been turned on.">
-        <ph name="FEATURE_NAME">$1<ex>Chromium Tips</ex></ph> notifications turned on
+        <ph name="FEATURE_NAME">$1<ex>Jatter Tips</ex></ph> notifications turned on
       </message>
       <message name="IDS_IOS_NOTIFICATIONS_CONFIRMATION_MESSAGE_OFF" desc="The snackbar message that confirms that notifications have been turned off.">
-        <ph name="FEATURE_NAME">$1<ex>Chromium Tips</ex></ph> notifications turned off
+        <ph name="FEATURE_NAME">$1<ex>Jatter Tips</ex></ph> notifications turned off
       </message>
       <message name="IDS_IOS_NOTIFICATIONS_MANAGE_SETTINGS" desc="The label for a button that takes the user to the app's Notifications Settings page.">
         Manage
@@ -4562,13 +4562,13 @@
       <message name="IDS_IOS_OMNIBOX_PEDAL_SUBTITLE_MANAGE_PASSWORDS" desc="Subtitle for the Manage Passwords acceleration pedal in the omnibox that should correspond to the path to the Passwords Manager dialog">
        Menu → Password Manager
       </message>
-      <message name="IDS_IOS_OMNIBOX_PEDAL_SUBTITLE_RUN_CHROME_SAFETY_CHECK" desc="Subtitle for the Run Chrome Safety Check acceleration pedal in the omnibox that should correspond to the path to the Safety Check dialog in Settings">
+      <message name="IDS_IOS_OMNIBOX_PEDAL_SUBTITLE_RUN_CHROME_SAFETY_CHECK" desc="Subtitle for the Run Jatter Safety Check acceleration pedal in the omnibox that should correspond to the path to the Safety Check dialog in Settings">
        Menu → Settings → Safety Check
       </message>
       <message name="IDS_IOS_OMNIBOX_PEDAL_SUBTITLE_UPDATE_CREDIT_CARD" desc="Subtitle for the Manage Payment Methods acceleration pedal in the omnibox that should correspond to the path to the Payment Methods dialog in Settings">
        Menu → Settings → Payment methods
       </message>
-      <message name="IDS_IOS_OMNIBOX_PEDAL_SUBTITLE_VIEW_CHROME_HISTORY" desc="Subtitle for the View Your Chrome History acceleration pedal in the omnibox that should correspond to the path to History">
+      <message name="IDS_IOS_OMNIBOX_PEDAL_SUBTITLE_VIEW_CHROME_HISTORY" desc="Subtitle for the View Your Jatter History acceleration pedal in the omnibox that should correspond to the path to History">
        Menu → History
       </message>
       <message name="IDS_IOS_OMNIBOX_PLACEHOLDER_IMAGE_SEARCH" desc="The placeholder text displayed in the omnibox to refine an image search.">
@@ -4682,25 +4682,25 @@
       <message name="IDS_IOS_OPTIONS_ACCOUNTS_ADD_ACCOUNT_BUTTON" desc="The title of the Add account button on the accounts settings screen [iOS only] [30em]">
         Add account…
       </message>
-      <message name="IDS_IOS_OPTIONS_ACCOUNTS_DESCRIPTION" desc="Text informing the user of the accounts they are signed in to Chrome with [iOS only] [150em]">
+      <message name="IDS_IOS_OPTIONS_ACCOUNTS_DESCRIPTION" desc="Text informing the user of the accounts they are signed in to Jatter with [iOS only] [150em]">
         Signed in to Google as
       </message>
       <message name="IDS_IOS_OPTIONS_ACCOUNTS_RESTRICTED_IDENTITIES" desc="Message shown in the settings account switcher when enterprise policy has restricted some unseen identities. [iOS only]">
         Your organization allows you to sign in only with certain accounts. Accounts that aren't allowed are hidden. <ph name="BEGIN_LINK">BEGIN_LINK</ph>Learn more<ph name="END_LINK">END_LINK</ph>
       </message>
-      <message name="IDS_IOS_OPTIONS_ACCOUNTS_SIGNIN_ACCESSIBILITY_LABEL" desc="This string is found on a button on a list of available Google Accounts that the user sees when they open the profile menu on Chrome on iOS. When the user taps this button, Chrome will sign the user in to the selected account (and sign them out of the previous account). This text is a verb phrase. The tone should be factual. [iOS only]">
+      <message name="IDS_IOS_OPTIONS_ACCOUNTS_SIGNIN_ACCESSIBILITY_LABEL" desc="This string is found on a button on a list of available Google Accounts that the user sees when they open the profile menu on Jatter on iOS. When the user taps this button, Jatter will sign the user in to the selected account (and sign them out of the previous account). This text is a verb phrase. The tone should be factual. [iOS only]">
         Sign in as <ph name="EMAIL">$1<ex>johndoe@gmail.com</ex></ph>
       </message>
-      <message name="IDS_IOS_OPTIONS_ACCOUNTS_SIGNIN_MANAGED_ACCESSIBILITY_LABEL" is_accessibility_with_no_ui="true" desc="This string is found on a button on a list of available Google Accounts that the user sees when they open the profile menu on Chrome on iOS and the account is managed. When the user taps this button, Chrome will sign the user in to the selected account (and sign them out of the previous account). This text is a verb phrase. The tone should be factual. [iOS only]">
+      <message name="IDS_IOS_OPTIONS_ACCOUNTS_SIGNIN_MANAGED_ACCESSIBILITY_LABEL" is_accessibility_with_no_ui="true" desc="This string is found on a button on a list of available Google Accounts that the user sees when they open the profile menu on Jatter on iOS and the account is managed. When the user taps this button, Jatter will sign the user in to the selected account (and sign them out of the previous account). This text is a verb phrase. The tone should be factual. [iOS only]">
         Sign in as <ph name="EMAIL">$1<ex>johndoe@gmail.com</ex></ph>, managed by your organization.
       </message>
-      <message name="IDS_IOS_OPTIONS_ACCOUNTS_SIGNIN_WITH_NAME_ACCESSIBILITY_LABEL" desc="This string is found on a button on a list of available Google Accounts that the user sees when they open the profile menu on Chrome on iOS. When the user taps this button, Chrome will sign the user in to the selected account (and sign them out of the previous account). This text is a verb phrase. The tone should be factual. [iOS only]">
+      <message name="IDS_IOS_OPTIONS_ACCOUNTS_SIGNIN_WITH_NAME_ACCESSIBILITY_LABEL" desc="This string is found on a button on a list of available Google Accounts that the user sees when they open the profile menu on Jatter on iOS. When the user taps this button, Jatter will sign the user in to the selected account (and sign them out of the previous account). This text is a verb phrase. The tone should be factual. [iOS only]">
         Sign in as <ph name="NAME">$1<ex>John Doe</ex></ph> <ph name="EMAIL">$2<ex>johndoe@gmail.com</ex></ph>
       </message>
-      <message name="IDS_IOS_OPTIONS_ACCOUNTS_SIGNIN_WITH_NAME_MANAGED_ACCESSIBILITY_LABEL" is_accessibility_with_no_ui="true" desc="This string is found on a button on a list of available Google Accounts that the user sees when they open the profile menu on Chrome on iOS and the account is managed. When the user taps this button, Chrome will sign the user in to the selected account (and sign them out of the previous account). This text is a verb phrase. The tone should be factual. [iOS only]">
+      <message name="IDS_IOS_OPTIONS_ACCOUNTS_SIGNIN_WITH_NAME_MANAGED_ACCESSIBILITY_LABEL" is_accessibility_with_no_ui="true" desc="This string is found on a button on a list of available Google Accounts that the user sees when they open the profile menu on Jatter on iOS and the account is managed. When the user taps this button, Jatter will sign the user in to the selected account (and sign them out of the previous account). This text is a verb phrase. The tone should be factual. [iOS only]">
         Sign in as <ph name="NAME">$1<ex>John Doe</ex></ph> <ph name="EMAIL">$2<ex>johndoe@gmail.com</ex></ph>, managed by your organization.
       </message>
-      <message name="IDS_IOS_OPTIONS_ACCOUNTS_SYNC_IS_OFF" desc="Text informing the user that sync is off [iOS only] [60em]" meaning="The Chrome sync feature is off.">
+      <message name="IDS_IOS_OPTIONS_ACCOUNTS_SYNC_IS_OFF" desc="Text informing the user that sync is off [iOS only] [60em]" meaning="The Jatter sync feature is off.">
         Off
       </message>
       <message name="IDS_IOS_OPTIONS_ADVANCED_TAB_LABEL" desc="The title of the Advanced section of the Settings page.  [Length: 20em] [iOS only]">
@@ -4927,14 +4927,14 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_PARTIAL_TRANSLATE_SWITCH_FULL_PAGE_TRANSLATION" desc="Title of the alert proposing to switch to full page translation if partial translate fails.">
         Switch to full Page translation
       </message>
-      <message name="IDS_IOS_PASSKEY_BOOTSTRAPPING_SUBTITLE" desc="Subtitle of the screen shown when the user needs to enter their Google Password Manager pin to use passkeys on their device.">
+      <message name="IDS_IOS_PASSKEY_BOOTSTRAPPING_SUBTITLE" desc="Subtitle of the screen shown when the user needs to enter their Password Manager pin to use passkeys on their device.">
         You’ll only have to do this once.
       </message>
-      <message name="IDS_IOS_PASSKEY_BOOTSTRAPPING_TITLE" desc="Title of the screen shown when the user needs to enter their Google Password Manager pin to use passkeys on their device.">
+      <message name="IDS_IOS_PASSKEY_BOOTSTRAPPING_TITLE" desc="Title of the screen shown when the user needs to enter their Password Manager pin to use passkeys on their device.">
         Verify it’s you to use your passkeys on this device
       </message>
       <message name="IDS_IOS_PASSKEY_CREATION_BOTTOM_SHEET_ACCOUNT" desc="Below the Passkey Creation Bottom Sheet's subtitle, this indicates in which account the new passkey will be saved (the currently signed in account). [iOS only]">
-        Passkeys are saved in Google Password Manager for
+        Passkeys are saved in Password Manager for
       </message>
       <message name="IDS_IOS_PASSKEY_CREATION_BOTTOM_SHEET_CREATE" desc="Passkey Creation Bottom Sheet's button to create a passkey. [iOS only]">
         Create
@@ -4957,13 +4957,13 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_PASSKEY_DOES_NOT_WORK" desc="Label indicating that the passkey was marked for deletion and does not work anymore. [iOS only]">
         Doesn't work
       </message>
-      <message name="IDS_IOS_PASSKEY_ENROLLMENT_INSTRUCTIONS_STEP_1" desc="First step of the instructions on how to get set up to create and use passkeys with Google Password Manager. Lets the user know that they first need to create their recovery PIN.">
+      <message name="IDS_IOS_PASSKEY_ENROLLMENT_INSTRUCTIONS_STEP_1" desc="First step of the instructions on how to get set up to create and use passkeys with Password Manager. Lets the user know that they first need to create their recovery PIN.">
         Create a recovery PIN
       </message>
-      <message name="IDS_IOS_PASSKEY_ENROLLMENT_INSTRUCTIONS_STEP_2" desc="Second step of the instructions on how to get set up to create and use passkeys with Google Password Manager. Lets the user know that they'll be able to save their first passkey after they've created their recovery pin.">
+      <message name="IDS_IOS_PASSKEY_ENROLLMENT_INSTRUCTIONS_STEP_2" desc="Second step of the instructions on how to get set up to create and use passkeys with Password Manager. Lets the user know that they'll be able to save their first passkey after they've created their recovery pin.">
         Save your first passkey
       </message>
-      <message name="IDS_IOS_PASSKEY_ENROLLMENT_INSTRUCTIONS_STEP_3" desc="Third step of the instructions on how to get set up to create and use passkeys with Google Password Manager. Lets the user know that they'll be able to sign in faster accross their devices if they use passkeys.">
+      <message name="IDS_IOS_PASSKEY_ENROLLMENT_INSTRUCTIONS_STEP_3" desc="Third step of the instructions on how to get set up to create and use passkeys with Password Manager. Lets the user know that they'll be able to sign in faster accross their devices if they use passkeys.">
         Sign in faster across your devices
       </message>
       <message name="IDS_IOS_PASSKEY_ENROLLMENT_NOT_NOW_BUTTON" desc="Used as a title for a 'Not now' button." meaning="Abort a certain process. User doesn't want to keep going for now.">
@@ -4984,7 +4984,7 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_PASSKEY_INCOGNITO_INTERSTITIAL_DIALOG_TITLE" desc="Title of the dialog shown when a user tries to create a passkey while in Incognito mode.">
         Create a passkey outside of Incognito?
       </message>
-      <message name="IDS_IOS_PASSKEY_PARTIAL_BOOTSTRAPPING_TITLE" desc="Title of the screen shown when the user needs to create their Google Password Manager pin to set up passkeys on their device.">
+      <message name="IDS_IOS_PASSKEY_PARTIAL_BOOTSTRAPPING_TITLE" desc="Title of the screen shown when the user needs to create their Password Manager pin to set up passkeys on their device.">
         Set up passkeys for this device
       </message>
       <message name="IDS_IOS_PASSKEY_WELCOME_SCREEN_GET_STARTED_BUTTON" desc="Used as a title for a 'Get started' button." meaning="Get set up to use a feature.">
@@ -5094,16 +5094,16 @@ Handoff must also be enabled in the General section of Settings, and your device
         Never
       </message>
       <message name="IDS_IOS_PASSWORD_MANAGER_HEADER_NOT_SYNCING" desc="Header text for the view in Settings for managing saved passwords. This string only appears when the user is not syncing their passwords. [Length: unlimited] [iOS only]">
-        Passwords are saved to Google Password Manager on this device only.
+        Passwords are saved to Password Manager on this device only.
       </message>
       <message name="IDS_IOS_PASSWORD_MANAGER_LOCAL_SAVE_SUBTITLE" desc="Infobar subtitle to save a password on device. [Length: 60em]">
-        To Google Password Manager on this device
+        To Password Manager on this device
       </message>
       <message name="IDS_IOS_PASSWORD_MANAGER_MODAL_BLOCK_BUTTON" desc="Button text for the 'Save Password' Infobar's Modal 'Never remember this site' option [Length: 70em]">
         Never for this site
       </message>
       <message name="IDS_IOS_PASSWORD_MANAGER_ON_ACCOUNT_SAVE_SUBTITLE" desc="Infobar subtitle to save a password on account. [Length: 60em]">
-        To Google Password Manager for <ph name="EMAIL">$1<ex>johndoe@gmail.com</ex></ph>
+        To Password Manager for <ph name="EMAIL">$1<ex>johndoe@gmail.com</ex></ph>
       </message>
       <message name="IDS_IOS_PASSWORD_MANAGER_SAVE_BUTTON" desc="Save button text for password manager [Length: 10em]">
         Save
@@ -5115,7 +5115,7 @@ Handoff must also be enabled in the General section of Settings, and your device
         Save password
       </message>
       <message name="IDS_IOS_PASSWORD_MANAGER_TITLE_VIEW_ACCESSIBILITY_LABEL" desc="The accessibility announcement read by Voice Over for the navigation bar title of the Password Manager.">
-          Google Password Manager
+          Password Manager
         </message>
       <message name="IDS_IOS_PASSWORD_MANAGER_UPDATE_BUTTON" desc="Label for the 'update' button in the Update Password infobar. This infobar asks if the user wishes to update the saved password for a site to a new password the user has just entered; the button applies the suggested update. [Length: 10em]">
         Update
@@ -5186,14 +5186,14 @@ Handoff must also be enabled in the General section of Settings, and your device
         =1 {Password saved in your Google Account, {EMAIL}}
         other {Passwords saved in your Google Account, {EMAIL}}}
       </message>
-      <message name="IDS_IOS_PASSWORD_SETTINGS_CHANGE_PIN" desc="Label of the button that allows to change the PIN for Google Password Manager in password settings. [iOS Only]">
+      <message name="IDS_IOS_PASSWORD_SETTINGS_CHANGE_PIN" desc="Label of the button that allows to change the PIN for Password Manager in password settings. [iOS Only]">
         Change PIN
       </message>
       <message name="IDS_IOS_PASSWORD_SETTINGS_CHANGE_PIN_SET_UP_PASSCODE_CONTENT" desc="Message informing the user that in order to change their password manager PIN, a passcode or screen lock needs to be set up on the device. [iOS only]">
         To change your PIN, first set up a passcode on your device.
       </message>
       <message name="IDS_IOS_PASSWORD_SETTINGS_CREDENTIAL_DELETION_TEXT" desc="Section title in password settings, explaining to the user what data will be deleted. [iOS Only]">
-        From Google Password Manager, including passwords and passkeys
+        From Password Manager, including passwords and passkeys
       </message>
       <message name="IDS_IOS_PASSWORD_SETTINGS_DELETE_ALL_CREDENTIALS_DESCRIPTION" desc="Description of the confirmation alert when the user tap delete all data button. The 'list of sites &amp; apps' corresponds to the data shown in the 'Never Saved' section in the home page of Password Manager. [iOS only]">
         You are about to delete {password_count} passwords, {passkey_count} passkeys, and the list of sites &amp; apps you chose to never save sign-in into. Any account you created for sites and apps won't be deleted.
@@ -5208,16 +5208,16 @@ Handoff must also be enabled in the General section of Settings, and your device
         You are about to delete {passkey_count} passkeys and the list of sites &amp; apps you chose to never save sign-in into. Any account you created for sites and apps won't be deleted.
       </message>
       <message name="IDS_IOS_PASSWORD_SETTINGS_DELETE_ALL_CREDENTIALS_TITLE" desc="Title of the confirmation alert when the user tap delete all data button. [iOS only]">
-        You're about to delete your Google Password Manager data
+        You're about to delete your Password Manager data
       </message>
       <message name="IDS_IOS_PASSWORD_SETTINGS_DELETE_ALL_SAVED_CREDENTIALS" desc="Button that user can press to delete all saved credentials. [iOS only]">
         Delete all data
       </message>
-      <message name="IDS_IOS_PASSWORD_SETTINGS_GOOGLE_PASSWORD_MANAGER_PIN_DESCRIPTION" desc="Help text explaining the functionality of a PIN for Google Password Manager. Refer to Glossary for the meaning of 'passkey', do not translate it as 'password'. [iOS Only]">
+      <message name="IDS_IOS_PASSWORD_SETTINGS_GOOGLE_PASSWORD_MANAGER_PIN_DESCRIPTION" desc="Help text explaining the functionality of a PIN for Password Manager. Refer to Glossary for the meaning of 'passkey', do not translate it as 'password'. [iOS Only]">
         Helps you access saved passkeys on any device
       </message>
-      <message name="IDS_IOS_PASSWORD_SETTINGS_GOOGLE_PASSWORD_MANAGER_PIN_TITLE" desc="Title of the section for managing the PIN for Google Password Manager. [iOS Only]">
-        Google Password Manager PIN
+      <message name="IDS_IOS_PASSWORD_SETTINGS_GOOGLE_PASSWORD_MANAGER_PIN_TITLE" desc="Title of the section for managing the PIN for Password Manager. [iOS Only]">
+        Password Manager PIN
       </message>
       <message name="IDS_IOS_PASSWORD_SETTINGS_NO_CREDENTIAL_DELETION_TEXT" desc="Section title in password settings, explaining to the user there is no data to be deleted. [iOS Only]">
         No saved passwords or passkeys
@@ -5226,13 +5226,13 @@ Handoff must also be enabled in the General section of Settings, and your device
         On-Device Encryption
       </message>
       <message name="IDS_IOS_PASSWORD_SETTINGS_ON_DEVICE_ENCRYPTION_LEARN_MORE" desc="Section title in settings &gt; password. [iOS Only]">
-        Your passwords are encrypted on your device before they’re saved to Google Password Manager.
+        Your passwords are encrypted on your device before they’re saved to Password Manager.
       </message>
       <message name="IDS_IOS_PASSWORD_SETTINGS_ON_DEVICE_ENCRYPTION_OPTED_IN_LEARN_MORE" desc="Section title in settings &gt; password, allow to learn more about on-device encryption. [iOS Only]">
         Learn more
       </message>
       <message name="IDS_IOS_PASSWORD_SETTINGS_ON_DEVICE_ENCRYPTION_OPT_IN" desc="Section title in settings &gt; password, explaining to the user what they can opt-in. [iOS Only]">
-        For added safety, encrypt passwords on your device before they’re saved to Google Password Manager.
+        For added safety, encrypt passwords on your device before they’re saved to Password Manager.
       </message>
       <message name="IDS_IOS_PASSWORD_SETTINGS_ON_DEVICE_ENCRYPTION_SET_UP" desc="Section title in settings &gt; password, allowing user to opt-in. [iOS Only]">
         Set up…
@@ -5271,7 +5271,7 @@ Handoff must also be enabled in the General section of Settings, and your device
         Back
       </message>
       <message name="IDS_IOS_PASSWORD_SHARING_FAMILY_PICKER_SUBTITLE" desc="Header text in the view that allows to choose recipients for password sharing from a list of family members explaining what happens when the user shares their password with them. [iOS Only]">
-        When you share a copy of your username and password, your family member can fill them using Google Password Manager.
+        When you share a copy of your username and password, your family member can fill them using Password Manager.
       </message>
       <message name="IDS_IOS_PASSWORD_SHARING_FAMILY_PROMO_BUTTON" desc="Button text for the confirm action in the password sharing family promo view. [iOS only]">
         Got It
@@ -5327,10 +5327,10 @@ Handoff must also be enabled in the General section of Settings, and your device
         To stop others from using your password, open the <ph name="APP">$1<ex>Netflix</ex></ph> app to change your password
       </message>
       <message name="IDS_IOS_PASSWORD_SHARING_SUCCESS_SUBTITLE" desc="Subtitle text on the sharing status view when it succeeds describing that the recipient can now use the shared password. [iOS only]">
-        <ph name="BEGIN_BOLD">BEGIN_BOLD</ph><ph name="USERNAME">$1<ex>johndoe</ex></ph><ph name="END_BOLD">END_BOLD</ph> can now use your username and password when they use Google Password Manager to sign in to <ph name="BEGIN_BOLD">BEGIN_BOLD</ph><ph name="WEBSITE">$2<ex>amazon.com</ex></ph><ph name="END_BOLD">END_BOLD</ph>.
+        <ph name="BEGIN_BOLD">BEGIN_BOLD</ph><ph name="USERNAME">$1<ex>johndoe</ex></ph><ph name="END_BOLD">END_BOLD</ph> can now use your username and password when they use Password Manager to sign in to <ph name="BEGIN_BOLD">BEGIN_BOLD</ph><ph name="WEBSITE">$2<ex>amazon.com</ex></ph><ph name="END_BOLD">END_BOLD</ph>.
       </message>
       <message name="IDS_IOS_PASSWORD_SHARING_SUCCESS_SUBTITLE_MULTIPLE_RECIPIENTS" desc="Subtitle text on the sharing status view when it succeeds describing that the recipient can now use the shared password. [iOS only]">
-        Your family members can now use your username and password when they use Google Password Manager to sign in to <ph name="BEGIN_BOLD">BEGIN_BOLD</ph><ph name="WEBSITE">$1<ex>amazon.com</ex></ph><ph name="END_BOLD">END_BOLD</ph>.
+        Your family members can now use your username and password when they use Password Manager to sign in to <ph name="BEGIN_BOLD">BEGIN_BOLD</ph><ph name="WEBSITE">$1<ex>amazon.com</ex></ph><ph name="END_BOLD">END_BOLD</ph>.
       </message>
       <message name="IDS_IOS_PASSWORD_SHARING_SUCCESS_TITLE" desc="Title text on the sharing status view when it succeeded. [iOS only]">
         Password shared
@@ -5401,10 +5401,10 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_PERMISSIONS_MICROPHONE" desc="Usually used to show whether user has enabled a site's permission to use the device microphone.">
         Microphone
       </message>
-      <message name="IDS_IOS_PERSONALIZE_GOOGLE_SERVICES_LINKED_SERVICES_TITLE" desc="This string is found on a subpage from Chrome’s Advanced Sync settings. When the user taps it, the link takes the user to “Linked Google services” in the Google Account’s Data &amp; privacy settings. The link is on a setting that users see in Chrome’s Advanced Sync settings. This text should match the branded term “linked Google services” in Glossary Manager: https://localization.google.com/glossary/termset?gid=27517723&amp;tsid=517bace2.">
-        Linked Google services
+      <message name="IDS_IOS_PERSONALIZE_GOOGLE_SERVICES_LINKED_SERVICES_TITLE" desc="This string is found on a subpage from Jatter’s Advanced Sync settings. When the user taps it, the link takes the user to “Linked Services” in the Google Account’s Data &amp; privacy settings. The link is on a setting that users see in Jatter’s Advanced Sync settings. This text should match the branded term “linked Services” in Glossary Manager: https://localization.google.com/glossary/termset?gid=27517723&amp;tsid=517bace2.">
+        Linked Services
       </message>
-      <message name="IDS_IOS_PERSONALIZE_GOOGLE_SERVICES_WAA_TITLE" desc="This string is found on a link in Chrome’s Advanced Sync settings. When the user taps it, the link takes the user to “Web &amp; App Activity” in the Google Account’s Activity Controls. The link is on a subpage from Chrome’s Advanced Sync settings. This text should match the branded term “Web &amp; App Activity” in Glossary Manager: https://localization.google.com/glossary/termset?gid=27517723&amp;tsid=77d3b75.">
+      <message name="IDS_IOS_PERSONALIZE_GOOGLE_SERVICES_WAA_TITLE" desc="This string is found on a link in Jatter’s Advanced Sync settings. When the user taps it, the link takes the user to “Web &amp; App Activity” in the Google Account’s Activity Controls. The link is on a subpage from Jatter’s Advanced Sync settings. This text should match the branded term “Web &amp; App Activity” in Glossary Manager: https://localization.google.com/glossary/termset?gid=27517723&amp;tsid=77d3b75.">
         Web &amp; App activity
       </message>
       <message name="IDS_IOS_PHONE_CALL_BUTTON" desc="Text in the confirmation dialog button that will initiate a phone call for the presented number. [Length: 10em] [iOS only]">
@@ -5545,7 +5545,7 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_PRICE_NOTIFICATIONS_PRICE_TRACK_PERMISSION_REDIRECT_ALERT_CANCEL" desc="The label for the alert's cancel button">
           Cancel
       </message>
-      <message name="IDS_IOS_PRICE_NOTIFICATIONS_PRICE_TRACK_PERMISSION_REDIRECT_ALERT_REDIRECT" desc="The label for the alert's button that redirects the user to Chrome's application settings in iOS">
+      <message name="IDS_IOS_PRICE_NOTIFICATIONS_PRICE_TRACK_PERMISSION_REDIRECT_ALERT_REDIRECT" desc="The label for the alert's button that redirects the user to Jatter's application settings in iOS">
           Go to Settings
       </message>
       <message name="IDS_IOS_PRICE_NOTIFICATIONS_PRICE_TRACK_SUBSCRIBE_ERROR_ALERT_DESCRIPTION" desc="The description that informs the user that an error occurred during the price tracking subscription process.">
@@ -5637,7 +5637,7 @@ Handoff must also be enabled in the General section of Settings, and your device
         Does not protect you against dangerous websites, downloads, and extensions. Your Safe Browsing settings in other Google products won't be affected.
       </message>
       <message name="IDS_IOS_PRIVACY_SAFE_BROWSING_NO_PROTECTION_SUMMARY" desc="Summary for Privacy Safe Browsing no protection mode.">
-        Does not protect you against dangerous websites, downloads, and extensions. You’ll still get Safe Browsing protection, where available, in other Google services, like Gmail and Search.
+        Does not protect you against dangerous websites, downloads, and extensions. You’ll still get Safe Browsing protection, where available, in other Services, like Gmail and Search.
       </message>
       <message name="IDS_IOS_PRIVACY_SAFE_BROWSING_NO_PROTECTION_TITLE" desc="Title for Privacy Safe Browsing no protection mode.">
         No protection (not recommended)
@@ -5808,10 +5808,10 @@ Handoff must also be enabled in the General section of Settings, and your device
         Done
       </message>
       <message name="IDS_IOS_READING_LIST_ENTRY_ACCESSIBILITY_LABEL" desc="Accessibility label for a reading list entry. Summarizes fields in the reading list entry (title, status and url). Read by Text To Speech. Similar to IDS_IOS_READING_LIST_ENTRY_WITH_UPLOAD_STATE_ACCESSIBILITY_LABEL">
-        <ph name="TITLE"><ex>Chromium - The Chromium projects</ex>$1</ph>, <ph name="STATE"><ex>available offline</ex>$2</ph>, <ph name="URL"><ex>http://www.chromium.org/Home</ex>$3</ph>
+        <ph name="TITLE"><ex>Jatter - The Jatter projects</ex>$1</ph>, <ph name="STATE"><ex>available offline</ex>$2</ph>, <ph name="URL"><ex>http://www.chromium.org/Home</ex>$3</ph>
       </message>
       <message name="IDS_IOS_READING_LIST_ENTRY_WITH_UPLOAD_STATE_ACCESSIBILITY_LABEL" desc="Accessibility label for a reading list entry. Summarizes fields in the reading list entry (title, status, upload state and url). Read by Text To Speech. Similar to IDS_IOS_READING_LIST_ENTRY_ACCESSIBILITY_LABEL">
-        <ph name="TITLE"><ex>Chromium - The Chromium projects</ex>$1</ph>, <ph name="STATE"><ex>available offline</ex>$2</ph>, only on this device, <ph name="URL"><ex>http://www.chromium.org/Home</ex>$3</ph>
+        <ph name="TITLE"><ex>Jatter - The Jatter projects</ex>$1</ph>, <ph name="STATE"><ex>available offline</ex>$2</ph>, only on this device, <ph name="URL"><ex>http://www.chromium.org/Home</ex>$3</ph>
       </message>
       <message name="IDS_IOS_READING_LIST_JUST_NOW" desc="String indicating that an event (adding item, distillation) happened less than one minute ago. [Length: 25em]">
         Just now
@@ -6104,10 +6104,10 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_SAFARI_IMPORT_IMPORT_ACTION_BUTTON_SELECT_YOUR_FILE" desc="Safari import screen that handles the import process - Button text to select the file to import data from Safari. [iOS only]">
         Select your file
       </message>
-      <message name="IDS_IOS_SAFARI_IMPORT_IMPORT_FAILURE_MESSAGE_DESCRIPTION" desc="Description in the alert message informing the user that the currently selected file could not be imported to Chrome. [iOS only]">
+      <message name="IDS_IOS_SAFARI_IMPORT_IMPORT_FAILURE_MESSAGE_DESCRIPTION" desc="Description in the alert message informing the user that the currently selected file could not be imported to Jatter. [iOS only]">
         This file can't be imported
       </message>
-      <message name="IDS_IOS_SAFARI_IMPORT_IMPORT_FAILURE_MESSAGE_TITLE" desc="Title of the alert message informing the user that the currently selected file could not be imported to Chrome. [iOS only]">
+      <message name="IDS_IOS_SAFARI_IMPORT_IMPORT_FAILURE_MESSAGE_TITLE" desc="Title of the alert message informing the user that the currently selected file could not be imported to Jatter. [iOS only]">
         Something went wrong
       </message>
       <message name="IDS_IOS_SAFARI_IMPORT_IMPORT_FILE_DELETION_ALERT_ACTION_DELETE" desc="Button in the alert message that deletes the imported ZIP file for the user. [iOS only]">
@@ -6170,10 +6170,10 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_SAFARI_IMPORT_INVALID_PASSWORD_REASON_UNKNOWN" desc="Message is shown on the dialog for importing passwords if no passwords were imported and we don't know the cause of error. Probably error in the backend or in our systems.">
         Your password wasn't imported
       </message>
-      <message name="IDS_IOS_SAFARI_IMPORT_PASSWORD_CONFLICT_RESOLUTION_BUTTON_DESELECT_ALL" desc="Bar button to automatically deselect all passwords displayed on the screen . It shows up at the bottom of the modal that enables user to resolve conflict between existing Passwords in Google Password Manager and those imported from Safari. [iOS only]">
+      <message name="IDS_IOS_SAFARI_IMPORT_PASSWORD_CONFLICT_RESOLUTION_BUTTON_DESELECT_ALL" desc="Bar button to automatically deselect all passwords displayed on the screen . It shows up at the bottom of the modal that enables user to resolve conflict between existing Passwords in Password Manager and those imported from Safari. [iOS only]">
         Deselect all
       </message>
-      <message name="IDS_IOS_SAFARI_IMPORT_PASSWORD_CONFLICT_RESOLUTION_BUTTON_SELECT_ALL" desc="Bar button to automatically mark all passwords displayed on the screen as selected. It shows up at the bottom of the modal that enables user to resolve conflict between existing Passwords in Google Password Manager and those imported from Safari. [iOS only]">
+      <message name="IDS_IOS_SAFARI_IMPORT_PASSWORD_CONFLICT_RESOLUTION_BUTTON_SELECT_ALL" desc="Bar button to automatically mark all passwords displayed on the screen as selected. It shows up at the bottom of the modal that enables user to resolve conflict between existing Passwords in Password Manager and those imported from Safari. [iOS only]">
         Select all
       </message>
       <message name="IDS_IOS_SAFARI_IMPORT_PASSWORD_UNMASK_REAUTH_REASON" desc="Message explaining that the reason why we are requiring the user to re-authenticate is to be able to show the password in plain text. This is shown by iOS in the passcode reauthentication system dialogue, right under the OS string 'Enter iPhone Passcode for $BROWSER_NAME'. [Length: 22em]">
@@ -6311,7 +6311,7 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_SAFETY_CHECK_TITLE_SAFE_BROWSING" desc="Tag label title displayed for the Safety Check module in the Magic Stack when the Safe Browsing check finds an issue. [iOS only]">
         Add browsing protection
       </message>
-      <message name="IDS_IOS_SAFETY_CHECK_TITLE_UPDATE_CHROME" desc="Tag label title displayed for the Safety Check module in the Magic Stack when the Update Chrome check finds an issue. [iOS only]">
+      <message name="IDS_IOS_SAFETY_CHECK_TITLE_UPDATE_CHROME" desc="Tag label title displayed for the Safety Check module in the Magic Stack when the Update Jatter check finds an issue. [iOS only]">
         Update your Browser
       </message>
       <message name="IDS_IOS_SAFE_BROWSING_ENHANCED_OFF_INFOBAR_TITLE" desc="The title to display in an infobar when Enhanced protection is disabled by sync.">
@@ -6321,7 +6321,7 @@ Handoff must also be enabled in the General section of Settings, and your device
         Enhanced protection is on
       </message>
       <message name="IDS_IOS_SAFE_BROWSING_ENHANCED_PROTECTION_ACCOUNT_ICON_DESCRIPTION" desc="Description for Safe Browsing enhanced protection account icon.">
-        When you're signed in, this data is linked to your Google Account to protect you across Google services, for example increasing protection in Gmail after a security incident.
+        When you're signed in, this data is linked to your Google Account to protect you across Services, for example increasing protection in Gmail after a security incident.
       </message>
       <message name="IDS_IOS_SAFE_BROWSING_ENHANCED_PROTECTION_BULLET_FIVE" desc="Fifth bullet point under the Safe Browsing enhanced protection mode">
         Sends URLs to Safe Browsing to check them. Also sends a small sample of pages, downloads, extension activity, and system information to help discover new threats. Temporarily links this data to your Google Account when you’re signed in, to protect you across Google apps.
@@ -6339,7 +6339,7 @@ Handoff must also be enabled in the General section of Settings, and your device
         Improves security for you and everyone on the web.
       </message>
       <message name="IDS_IOS_SAFE_BROWSING_ENHANCED_PROTECTION_G_ICON_DESCRIPTION" desc="Description for Safe Browsing enhanced protection G icon.">
-        When you're signed in, protects you across Google services.
+        When you're signed in, protects you across Services.
       </message>
       <message name="IDS_IOS_SAFE_BROWSING_ENHANCED_PROTECTION_INFOBAR_BUTTON_TEXT" desc="The Enhanced Safe Browsing infobar promo button's text. When the button is clicked, the user is navigated to the Safe Browsing settings page.">Turn on…</message>
       <message name="IDS_IOS_SAFE_BROWSING_ENHANCED_PROTECTION_INFOBAR_TITLE" desc="The Enhanced Safe Browsing infobar promo's title.">
@@ -6384,25 +6384,25 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_SAFE_BROWSING_STANDARD_PROTECTION_EXTENDED_REPORTING_TITLE" desc="Title for Safe Browsing extended reporting.">
         Help improve security on the Web for everyone
       </message>
-      <message name="IDS_IOS_SAFE_BROWSING_STANDARD_PROTECTION_LEAK_CHECK_TITLE" desc="Title for the switch toggling whether Chrome should check that entered credentials have been part of a leak.">
+      <message name="IDS_IOS_SAFE_BROWSING_STANDARD_PROTECTION_LEAK_CHECK_TITLE" desc="Title for the switch toggling whether Jatter should check that entered credentials have been part of a leak.">
         Warn you if passwords are Exposed in a Data breach
       </message>
       <message name="IDS_IOS_SAFE_MODE_AW_SNAP" desc="The title of the safe mode UI after multiple crashes.  This is intended to be a humorous exclamation of dismay. [Length: 30em]">
         Aw, snap!
       </message>
-      <message name="IDS_IOS_SAFE_MODE_CRASH_REPORT_SENT" desc="The message indicating that Chrome sent a crash report. [Length: 140em]">
+      <message name="IDS_IOS_SAFE_MODE_CRASH_REPORT_SENT" desc="The message indicating that Jatter sent a crash report. [Length: 140em]">
         Crash report sent.
       </message>
-      <message name="IDS_IOS_SAFE_MODE_NEEDS_OS_UPDATE" desc="The message indicating that Chrome crashed due to a known issue with the current version of iOS. [Length: 140em]">
+      <message name="IDS_IOS_SAFE_MODE_NEEDS_OS_UPDATE" desc="The message indicating that Jatter crashed due to a known issue with the current version of iOS. [Length: 140em]">
         Something went really wrong. Please update your iOS version.
       </message>
-      <message name="IDS_IOS_SAFE_MODE_RELOAD_CHROME" desc="The label of a button used to start Chrome from safe mode.  Clicking this button dismisses the safe mode UI and launches Chrome. [Length: 30em]">
+      <message name="IDS_IOS_SAFE_MODE_RELOAD_CHROME" desc="The label of a button used to start Jatter from safe mode.  Clicking this button dismisses the safe mode UI and launches Jatter. [Length: 30em]">
         Try again
       </message>
-      <message name="IDS_IOS_SAFE_MODE_SENDING_CRASH_REPORT" desc="The message indicating that Chrome is sending a crash report. [Length: 140em]">
+      <message name="IDS_IOS_SAFE_MODE_SENDING_CRASH_REPORT" desc="The message indicating that Jatter is sending a crash report. [Length: 140em]">
         Sending crash report…
       </message>
-      <message name="IDS_IOS_SAFE_MODE_UNKNOWN_CAUSE" desc="The message indicating that Chrome crashed for an unknown reason. [Length: 140em]">
+      <message name="IDS_IOS_SAFE_MODE_UNKNOWN_CAUSE" desc="The message indicating that Jatter crashed for an unknown reason. [Length: 140em]">
         Something went really wrong. We'll work on that.
       </message>
       <message name="IDS_IOS_SAVE_IMAGE_ERROR" desc="Message informing the user that the image could not be saved because there was an error.">
@@ -6513,13 +6513,13 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_SEARCH_COPIED" desc="The message displayed when the search is copied via long press (contextual search) [Length: 10em] [iOS only]">
         Copied
       </message>
-      <message name="IDS_IOS_SEARCH_COPIED_IMAGE" desc="If a user has an image on their clipboard, this string will appear as an option when the user long-presses on Chrome's address bar. The user can select this option to search the default search engine for the image. This string is a complete sentence. If necessary for your language, you can translate as 'Search for Image That You Copied.' [iOS only]" meaning="Maximum characters: 32">
+      <message name="IDS_IOS_SEARCH_COPIED_IMAGE" desc="If a user has an image on their clipboard, this string will appear as an option when the user long-presses on Jatter's address bar. The user can select this option to search the default search engine for the image. This string is a complete sentence. If necessary for your language, you can translate as 'Search for Image That You Copied.' [iOS only]" meaning="Maximum characters: 32">
           Search for copied image
       </message>
-      <message name="IDS_IOS_SEARCH_COPIED_IMAGE_WITH_LENS" desc="If a user has an image on their clipboard, this string will appear as an option when the user long-presses on Chrome's address bar if Lens is enabled. The user can select this option to trigger a Lens search on the image. This string is a complete sentence. If necessary for your language, you can translate as 'Lens Image That You Copied.' [iOS only]" meaning="Maximum characters: 32">
+      <message name="IDS_IOS_SEARCH_COPIED_IMAGE_WITH_LENS" desc="If a user has an image on their clipboard, this string will appear as an option when the user long-presses on Jatter's address bar if Lens is enabled. The user can select this option to trigger a Lens search on the image. This string is a complete sentence. If necessary for your language, you can translate as 'Lens Image That You Copied.' [iOS only]" meaning="Maximum characters: 32">
           Lens copied image
       </message>
-      <message name="IDS_IOS_SEARCH_COPIED_TEXT" desc="If a user has some text on their clipboard, this string will appear as an option when the user long-presses on Chrome's address bar. The user can select this option to search the default search engine for the text. This string is a complete sentence. If necessary for your language, you can translate as 'Search for Text That You Copied.' [iOS only]" meaning="Maximum characters: 32">
+      <message name="IDS_IOS_SEARCH_COPIED_TEXT" desc="If a user has some text on their clipboard, this string will appear as an option when the user long-presses on Jatter's address bar. The user can select this option to search the default search engine for the text. This string is a complete sentence. If necessary for your language, you can translate as 'Search for Text That You Copied.' [iOS only]" meaning="Maximum characters: 32">
           Search for copied text
       </message>
       <message name="IDS_IOS_SEARCH_ENGINE_ACCESSIBILITY_COLLAPSE_SNIPPET" desc="Accessibility action to collapse the search engine description, using the chevron.">
@@ -6641,7 +6641,7 @@ Handoff must also be enabled in the General section of Settings, and your device
           other {Delete addresses}}
       </message>
       <message name="IDS_IOS_SETTINGS_AUTOFILL_DELETE_HOME_WORK_ADDRESS_CONFIRMATION_TITLE" desc="Title for the sheet shown to the user for confirmation to delete home or work addresses. [iOS only]">
-          This removes selected info from Chrome, but it doesn’t delete this info from your Google Account.
+          This removes selected info from Jatter, but it doesn’t delete this info from your Google Account.
       </message>
       <message name="IDS_IOS_SETTINGS_AUTOFILL_DELETE_LOCAL_ACCOUNT_ADDRESS_CONFIRMATION_TITLE" desc="Title for the sheet shown to the user for confirmation to delete local and account addresses. [iOS only]">
           This deletes addresses saved on this device. It also deletes addresses saved in your Google Account <ph name="USER_EMAIL">$1<ex>janedoe@google.com</ex></ph>.
@@ -6658,7 +6658,7 @@ Handoff must also be enabled in the General section of Settings, and your device
           other {These addresses will be deleted from this device.}}
       </message>
       <message name="IDS_IOS_SETTINGS_AUTOFILL_DELETE_LOCAL_HOME_WORK_ADDRESS_CONFIRMATION_TITLE" desc="Title for the sheet shown to the user for confirmation to delete local and home or work addresses. [iOS only]">
-          This deletes addresses saved on this device. It also removes selected info from Chrome, but it doesn’t delete this info from your Google Account.
+          This deletes addresses saved on this device. It also removes selected info from Jatter, but it doesn’t delete this info from your Google Account.
       </message>
       <message name="IDS_IOS_SETTINGS_AUTOFILL_DELETE_TITLE_LOCAL" desc="Title for the sheet shown to the user for confirmation to delete mixed selection of addresses and entities. Locally saved only. [iOS only]">
           This deletes selected info saved on this device.
@@ -6737,28 +6737,28 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_SETTINGS_PASSWORDS_EXCEPTIONS_HEADING" desc="The title for a list of sites where passwords will not be saved. These items are already saved by the browser and can only be deleted. [Length: one line] [iOS only]">
       Never saved
       </message>
-      <message name="IDS_IOS_SETTINGS_PASSWORDS_IN_OTHER_APPS_CAPTION" desc="The caption label below subtitle of the view that teaches users to turn off iOS AutoFill from Chrome password manager">
+      <message name="IDS_IOS_SETTINGS_PASSWORDS_IN_OTHER_APPS_CAPTION" desc="The caption label below subtitle of the view that teaches users to turn off iOS AutoFill from Jatter password manager">
         To turn off, open <ph name="BEGIN_LINK">BEGIN_LINK</ph>Settings<ph name="END_LINK">END_LINK</ph> and go to AutoFill Passwords.
       </message>
-      <message name="IDS_IOS_SETTINGS_PASSWORDS_IN_OTHER_APPS_CAPTION_IOS17" desc="The caption label below subtitle of the view that teaches users to turn off iOS AutoFill from Chrome password manager. 'Password Options' is the name of an iOS setting (iOS settings &gt; Passwords &gt; Password Options). The translation and capitalization should match that of the iOS setting. [iOS only]" meaning="Translation and capitalization of 'Password Options' should match that of the iOS setting.">
+      <message name="IDS_IOS_SETTINGS_PASSWORDS_IN_OTHER_APPS_CAPTION_IOS17" desc="The caption label below subtitle of the view that teaches users to turn off iOS AutoFill from Jatter password manager. 'Password Options' is the name of an iOS setting (iOS settings &gt; Passwords &gt; Password Options). The translation and capitalization should match that of the iOS setting. [iOS only]" meaning="Translation and capitalization of 'Password Options' should match that of the iOS setting.">
         To turn off, go to <ph name="BEGIN_LINK">BEGIN_LINK</ph>Password Options<ph name="END_LINK">END_LINK</ph>
       </message>
-      <message name="IDS_IOS_SETTINGS_PASSWORDS_IN_OTHER_APPS_CAPTION_IOS18" desc="The caption label below the title of the view that teaches users how to turn off iOS AutoFill from Chrome password manager on iOS 18 and above. 'AutoFill &amp; Passwords' is the name of an iOS setting (iOS settings &gt; General &gt; AutoFill &amp; Passwords). The translation and capitalization should match that of the iOS setting. [iOS only]" meaning="Translation and capitalization of 'AutoFill &amp; Passwords' should match that of the iOS setting.">
+      <message name="IDS_IOS_SETTINGS_PASSWORDS_IN_OTHER_APPS_CAPTION_IOS18" desc="The caption label below the title of the view that teaches users how to turn off iOS AutoFill from Jatter password manager on iOS 18 and above. 'AutoFill &amp; Passwords' is the name of an iOS setting (iOS settings &gt; General &gt; AutoFill &amp; Passwords). The translation and capitalization should match that of the iOS setting. [iOS only]" meaning="Translation and capitalization of 'AutoFill &amp; Passwords' should match that of the iOS setting.">
         To turn off, go to <ph name="BEGIN_LINK">BEGIN_LINK</ph>AutoFill &amp; Passwords<ph name="END_LINK">END_LINK</ph>
       </message>
-      <message name="IDS_IOS_SETTINGS_PASSWORDS_IN_OTHER_APPS_SHORTENED_STEP_1_IOS16" desc="Text of the row indicating the first step of shortened instruction of of turning on iOS auto-fill from Chrome password manager on iOS 16 and above [iOS only]">
+      <message name="IDS_IOS_SETTINGS_PASSWORDS_IN_OTHER_APPS_SHORTENED_STEP_1_IOS16" desc="Text of the row indicating the first step of shortened instruction of of turning on iOS auto-fill from Jatter password manager on iOS 16 and above [iOS only]">
         Open Password Options
       </message>
-      <message name="IDS_IOS_SETTINGS_PASSWORDS_IN_OTHER_APPS_STEP_1_IPAD" desc="Text of the row indicating the first step of full instruction of of turning on iOS auto-fill from Chrome password manager [iOS only]">
+      <message name="IDS_IOS_SETTINGS_PASSWORDS_IN_OTHER_APPS_STEP_1_IPAD" desc="Text of the row indicating the first step of full instruction of of turning on iOS auto-fill from Jatter password manager [iOS only]">
         1. Open iPad Settings
       </message>
-      <message name="IDS_IOS_SETTINGS_PASSWORDS_IN_OTHER_APPS_STEP_1_IPHONE" desc="Text of the row indicating the first step of full instruction of of turning on iOS auto-fill from Chrome password manager [iOS only]">
+      <message name="IDS_IOS_SETTINGS_PASSWORDS_IN_OTHER_APPS_STEP_1_IPHONE" desc="Text of the row indicating the first step of full instruction of of turning on iOS auto-fill from Jatter password manager [iOS only]">
         1. Open iPhone Settings
       </message>
-      <message name="IDS_IOS_SETTINGS_PASSWORDS_IN_OTHER_APPS_STEP_2" desc="Text of the row indicating the second step of full instruction of of turning on iOS auto-fill from Chrome password manager [iOS only]">
+      <message name="IDS_IOS_SETTINGS_PASSWORDS_IN_OTHER_APPS_STEP_2" desc="Text of the row indicating the second step of full instruction of of turning on iOS auto-fill from Jatter password manager [iOS only]">
         2. Tap Passwords
       </message>
-      <message name="IDS_IOS_SETTINGS_PASSWORDS_IN_OTHER_APPS_STEP_3_IOS16" desc="Text of the row indicating the third step of full instruction of of turning on iOS auto-fill from Chrome password manager on iOS 16 and above [iOS only]">
+      <message name="IDS_IOS_SETTINGS_PASSWORDS_IN_OTHER_APPS_STEP_3_IOS16" desc="Text of the row indicating the third step of full instruction of of turning on iOS auto-fill from Jatter password manager on iOS 16 and above [iOS only]">
         3. Tap Password Options
       </message>
       <message name="IDS_IOS_SETTINGS_PASSWORDS_IN_OTHER_APPS_SUBTITLE_SYNCING_ENABLED" desc="The subtitle of the view that teaches password-syncing users they can access passwords from their other devices">
@@ -6770,16 +6770,16 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_SETTINGS_PASSWORDS_NUMBER_ACCOUNT" desc="A description presented to the user of how many accounts have sign-in information available by tapping on this menu item. [iOS only]">
         <ph name="NUMBER_OF_ACCOUNTS">$1<ex>2</ex></ph> accounts
       </message>
-      <message name="IDS_IOS_SETTINGS_PASSWORDS_PASSKEYS_IN_OTHER_APPS" desc="The title of the view in password settings that allows users to turn on iOS auto-fill from Chrome password manager. Refer to Glossary when translating passkeys. [iOS only]">
+      <message name="IDS_IOS_SETTINGS_PASSWORDS_PASSKEYS_IN_OTHER_APPS" desc="The title of the view in password settings that allows users to turn on iOS auto-fill from Jatter password manager. Refer to Glossary when translating passkeys. [iOS only]">
         Access passwords &amp; passkeys from any app
       </message>
-      <message name="IDS_IOS_SETTINGS_PASSWORDS_PASSKEYS_IN_OTHER_APPS_HEADER" desc="The title of the view that teaches users to turn on iOS AutoFill from Chrome password manager. Refer to Glossary when translating passkeys. [iOS only]">
+      <message name="IDS_IOS_SETTINGS_PASSWORDS_PASSKEYS_IN_OTHER_APPS_HEADER" desc="The title of the view that teaches users to turn on iOS AutoFill from Jatter password manager. Refer to Glossary when translating passkeys. [iOS only]">
         Access your passwords &amp; passkeys from any app
       </message>
-      <message name="IDS_IOS_SETTINGS_PASSWORDS_PASSKEYS_IN_OTHER_APPS_HEADER_IOS18" desc="The title of the view that teaches users to turn on iOS AutoFill from Chrome password manager. Used on iOS 18+. Refer to Glossary when translating passkeys. [iOS only]">
+      <message name="IDS_IOS_SETTINGS_PASSWORDS_PASSKEYS_IN_OTHER_APPS_HEADER_IOS18" desc="The title of the view that teaches users to turn on iOS AutoFill from Jatter password manager. Used on iOS 18+. Refer to Glossary when translating passkeys. [iOS only]">
         Autofill passwords and passkeys
       </message>
-      <message name="IDS_IOS_SETTINGS_PASSWORDS_PASSKEYS_IN_OTHER_APPS_IOS18" desc="The title of the view in password settings that allows users to turn on iOS AutoFill from Chrome password manager. Used on iOS 18+. Refer to Glossary when translating passkeys. [iOS only]">
+      <message name="IDS_IOS_SETTINGS_PASSWORDS_PASSKEYS_IN_OTHER_APPS_IOS18" desc="The title of the view in password settings that allows users to turn on iOS AutoFill from Jatter password manager. Used on iOS 18+. Refer to Glossary when translating passkeys. [iOS only]">
         Autofill passwords &amp; passkeys
       </message>
       <message name="IDS_IOS_SETTINGS_PASSWORDS_PASSKEYS_SAVED_HEADING" desc="The title for a list of items, with each entry consisting of a password or a passkey, and a corresponding username and website. These items are already saved by the browser and can be deleted/edited. Refer to Glossary for the meaning of 'passkey', do not translate it as 'password'. [Length: one line] [iOS only]">
@@ -6875,7 +6875,7 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_SETTINGS_SAFETY_CHECK_UPDATES_MANAGED_DESC" desc="Description text for when the device has updates managed by an administrator">
        Managed by your administrator
       </message>
-      <message name="IDS_IOS_SETTINGS_SAFETY_CHECK_UPDATES_TITLE" desc="Title for the updates element of safety check" meaning="Row title to display the user's Chrome update status, and access upates [CHAR_LIMIT=20]">
+      <message name="IDS_IOS_SETTINGS_SAFETY_CHECK_UPDATES_TITLE" desc="Title for the updates element of safety check" meaning="Row title to display the user's Jatter update status, and access upates [CHAR_LIMIT=20]">
         Updates
       </message>
       <message name="IDS_IOS_SETTINGS_SET_DEFAULT_BROWSER" desc="Label of the row that opens the Default Browser Settings page">
@@ -6950,10 +6950,10 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_SET_UP_LIST_ALL_SET_TITLE" desc="Title for the Set Up List item that tells the user they have completed all tasks.">
         You're all set
       </message>
-      <message name="IDS_IOS_SET_UP_LIST_AUTOFILL_SEE_MORE_DESCRIPTION" desc="Description for the Set Up List item in the See More modal that encourages the user to set up Chrome's autofill settings.">
+      <message name="IDS_IOS_SET_UP_LIST_AUTOFILL_SEE_MORE_DESCRIPTION" desc="Description for the Set Up List item in the See More modal that encourages the user to set up Jatter's autofill settings.">
         Access your passwords and more across apps.
       </message>
-      <message name="IDS_IOS_SET_UP_LIST_AUTOFILL_SHORT_DESCRIPTION" desc="Shortened description for the Set Up List item that encourages the user to set up Chrome's autofill settings.">
+      <message name="IDS_IOS_SET_UP_LIST_AUTOFILL_SHORT_DESCRIPTION" desc="Shortened description for the Set Up List item that encourages the user to set up Jatter's autofill settings.">
         Access your passwords across other apps.
       </message>
       <message name="IDS_IOS_SET_UP_LIST_BACKGROUND_CUSTOMIZATION_DESCRIPTION" desc="Description for the Set Up List item that encourages the user to set up background customization settings.">
@@ -6965,19 +6965,19 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_SET_UP_LIST_COLLAPSE" desc="Accessibility label for the button to expand the Set Up List.">
         Collapse list
       </message>
-      <message name="IDS_IOS_SET_UP_LIST_DEFAULT_BROWSER_SHORT_DESCRIPTION" desc="Shortened description for the Set Up List item that encourages the user to set Chrome as their default browser.">
+      <message name="IDS_IOS_SET_UP_LIST_DEFAULT_BROWSER_SHORT_DESCRIPTION" desc="Shortened description for the Set Up List item that encourages the user to set Jatter as their default browser.">
         Easily open links in other apps.
       </message>
       <message name="IDS_IOS_SET_UP_LIST_EXPAND" desc="Accessibility label for the button to expand the Set Up List.">
         Expand list
       </message>
       <message name="IDS_IOS_SET_UP_LIST_HIDE_MODULE_CONTEXT_MENU_DESCRIPTION" desc="Description for the long-press context menu for the Set Up List module.">
-          Hide "<ph name="TITLE">$1<ex>Get the most out of Chromium</ex></ph>"
+          Hide "<ph name="TITLE">$1<ex>Get the most out of Jatter</ex></ph>"
       </message>
       <message name="IDS_IOS_SET_UP_LIST_MENU" desc="Accessibility label for the Set Up List menu button.">
         Options
       </message>
-      <message name="IDS_IOS_SET_UP_LIST_NOTIFICATIONS_TITLE" desc="Title for the Set Up List item that encourages the user to enable Chrome notifications.">
+      <message name="IDS_IOS_SET_UP_LIST_NOTIFICATIONS_TITLE" desc="Title for the Set Up List item that encourages the user to enable Jatter notifications.">
         Get notifications
       </message>
       <message name="IDS_IOS_SET_UP_LIST_SAFARI_IMPORT_DESCRIPTION" desc="Description for the Set Up List item that encourages the user to set up Safari data import settings.">
@@ -6992,7 +6992,7 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_SET_UP_LIST_TRY_BUTTON_TEXT" desc="Button text next to a Set Up List item suggesting to the user to try the action.">
         Try
       </message>
-      <message name="IDS_IOS_SHARED_GROUP_ERROR_GOT_IT" desc="Title of the button to close the error message, letting the user notify Chrome of their understanding of the error message.">
+      <message name="IDS_IOS_SHARED_GROUP_ERROR_GOT_IT" desc="Title of the button to close the error message, letting the user notify Jatter of their understanding of the error message.">
         Got it
       </message>
       <message name="IDS_IOS_SHARED_GROUP_ERROR_MESSAGE" desc="Title for a generic alert when an error happened.">
@@ -7071,10 +7071,10 @@ Handoff must also be enabled in the General section of Settings, and your device
         Google+ post completed.
       </message>
       <message name="IDS_IOS_SHARE_KIT_BLOCK_AND_LEAVE_MESSAGE" desc="The message shown when the user tries to block another user and leave a tab group.">
-        You'll immediately lose access to the “<ph name="GROUP_NAME">$1<ex>Vacation</ex></ph>" tab group, and <ph name="USER_NAME">$2<ex>John Doe</ex></ph> (<ph name="USER_EMAIL">$3<ex>john.doe@gmail.com</ex></ph>) will no longer be able to interact with you across Google services
+        You'll immediately lose access to the “<ph name="GROUP_NAME">$1<ex>Vacation</ex></ph>" tab group, and <ph name="USER_NAME">$2<ex>John Doe</ex></ph> (<ph name="USER_EMAIL">$3<ex>john.doe@gmail.com</ex></ph>) will no longer be able to interact with you across Services
       </message>
       <message name="IDS_IOS_SHARE_KIT_BLOCK_MESSAGE" desc="The message shown when the user tries to block another user.">
-        <ph name="USER_NAME">$1<ex>John Doe</ex></ph> (<ph name="USER_EMAIL">$2<ex>john.doe@gmail.com</ex></ph>) will immediately lose access to the “<ph name="GROUP_NAME">$3<ex>Vacation</ex></ph>" tab group, and will no longer be able to interact with you across Google services
+        <ph name="USER_NAME">$1<ex>John Doe</ex></ph> (<ph name="USER_EMAIL">$2<ex>john.doe@gmail.com</ex></ph>) will immediately lose access to the “<ph name="GROUP_NAME">$3<ex>Vacation</ex></ph>" tab group, and will no longer be able to interact with you across Services
       </message>
       <message name="IDS_IOS_SHARE_KIT_JOIN_DISCLAIMER_CAPTION" desc="The caption part of the disclaimer for sharing a tab group.">
         <ph name="USER_NAME">$1<ex>John Doe</ex></ph> (<ph name="USER_EMAIL">$2<ex>john.doe@gmail.com</ex></ph>) wants you to join a tab group. Anyone with the link can edit all tabs, so join with care. Link expires in 48 hr.
@@ -7189,7 +7189,7 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_SHOW_FULL_URL_BUTTON_ACCESSIBILITY_LABEL" desc="Accessibility Label of a button which will initiate the popup message with the full URL in the web context menu. [iOS only]">
         Show full URL
       </message>
-      <message name="IDS_IOS_SHOW_LINK_PREVIEWS" desc="Title for the view and option in Settings for showing link previews. [Length: unlimited] [iOS only]" meaning="Title for the Chrome Settings option for showing link previews. [Length: unlimited]">
+      <message name="IDS_IOS_SHOW_LINK_PREVIEWS" desc="Title for the view and option in Settings for showing link previews. [Length: unlimited] [iOS only]" meaning="Title for the Jatter Settings option for showing link previews. [Length: unlimited]">
         Show link previews
       </message>
       <message name="IDS_IOS_SHOW_ME_HOW_FIRST_RUN_TITLE" desc="Tertiary action button text that leads to a list of instructions">
@@ -7249,22 +7249,22 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_SIGNIN_GROUP_COLLABORATION_TITLE" desc="Title displayed to the user when they attempt to access a shared group while being signed out.">
         Collaborate in tab groups
       </message>
-      <message name="IDS_IOS_SIGNIN_PROMO_BOOKMARKS" desc="This string is on a promo intended to promote signing in to Chrome with the user's Google Account. It appears on the Bookmarks page when the user is not signed in. We want users to read this promo and click 'Continue as name' to sign in to their Google Account. The tone should be informative and lightweight. [Length: 90em]">
+      <message name="IDS_IOS_SIGNIN_PROMO_BOOKMARKS" desc="This string is on a promo intended to promote signing in to Jatter with the user's Google Account. It appears on the Bookmarks page when the user is not signed in. We want users to read this promo and click 'Continue as name' to sign in to their Google Account. The tone should be informative and lightweight. [Length: 90em]">
         Sign in to get your bookmarks on all your devices.
       </message>
-      <message name="IDS_IOS_SIGNIN_PROMO_CHANGE_ACCOUNT" desc="Button that the user can press if they are not the profile that Chrome found (opposite of 'Continue as Joe Doe'). The user will be able to choose another account and sign-in with it.">
+      <message name="IDS_IOS_SIGNIN_PROMO_CHANGE_ACCOUNT" desc="Button that the user can press if they are not the profile that Jatter found (opposite of 'Continue as Joe Doe'). The user will be able to choose another account and sign-in with it.">
         Choose another account
       </message>
       <message name="IDS_IOS_SIGNIN_PROMO_CLOSE_ACCESSIBILITY" desc="Accessibility label to describe the close button action in the sign-in promo element.">
         Close sign-in promo
       </message>
-      <message name="IDS_IOS_SIGNIN_PROMO_CONTINUE_AS" desc="Button that the user can press to login without asking the password and continue using Chrome with this acccount. [Length: 9em]">
+      <message name="IDS_IOS_SIGNIN_PROMO_CONTINUE_AS" desc="Button that the user can press to login without asking the password and continue using Jatter with this acccount. [Length: 9em]">
         Continue as <ph name="NAME">$1<ex>John Doe</ex></ph>
       </message>
       <message name="IDS_IOS_SIGNIN_PROMO_CONTINUE_AS_TAPPED_ACCESSIBILITY_TITLE" desc="Accessibility label of the 'Continue as' button after it is tapped, during which a spinner replaces the button text. This is spoken by VoiceOver.">
         Sign-in in progress.
       </message>
-      <message name="IDS_IOS_SIGNIN_PROMO_READING_LIST" desc="This string is on a promo intended to promote signing in to Chrome with the user's Google Account. It appears on the Reading List page when the user is not signed in. We want users to read this promo and click 'Continue as {name}' to sign in to their Google Account. The tone should be informative and lightweight.">
+      <message name="IDS_IOS_SIGNIN_PROMO_READING_LIST" desc="This string is on a promo intended to promote signing in to Jatter with the user's Google Account. It appears on the Reading List page when the user is not signed in. We want users to read this promo and click 'Continue as {name}' to sign in to their Google Account. The tone should be informative and lightweight.">
         Sign in to get your reading list on all your devices.
       </message>
       <message name="IDS_IOS_SIGNIN_PROMO_RECENT_TABS_WITH_UNITY" desc="Text to inform the user that they can sign in and sync to get tabs shared between devices. [iOS only]">
@@ -7285,16 +7285,16 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_SIGNIN_PROMO_TURN_ON" desc="Button that the user can press if they want to sign-in to the browser. [iOS only]">
         Turn on
       </message>
-      <message name="IDS_IOS_SIGNIN_SHEET_LABEL_FOR_FEED_PROMO" desc="Text in the sheet that offers the user to sign-in to Chrome, when the sheet is opened from one of the NTP feed promos [iOS only].">
+      <message name="IDS_IOS_SIGNIN_SHEET_LABEL_FOR_FEED_PROMO" desc="Text in the sheet that offers the user to sign-in to Jatter, when the sheet is opened from one of the NTP feed promos [iOS only].">
         Sign in to get content based on your interests.
       </message>
-      <message name="IDS_IOS_SIGNIN_SHEET_LABEL_FOR_RECENT_TABS" desc="This string is on a sign-in page, after the user taps on a promotion about signing in to Chrome with the user's Google Account. It explains the specific user benefit of signing in from this page (access to tabs from other devices). We want users to understand why signing in is beneficial, and click 'Turn on' to sign in to their Google Account. The tone should be informative and lightweight. [iOS only]">
+      <message name="IDS_IOS_SIGNIN_SHEET_LABEL_FOR_RECENT_TABS" desc="This string is on a sign-in page, after the user taps on a promotion about signing in to Jatter with the user's Google Account. It explains the specific user benefit of signing in from this page (access to tabs from other devices). We want users to understand why signing in is beneficial, and click 'Turn on' to sign in to their Google Account. The tone should be informative and lightweight. [iOS only]">
         Sign in to see your tabs from your other devices.
       </message>
-      <message name="IDS_IOS_SIGNIN_SNACKBAR_SIGNED_IN_AS" desc="This confirmation message is intended to help users understand that they have signed in to Chrome with their Google Account. The confirmation message appears at the bottom of the Bookmarks page after users choose an account to sign in to. The tone should be informative. [iOS only]">
+      <message name="IDS_IOS_SIGNIN_SNACKBAR_SIGNED_IN_AS" desc="This confirmation message is intended to help users understand that they have signed in to Jatter with their Google Account. The confirmation message appears at the bottom of the Bookmarks page after users choose an account to sign in to. The tone should be informative. [iOS only]">
         Signed in as <ph name="USER_EMAIL">$1<ex>johndoe@gmail.com</ex></ph>
       </message>
-      <message name="IDS_IOS_SIGNIN_SNACKBAR_UNDO" desc="This string is found on a button that signs the user out when the user taps it. It is on a confirmation message that users see when they sign in to Chrome with their Google Account. This text is a verb and is short for the longer phrase 'Undo my sign-in.' The tone should be informative. [Length: 15em] [iOS only]">
+      <message name="IDS_IOS_SIGNIN_SNACKBAR_UNDO" desc="This string is found on a button that signs the user out when the user taps it. It is on a confirmation message that users see when they sign in to Jatter with their Google Account. This text is a verb and is short for the longer phrase 'Undo my sign-in.' The tone should be informative. [Length: 15em] [iOS only]">
         Undo
       </message>
       <message name="IDS_IOS_SIGNOUT_AND_DELETE_DIALOG_SIGN_OUT_BUTTON" desc="This button signs the user out. Related to IDS_IOS_SIGNOUT_DIALOG_TITLE [iOS only].">
@@ -7315,10 +7315,10 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_SIGNOUT_DIALOG_KEEP_DATA_BUTTON" desc="This button signs the user out and all its data stays on the device. Related to IDS_IOS_SIGNOUT_DIALOG_TITLE [iOS only].">
         Keep data
       </message>
-      <message name="IDS_IOS_SIGNOUT_DIALOG_SIGN_OUT_AND_DELETE_BUTTON" desc="Button title of a dialog shown to users when they sign out of Chrome but Chrome hasn't synced some data yet, which is permanently deleted if the user proceeds by pressing this button. Related to IDS_IOS_SIGNOUT_DIALOG_MESSAGE_WITH_NOT_SAVED_DATA and IDS_IOS_SIGNOUT_DIALOG_SIGN_OUT_AND_DELETE_TITLE [iOS only].">
+      <message name="IDS_IOS_SIGNOUT_DIALOG_SIGN_OUT_AND_DELETE_BUTTON" desc="Button title of a dialog shown to users when they sign out of Jatter but Jatter hasn't synced some data yet, which is permanently deleted if the user proceeds by pressing this button. Related to IDS_IOS_SIGNOUT_DIALOG_MESSAGE_WITH_NOT_SAVED_DATA and IDS_IOS_SIGNOUT_DIALOG_SIGN_OUT_AND_DELETE_TITLE [iOS only].">
         Delete and sign out
       </message>
-      <message name="IDS_IOS_SIGNOUT_DIALOG_SIGN_OUT_AND_DELETE_TITLE" desc="Title of a dialog shown to users when they sign out of Chrome but Chrome hasn't synced some data yet, which is permanently deleted if the user proceeds. IDS_IOS_SIGNOUT_DIALOG_MESSAGE_WITH_NOT_SAVED_DATA and IDS_IOS_SIGNOUT_DIALOG_SIGN_OUT_AND_DELETE_BUTTON [iOS only].">
+      <message name="IDS_IOS_SIGNOUT_DIALOG_SIGN_OUT_AND_DELETE_TITLE" desc="Title of a dialog shown to users when they sign out of Jatter but Jatter hasn't synced some data yet, which is permanently deleted if the user proceeds. IDS_IOS_SIGNOUT_DIALOG_MESSAGE_WITH_NOT_SAVED_DATA and IDS_IOS_SIGNOUT_DIALOG_SIGN_OUT_AND_DELETE_BUTTON [iOS only].">
         Some data isn't saved yet
       </message>
       <message name="IDS_IOS_SIGNOUT_DIALOG_SIGN_OUT_BUTTON" desc="This button signs the user out. Related to IDS_IOS_SIGNOUT_DIALOG_TITLE [iOS only].">
@@ -7333,7 +7333,7 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_SIGN_IN_DISMISS" desc="Title displayed when there is an unknown failure in sign-in and the user needs to attempt to sign in again. [Length: 20em] [iOS only]">
        Dismiss
       </message>
-      <message name="IDS_IOS_SIGN_IN_FAILED" desc="Explanatory message shown when Sign in to Chrome failed for an unknown technical reason.  [Length: 50em] [iOS only]">
+      <message name="IDS_IOS_SIGN_IN_FAILED" desc="Explanatory message shown when Sign in to Jatter failed for an unknown technical reason.  [Length: 50em] [iOS only]">
         Failed to sign in. Please try again later.
       </message>
       <message name="IDS_IOS_SIGN_IN_INVALID_ACCOUNT_MESSAGE" desc="Message of the alert displayed when the user sign in with a restricted account.">
@@ -7342,7 +7342,7 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_SIGN_IN_INVALID_ACCOUNT_TITLE" desc="Title of the alert displayed when the user sign in with a restricted account.">
         Sign in with a valid account
       </message>
-      <message name="IDS_IOS_SIGN_IN_TO_CHROME_SETTING_SUBTITLE" desc="The subtitle for the setting item to Sign in to Chrome [iOS only]">
+      <message name="IDS_IOS_SIGN_IN_TO_CHROME_SETTING_SUBTITLE" desc="The subtitle for the setting item to Sign in to Jatter [iOS only]">
         Get your bookmarks, history, passwords, and other settings on all your devices.
       </message>
       <message name="IDS_IOS_SIGN_IN_TO_CHROME_SETTING_SUBTITLE_SYNC_MANAGED" desc="The subtitle for the setting item of the signed in user when sync is managed by policies [iOS only]">
@@ -7372,34 +7372,34 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_SPEECH_RECOGNITION_USAGE_DESCRIPTION" desc="Specifies the reason for sending user data to Apple's speech recognition servers.">
         This will let you use your voice with certain features on websites.
       </message>
-      <message name="IDS_IOS_SPOTLIGHT_KEYWORD_EIGHT" desc="Keyword used in Spotlight that will be linked to the Chrome App. [iOS only]">
+      <message name="IDS_IOS_SPOTLIGHT_KEYWORD_EIGHT" desc="Keyword used in Spotlight that will be linked to the Jatter App. [iOS only]">
         Online
       </message>
-      <message name="IDS_IOS_SPOTLIGHT_KEYWORD_FIVE" desc="Keyword used in Spotlight that will be linked to the Chrome App. [iOS only]">
+      <message name="IDS_IOS_SPOTLIGHT_KEYWORD_FIVE" desc="Keyword used in Spotlight that will be linked to the Jatter App. [iOS only]">
         Browse
       </message>
-      <message name="IDS_IOS_SPOTLIGHT_KEYWORD_FOUR" desc="Keyword used in Spotlight that will be linked to the Chrome App. [iOS only]">
+      <message name="IDS_IOS_SPOTLIGHT_KEYWORD_FOUR" desc="Keyword used in Spotlight that will be linked to the Jatter App. [iOS only]">
         Search
       </message>
-      <message name="IDS_IOS_SPOTLIGHT_KEYWORD_NINE" desc="Keyword used in Spotlight that will be linked to the Chrome App. [iOS only]">
+      <message name="IDS_IOS_SPOTLIGHT_KEYWORD_NINE" desc="Keyword used in Spotlight that will be linked to the Jatter App. [iOS only]">
         Autofill
       </message>
-      <message name="IDS_IOS_SPOTLIGHT_KEYWORD_ONE" desc="Keyword used in Spotlight that will be linked to the Chrome App. [iOS only]">
+      <message name="IDS_IOS_SPOTLIGHT_KEYWORD_ONE" desc="Keyword used in Spotlight that will be linked to the Jatter App. [iOS only]">
         Incognito
       </message>
-      <message name="IDS_IOS_SPOTLIGHT_KEYWORD_SEVEN" desc="Keyword used in Spotlight that will be linked to the Chrome App. [iOS only]">
+      <message name="IDS_IOS_SPOTLIGHT_KEYWORD_SEVEN" desc="Keyword used in Spotlight that will be linked to the Jatter App. [iOS only]">
         Network
       </message>
-      <message name="IDS_IOS_SPOTLIGHT_KEYWORD_SIX" desc="Keyword used in Spotlight that will be linked to the Chrome App. [iOS only]">
+      <message name="IDS_IOS_SPOTLIGHT_KEYWORD_SIX" desc="Keyword used in Spotlight that will be linked to the Jatter App. [iOS only]">
         www
       </message>
-      <message name="IDS_IOS_SPOTLIGHT_KEYWORD_TEN" desc="Keyword used in Spotlight that will be linked to the Chrome App. [iOS only]">
+      <message name="IDS_IOS_SPOTLIGHT_KEYWORD_TEN" desc="Keyword used in Spotlight that will be linked to the Jatter App. [iOS only]">
         Sync
       </message>
-      <message name="IDS_IOS_SPOTLIGHT_KEYWORD_THREE" desc="Keyword used in Spotlight that will be linked to the Chrome App. [iOS only]">
+      <message name="IDS_IOS_SPOTLIGHT_KEYWORD_THREE" desc="Keyword used in Spotlight that will be linked to the Jatter App. [iOS only]">
         Private
       </message>
-      <message name="IDS_IOS_SPOTLIGHT_KEYWORD_TWO" desc="Keyword used in Spotlight that will be linked to the Chrome App. [iOS only]">
+      <message name="IDS_IOS_SPOTLIGHT_KEYWORD_TWO" desc="Keyword used in Spotlight that will be linked to the Jatter App. [iOS only]">
         Internet
       </message>
       <message name="IDS_IOS_SPOTLIGHT_OPEN_TAB_LABEL" desc="Tag label title displayed for opent tabs spotlight items. [iOS only]">
@@ -7481,7 +7481,7 @@ Handoff must also be enabled in the General section of Settings, and your device
         Continue
       </message>
       <message name="IDS_IOS_SYNC_ADDRESSES_DIALOG_MESSAGE" desc="Message of a dialog to enable saving addresses to the Google Account. This is shown to users who have chosen to encrypt their data with a custom passphrase. The dialog informs users that newly saved addresses will not be encrypted with their passphrase.">
-        Addresses aren't encrypted with your passphrase. This lets you use them in other Google services.
+        Addresses aren't encrypted with your passphrase. This lets you use them in other Services.
       </message>
       <message name="IDS_IOS_SYNC_ADDRESSES_DIALOG_TITLE" desc="Title of a dialog to enable saving addresses to the Google Account. This is shown to users who have chosen to encrypt their data with a custom passphrase. The dialog informs users that newly saved addresses will not be encrypted with their passphrase.">
         Save without encryption
@@ -7784,7 +7784,7 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_TAB_GROUP_CONFIRMATION_DELETE_MESSAGE_WITHOUT_EMAIL" desc="Message of the confirmation to delete a tab group in the action sheet. This text is displayed when a user is not signed in.">
         This will permanently delete the group from your device.
       </message>
-      <message name="IDS_IOS_TAB_GROUP_CONFIRMATION_DELETE_MESSAGE_WITH_EMAIL" desc="Message of the confirmation to delete a tab group in the action sheet. This text is displayed when a user is signed in to Chrome with their account.">
+      <message name="IDS_IOS_TAB_GROUP_CONFIRMATION_DELETE_MESSAGE_WITH_EMAIL" desc="Message of the confirmation to delete a tab group in the action sheet. This text is displayed when a user is signed in to Jatter with their account.">
         This will delete the group from all devices signed into <ph name="USER_EMAIL">$1<ex>peter.parker@gmail.com</ex></ph>.
       </message>
       <message name="IDS_IOS_TAB_GROUP_CONFIRMATION_DELETE_TITLE" desc="Title of the confirmation to delete a tab group in the action sheet.">
@@ -7799,7 +7799,7 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_TAB_GROUP_CONFIRMATION_UNGROUP_MESSAGE_WITHOUT_EMAIL" desc="Message of the confirmation to delete a tab group in the action sheet. This text is displayed when a user is not signed in.">
         The tabs will remain open on this device but the group will be permanently deleted.
       </message>
-      <message name="IDS_IOS_TAB_GROUP_CONFIRMATION_UNGROUP_MESSAGE_WITH_EMAIL" desc="Message of the confirmation to delete a tab group in the action sheet. This text is displayed when a user is signed in to Chrome with their account.">
+      <message name="IDS_IOS_TAB_GROUP_CONFIRMATION_UNGROUP_MESSAGE_WITH_EMAIL" desc="Message of the confirmation to delete a tab group in the action sheet. This text is displayed when a user is signed in to Jatter with their account.">
         The tabs will remain open on this device but the group will be deleted from all devices signed into <ph name="USER_EMAIL">$1<ex>peter.parker@gmail.com</ex></ph>.
       </message>
       <message name="IDS_IOS_TAB_GROUP_CONFIRMATION_UNGROUP_TITLE" desc="Title of the confirmation to delete a tab group in the action sheet.">
@@ -7923,10 +7923,10 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_TANGIBLE_SYNC_DATA_TYPE_HISTORY" desc="This string appears as an item in a list of sync data types on a full-page screen that asks users if they want to turn on sync. Translate 'history' according to https://localization.google.com/glossary/termset?gid=27517723&amp;tsid=59c3162. Translate 'and more' so that it conveys that there are additional similar items that are not listed. [iOS only][CHAR_LIMIT=30]">
         History and more
       </message>
-      <message name="IDS_IOS_TANGIBLE_SYNC_DISCLAIMER" desc="This string appears in the footer on a full-page screen that asks users if they want to turn on sync. 'Sync' is short for 'synchronization'. The first sentence informs the user where they can go to change their mind or to customize what Chrome/Chromium data types they choose to sync (a user's Chrome/Chromium data includes their bookmarks, passwords, history, settings, and more). The second sentence informs the user that if they choose to sync, then their history may be used to personalize Search and other services. Translate 'history' according to https://localization.google.com/glossary/termset?gid=27517723&amp;tsid=59c3162. [iOS only][CHAR_LIMIT=200].">
+      <message name="IDS_IOS_TANGIBLE_SYNC_DISCLAIMER" desc="This string appears in the footer on a full-page screen that asks users if they want to turn on sync. 'Sync' is short for 'synchronization'. The first sentence informs the user where they can go to change their mind or to customize what Jatter/Jatter data types they choose to sync (a user's Jatter/Jatter data includes their bookmarks, passwords, history, settings, and more). The second sentence informs the user that if they choose to sync, then their history may be used to personalize Search and other services. Translate 'history' according to https://localization.google.com/glossary/termset?gid=27517723&amp;tsid=59c3162. [iOS only][CHAR_LIMIT=200].">
         You can always choose what to sync in <ph name="BEGIN_LINK">BEGIN_LINK</ph>settings<ph name="END_LINK">END_LINK</ph>. Google may personalize Search and other services based on your history.
       </message>
-      <message name="IDS_IOS_TANGIBLE_SYNC_SUBTITLE_BACK_UP" desc="This string appears as a subheading a full-page screen that asks users if they want to turn on sync. This string explains to users that they can back up their Chrome/Chromium data and use it on all their computers, phones, and other devices; a user's Chrome/Chromium data includes their bookmarks, passwords, history, settings, and more. The word 'stuff' can be translated as 'data' or similar if there is no natural translation of 'stuff'. Maintain the level of formality that your language generally uses in the Chrome/Chromium app. The tone should be informative and inviting. [iOS only][CHAR_LIMIT=100]">
+      <message name="IDS_IOS_TANGIBLE_SYNC_SUBTITLE_BACK_UP" desc="This string appears as a subheading a full-page screen that asks users if they want to turn on sync. This string explains to users that they can back up their Jatter/Jatter data and use it on all their computers, phones, and other devices; a user's Jatter/Jatter data includes their bookmarks, passwords, history, settings, and more. The word 'stuff' can be translated as 'data' or similar if there is no natural translation of 'stuff'. Maintain the level of formality that your language generally uses in the Jatter/Jatter app. The tone should be informative and inviting. [iOS only][CHAR_LIMIT=100]">
         Back up your stuff and use it on any device.
       </message>
       <message name="IDS_IOS_TANGIBLE_SYNC_TITLE_TURN_ON_SYNC" desc="This string appears as a heading on a full-page screen that asks users if they want to turn on sync. 'Sync' is short for 'synchronization'. The tone should be informative and inviting. [iOS only][CHAR_LIMIT=35]">
@@ -7942,10 +7942,10 @@ Handoff must also be enabled in the General section of Settings, and your device
         Zoom out
       </message>
       <message name="IDS_IOS_TIPS_NOTIFICATIONS_CONTEXT_MENU_ITEM" desc="Title of context menu item for the Set Up List to enable notifications.">
-        Turn on notifications for <ph name="FEATURE_NAME">$1<ex>Chromium tips</ex></ph>
+        Turn on notifications for <ph name="FEATURE_NAME">$1<ex>Jatter tips</ex></ph>
       </message>
       <message name="IDS_IOS_TIPS_NOTIFICATIONS_CONTEXT_MENU_ITEM_OFF" desc="Title of context menu item for the Set Up List to turn off notifications.">
-        Turn off notifications for <ph name="FEATURE_NAME">$1<ex>Chromium tips</ex></ph>
+        Turn off notifications for <ph name="FEATURE_NAME">$1<ex>Jatter tips</ex></ph>
       </message>
       <message name="IDS_IOS_TOGGLE_SETTING_MANAGED_ACCESSIBILITY_HINT" desc="Action hint for any managed switch in settings. This is spoken by VoiceOver. [iOS only]">
         This setting is managed, double tap for more information
@@ -8058,7 +8058,7 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_TOOLS_MENU_LENS_CAMERA_SEARCH" desc="The iOS menu item for searching images with the device camera using Google Lens.">
         Lens Camera Search
       </message>
-      <message name="IDS_IOS_TOOLS_MENU_LENS_COPIED_IMAGE" desc="If a user has an image on their clipboard, this string will appear as an option when the user long-presses on Chrome's search icon and Lens is enabled. The user can select this option to search the image using Lens. This string is a complete sentence. If necessary for your language, you can translate as 'Lens image that you copied.'" meaning="[Length:Unlimited]">
+      <message name="IDS_IOS_TOOLS_MENU_LENS_COPIED_IMAGE" desc="If a user has an image on their clipboard, this string will appear as an option when the user long-presses on Jatter's search icon and Lens is enabled. The user can select this option to search the image using Lens. This string is a complete sentence. If necessary for your language, you can translate as 'Lens image that you copied.'" meaning="[Length:Unlimited]">
         Lens image you copied
       </message>
       <message name="IDS_IOS_TOOLS_MENU_NEW_INCOGNITO_SEARCH" desc="The iOS menu item for opening a new Incognito tab and doing a new search in that tab." meaning="Do a new search in a new Incognito tab">
@@ -8118,10 +8118,10 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_TOOLS_MENU_SAVE_IMAGE_TO_PHOTOS" desc="The iOS menu item for saving images to Google Photos.">
         Save in Google Photos
       </message>
-      <message name="IDS_IOS_TOOLS_MENU_SEARCH_COPIED_IMAGE" desc="If a user has an image on their clipboard, this string will appear as an option when the user long-presses on Chrome's search icon. The user can select this option to search the default search engine for the image. This string is a complete sentence. If necessary for your language, you can translate as 'Search for image that you copied.'" meaning="[Length:Unlimited]">
+      <message name="IDS_IOS_TOOLS_MENU_SEARCH_COPIED_IMAGE" desc="If a user has an image on their clipboard, this string will appear as an option when the user long-presses on Jatter's search icon. The user can select this option to search the default search engine for the image. This string is a complete sentence. If necessary for your language, you can translate as 'Search for image that you copied.'" meaning="[Length:Unlimited]">
         Search for Image You Copied
       </message>
-      <message name="IDS_IOS_TOOLS_MENU_SEARCH_COPIED_TEXT" desc="If a user has some text on their clipboard, this string will appear as an option when the user long-presses on Chrome's search icon. The user can select this option to search the default search engine for the text. This string is a complete sentence. If necessary for your language, you can translate as 'Search for text that you copied.'" meaning="[Length:Unlimited]">
+      <message name="IDS_IOS_TOOLS_MENU_SEARCH_COPIED_TEXT" desc="If a user has some text on their clipboard, this string will appear as an option when the user long-presses on Jatter's search icon. The user can select this option to search the default search engine for the text. This string is a complete sentence. If necessary for your language, you can translate as 'Search for text that you copied.'" meaning="[Length:Unlimited]">
         Search for Text You Copied
       </message>
       <message name="IDS_IOS_TOOLS_MENU_SETTINGS" desc="The iOS menu item for opening the settings [iOS only]" meaning="[Length: 16em] [iOS only].">
@@ -8145,7 +8145,7 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_TOOLS_MENU_TRANSLATE" desc="The iOS menu item for translating the current page [iOS only]" meaning="Open the translate infobar [Length: unlimited]">
         Translate
       </message>
-      <message name="IDS_IOS_TOOLS_MENU_VISIT_COPIED_LINK" desc="If a user has a URL on their clipboard, this string will appear as an option when the user long-presses on Chrome's search icon. The user can select this option to visit the URL. This string is a complete sentence. If necessary for your language, you can translate as 'Visit link that you copied.'" meaning="[Lenth: unlimited]">
+      <message name="IDS_IOS_TOOLS_MENU_VISIT_COPIED_LINK" desc="If a user has a URL on their clipboard, this string will appear as an option when the user long-presses on Jatter's search icon. The user can select this option to visit the URL. This string is a complete sentence. If necessary for your language, you can translate as 'Visit link that you copied.'" meaning="[Lenth: unlimited]">
         Visit Link You Copied
       </message>
       <message name="IDS_IOS_TOOLS_MENU_VOICE_SEARCH" desc="The iOS menu item for opening Voice Search.">
@@ -8262,10 +8262,10 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_UNITS_MEASUREMENTS_ACCESSIBILITY_HINT_UNIT_TYPE_SELECTOR" desc="Accessibility Hint for the unit conversion title button that displays a menu of unit types. This is spoken by VoiceOver.   [Length:Unlimited] [iOS only]">
           Unit type selector
       </message>
-      <message name="IDS_IOS_UNO_UPGRADE_PROMO_SIGNIN_SUBTITLE" desc="This string is on a sign-in page, shown several weeks after the user has installed Chrome. It explains the overarching user benefit of signing in (access to bookmarks, passwords, history, settings, etc.). We want users to understand why signing in is beneficial, and click 'Continue as name' to sign in to their Google Account. The tone should be informative and lightweight.">
+      <message name="IDS_IOS_UNO_UPGRADE_PROMO_SIGNIN_SUBTITLE" desc="This string is on a sign-in page, shown several weeks after the user has installed Jatter. It explains the overarching user benefit of signing in (access to bookmarks, passwords, history, settings, etc.). We want users to understand why signing in is beneficial, and click 'Continue as name' to sign in to their Google Account. The tone should be informative and lightweight.">
         Get your bookmarks, passwords, and more on all your devices.
       </message>
-      <message name="IDS_IOS_UNO_UPGRADE_PROMO_SIGNIN_TITLE_1" desc="Variations option 2. Title of the screen suggesting to the user to sign in. The user may see this screen when Chrome is opened, but only several weeks after installation.">
+      <message name="IDS_IOS_UNO_UPGRADE_PROMO_SIGNIN_TITLE_1" desc="Variations option 2. Title of the screen suggesting to the user to sign in. The user may see this screen when Jatter is opened, but only several weeks after installation.">
         Pick Up Where You Left Off
       </message>
       <message name="IDS_IOS_UPGRADE_AVAILABLE_BUTTON" desc="Displayed on a button the user can use to upgrade the a more recent version of the application. [Length: 10em]">
@@ -8289,7 +8289,7 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_USE_SUGGESTED_STRONG_PASSWORD" desc="Button title in a suggested password popup asking user if they want to use the suggested password. [Length: 20em] [iOS only]">
         Use password
       </message>
-      <message name="IDS_IOS_VERSION" desc="The label for the Chrome version on which the application is based, displayed in the About Chrome settings page [Length: 30em] [iOS only]">
+      <message name="IDS_IOS_VERSION" desc="The label for the Jatter version on which the application is based, displayed in the About Jatter settings page [Length: 30em] [iOS only]">
         Version <ph name="PRODUCT_VERSION">$1<ex>31.0.1650.18</ex></ph>
       </message>
       <message name="IDS_IOS_VERSION_COPIED" desc="The message displayed when the version label is tapped (in About settings) [Length: 10em] [iOS only]">
@@ -8313,7 +8313,7 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_VIEW_CONTROLLER_DISMISS_SAVE_CHANGES" desc="Text displayed on an alert button for Saving changes whenever trying       to dismiss a presented view with pending changes.">
         Save changes
       </message>
-      <message name="IDS_IOS_VISIT_COPIED_LINK" desc="If a user has a URL on their clipboard, this string will appear as an option when the user long-presses on Chrome's address bar. The user can select this option to visit the URL. This string is a complete sentence. If necessary for your language, you can translate as 'Visit link that you copied.' [iOS only]" meaning="Maximum characters: 32">
+      <message name="IDS_IOS_VISIT_COPIED_LINK" desc="If a user has a URL on their clipboard, this string will appear as an option when the user long-presses on Jatter's address bar. The user can select this option to visit the URL. This string is a complete sentence. If necessary for your language, you can translate as 'Visit link that you copied.' [iOS only]" meaning="Maximum characters: 32">
         Visit copied link
       </message>
       <message name="IDS_IOS_VOICE_SEARCH_SETTINGS_DEFAULT_LOCALE" desc="The label for the default locale option in the voice search settings [iOS only]">
@@ -8411,25 +8411,25 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_WHATS_NEW_CALENDAR_TITLE" desc="Google calendar title displayed in What's New. [iOS only]">
         Create calendar events from dates
       </message>
-      <message name="IDS_IOS_WHATS_NEW_CHROME_ACTIONS_SCREENSHOT_TEXT_MANAGE_PASSWORDS" desc="Text in image displaying the result of Chrome Actions query. [iOS only]">
+      <message name="IDS_IOS_WHATS_NEW_CHROME_ACTIONS_SCREENSHOT_TEXT_MANAGE_PASSWORDS" desc="Text in image displaying the result of Jatter Actions query. [iOS only]">
         Manage passwords
       </message>
-      <message name="IDS_IOS_WHATS_NEW_CHROME_ACTIONS_SCREENSHOT_TEXT_MENU" desc="Text in image displaying the first step of the Chrome Actions query result. [iOS only]">
+      <message name="IDS_IOS_WHATS_NEW_CHROME_ACTIONS_SCREENSHOT_TEXT_MENU" desc="Text in image displaying the first step of the Jatter Actions query result. [iOS only]">
         Menu
       </message>
-      <message name="IDS_IOS_WHATS_NEW_CHROME_ACTIONS_SCREENSHOT_TEXT_PASSWORDS" desc="Text in image displaying the third step of the Chrome Actions query result. [iOS only]">
+      <message name="IDS_IOS_WHATS_NEW_CHROME_ACTIONS_SCREENSHOT_TEXT_PASSWORDS" desc="Text in image displaying the third step of the Jatter Actions query result. [iOS only]">
         Passwords
       </message>
-      <message name="IDS_IOS_WHATS_NEW_CHROME_ACTIONS_SCREENSHOT_TEXT_SETTINGS" desc="Text in image displaying the second step of the Chrome Actions query result. [iOS only]">
+      <message name="IDS_IOS_WHATS_NEW_CHROME_ACTIONS_SCREENSHOT_TEXT_SETTINGS" desc="Text in image displaying the second step of the Jatter Actions query result. [iOS only]">
         Settings
       </message>
-      <message name="IDS_IOS_WHATS_NEW_CHROME_ACTIONS_SUBTITLE" desc="Chrome Actions subtitle displayed in What's New. [iOS only]">
+      <message name="IDS_IOS_WHATS_NEW_CHROME_ACTIONS_SUBTITLE" desc="Jatter Actions subtitle displayed in What's New. [iOS only]">
         Shortcuts to quickly modify settings and use features from the address bar.
       </message>
-      <message name="IDS_IOS_WHATS_NEW_CHROME_TIP_CHROME_DEFAULT_STEP_1" desc="Text of the row indicating the first step of Use Chrome By Default in What's New. [iOS only]">
+      <message name="IDS_IOS_WHATS_NEW_CHROME_TIP_CHROME_DEFAULT_STEP_1" desc="Text of the row indicating the first step of Use Jatter By Default in What's New. [iOS only]">
         Open Settings
       </message>
-      <message name="IDS_IOS_WHATS_NEW_CHROME_TIP_CHROME_DEFAULT_STEP_2" desc="Text of the row indicating the second step of Use Chrome By Default in What's New. [iOS only]">
+      <message name="IDS_IOS_WHATS_NEW_CHROME_TIP_CHROME_DEFAULT_STEP_2" desc="Text of the row indicating the second step of Use Jatter By Default in What's New. [iOS only]">
         Tap Default Browser App
       </message>
       <message name="IDS_IOS_WHATS_NEW_CHROME_TIP_PASSWORDS_IN_OTHER_APPS_STEP_1" desc="Text of the row indicating the first step of Passwords In Other Apps in What's New. [iOS only]">
@@ -8438,7 +8438,7 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_WHATS_NEW_CHROME_TIP_PASSWORDS_IN_OTHER_APPS_STEP_1_IOS16" desc="Text of the row indicating the first step of Passwords In Other Apps in What's New. [iOS only]">
         Open Password Options
       </message>
-      <message name="IDS_IOS_WHATS_NEW_CHROME_TIP_PASSWORDS_IN_OTHER_APPS_STEP_2_IOS16" desc="Text of the row indicating the first step of shortened instruction of of turning on iOS auto-fill from Chrome password manager on iOS 16 and above [iOS only]">
+      <message name="IDS_IOS_WHATS_NEW_CHROME_TIP_PASSWORDS_IN_OTHER_APPS_STEP_2_IOS16" desc="Text of the row indicating the first step of shortened instruction of of turning on iOS auto-fill from Jatter password manager on iOS 16 and above [iOS only]">
         Turn on AutoFill Passwords
       </message>
       <message name="IDS_IOS_WHATS_NEW_FEATURE_NEW_MENU_STEP_2" desc="Text of the row indicating the second step of New Menu in What's New. [iOS only]">
@@ -8535,7 +8535,7 @@ Handoff must also be enabled in the General section of Settings, and your device
         Select Password Manager, then tap Add Widget
       </message>
       <message name="IDS_IOS_WIDGET_PROMO_INSTRUCTIONS_SUBTITLE" desc="Subtitle of the instruction screen for the Password Manager widget's installation.">
-        Easy and secure access with the Google Password Manager widget.
+        Easy and secure access with the Password Manager widget.
       </message>
       <message name="IDS_IOS_WIDGET_PROMO_INSTRUCTIONS_TITLE" desc="Title of the instruction screen for the Password Manager widget's installation.">
         Get to passwords from the home screen
@@ -8558,11 +8558,11 @@ Handoff must also be enabled in the General section of Settings, and your device
       <message name="IDS_IOS_YOUTUBE_INCOGNITO_SNACKBAR_BUTTON_TITLE" desc="The title of the button on the right corner of the snackbar">
           LEARN MORE
       </message>
-      <message name="IDS_SAVE_PASSWORD_FOOTER" desc="The footer text of the infobar that offers user to save/update a password to Chrome.">
+      <message name="IDS_SAVE_PASSWORD_FOOTER" desc="The footer text of the infobar that offers user to save/update a password to Jatter.">
         Passwords are saved in your Google Account so you can use them on any device.
       </message>
-      <message name="IDS_SAVE_PASSWORD_FOOTER_DISPLAYING_USER_EMAIL" desc="The footer text of the infobar that offers user to save/update a password to Chrome; also display's current user's email.">
-        You can use saved passwords on any device. They're saved to Google Password Manager for <ph name="EMAIL">$1<ex>johndoe@gmail.com</ex></ph>.
+      <message name="IDS_SAVE_PASSWORD_FOOTER_DISPLAYING_USER_EMAIL" desc="The footer text of the infobar that offers user to save/update a password to Jatter; also display's current user's email.">
+        You can use saved passwords on any device. They're saved to Password Manager for <ph name="EMAIL">$1<ex>johndoe@gmail.com</ex></ph>.
       </message>
       <message name="IDS_SEARCH_ENGINE_CHOICE_DEFAULT_HINT" desc="Announcement for screen reader users. This string is announced when the user interacts with the 'Set as Default' button at the bottom of the 'Choose Your Search Engine' choice screen. The text provides a hint that the user needs to choose a search engine from the list on this screen before they can press this button.">
         Choose a search engine from the list.

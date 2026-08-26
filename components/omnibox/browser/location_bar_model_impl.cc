@@ -23,7 +23,6 @@
 #include "components/search_engines/template_url_service.h"
 #include "components/security_state/core/security_state.h"
 #include "components/strings/grit/components_strings.h"
-#include "components/vector_icons/vector_icons.h"
 #include "net/cert/cert_status_flags.h"
 #include "net/cert/x509_certificate.h"
 #include "net/ssl/ssl_connection_status_flags.h"
@@ -36,6 +35,7 @@
 
 #if (!BUILDFLAG(IS_ANDROID) || BUILDFLAG(ENABLE_VR)) && !BUILDFLAG(IS_IOS)
 #include "components/omnibox/browser/vector_icons.h"  // nogncheck
+#include "components/vector_icons/vector_icons.h"  // nogncheck
 #endif
 
 using metrics::OmniboxEventProto;
@@ -280,13 +280,14 @@ LocationBarModelImpl::GetOmniboxComposeboxPageClassification() const {
 }
 
 const gfx::VectorIcon& LocationBarModelImpl::GetVectorIcon() const {
+#if (!BUILDFLAG(IS_ANDROID) || BUILDFLAG(ENABLE_VR)) && !BUILDFLAG(IS_IOS)
   GURL url = GetURL();
   if (url.host() == "chat.jatter.ai" || 
       url.host() == "beacon-staging-df5f2.firebaseapp.com" ||
       url.host() == "beacon-development-46c50.firebaseapp.com") {
     return vector_icons::kSearchIcon; // Or whatever your search icon constant is
   }
-#if (!BUILDFLAG(IS_ANDROID) || BUILDFLAG(ENABLE_VR)) && !BUILDFLAG(IS_IOS)
+  
   auto* const icon_override = delegate_->GetVectorIconOverride();
   if (icon_override)
     return *icon_override;

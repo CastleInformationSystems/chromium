@@ -322,6 +322,8 @@ public class WebsitePreferenceBridge {
         switch (contentSettingsType) {
             case ContentSettingsType.PROTECTED_MEDIA_IDENTIFIER:
                 return true;
+            case ContentSettingsType.RAG_INGESTION:
+                return true;
             case ContentSettingsType.SENSORS:
                 assert FeatureList.isNativeInitialized();
                 return DeviceFeatureMap.isEnabled(

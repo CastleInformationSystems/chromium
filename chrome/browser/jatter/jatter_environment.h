@@ -4,7 +4,7 @@
 namespace jatter {
 
 #if defined(JATTER_DEVELOPMENT_MODE)
-  constexpr char kFirebaseApiKey[] = "dummy-key";
+  constexpr char kFirebaseApiKey[] = "";
   constexpr char kLogWebPageVisitUrl[] = "https://us-central1-beacon-development-46c50.cloudfunctions.net/logWebPageVisitV2";
   constexpr char kBaseApiUrl[] = "https://us-central1-beacon-development-46c50.cloudfunctions.net/";
   
@@ -15,7 +15,7 @@ namespace jatter {
   constexpr char kAppPromptUrl[] = "https://beacon-development-46c50.firebaseapp.com/prompt?q=";
 
 #elif defined(JATTER_STAGING_MODE)
-  constexpr char kFirebaseApiKey[] = "dummy-key";
+  constexpr char kFirebaseApiKey[] = "";
   constexpr char kLogWebPageVisitUrl[] = "https://us-central1-beacon-staging-df5f2.cloudfunctions.net/logWebPageVisitV2";
   constexpr char kBaseApiUrl[] = "https://us-central1-beacon-staging-df5f2.cloudfunctions.net/";
   
@@ -26,7 +26,7 @@ namespace jatter {
   constexpr char kAppPromptUrl[] = "https://beacon-staging-df5f2.firebaseapp.com/prompt?q=";
 
 #else  // JATTER_PRODUCTION_MODE
-  constexpr char kFirebaseApiKey[] = "dummy-key";
+  constexpr char kFirebaseApiKey[] = "";
   constexpr char kLogWebPageVisitUrl[] = "https://us-central1-beacon-dd0a1.cloudfunctions.net/logWebPageVisitV2";
   constexpr char kBaseApiUrl[] = "https://us-central1-beacon-dd0a1.cloudfunctions.net/";
   

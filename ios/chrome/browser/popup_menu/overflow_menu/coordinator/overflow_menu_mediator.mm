@@ -531,7 +531,7 @@ OverflowMenuFooter* CreateOverflowMenuManagedFooter(
   self.spotlightDebuggerDestination = [self newSpotlightDebuggerDestination];
 
   // WhatsNew destination.
-  self.whatsNewDestination = [self newWhatsNewDestination];
+  // self.whatsNewDestination = [self newWhatsNewDestination];
 
   // Site Info destination.
   self.siteInfoDestination = [self newSiteInfoDestination];
@@ -1656,8 +1656,8 @@ OverflowMenuFooter* CreateOverflowMenuManagedFooter(
     [helpActions addObject:self.reportIssueAction];
   }
 
-  [helpActions addObject:self.helpAction];
-  [helpActions addObject:self.shareChromeAction];
+  // [helpActions addObject:self.helpAction];
+  // [helpActions addObject:self.shareChromeAction];
 
   self.helpActionsGroup.actions = helpActions;
 }
