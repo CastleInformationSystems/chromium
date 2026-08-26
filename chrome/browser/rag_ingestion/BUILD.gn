@@ -9,7 +9,11 @@ grit("rag_ingestion_strings") {
   # [CRITICAL FIX] Subtraction (-) removes pseudo-locales if they exist, 
   # and addition (+) appends them back once. This guarantees zero duplicates
   # regardless of whether you are in Debug or Release mode!
-  _all_locales = platform_pak_locales - [ "en-XA", "ar-XB" ] + [ "en-XA", "ar-XB" ]
+
+  _all_locales = platform_pak_locales
+  if (!enable_pseudolocales) {
+    _all_locales += [ "en-XA", "ar-XB" ]
+  }
 
   foreach(locale, _all_locales) {
     outputs += [
