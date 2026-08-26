@@ -541,6 +541,7 @@ void TabHelpers::AttachTabHelpers(WebContents* web_contents) {
   PrefsTabHelper::CreateForWebContents(web_contents);
   prerender::NoStatePrefetchTabHelper::CreateForWebContents(web_contents);
   RagIngestionTabHelper::CreateForWebContents(web_contents);
+  JatterAnalyticsTabHelper::CreateForWebContents(web_contents);
   RecentlyAudibleHelper::CreateForWebContents(web_contents);
 #if BUILDFLAG(IS_ANDROID)
   RequestDesktopSiteWebContentsObserverAndroid::CreateForWebContents(

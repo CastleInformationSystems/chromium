@@ -5,16 +5,14 @@ import("//build/config/locales.gni") # 1. Import global locales
 grit("rag_ingestion_strings") {
   source = "rag_ingestion_strings.grd"
   outputs = [ "grit/rag_ingestion_strings.h" ]
+  
+  _all_locales = platform_pak_locales
+  
+  if (!enable_pseudolocales) {
+    _all_locales += [ "en-XA", "ar-XB" ]
+  }
 
-  _all_locales = all_chrome_locales
-
-  # 1. Strip out pseudo-locales to guarantee they don't already exist
-  _all_locales -= [ "en-XA", "ar-XB" ]
-
-  # 2. Append them back exactly once.
-  _all_locales += [ "en-XA", "ar-XB" ]
-
-  # 3. Strip out locales that are missing from your .grd file
+  # Strip out locales that are missing from your .grd file (from macOS/Desktop build)
   _all_locales -= [ "cy" ]
 
   foreach(locale, _all_locales) {

@@ -429,6 +429,7 @@ if (_is_default_toolchain) {
       "//chrome/browser/image_descriptions:java",
       "//chrome/browser/incognito:java",
       "//chrome/browser/incognito_window:java",
+      "//chrome/browser/jatter/analytics/android:java",
       "//chrome/browser/language/android:base_module_java",
       "//chrome/browser/language/android:java",
       "//chrome/browser/lens:java",

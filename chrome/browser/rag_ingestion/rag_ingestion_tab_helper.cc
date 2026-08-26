@@ -471,10 +471,7 @@ void RagIngestionTabHelper::OnLiveTextCaptured(int attempt, base::Value result) 
     }
   }
 
-  // REFINED POLLING: 
-  // Lowered threshold from 500 to 100 chars, and max attempts from 6 to 3 (300ms intervals).
-  // A legitimate Auth Wall or sparse dashboard will now pass immediately!
-  if (live_text_content_.length() < 100 && attempt < 3) {
+  if (live_text_content_.length() < 1000 && attempt < 10) {
       ingestion_timer_.Start(
           FROM_HERE, base::Milliseconds(300),
           base::BindOnce(&RagIngestionTabHelper::AttemptLiveTextExtraction,
@@ -490,7 +487,7 @@ void RagIngestionTabHelper::OnLiveTextCaptured(int attempt, base::Value result) 
       }
 #endif
       anon_loader_.reset(); // Cancel background network fetch if running
-      last_check_time_[current_check_url_.spec()] = base::Time::Now();
+      // last_check_time_[current_check_url_.spec()] = base::Time::Now();
       return;
   }
 

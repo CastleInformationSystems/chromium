@@ -172,9 +172,9 @@ void AnonPageLoader::ExecuteExtraction(int attempt) {
 
             // C++ POLLING LOGIC
             // If the text is empty and we haven't maxed out our 6 attempts, wait 500ms and try again
-            if (text.length() < 500 && attempt < 6) {
+            if (text.length() < 500 && attempt < 10) {
                 loader->extraction_timer_.Start(
-                    FROM_HERE, base::Milliseconds(500),
+                    FROM_HERE, base::Milliseconds(300),
                     base::BindOnce(&AnonPageLoader::ExecuteExtraction, loader, attempt + 1));
                 return;
             }

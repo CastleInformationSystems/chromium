@@ -5,12 +5,18 @@
 package org.chromium.chrome.browser;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
+import android.os.SystemClock;
 import android.text.TextUtils;
 
 import org.chromium.base.ApplicationState;
 import org.chromium.base.ApplicationStatus;
 import org.chromium.base.ApplicationStatus.ApplicationStateListener;
 import org.chromium.base.Callback;
+import org.chromium.base.ContextUtils;
 import org.chromium.base.LocaleUtils;
 import org.chromium.base.ServiceLoaderUtil;
 import org.chromium.base.ThreadUtils;
@@ -24,6 +30,7 @@ import org.chromium.chrome.browser.browsing_data.BrowsingDataBridge;
 import org.chromium.chrome.browser.browsing_data.BrowsingDataType;
 import org.chromium.chrome.browser.browsing_data.TimePeriod;
 import org.chromium.chrome.browser.feature_engagement.TrackerFactory;
+import org.chromium.chrome.browser.jatter.analytics.JatterAnalyticsServiceBridge;
 import org.chromium.chrome.browser.metrics.UmaUtils;
 import org.chromium.chrome.browser.metrics.VariationsSession;
 import org.chromium.chrome.browser.notifications.NotificationPlatformBridge;
@@ -35,6 +42,7 @@ import org.chromium.chrome.browser.preferences.ChromeSharedPreferences;
 import org.chromium.chrome.browser.privacy.settings.PasswordEchoSettingHandlerFactory;
 import org.chromium.chrome.browser.profiles.Profile;
 import org.chromium.chrome.browser.profiles.ProfileKeyedMap;
+import org.chromium.chrome.browser.profiles.ProfileManager;
 import org.chromium.chrome.browser.profiles.ProfileManagerUtils;
 import org.chromium.chrome.browser.profiles.ProfileProvider;
 import org.chromium.chrome.browser.safety_hub.SafetyHubFetchServiceFactory;
@@ -66,6 +74,8 @@ public class ChromeActivitySessionTracker {
 
     private boolean mIsInitialized;
     private boolean mIsStarted;
+
+    private long mJatterSessionStartTimeMs;
 
     /**
      * @return The activity session tracker for Chrome.
@@ -160,6 +170,35 @@ public class ChromeActivitySessionTracker {
         try (TraceEvent te =
                 TraceEvent.scoped(
                         "ChromeActivitySessionTracker.handlePerAppForegroundSessionStart")) {
+            // Jatter: Mark session start
+            mJatterSessionStartTimeMs = SystemClock.elapsedRealtime();
+
+            // --- Jatter Default Browser Check ---
+            // 1. Check if we are currently the default browser via Android PackageManager
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://"));
+            ResolveInfo resolveInfo = ContextUtils.getApplicationContext()
+                    .getPackageManager()
+                    .resolveActivity(browserIntent, PackageManager.MATCH_DEFAULT_ONLY);
+            
+            boolean isDefault = resolveInfo != null && 
+                    resolveInfo.activityInfo.packageName.equals(
+                            ContextUtils.getApplicationContext().getPackageName());
+            
+            // 2. Check if we have already logged this success event previously
+            boolean hasLoggedDefault = ChromeSharedPreferences.getInstance()
+                    .readBoolean(ChromePreferenceKeys.JATTER_DEFAULT_BROWSER_LOGGED, false);
+
+            if (isDefault && !hasLoggedDefault) {
+                // We are the default, and we haven't told the backend yet!
+                JatterAnalyticsServiceBridge.recordDefaultBrowserSet(
+                        ProfileManager.getLastUsedRegularProfile());
+                
+                // Save state so we don't spam the backend on every app resume
+                ChromeSharedPreferences.getInstance()
+                        .writeBoolean(ChromePreferenceKeys.JATTER_DEFAULT_BROWSER_LOGGED, true);
+            }
+            // ----------------------------------
+
             UmaUtils.recordForegroundStartTimeWithNative();
             ChromeLocalizationUtils.recordUiLanguageStatus();
             mVariationsSession.start();
@@ -200,6 +239,14 @@ public class ChromeActivitySessionTracker {
      */
     private void onForegroundSessionEnd() {
         if (!mIsStarted) return;
+
+        // Jatter: Calculate total session duration
+        long sessionLengthMs = 0;
+        if (mJatterSessionStartTimeMs > 0) {
+            sessionLengthMs = SystemClock.elapsedRealtime() - mJatterSessionStartTimeMs;
+            mJatterSessionStartTimeMs = 0;
+        }
+
         UmaUtils.recordBackgroundTimeWithNative();
         ProfileManagerUtils.flushPersistentDataForAllProfiles();
         mIsStarted = false;
@@ -212,6 +259,11 @@ public class ChromeActivitySessionTracker {
         for (Profile profile : mStartupProfileTasksCompleted.getTrackedProfiles()) {
             Tracker tracker = TrackerFactory.getTrackerForProfile(profile);
             tracker.notifyEvent(EventConstants.FOREGROUND_SESSION_DESTROYED);
+
+            // Jatter: Send duration to C++ backend (ignore flickers under 1s)
+            if (sessionLengthMs >= 1000) {
+                JatterAnalyticsServiceBridge.recordSessionEnded(profile, sessionLengthMs);
+            }
         }
         mStartupProfileTasksCompleted.destroy();
     }

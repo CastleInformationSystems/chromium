@@ -60,7 +60,8 @@ found in the LICENSE file.
                     android:layout_gravity="center"
                     android:scaleType="fitCenter"
                     android:adjustViewBounds="true"
-                    app:lottie_rawRes="@raw/signin_spin" />
+                    app:lottie_rawRes="@raw/signin_spin"
+                    android:visibility="gone" />
             </FrameLayout>
 
             <TextView
