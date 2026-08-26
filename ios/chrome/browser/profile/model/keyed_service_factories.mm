@@ -90,6 +90,8 @@
 #import "ios/chrome/browser/intelligence/bwg/model/bwg_service_factory.h"
 #import "ios/chrome/browser/intelligence/persist_tab_context/model/page_content_cache_service_factory.h"
 #import "ios/chrome/browser/invalidation/model/ios_chrome_profile_invalidation_provider_factory.h"
+#import "ios/chrome/browser/jatter/rag_ingestion_service_factory.h"
+#import "ios/chrome/browser/jatter/analytics/jatter_analytics_service_factory.h"
 #import "ios/chrome/browser/language/model/accept_languages_service_factory.h"
 #import "ios/chrome/browser/language/model/language_model_manager_factory.h"
 #import "ios/chrome/browser/language/model/url_language_histogram_factory.h"
@@ -370,6 +372,8 @@ void EnsureProfileKeyedServiceFactoriesBuilt() {
   PromosManagerFactory::GetInstance();
   ProvisionalPushNotificationServiceFactory::GetInstance();
   PushNotificationProfileServiceFactory::GetInstance();
+  RagIngestionServiceFactory::GetInstance();
+  JatterAnalyticsServiceFactory::GetInstance();
   ReadingListDownloadServiceFactory::GetInstance();
   ReadingListModelFactory::GetInstance();
   RealTimeUrlLookupServiceFactory::GetInstance();

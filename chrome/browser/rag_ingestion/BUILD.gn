@@ -6,10 +6,16 @@ grit("rag_ingestion_strings") {
   source = "rag_ingestion_strings.grd"
   outputs = [ "grit/rag_ingestion_strings.h" ]
 
-  # [CRITICAL FIX] Subtraction (-) removes pseudo-locales if they exist, 
-  # and addition (+) appends them back once. This guarantees zero duplicates
-  # regardless of whether you are in Debug or Release mode!
-  _all_locales = platform_pak_locales - [ "en-XA", "ar-XB" ] + [ "en-XA", "ar-XB" ]
+  _all_locales = all_chrome_locales
+
+  # 1. Strip out pseudo-locales to guarantee they don't already exist
+  _all_locales -= [ "en-XA", "ar-XB" ]
+
+  # 2. Append them back exactly once.
+  _all_locales += [ "en-XA", "ar-XB" ]
+
+  # 3. Strip out locales that are missing from your .grd file
+  _all_locales -= [ "cy" ]
 
   foreach(locale, _all_locales) {
     outputs += [
@@ -19,11 +25,6 @@ grit("rag_ingestion_strings") {
       "rag_ingestion_strings_${locale}_NEUTER.pak",
     ]
   }
-}
-
-java_strings_grd("java_strings_grd") {
-  grd_file = "rag_ingestion_strings.grd"
-  outputs = [ "values/rag_ingestion_strings.xml" ]
 }
 
 source_set("rag_ingestion_ui") {

@@ -19,6 +19,7 @@
 #import "components/strings/grit/components_strings.h"
 #import "components/variations/service/variations_service.h"
 #import "components/version_info/version_info.h"
+#import "components/webui/version/jatter_build_id.h"
 #import "components/webui/version/version_handler_helper.h"
 #import "components/webui/version/version_ui_constants.h"
 #import "ios/chrome/browser/shared/model/application_context/application_context.h"
@@ -47,6 +48,7 @@ web::WebUIIOSDataSource* CreateVersionUIDataSource() {
                                   IDS_IOS_PRODUCT_NAME);
   html_source->AddString(version_ui::kVersion,
                          std::string(version_info::GetVersionNumber()));
+  html_source->AddString("jatter_build_id", std::string(JATTER_BUILD_ID));
   html_source->AddString(version_ui::kVersionModifier,
                          std::string(GetChannelString(GetChannel())));
   html_source->AddLocalizedString(version_ui::kOSName, IDS_VERSION_UI_OS);

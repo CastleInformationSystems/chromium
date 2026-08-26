@@ -435,7 +435,7 @@
 <translation id="2523295204312809179">Кога ќе затворите група картички, таа автоматски се зачувува овде</translation>
 <translation id="2524699375503213836">Увезете ги вашите податоци од Safari</translation>
 <translation id="2529021024822217800">Отвори ги сите</translation>
-<translation id="2536991091671391962">Зачуваните лозинки може да ги користите на кој било уред. Зачувани се во Google Password Manager за <ph name="EMAIL" />.</translation>
+<translation id="2536991091671391962">Зачуваните лозинки може да ги користите на кој било уред. Зачувани се во Password Manager за <ph name="EMAIL" />.</translation>
 <translation id="2538103551183528357">Скриена лозинка</translation>
 <translation id="2538705697765638552">Зачувајте ги вашите податоци и завршувајте ги работите побрзо, како пополнувањето формулари во производите на Google. Може да управувате со вашите податоци во Google Wallet за <ph name="USER_EMAIL" />.</translation>
 <translation id="2539748786028143624">Вклучете „Подобрена заштита“…</translation>
@@ -464,7 +464,7 @@
 <translation id="2640733327287333451">Нема корисничко име ••••••</translation>
 <translation id="264215785133931186">Тукушто проверено</translation>
 <translation id="2647434099613338025">Додајте јазик</translation>
-<translation id="2649592894792404568">Ќе ги избришете вашите податоци во Google Password Manager</translation>
+<translation id="2649592894792404568">Ќе ги избришете вашите податоци во Password Manager</translation>
 <translation id="2652129567809778422">Изберете лозинка</translation>
 <translation id="2658056020748144467">Датотеката не можеше да се отвори</translation>
 <translation id="2661809266906115479"><ph name="TITLE" />, <ph name="STATE" />, само на уредов, <ph name="URL" /></translation>
@@ -1128,7 +1128,7 @@
 <translation id="508645147179720015">Белешката е поголема од 1.000 знаци</translation>
 <translation id="5087098519049306025">Следење цена</translation>
 <translation id="5090832849094901128">Со бришењето на лозинкава нема да се избрише вашата сметка на <ph name="WEBSITE" />.</translation>
-<translation id="5096619236864235">Криптографските клучеви се зачувуваат во Google Password Manager за</translation>
+<translation id="5096619236864235">Криптографските клучеви се зачувуваат во Password Manager за</translation>
 <translation id="510580293474170715">Не е увезено ништо</translation>
 <translation id="5113960131843706315">Се преземаат вашите работи…</translation>
 <translation id="5118462200606189584">Додајте сметка…</translation>
@@ -1174,7 +1174,7 @@
 <translation id="5233638681132016545">Нова картичка</translation>
 <translation id="5234094073825090254">{count,plural, =1{Обележувачот е зачуван во вашата сметка на Google, {email}.}one{Обележувачите се зачувани во вашата сметка на Google, {email}.}other{Обележувачите се зачувани во вашата сметка на Google, {email}.}}</translation>
 <translation id="5234764350956374838">Отфрли</translation>
-<translation id="5238596603078743134"><ph name="BEGIN_BOLD" /><ph name="USERNAME" /><ph name="END_BOLD" /> сега може да ги користи вашите корисничко име и лозинка при користење Google Password Manager за најавување на <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" />.</translation>
+<translation id="5238596603078743134"><ph name="BEGIN_BOLD" /><ph name="USERNAME" /><ph name="END_BOLD" /> сега може да ги користи вашите корисничко име и лозинка при користење Password Manager за најавување на <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" />.</translation>
 <translation id="5241106044372754566"><ph name="NAME" />, <ph name="EMAIL" />, управувана од вашата организација и е избрана во моментов. Изберете сметка.</translation>
 <translation id="5242899254250321823">Променете ја лозинката на веб-сајтот</translation>
 <translation id="5248640482715684545">Сајтов се обидува да отвори друга апликација.</translation>
@@ -1299,7 +1299,7 @@ Handoff мора да биде овозможен и во Општиот дел 
 <translation id="5684761169742812828">Лозинкава се изложи во упад во податоци на интернет. Ако немате време да ја промените сега, Google препорачува да го чувате предупредувањево за да се потсетите подоцна.</translation>
 <translation id="5694848685995373177">Зачувано на Drive за <ph name="USER_EMAIL" />.</translation>
 <translation id="570209299585559496">Може да го промените стандардниот приказ на сајтот во приказ на компјутер така што ќе појдете во „Поставки“, па во „Поставки за содржини“</translation>
-<translation id="5702108177581350218">Кога ќе споделите копија од вашите корисничко име и лозинка, членот на вашето семејство може да ги пополни со Google Password Manager.</translation>
+<translation id="5702108177581350218">Кога ќе споделите копија од вашите корисничко име и лозинка, членот на вашето семејство може да ги пополни со Password Manager.</translation>
 <translation id="5704908597376970822">Не може да се најавите.</translation>
 <translation id="5709005673595820640">{count,plural, =1{Имате {count} повторно употребена лозинка што би можела да ја загрози вашата безбедност. Решете го проблемот со неа сега за да се заштитите.}one{Имате {count} повторно употребена лозинка што би можеле да ја загрозат вашата безбедност. Решете го проблемот со нив за да се заштитите.}other{Имате {count} повторно употребени лозинки што би можеле да ја загрозат вашата безбедност. Решете го проблемот со нив за да се заштитите.}}</translation>
 <translation id="57094364128775171">Предложи силна лозинка…</translation>
@@ -1406,7 +1406,7 @@ Handoff мора да биде овозможен и во Општиот дел 
 <translation id="6077126322656614846">Пристапот до „Камерата“ е дозволен</translation>
 <translation id="6078236141387574983">Приспособете ја висината на листот повторно</translation>
 <translation id="6084848228346514841">Изберете картички</translation>
-<translation id="6089212833343035912">PIN за Google Password Manager</translation>
+<translation id="6089212833343035912">PIN за Password Manager</translation>
 <translation id="6090760257419195752">Отфрлени опомени</translation>
 <translation id="6094325891006032858">Вклучете „Подобрено безбедно прелистување“</translation>
 <translation id="6096965253650248286">Најдени: <ph name="COUNT" /></translation>
@@ -1459,7 +1459,7 @@ Handoff мора да биде овозможен и во Општиот дел 
 <translation id="6234310016144827337">Проверете ја врската и обидете се повторно</translation>
 <translation id="6236952928980352967">Врати предупредување</translation>
 <translation id="6241132809279377987">Отклучете повеќе функции за вашиот iPhone со апликациите на Google</translation>
-<translation id="6247557882553405851">Google Password Manager</translation>
+<translation id="6247557882553405851">Password Manager</translation>
 <translation id="6251835855431997163">Автоматски пополни <ph name="VALUE" /></translation>
 <translation id="6254066287920239840">Отворајте линкови во апликацијата наместо во прелистувачот.</translation>
 <translation id="6259928806013786178">Не можеше да се активира Reading mode</translation>
@@ -1703,7 +1703,7 @@ Handoff мора да биде овозможен и во Општиот дел 
 <translation id="7080806333218412752">Испраќа URL-адреси во „Безбедно прелистување“ за да се проверат. Испраќа и мал примерок од страници, преземања, активност на екстензиите и информации за системот за да помогне да се откријат нови закани. Привремено ги поврзува податоциве со вашата сметка на Google кога сте најавени за да ве заштити на апликациите на Google.</translation>
 <translation id="7082853213442715471">Кога е вклучен, одредени технологии на интернет се блокирани, што може да предизвика некои веб-сајтови да се вчитуваат побавно или да не функционираат правилно.</translation>
 <translation id="7091023926159231962">{count,plural, =1{Не можеше да се увезе {count} лозинка}one{Не можеше да се увезат {count} лозинка}other{Не можеше да се увезат {count} лозинки}}</translation>
-<translation id="7095110968493193530">До Google Password Manager за <ph name="EMAIL" /></translation>
+<translation id="7095110968493193530">До Password Manager за <ph name="EMAIL" /></translation>
 <translation id="7097046145876891318">Во лентата за адреса, допрете ја историјата на цени за да ги видите промените на цените со текот на времето</translation>
 <translation id="7102005569666697658">Се презема… <ph name="FILE_SIZE" /></translation>
 <translation id="7104701424653979232">Мени → Поставки → Начини на плаќање</translation>
@@ -1897,7 +1897,7 @@ Handoff мора да биде овозможен и во Општиот дел 
 <translation id="78146569776629510">Преземања</translation>
 <translation id="7815852444315004084">Скриј засега</translation>
 <translation id="7825973332242257878">Групи картички</translation>
-<translation id="7839994177130598711">Членовите на вашето семејство сега може да ги користат вашите корисничко име и лозинка при користење Google Password Manager за најавување на <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" />.</translation>
+<translation id="7839994177130598711">Членовите на вашето семејство сега може да ги користат вашите корисничко име и лозинка при користење Password Manager за најавување на <ph name="BEGIN_BOLD" /><ph name="WEBSITE" /><ph name="END_BOLD" />.</translation>
 <translation id="7841180087127694526">Пребарајте го копираниот текст</translation>
 <translation id="7841418003178675048">Изберете кои картички да се гледаат на вашата страница во нова картичка.</translation>
 <translation id="7845466610722898">Прикажете го списокот за читање</translation>
@@ -1921,7 +1921,7 @@ Handoff мора да биде овозможен и во Општиот дел 
 <translation id="7887198238286927132">За да ја заштити вашата приватност, Chrome нема автоматски да го пополнува ова поле.</translation>
 <translation id="7887552845761062935">Допрете двапати и задржете за да се отворат повеќе опции</translation>
 <translation id="7888562068293422208">Да се затворат сите?</translation>
-<translation id="7889910613639381518">Лесен и безбеден пристап со виџетот на Google Password Manager.</translation>
+<translation id="7889910613639381518">Лесен и безбеден пристап со виџетот на Password Manager.</translation>
 <translation id="7899199123054742721">Означи ги сите како непрочитани</translation>
 <translation id="7911190106180361398">Вашата организација не дозволува да синхронизирате сѐ.</translation>
 <translation id="7918999344502274923">Скриј ги деталите за <ph name="SEARCH_ENGINE_NAME" /></translation>
@@ -1958,7 +1958,7 @@ Handoff мора да биде овозможен и во Општиот дел 
 <translation id="8010488806779226127">Откривајте функции што може да ви помогнат да извлечете максимум додека прелистувате</translation>
 <translation id="8011489434346330032">Web Inspector</translation>
 <translation id="8015826420689927262">Избриши го прилогот</translation>
-<translation id="8017015647846870183">Од Google Password Manager, вклучувајќи лозинки и криптографски клучеви</translation>
+<translation id="8017015647846870183">Од Password Manager, вклучувајќи лозинки и криптографски клучеви</translation>
 <translation id="802154636333426148">Неуспешно преземање</translation>
 <translation id="8023170444051056234">Веднаш ќе го изгубите пристапот до групата картички „<ph name="GROUP_NAME" />“, а групата картички ќе се избрише од сите ваши уреди</translation>
 <translation id="8023878949384262191">Го проширува делот.</translation>

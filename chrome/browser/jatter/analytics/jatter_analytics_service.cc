@@ -7,6 +7,7 @@
 #include "base/uuid.h"
 #include "base/json/json_writer.h"
 #include "base/logging.h"
+#include "base/system/sys_info.h"
 #include "base/time/time.h"
 #include "chrome/browser/jatter/jatter_environment.h"
 #include "chrome/browser/jatter/jatter_firebase_client.h"
@@ -125,6 +126,9 @@ void JatterAnalyticsService::RecordSessionEnded(base::TimeDelta session_length) 
              std::to_string(base::Time::Now().ToDeltaSinceWindowsEpoch().InMicroseconds()));
              
   QueueEvent("session_duration", std::move(params));
+
+  // IMMEDIATELY flush because the app is going to sleep!
+  FlushEvents();
 }
 
 // ===========================================================================
@@ -133,6 +137,9 @@ void JatterAnalyticsService::RecordSessionEnded(base::TimeDelta session_length) 
 
 void JatterAnalyticsService::QueueEvent(const std::string& event_name, 
                                         base::DictValue params) {
+  // Centrally inject the operating system name into every event's parameters
+  params.Set("os", base::SysInfo::OperatingSystemName());
+
   base::DictValue event_node;
   event_node.Set("name", event_name);
   event_node.Set("params", std::move(params));
@@ -140,7 +147,13 @@ void JatterAnalyticsService::QueueEvent(const std::string& event_name,
   event_queue_.Append(std::move(event_node));
   queued_event_count_++;
 
+  // --- ADDED LOGGING HERE ---
+  LOG(INFO) << "[JatterAnalytics] Queued event: '" << event_name 
+            << "' | Queue size is now: " << queued_event_count_ 
+            << "/" << kMaxQueueSize;
+
   if (queued_event_count_ >= kMaxQueueSize) {
+    LOG(INFO) << "[JatterAnalytics] Max queue size reached. Flushing events to backend.";
     FlushEvents();
   }
 }

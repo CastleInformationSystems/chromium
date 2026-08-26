@@ -7,6 +7,7 @@
 #import <StoreKit/StoreKit.h>
 
 #import <memory>
+#import <objc/runtime.h>
 #import <optional>
 
 #import "base/check_deref.h"
@@ -146,6 +147,8 @@
 #import "ios/chrome/browser/intelligence/features/features.h"
 #import "ios/chrome/browser/intelligence/page_action_menu/coordinator/page_action_menu_coordinator.h"
 #import "ios/chrome/browser/intents/model/intents_donation_helper.h"
+#import "ios/chrome/browser/jatter/jatter_environment.h"
+#import "ios/chrome/browser/jatter/rag_commands.h"
 #import "ios/chrome/browser/lens_overlay/coordinator/lens_overlay_availability.h"
 #import "ios/chrome/browser/lens_overlay/coordinator/lens_overlay_coordinator.h"
 #import "ios/chrome/browser/lens_overlay/coordinator/lens_view_finder_coordinator.h"
@@ -380,6 +383,179 @@
 #import "ios/chrome/common/swift/features.h"
 #endif  // BUILDFLAG(ENABLE_SWIFT_CXX_INTEROP)
 
+#pragma mark - Jatter Pan Handler Helper
+
+@interface JatterBannerPanHandler : NSObject
+@property (nonatomic, weak) NSLayoutConstraint *topConstraint;
+@property (nonatomic, weak) UIViewController *rootVC;
+@property (nonatomic, copy) void (^dismissUI)();
+@property (nonatomic, copy) RagPermissionDecisionBlock decisionHandler;
+@end
+
+@implementation JatterBannerPanHandler
+- (void)handlePan:(UIPanGestureRecognizer *)recognizer {
+    CGPoint translation = [recognizer translationInView:self.rootVC.view];
+    
+    if (recognizer.state == UIGestureRecognizerStateChanged) {
+        CGFloat newConstant = 16 + translation.y;
+        // Rubber-band effect when pulling down
+        if (newConstant > 16) {
+            newConstant = 16 + (translation.y * 0.2); 
+        }
+        self.topConstraint.constant = newConstant;
+    } 
+    else if (recognizer.state == UIGestureRecognizerStateEnded || 
+             recognizer.state == UIGestureRecognizerStateCancelled) {
+             
+        CGPoint velocity = [recognizer velocityInView:self.rootVC.view];
+        
+        // Dismiss if swiped up fast or dragged up past the safe area
+        if (velocity.y < -500 || self.topConstraint.constant < -20) {
+            
+            // The user swiped the banner away.
+            // We just visually dismiss the UI and intentionally DO NOT call 
+            // the decisionHandler so the status remains kUnknown/kOffer.
+            if (self.dismissUI) self.dismissUI();
+            
+        } else {
+            // Snap back to original position
+            self.topConstraint.constant = 16;
+            [UIView animateWithDuration:0.3 
+                                  delay:0 
+                 usingSpringWithDamping:0.7 
+                  initialSpringVelocity:0.5 
+                                options:UIViewAnimationOptionCurveEaseOut 
+                             animations:^{
+                [self.rootVC.view layoutIfNeeded];
+            } completion:nil];
+        }
+    }
+}
+@end
+
+#pragma mark - Jatter Management Bottom Sheet
+
+@interface JatterManagementViewController : UIViewController <UITextFieldDelegate>
+@property (nonatomic, copy) NSString* host;
+@property (nonatomic, copy) NSString* siteName;
+@property (nonatomic, assign) BOOL isEnabled;
+@property (nonatomic, copy) void (^submitHandler)(NSString* query);
+@property (nonatomic, copy) void (^settingsHandler)();
+@end
+
+@implementation JatterManagementViewController
+
+- (void)viewDidLoad {
+  [super viewDidLoad];
+  self.view.backgroundColor = [UIColor systemBackgroundColor];
+
+  // Main Vertical Stack
+  UIStackView* mainStack = [[UIStackView alloc] init];
+  mainStack.axis = UILayoutConstraintAxisVertical;
+  mainStack.spacing = 20;
+  mainStack.translatesAutoresizingMaskIntoConstraints = NO;
+  [self.view addSubview:mainStack];
+
+  [NSLayoutConstraint activateConstraints:@[
+    [mainStack.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:24],
+    [mainStack.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:20],
+    [mainStack.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-20],
+  ]];
+
+  // 1. HEADER ROW [ Icon | Text | Settings ]
+  UIStackView* headerStack = [[UIStackView alloc] init];
+  headerStack.axis = UILayoutConstraintAxisHorizontal;
+  headerStack.spacing = 12;
+  headerStack.alignment = UIStackViewAlignmentCenter;
+  
+  // A. Squircle Icon (Terracotta Background)
+  UIView* iconBg = [[UIView alloc] init];
+  // kBrandTerracotta = RGB(194, 110, 96)
+  iconBg.backgroundColor = [UIColor colorWithRed:194.0/255.0 green:110.0/255.0 blue:96.0/255.0 alpha:1.0];
+  iconBg.layer.cornerRadius = 12;
+  iconBg.translatesAutoresizingMaskIntoConstraints = NO;
+  [NSLayoutConstraint activateConstraints:@[
+    [iconBg.widthAnchor constraintEqualToConstant:44],
+    [iconBg.heightAnchor constraintEqualToConstant:44]
+  ]];
+  
+  // Bell inside the Squircle
+  UIImageView* bellIcon = [[UIImageView alloc] initWithImage:[UIImage systemImageNamed:@"bell.fill"]];
+  bellIcon.tintColor = [UIColor whiteColor];
+  bellIcon.translatesAutoresizingMaskIntoConstraints = NO;
+  [iconBg addSubview:bellIcon];
+  [NSLayoutConstraint activateConstraints:@[
+    [bellIcon.centerXAnchor constraintEqualToAnchor:iconBg.centerXAnchor],
+    [bellIcon.centerYAnchor constraintEqualToAnchor:iconBg.centerYAnchor],
+    [bellIcon.widthAnchor constraintEqualToConstant:24],
+    [bellIcon.heightAnchor constraintEqualToConstant:24]
+  ]];
+  [headerStack addArrangedSubview:iconBg];
+
+  // B. Status Text ("Enabled for host")
+  UILabel* statusLabel = [[UILabel alloc] init];
+  statusLabel.numberOfLines = 0;
+  
+  NSString* baseString = self.isEnabled ? 
+      [NSString stringWithFormat:@"Enabled for %@", self.host] : 
+      [NSString stringWithFormat:@"Disabled for %@", self.host];
+  
+  NSMutableAttributedString* attrString = [[NSMutableAttributedString alloc] 
+      initWithString:baseString 
+      attributes:@{
+          NSFontAttributeName: [UIFont systemFontOfSize:15], 
+          NSForegroundColorAttributeName: [UIColor labelColor]
+      }];
+  
+  // Make the host name bold (mirroring the desktop emphasize style)
+  NSRange hostRange = [baseString rangeOfString:self.host];
+  if (hostRange.location != NSNotFound) {
+      [attrString addAttribute:NSFontAttributeName 
+                         value:[UIFont boldSystemFontOfSize:15] 
+                         range:hostRange];
+  }
+  statusLabel.attributedText = attrString;
+  [headerStack addArrangedSubview:statusLabel];
+
+  // C. Settings Button (Right aligned)
+  UIButton* settingsBtn = [UIButton buttonWithType:UIButtonTypeSystem];
+  [settingsBtn setImage:[UIImage systemImageNamed:@"gearshape.fill"] forState:UIControlStateNormal];
+  [settingsBtn addTarget:self action:@selector(settingsTapped) forControlEvents:UIControlEventTouchUpInside];
+  [settingsBtn setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+  [headerStack addArrangedSubview:settingsBtn];
+
+  [mainStack addArrangedSubview:headerStack];
+
+  // 2. INPUT FIELD (Only if Enabled)
+  if (self.isEnabled) {
+    UITextField* inputField = [[UITextField alloc] init];
+    inputField.placeholder = [NSString stringWithFormat:@"Ask about %@", self.siteName.length ? self.siteName : self.host];
+    inputField.borderStyle = UITextBorderStyleRoundedRect;
+    inputField.returnKeyType = UIReturnKeySend;
+    inputField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    inputField.delegate = self;
+    [inputField.heightAnchor constraintEqualToConstant:44].active = YES;
+    [mainStack addArrangedSubview:inputField];
+  }
+}
+
+- (void)settingsTapped {
+  [self dismissViewControllerAnimated:YES completion:^{
+      if (self.settingsHandler) self.settingsHandler();
+  }];
+}
+
+// Triggers when user hits "Send" / "Return" on the iOS Keyboard
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+  if (textField.text.length > 0) {
+      [self dismissViewControllerAnimated:YES completion:^{
+          if (self.submitHandler) self.submitHandler(textField.text);
+      }];
+  }
+  return YES;
+}
+@end
+
 namespace {
 
 // URL to share when user selects "Share Chrome"
@@ -446,6 +622,7 @@ const char kChromeAppStoreUrl[] =
     SyncedSetUpCommands,
     PrerenderBrowserAgentDelegate,
     QuickDeleteCommands,
+    RagCommands,
     ReaderModeBrowserAgentDelegate,
     ReaderModeCommands,
     ReaderModeCoordinatorDelegate,
@@ -1246,6 +1423,7 @@ const char kChromeAppStoreUrl[] =
     @protocol(DockingPromoCommands),
     @protocol(EnterpriseCommands),
     @protocol(PictureInPictureCommands),
+    @protocol(RagCommands),
   ];
 
   for (Protocol* protocol in protocols) {
@@ -5359,6 +5537,253 @@ const char kChromeAppStoreUrl[] =
               organizationDomain:organizationDomain
                         callback:std::move(callback)];
   [_enterpriseDialogCoordinator start];
+}
+
+#pragma mark - RagCommands
+
+- (void)showRagPermissionUIForHost:(NSString*)host 
+                   decisionHandler:(RagPermissionDecisionBlock)decisionHandler {
+  // 1. Define Brand Colors
+  UIColor* brandPurple = [UIColor colorWithRed:73.0/255.0 green:47.0/255.0 blue:140.0/255.0 alpha:1.0];
+  UIColor* greyStroke = [UIColor colorWithRed:211.0/255.0 green:211.0/255.0 blue:211.0/255.0 alpha:1.0];
+
+  // 2. Define Strings (Mirroring the GRIT definitions)
+  NSString* titleText = [NSString stringWithFormat:@"Enable personal answers for %@?", host];
+  NSString* bodyText = @"Jatter can securely learn about websites you log into in order to provide personal answers and assistance.";
+  NSString* linkText = @"Learn more about personal answers.";
+  NSString* blockText = @"Never";
+  NSString* allowText = @"Enable";
+
+  // 3. Create the Banner Container
+  UIView* bannerView = [[UIView alloc] init];
+  bannerView.backgroundColor = [UIColor secondarySystemBackgroundColor]; // Auto-adapts to Dark Mode
+  bannerView.layer.cornerRadius = 12;
+  bannerView.layer.shadowColor = [UIColor blackColor].CGColor;
+  bannerView.layer.shadowOpacity = 0.2;
+  bannerView.layer.shadowOffset = CGSizeMake(0, 4);
+  bannerView.layer.shadowRadius = 16;
+  bannerView.translatesAutoresizingMaskIntoConstraints = NO;
+
+  // 4. Create Main Vertical Stack
+  UIStackView* mainStack = [[UIStackView alloc] init];
+  mainStack.axis = UILayoutConstraintAxisVertical;
+  mainStack.spacing = 12;
+  mainStack.alignment = UIStackViewAlignmentFill;
+  mainStack.translatesAutoresizingMaskIntoConstraints = NO;
+  [bannerView addSubview:mainStack];
+
+  // A. Title Label
+  UILabel* titleLabel = [[UILabel alloc] init];
+  titleLabel.text = titleText;
+  titleLabel.font = [UIFont boldSystemFontOfSize:16];
+  titleLabel.numberOfLines = 0; // Wrap text
+  [mainStack addArrangedSubview:titleLabel];
+
+  // B. Body Text
+  UILabel* bodyLabel = [[UILabel alloc] init];
+  bodyLabel.text = bodyText;
+  bodyLabel.font = [UIFont systemFontOfSize:13];
+  bodyLabel.textColor = [UIColor secondaryLabelColor];
+  bodyLabel.numberOfLines = 0; // Wrap text
+  [mainStack addArrangedSubview:bodyLabel];
+
+  // C. Learn More Link (Using a button to mimic views::Link)
+  UIButton* linkButton = [UIButton buttonWithType:UIButtonTypeSystem];
+  [linkButton setTitle:linkText forState:UIControlStateNormal];
+  [linkButton setTitleColor:brandPurple forState:UIControlStateNormal];
+  linkButton.titleLabel.font = [UIFont systemFontOfSize:13];
+  linkButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+  // Optional: add a target here to open the URL
+  [mainStack addArrangedSubview:linkButton];
+
+  // D. Button Row (Horizontal Stack)
+  UIStackView* buttonStack = [[UIStackView alloc] init];
+  buttonStack.axis = UILayoutConstraintAxisHorizontal;
+  buttonStack.spacing = 8;
+  buttonStack.alignment = UIStackViewAlignmentTrailing; // Align to bottom
+  
+  // Push buttons to the right using a flexible spacer
+  UIView* spacer = [[UIView alloc] init];
+  [spacer setContentHuggingPriority:UILayoutPriorityDefaultLow forAxis:UILayoutConstraintAxisHorizontal];
+  [buttonStack addArrangedSubview:spacer];
+
+  // Common font attribute for both buttons
+  NSDictionary* buttonFontAttr = @{ NSFontAttributeName: [UIFont boldSystemFontOfSize:13] };
+
+  // "Never" Button (Ghost Style using modern UIButtonConfiguration)
+  UIButtonConfiguration* neverConfig = [UIButtonConfiguration plainButtonConfiguration];
+  neverConfig.attributedTitle = [[NSAttributedString alloc] initWithString:blockText attributes:buttonFontAttr];
+  neverConfig.baseForegroundColor = brandPurple;
+  neverConfig.contentInsets = NSDirectionalEdgeInsetsMake(6, 12, 6, 12);
+  neverConfig.background.strokeColor = greyStroke;
+  neverConfig.background.strokeWidth = 1.0;
+  neverConfig.background.cornerRadius = 5.0;
+  UIButton* neverButton = [UIButton buttonWithConfiguration:neverConfig primaryAction:nil];
+  [buttonStack addArrangedSubview:neverButton];
+
+  // "Enable" Button (Prominent Style using modern UIButtonConfiguration)
+  UIButtonConfiguration* enableConfig = [UIButtonConfiguration filledButtonConfiguration];
+  enableConfig.attributedTitle = [[NSAttributedString alloc] initWithString:allowText attributes:buttonFontAttr];
+  enableConfig.baseBackgroundColor = brandPurple;
+  enableConfig.baseForegroundColor = [UIColor whiteColor];
+  enableConfig.contentInsets = NSDirectionalEdgeInsetsMake(6, 12, 6, 12);
+  enableConfig.background.cornerRadius = 2.0; // Matching the desktop corner radius
+  UIButton* enableButton = [UIButton buttonWithConfiguration:enableConfig primaryAction:nil];
+  [buttonStack addArrangedSubview:enableButton];
+
+  [mainStack addArrangedSubview:buttonStack];
+
+  // 5. Layout Constraints for Container & Stack
+  UIViewController* rootVC = self.viewController;
+  [rootVC.view addSubview:bannerView];
+
+  [NSLayoutConstraint activateConstraints:@[
+      [mainStack.topAnchor constraintEqualToAnchor:bannerView.topAnchor constant:16],
+      [mainStack.leadingAnchor constraintEqualToAnchor:bannerView.leadingAnchor constant:16],
+      [mainStack.trailingAnchor constraintEqualToAnchor:bannerView.trailingAnchor constant:-16],
+      [mainStack.bottomAnchor constraintEqualToAnchor:bannerView.bottomAnchor constant:-16],
+      
+      [bannerView.leadingAnchor constraintEqualToAnchor:rootVC.view.leadingAnchor constant:16],
+      [bannerView.trailingAnchor constraintEqualToAnchor:rootVC.view.trailingAnchor constant:-16]
+  ]];
+
+  // 6. Animation Setup (Drop down from top)
+  NSLayoutConstraint* topConstraint = [bannerView.topAnchor constraintEqualToAnchor:rootVC.view.safeAreaLayoutGuide.topAnchor constant:-250];
+  topConstraint.active = YES;
+  [rootVC.view layoutIfNeeded];
+
+  // Trigger Drop-Down
+  topConstraint.constant = 16;
+  [UIView animateWithDuration:0.5 
+                        delay:0 
+       usingSpringWithDamping:0.75 
+        initialSpringVelocity:0.5 
+                      options:UIViewAnimationOptionCurveEaseOut 
+                   animations:^{
+      [rootVC.view layoutIfNeeded];
+  } completion:nil];
+
+  // Helper block to animate dismissal
+  void (^dismissUI)() = ^{
+      topConstraint.constant = -250;
+      [UIView animateWithDuration:0.3 animations:^{
+          [rootVC.view layoutIfNeeded];
+          bannerView.alpha = 0.0;
+      } completion:^(BOOL finished) {
+          [bannerView removeFromSuperview];
+      }];
+  };
+
+  // 7. Add Swipe-to-Dismiss (Pan Gesture)
+  JatterBannerPanHandler *panHandler = [[JatterBannerPanHandler alloc] init];
+  panHandler.topConstraint = topConstraint;
+  panHandler.rootVC = rootVC;
+  panHandler.dismissUI = dismissUI;
+  panHandler.decisionHandler = decisionHandler;
+
+  UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] 
+      initWithTarget:panHandler action:@selector(handlePan:)];
+  [bannerView addGestureRecognizer:panGesture];
+
+  // Bind the handler's lifecycle to the banner view so it doesn't deallocate
+  static char kPanHandlerKey;
+  objc_setAssociatedObject(bannerView, &kPanHandlerKey, panHandler, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+
+  // "Never" Button Action (Block)
+  UIAction *blockAction = [UIAction actionWithHandler:^(__kindof UIAction * _Nonnull action) {
+      if (decisionHandler) decisionHandler(NO);
+      dismissUI();
+  }];
+  [neverButton addAction:blockAction forControlEvents:UIControlEventTouchUpInside];
+
+  // "Enable" Button Action (Allow)
+  UIAction *allowAction = [UIAction actionWithHandler:^(__kindof UIAction * _Nonnull action) {
+      if (decisionHandler) decisionHandler(YES);
+      dismissUI();
+  }];
+  [enableButton addAction:allowAction forControlEvents:UIControlEventTouchUpInside];
+}
+
+- (void)showRagManagementUIForHost:(NSString*)host 
+                          siteName:(NSString*)siteName 
+                         isEnabled:(BOOL)isEnabled {
+                          
+  JatterManagementViewController *sheetVC = [[JatterManagementViewController alloc] init];
+  sheetVC.host = host;
+  sheetVC.siteName = siteName;
+  sheetVC.isEnabled = isEnabled;
+
+  __weak __typeof(self) weakSelf = self;
+
+  // Handle the text input submission
+  sheetVC.submitHandler = ^(NSString* query) {
+      // 1. URL encode the query
+      NSString* encodedQuery = [query stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+      
+      // 2. Truncate to 512 characters
+      if (encodedQuery.length > 512) {
+          encodedQuery = [encodedQuery substringToIndex:512];
+      }
+      
+      // 3. Construct URL
+      NSString* urlString = [NSString stringWithFormat:@"%s/prompt?q=%@", jatter::kAppUrl, encodedQuery];
+      
+      // 4. Open in New Foreground Tab
+      UrlLoadParams params = UrlLoadParams::InNewTab(GURL(base::SysNSStringToUTF8(urlString)));
+      if (weakSelf.browser) {
+          UrlLoadingBrowserAgent::FromBrowser(weakSelf.browser)->Load(params);
+      }
+  };
+
+  sheetVC.settingsHandler = ^{
+      // 1. Dismiss the current Jatter half-sheet
+      [weakSelf.viewController dismissViewControllerAnimated:YES completion:^{
+          
+          // 2. Break out of UIKit's internal animation lock
+          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+              if (!weakSelf.browser) return;
+              
+              // 3. Fetch the PageInfoCommands dispatcher
+              id<PageInfoCommands> pageInfoHandler = 
+                  HandlerForProtocol(weakSelf.browser->GetCommandDispatcher(), PageInfoCommands);
+              
+              if (pageInfoHandler) {
+                  // 4. Trigger the native Chromium "Site information" sheet
+                  [pageInfoHandler showPageInfo];
+              } else {
+                  // Fallback debug log just in case the dispatcher isn't registered
+                  NSLog(@"❌ [Jatter] ERROR: pageInfoHandler is nil!");
+              }
+          });
+          
+      }];
+  };
+
+  // Present as a native iOS Half-Sheet
+  UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:sheetVC];
+  navController.navigationBarHidden = YES;
+  
+  if (@available(iOS 16.0, *)) {
+      if (UISheetPresentationController *sheet = navController.sheetPresentationController) {
+          CGFloat sheetHeight = isEnabled ? 170.0 : 110.0;
+          
+          UISheetPresentationControllerDetent *compactDetent = 
+              [UISheetPresentationControllerDetent customDetentWithIdentifier:@"JatterCompactDetent" 
+                                                                     resolver:^CGFloat(id<UISheetPresentationControllerDetentResolutionContext> context) {
+              return sheetHeight;
+          }];
+          
+          sheet.detents = @[compactDetent]; 
+          sheet.prefersGrabberVisible = YES;
+      }
+  } else if (@available(iOS 15.0, *)) {
+      if (UISheetPresentationController *sheet = navController.sheetPresentationController) {
+          sheet.detents = @[[UISheetPresentationControllerDetent mediumDetent]]; 
+          sheet.prefersGrabberVisible = YES;
+      }
+  }
+
+  [self.viewController presentViewController:navController animated:YES completion:nil];
 }
 
 @end

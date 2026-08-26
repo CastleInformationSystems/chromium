@@ -159,14 +159,7 @@ bundle_data_xcassets("chromium_icons_legacy") {
 bundle_data_xcassets("chromium_icons") {
   catalog = "ChromiumIcons.xcassets"
   sources = [
-    "ChromiumIcons.xcassets/AppIcon.icon/Assets/2.svg",
-    "ChromiumIcons.xcassets/AppIcon.icon/Assets/3.svg",
-    "ChromiumIcons.xcassets/AppIcon.icon/Assets/5.svg",
-    "ChromiumIcons.xcassets/AppIcon.icon/Assets/blue.svg",
-    "ChromiumIcons.xcassets/AppIcon.icon/Assets/cr.svg",
-    "ChromiumIcons.xcassets/AppIcon.icon/Assets/donut.svg",
-    "ChromiumIcons.xcassets/AppIcon.icon/Assets/pill.svg",
-    "ChromiumIcons.xcassets/AppIcon.icon/Assets/ring.png",
+    "ChromiumIcons.xcassets/AppIcon.icon/Assets/owl.svg",
     "ChromiumIcons.xcassets/AppIcon.icon/icon.json",
   ]
 }

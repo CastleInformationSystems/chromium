@@ -24,14 +24,6 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSChildPaneSpecifier</string>
-			<key>Title</key>
-			<string>Experimental Settings</string>
-			<key>File</key>
-			<string>Experimental</string>
-		</dict>
 	</array>
 </dict>
 </plist>

@@ -12,7 +12,9 @@
 #import "ios/chrome/browser/page_info/ui/page_info_presentation_commands.h"
 #import "ios/chrome/browser/page_info/ui/page_info_site_security_description.h"
 #import "ios/chrome/browser/permissions/ui_bundled/permissions_consumer.h"
+#import "ios/chrome/browser/shared/model/profile/profile_ios.h"
 #import "ios/chrome/browser/shared/ui/table_view/chrome_table_view_controller.h"
+#import "url/gurl.h"
 
 @protocol PageInfoCommands;
 @protocol PageInfoHistoryMutator;
@@ -49,6 +51,9 @@
 
 // Mutator for Page Info History.
 @property(nonatomic, weak) id<PageInfoHistoryMutator> pageInfoHistoryMutator;
+
+@property (nonatomic, assign) ProfileIOS* profile;
+@property (nonatomic, assign) GURL pageInfoURL;
 
 @end
 

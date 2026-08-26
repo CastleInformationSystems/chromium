@@ -49,6 +49,9 @@
 #import "ios/chrome/browser/intelligence/actuation/model/tools/click_tool_java_script_feature.h"
 #import "ios/chrome/browser/intelligence/features/features.h"
 #import "ios/chrome/browser/intelligence/proto_wrappers/page_context_extractor_java_script_feature.h"
+#import "ios/chrome/browser/jatter/jatter_java_script_feature.h"
+#import "ios/chrome/browser/jatter/rag_ingestion_java_script_feature.h"
+#import "ios/chrome/browser/jatter/url_rewriter/jatter_url_rewriter.h"
 #import "ios/chrome/browser/link_to_text/model/link_to_text_java_script_feature.h"
 #import "ios/chrome/browser/ntp/model/browser_policy_new_tab_page_rewriter.h"
 #import "ios/chrome/browser/ntp/model/new_tab_page_tab_helper.h"
@@ -396,6 +399,7 @@ void ChromeWebClient::GetAdditionalWebUISchemes(
 void ChromeWebClient::PostBrowserURLRewriterCreation(
     web::BrowserURLRewriter* rewriter) {
   rewriter->AddURLRewriter(&WillHandleWebBrowserNewTabPageURLForPolicy);
+  rewriter->AddURLRewriter(&WillRewriteNewTabPageToJatter);
   rewriter->AddURLRewriter(&WillHandleWebBrowserAboutURL);
   ios::provider::AddURLRewriters(rewriter);
 }
@@ -467,6 +471,9 @@ std::vector<web::JavaScriptFeature*> ChromeWebClient::GetJavaScriptFeatures(
       features.push_back(MediaAPIUsageJavaScriptFeature::GetInstance());
     }
   }
+
+  features.push_back(JatterJavaScriptFeature::GetInstance());
+  features.push_back(RagIngestionJavaScriptFeature::GetInstance());
 
   return features;
 }
