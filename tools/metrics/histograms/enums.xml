@@ -222,6 +222,7 @@ uploading your change for review.  These are checked by presubmit scripts.
   <int value="15" label="Open in browser"/>
   <int value="16" label="Tab grouping"/>
   <int value="17" label="Glic"/>
+  <int value="18" label="RagIngestion"/>
 </enum>
 
 <!-- LINT.ThenChange(/chrome/browser/ui/android/toolbar/adaptive_toolbar_enums.h:AdaptiveToolbarButtonVariant) -->
@@ -2508,6 +2509,7 @@ Called by update_net_error_codes.py.-->
   <int value="142" label="Suspicious notification show original"/>
   <int value="143" label="Local network access - Local"/>
   <int value="144" label="Local network access - Loopback"/>
+  <int value="145" label="RAG ingestion"/>
 </enum>
 
 <!-- LINT.ThenChange(//components/content_settings/core/browser/content_settings_uma_util.cc:kHistogramValue) -->

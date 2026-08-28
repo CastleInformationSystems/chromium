@@ -165,6 +165,9 @@
     "messages": [2540],
     "includes": [2600],
   },
+  "chrome/browser/rag_ingestion/rag_ingestion_strings.grd": {
+    "messages": [2650],
+  },
   # END chrome/browser section.
 
   # START chrome/ WebUI resources section

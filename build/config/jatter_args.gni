@@ -1,0 +1,6 @@
+# //build/config/jatter_args.gni
+
+declare_args() {
+  # This acts as the global source of truth for the environment
+  jatter_build_environment = "staging" 
+}

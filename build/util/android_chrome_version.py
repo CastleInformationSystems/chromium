@@ -47,6 +47,7 @@ For example:
 
 import argparse
 from collections import namedtuple
+import os
 
 # Package name version bits.
 _PACKAGE_NAMES = {
@@ -372,7 +373,20 @@ def GenerateVersionCodes(build_number, patch_number, arch):
 
   Thus, this method is responsible for the final two digits of versionCode.
   """
-  base_version_code = (build_number * 1000 + patch_number) * 100
+
+  jatter_env = os.environ.get("JATTER_VERSION_OFFSET")
+    
+  if jatter_env is None:
+    print("\n❌ ERROR: JATTER_VERSION_OFFSET is NOT SET.")
+    sys.exit(1)
+        
+  try:
+    jatter_version = int(jatter_env)
+  except ValueError:
+    print(f"❌ ERROR: JATTER_VERSION_OFFSET '{jatter_env}' not an int.")
+    sys.exit(1)
+  
+  base_version_code = (build_number * 1000 + patch_number) * 100 + jatter_version
 
   mfg, bitness = _ARCH_TO_MFG_AND_BITNESS[arch]
 
