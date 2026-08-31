@@ -104,6 +104,7 @@
 #include "chrome/browser/history/top_sites_factory.h"
 #include "chrome/browser/history_clusters/history_clusters_service_factory.h"
 #include "chrome/browser/history_embeddings/history_embeddings_service_factory.h"
+#include "chrome/browser/jatter/analytics/jatter_analytics_service_factory.h"
 #include "chrome/browser/k_anonymity_service/k_anonymity_service_factory.h"
 #include "chrome/browser/language/accept_languages_service_factory.h"
 #include "chrome/browser/language/language_model_manager_factory.h"
@@ -185,6 +186,7 @@
 #include "chrome/browser/profiles/batch_upload/batch_upload_service_factory.h"
 #include "chrome/browser/profiles/renderer_updater_factory.h"
 #include "chrome/browser/push_messaging/push_messaging_service_factory.h"
+#include "chrome/browser/rag_ingestion/rag_ingestion_service_factory.h"
 #include "chrome/browser/reading_list/reading_list_model_factory.h"
 #include "chrome/browser/reduce_accept_language/reduce_accept_language_factory.h"
 #include "chrome/browser/regional_capabilities/regional_capabilities_service_factory.h"
@@ -1032,6 +1034,7 @@ void ChromeBrowserMainExtraPartsProfiles::
 #if BUILDFLAG(IS_WIN)
   JumpListFactory::GetInstance();
 #endif
+  JatterAnalyticsServiceFactory::GetInstance();
   KAnonymityServiceFactory::GetInstance();
   LanguageDetectionModelServiceFactory::GetInstance();
   LanguageModelManagerFactory::GetInstance();
@@ -1266,6 +1269,7 @@ void ChromeBrowserMainExtraPartsProfiles::
   ProtocolHandlerRegistryFactory::GetInstance();
   ProviderStateServiceFactory::GetInstance();
   PushMessagingServiceFactory::GetInstance();
+  RagIngestionServiceFactory::GetInstance();
 #if !BUILDFLAG(IS_ANDROID)
   ReadAnythingServiceFactory::GetInstance();
 #endif

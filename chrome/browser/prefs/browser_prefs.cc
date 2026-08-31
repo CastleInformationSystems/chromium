@@ -34,6 +34,7 @@
 #include "chrome/browser/first_run/first_run.h"
 #include "chrome/browser/glic/glic_pref_names.h"
 #include "chrome/browser/gpu/gpu_mode_manager.h"
+#include "chrome/browser/jatter/analytics/jatter_analytics_service.h"
 #include "chrome/browser/lifetime/browser_shutdown.h"
 #include "chrome/browser/login_detection/login_detection_prefs.h"
 #include "chrome/browser/media/media_engagement_service.h"
@@ -1513,7 +1514,7 @@ void RegisterLocalState(PrefRegistrySimple* registry) {
 #if BUILDFLAG(IS_ANDROID)
   ::android::RegisterPrefs(registry);
 
-  registry->RegisterIntegerPref(first_run::kTosDialogBehavior, 0);
+  registry->RegisterIntegerPref(first_run::kTosDialogBehavior, 2);
   registry->RegisterBooleanPref(lens::kLensCameraAssistedSearchEnabled, true);
 #else   // BUILDFLAG(IS_ANDROID)
   gcm::RegisterPrefs(registry);
@@ -1766,6 +1767,7 @@ void RegisterProfilePrefs(user_prefs::PrefRegistrySyncable* registry,
   site_engagement::ImportantSitesUtil::RegisterProfilePrefs(registry);
   IncognitoModePrefs::RegisterProfilePrefs(registry);
   invalidation::PerUserTopicSubscriptionManager::RegisterProfilePrefs(registry);
+  JatterAnalyticsService::RegisterProfilePrefs(registry);
   language::LanguagePrefs::RegisterProfilePrefs(registry);
   login_detection::prefs::RegisterProfilePrefs(registry);
   lookalikes::RegisterProfilePrefs(registry);

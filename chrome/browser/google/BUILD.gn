@@ -44,7 +44,7 @@ source_set("google") {
       "google_update_app_command.cc",
       "google_update_app_command.h",
     ]
-    if (is_chrome_branded) {
+    if (true) {
       sources += [
         "google_update_policy_fetcher_win.cc",
         "google_update_policy_fetcher_win.h",

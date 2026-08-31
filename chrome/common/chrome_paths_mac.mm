@@ -20,6 +20,13 @@
 #include "build/build_config.h"
 #include "chrome/common/chrome_constants.h"
 #include "chrome/common/chrome_paths_internal.h"
+#include "chrome/common/jatter_buildflags.h"
+
+#if BUILDFLAG(IS_JATTER_PROD)
+#define JATTER_APP_GUID "Jatter"
+#else
+#define JATTER_APP_GUID "JatterStaging"
+#endif
 
 namespace {
 
@@ -37,7 +44,7 @@ char* ProductDirNameForBundle(NSBundle* chrome_bundle) {
 #elif BUILDFLAG(GOOGLE_CHROME_BRANDING)
       product_dir_name = "Google/Chrome";
 #else
-      product_dir_name = "Chromium";
+      product_dir_name = JATTER_APP_GUID;
 #endif
     }
 

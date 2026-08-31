@@ -4,6 +4,7 @@
 
 import("//build/buildflag_header.gni")
 import("//build/config/chrome_build.gni")
+import("//build/config/jatter_args.gni")
 import("//build/util/process_version.gni")
 import("//chrome/browser/downgrade/buildflags.gni")
 import("//chrome/common/features.gni")
@@ -23,6 +24,15 @@ import("//tools/grit/grit_rule.gni")
 
 assert(enable_supervised_users)
 assert(!is_fuchsia, "Fuchsia shouldn't use anything in //chrome")
+
+_is_jatter_prod = jatter_build_environment == "prod"
+
+buildflag_header("jatter_buildflags") {
+  header = "jatter_buildflags.h"
+  flags = [
+    "IS_JATTER_PROD=$_is_jatter_prod",
+  ]
+}
 
 fuzzer_test("ini_parser_fuzzer") {
   sources = [ "ini_parser_fuzzer.cc" ]
@@ -598,6 +608,7 @@ static_library("constants") {
   }
   if (is_mac) {
     sources += [ "chrome_paths_mac.mm" ]
+    deps += [ ":jatter_buildflags" ]
   }
   if (is_win) {
     sources += [ "chrome_paths_win.cc" ]
