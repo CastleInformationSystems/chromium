@@ -482,6 +482,8 @@ public final class ChromePreferenceKeys {
     /** The new_tab_url of the default search engine if it isn't Google. */
     public static final String DSE_NEW_TAB_URL = "Chrome.SearchEngine.DSENewTabUrl";
 
+    public static final String JATTER_DEFAULT_BROWSER_LOGGED = "Chrome.Jatter.DefaultBrowserLogged";
+
     /**
      * When the user is shown a badge that the current Android OS version is unsupported, and they
      * tap it to display the menu (which has additional information), we store the current version
@@ -1286,6 +1288,7 @@ public final class ChromePreferenceKeys {
                 IS_LAST_VISITED_TAB_SRP,
                 IS_DSE_GOOGLE,
                 IS_MVT_VISIBLE,
+                JATTER_DEFAULT_BROWSER_LOGGED,
                 LAST_SESSION_BROWSER_EXIT_REASON,
                 LAST_SESSION_BROWSER_PID,
                 LOCALE_MANAGER_PROMO_V3_CHECKED,

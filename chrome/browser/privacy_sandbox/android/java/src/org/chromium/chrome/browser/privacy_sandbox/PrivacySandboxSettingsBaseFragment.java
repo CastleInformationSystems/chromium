@@ -69,11 +69,11 @@ public abstract class PrivacySandboxSettingsBaseFragment extends ChromeBaseSetti
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // Add the custom question mark button.
         menu.clear();
-        MenuItem help =
-                menu.add(Menu.NONE, R.id.menu_id_targeted_help, Menu.NONE, R.string.menu_help);
-        help.setIcon(
-                TraceEventVectorDrawableCompat.create(
-                        getResources(), R.drawable.ic_help_24dp, getActivity().getTheme()));
+        // MenuItem help =
+        //         menu.add(Menu.NONE, R.id.menu_id_targeted_help, Menu.NONE, R.string.menu_help);
+        // help.setIcon(
+        //         TraceEventVectorDrawableCompat.create(
+        //                 getResources(), R.drawable.ic_help_24dp, getActivity().getTheme()));
     }
 
     @Override

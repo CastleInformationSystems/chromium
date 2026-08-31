@@ -201,7 +201,7 @@ public class IdentityDiscController
 
         mButtonData.setButtonSpec(
                 buttonSpecWithDrawableAndDescription(mButtonData.getButtonSpec(), email));
-        mButtonData.setCanShow(true);
+        mButtonData.setCanShow(false);
     }
 
     private ButtonSpec buttonSpecWithDrawableAndDescription(

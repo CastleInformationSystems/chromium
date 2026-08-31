@@ -12,7 +12,7 @@ found in the LICENSE file.
         android:key="open_source_license"
         android:title="@string/open_source_license_title"
         app:url="@string/open_source_license_url" />
-    <org.chromium.chrome.browser.about_settings.HyperlinkPreference
+    <!-- <org.chromium.chrome.browser.about_settings.HyperlinkPreference
         android:key="google_terms_of_service"
         android:title="@string/google_terms_of_service_title"
         app:url="@string/google_terms_of_service_url" />
@@ -23,5 +23,5 @@ found in the LICENSE file.
     <org.chromium.chrome.browser.about_settings.HyperlinkPreference
         android:key="privacy_policy"
         android:title="@string/privacy_policy_title"
-        app:url="@string/google_privacy_policy_url" />
+        app:url="@string/google_privacy_policy_url" /> -->
 </PreferenceScreen>

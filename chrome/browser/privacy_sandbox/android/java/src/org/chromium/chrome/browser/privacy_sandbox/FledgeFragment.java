@@ -102,7 +102,7 @@ public class FledgeFragment extends PrivacySandboxSettingsBaseFragment
         mFledgeTogglePreference.setManagedPreferenceDelegate(createManagedPreferenceDelegate());
         mMoreThanMaxSitesToDisplay = false;
 
-        handleAdsApiUxEnhancements();
+        // handleAdsApiUxEnhancements();
     }
 
     @Override

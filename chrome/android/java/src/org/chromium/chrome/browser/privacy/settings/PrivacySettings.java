@@ -157,32 +157,32 @@ public class PrivacySettings extends ChromeBaseSettingsFragment
         }
         Preference privacyGuidePreference = findPreference(PREF_PRIVACY_GUIDE);
         // Record the launch of PG from the S&P link-row entry point
-        privacyGuidePreference.setOnPreferenceClickListener(
-                preference -> {
-                    RecordUserAction.record("Settings.PrivacyGuide.StartPrivacySettings");
-                    RecordHistogram.recordEnumeratedHistogram(
-                            "Settings.PrivacyGuide.EntryExit",
-                            PrivacyGuideInteractions.SETTINGS_LINK_ROW_ENTRY,
-                            PrivacyGuideInteractions.MAX_VALUE);
-                    UserPrefs.get(getProfile()).setBoolean(Pref.PRIVACY_GUIDE_VIEWED, true);
+        // privacyGuidePreference.setOnPreferenceClickListener(
+        //         preference -> {
+        //             RecordUserAction.record("Settings.PrivacyGuide.StartPrivacySettings");
+        //             RecordHistogram.recordEnumeratedHistogram(
+        //                     "Settings.PrivacyGuide.EntryExit",
+        //                     PrivacyGuideInteractions.SETTINGS_LINK_ROW_ENTRY,
+        //                     PrivacyGuideInteractions.MAX_VALUE);
+        //             UserPrefs.get(getProfile()).setBoolean(Pref.PRIVACY_GUIDE_VIEWED, true);
 
-                    // Explicitly launch PrivacyGuideFragment from here. Because the fragment
-                    // does not implement EmbeddableSettingsPage, it will work as standalone mode.
-                    // In details it is still a part of SettingsActivity, it will let user find
-                    // it is an independent flow.
-                    SettingsNavigationFactory.createSettingsNavigation()
-                            .startSettings(
-                                    getActivity(),
-                                    PrivacyGuideFragment.class,
-                                    /* fragmentArgs= */ null,
-                                    /* addToBackStack= */ true);
-                    return true;
-                });
-        if (getProfile().isChild()
-                || ManagedBrowserUtils.isBrowserManaged(getProfile())
-                || ManagedBrowserUtils.isProfileManaged(getProfile())) {
+        //             // Explicitly launch PrivacyGuideFragment from here. Because the fragment
+        //             // does not implement EmbeddableSettingsPage, it will work as standalone mode.
+        //             // In details it is still a part of SettingsActivity, it will let user find
+        //             // it is an independent flow.
+        //             SettingsNavigationFactory.createSettingsNavigation()
+        //                     .startSettings(
+        //                             getActivity(),
+        //                             PrivacyGuideFragment.class,
+        //                             /* fragmentArgs= */ null,
+        //                             /* addToBackStack= */ true);
+        //             return true;
+        //         });
+        // if (getProfile().isChild()
+        //         || ManagedBrowserUtils.isBrowserManaged(getProfile())
+        //         || ManagedBrowserUtils.isProfileManaged(getProfile())) {
             getPreferenceScreen().removePreference(privacyGuidePreference);
-        }
+        // }
 
         IncognitoReauthSettingSwitchPreference incognitoReauthPreference =
                 (IncognitoReauthSettingSwitchPreference) findPreference(PREF_INCOGNITO_LOCK);
@@ -565,11 +565,11 @@ public class PrivacySettings extends ChromeBaseSettingsFragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
-        MenuItem help =
-                menu.add(Menu.NONE, R.id.menu_id_targeted_help, Menu.NONE, R.string.menu_help);
-        help.setIcon(
-                TraceEventVectorDrawableCompat.create(
-                        getResources(), R.drawable.ic_help_24dp, getActivity().getTheme()));
+        // MenuItem help =
+        //         menu.add(Menu.NONE, R.id.menu_id_targeted_help, Menu.NONE, R.string.menu_help);
+        // help.setIcon(
+        //         TraceEventVectorDrawableCompat.create(
+        //                 getResources(), R.drawable.ic_help_24dp, getActivity().getTheme()));
     }
 
     @Override

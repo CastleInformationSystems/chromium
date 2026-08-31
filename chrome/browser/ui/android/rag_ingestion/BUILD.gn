@@ -1,0 +1,40 @@
+import("//build/config/android/rules.gni")
+import("//third_party/jni_zero/jni_zero.gni")
+
+# 1. This target parses the Java file and generates the C++ JNI header
+generate_jni("jni_headers") {
+  sources = [ "java/src/org/chromium/chrome/browser/rag_ingestion/RagIngestionBridge.java" ]
+}
+
+# 2. This is the Java target we will write in Phase 2
+android_library("java") {
+  sources = [
+#   "java/src/org/chromium/chrome/browser/rag_ingestion/RagIngestionBottomSheetContent.java",
+    "java/src/org/chromium/chrome/browser/rag_ingestion/RagIngestionBridge.java",
+    "java/src/org/chromium/chrome/browser/rag_ingestion/RagIngestionManagementBottomSheetContent.java",
+  ]
+
+  srcjar_deps = [ ":jni_headers" ]
+
+  deps = [
+    ":java_resources",
+    "//base:base_java",
+    "//build/android:build_java",
+    "//chrome/browser/settings:factory_java",
+    "//components/browser_ui/bottomsheet/android:java",
+    "//components/browser_ui/site_settings/android:java",
+    "//components/browser_ui/site_settings/android:java_resources",
+    "//components/messages/android:java",
+    "//content/public/android:content_java",
+    "//third_party/androidx:androidx_annotation_annotation_java",
+    "//third_party/jni_zero:jni_zero_java",
+    "//ui/android:ui_java",
+    "//ui/android:ui_no_recycler_view_java",
+  ]
+}
+
+android_resources("java_resources") {
+  sources = [
+    "java/res/values/strings.xml",
+  ]
+}

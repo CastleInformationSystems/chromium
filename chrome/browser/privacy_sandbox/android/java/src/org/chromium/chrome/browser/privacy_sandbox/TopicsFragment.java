@@ -102,14 +102,14 @@ public class TopicsFragment extends PrivacySandboxSettingsBaseFragment
         mTopicsTogglePreference.setOnPreferenceChangeListener(this);
         mTopicsTogglePreference.setManagedPreferenceDelegate(createManagedPreferenceDelegate());
 
-        mTopicsExplanationPreference.setSummary(
-                SpanApplier.applySpans(
-                        getResources().getString(R.string.settings_topics_page_disclaimer_clank),
-                        new SpanApplier.SpanInfo(
-                                "<link1>",
-                                "</link1>",
-                                new ChromeClickableSpan(
-                                        getContext(), this::onManagingAdPrivacyClicked))));
+        // mTopicsExplanationPreference.setSummary(
+        //         SpanApplier.applySpans(
+        //                 getResources().getString(R.string.settings_topics_page_disclaimer_clank),
+        //                 new SpanApplier.SpanInfo(
+        //                         "<link1>",
+        //                         "</link1>",
+        //                         new ChromeClickableSpan(
+        //                                 getContext(), this::onManagingAdPrivacyClicked))));
         maybeApplyAdTopicsContentParity();
         maybeApplyAdsApiUxEnhancements();
     }
@@ -151,16 +151,16 @@ public class TopicsFragment extends PrivacySandboxSettingsBaseFragment
                 ChromeFeatureList.PRIVACY_SANDBOX_AD_TOPICS_CONTENT_PARITY)) {
             disclaimerStringResId = R.string.settings_ad_topics_page_disclaimer_v2_clank;
         }
-        ClickableSpansTextMessagePreference disclaimerPreference =
-                findPreference(TOPICS_DISCLAIMER);
-        disclaimerPreference.setSummary(
-                SpanApplier.applySpans(
-                        getResources().getString(disclaimerStringResId),
-                        new SpanApplier.SpanInfo(
-                                "<link>",
-                                "</link>",
-                                new ChromeClickableSpan(
-                                        getContext(), this::onPrivacyPolicyLinkClicked))));
+        // ClickableSpansTextMessagePreference disclaimerPreference =
+        //         findPreference(TOPICS_DISCLAIMER);
+        // disclaimerPreference.setSummary(
+        //         SpanApplier.applySpans(
+        //                 getResources().getString(disclaimerStringResId),
+        //                 new SpanApplier.SpanInfo(
+        //                         "<link>",
+        //                         "</link>",
+        //                         new ChromeClickableSpan(
+        //                                 getContext(), this::onPrivacyPolicyLinkClicked))));
     }
 
     private void onManagingAdPrivacyClicked(View unused) {
