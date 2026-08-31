@@ -570,17 +570,17 @@ public class SingleCategorySettings extends BaseSiteSettingsFragment
                     }
                 });
 
-        if (getSiteSettingsDelegate().isHelpAndFeedbackEnabled()) {
-            MenuItem help =
-                    menu.add(
-                            Menu.NONE,
-                            R.id.menu_id_site_settings_help,
-                            Menu.NONE,
-                            R.string.menu_help);
-            help.setIcon(
-                    TraceEventVectorDrawableCompat.create(
-                            getResources(), R.drawable.ic_help_24dp, getContext().getTheme()));
-        }
+        // if (getSiteSettingsDelegate().isHelpAndFeedbackEnabled()) {
+        //     MenuItem help =
+        //             menu.add(
+        //                     Menu.NONE,
+        //                     R.id.menu_id_site_settings_help,
+        //                     Menu.NONE,
+        //                     R.string.menu_help);
+        //     help.setIcon(
+        //             TraceEventVectorDrawableCompat.create(
+        //                     getResources(), R.drawable.ic_help_24dp, getContext().getTheme()));
+        // }
     }
 
     @Override
@@ -1240,6 +1240,8 @@ public class SingleCategorySettings extends BaseSiteSettingsFragment
             return R.string.website_settings_window_management_page_description;
         } else if (mCategory.getType() == SiteSettingsCategory.Type.AUTO_PICTURE_IN_PICTURE) {
             return R.string.website_settings_automatic_picture_in_picture_page_description;
+        } else if (mCategory.getType() == SiteSettingsCategory.Type.RAG_INGESTION) {
+            return R.string.rag_ingestion_page_description;
         }
 
         return -1;

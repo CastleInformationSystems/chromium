@@ -170,6 +170,15 @@ public class SiteSettings extends BaseSiteSettingsFragment
                 p.setSummary(ContentSettingsResources.getClipboardBlockedListSummary());
             } else if (Type.ADS == prefCategory && !checked) {
                 p.setSummary(ContentSettingsResources.getAdsBlockedListSummary());
+            } else if (Type.RAG_INGESTION == prefCategory) {
+                // 1. Read the actual current choice directly from native:
+                @ContentSetting int currentDefault = 
+                        WebsitePreferenceBridge.getDefaultContentSetting(
+                                browserContextHandle, contentType);
+                
+                // 2. Pass the real setting directly into getCategorySummary:
+                p.setSummary(ContentSettingsResources.getCategorySummary(
+                        currentDefault, /* isOneTime= */ false));
             } else if (Type.SOUND == prefCategory && !checked) {
                 p.setSummary(ContentSettingsResources.getSoundBlockedListSummary());
             } else if (Type.REQUEST_DESKTOP_SITE == prefCategory) {

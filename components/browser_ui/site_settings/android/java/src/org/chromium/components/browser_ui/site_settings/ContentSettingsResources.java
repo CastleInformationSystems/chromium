@@ -529,6 +529,19 @@ public class ContentSettingsResources {
                         0,
                         0,
                         0);
+            
+            case ContentSettingsType.RAG_INGESTION:
+                return new ResourceItem(
+                        R.drawable.ic_rag_ingestion_site_settings,
+                        R.string.rag_ingestion_title,
+                        ContentSetting.ALLOW,           // Default behavior when enabled
+                        ContentSetting.BLOCK,         // Default behavior when disabled
+                        0,                            // 0 = auto-generate "Ask first" summary
+                        0,                            // 0 = auto-generate "Blocked" summary
+                        0,                            // No custom screen reader override yet
+                        0,                            // No custom blocked icon yet
+                        0,                            // Default Allow primary text
+                        0);                           // Default Block primary text
 
             case ContentSettingsType.REQUEST_DESKTOP_SITE:
                 return new ResourceItem(
@@ -1072,6 +1085,12 @@ public class ContentSettingsResources {
                 R.string.website_settings_protected_content_ask,
                 R.string.website_settings_protected_content_block
             };
+        } else if (contentType == ContentSettingsType.RAG_INGESTION) { // <--- ADD THIS BLOCK
+            return new int[] {
+                R.string.website_settings_category_allowed, // Option 1: Allowed
+                R.string.website_settings_category_ask,     // Option 2: Ask first
+                R.string.website_settings_category_not_allowed // Option 3: Not allowed
+            };
         } else if (contentType == ContentSettingsType.SENSORS) {
             if (DeviceFeatureMap.isEnabled(
                     DeviceFeatureList.SENSORS_ALLOW_ASK_BLOCK_PERMISSION_MODEL)) {
@@ -1104,6 +1123,12 @@ public class ContentSettingsResources {
         if (contentType == ContentSettingsType.PROTECTED_MEDIA_IDENTIFIER) {
             return new int[] {
                 R.drawable.live_tv_24px, R.drawable.tv_24px, R.drawable.tv_off_24px,
+            };
+        } else if (contentType == ContentSettingsType.RAG_INGESTION) {
+            return new int[] {
+                R.drawable.ic_check_circle_24dp,  // Allowed (Already working!)
+                R.drawable.ic_info_24dp,          // Ask (Standard Chromium info icon, no _outline_)
+                R.drawable.ic_cancel_24dp         // Blocked (Material circle-X standard)
             };
         } else if (contentType == ContentSettingsType.SENSORS) {
             return new int[] {
