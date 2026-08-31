@@ -134,6 +134,8 @@ static_library("ui") {
     "webui/history_clusters/history_clusters_internals_ui_config.h",
     "webui/interstitials/interstitial_ui.cc",
     "webui/interstitials/interstitial_ui.h",
+    "webui/jatter_ntp/jatter_ntp_ui.cc",
+    "webui/jatter_ntp/jatter_ntp_ui.h",
     "webui/local_state/local_state_ui.cc",
     "webui/local_state/local_state_ui.h",
     "webui/location_internals/location_internals_handler.cc",
@@ -213,6 +215,15 @@ static_library("ui") {
     "webui/webui_load_timer.cc",
     "webui/webui_load_timer.h",
   ]
+
+  if (toolkit_views) {
+    sources += [
+      "rag_ingestion/rag_ingestion_page_action_controller.cc",
+      "rag_ingestion/rag_ingestion_page_action_controller.h",
+      "views/rag_ingestion/rag_ingestion_page_action_icon_view.cc",
+      "views/rag_ingestion/rag_ingestion_page_action_icon_view.h",
+  ]
+}
 
   if (enable_session_service) {
     sources += [
@@ -318,6 +329,8 @@ static_library("ui") {
     "//chrome/browser/history_embeddings",
     "//chrome/browser/image_decoder",
     "//chrome/browser/image_fetcher",
+    "//chrome/browser/jatter",
+    "//chrome/browser/jatter/analytics",
     "//chrome/browser/lookalikes",
     "//chrome/browser/media/router:media_router_feature",
     "//chrome/browser/media/router/discovery/access_code:access_code_cast_feature",
@@ -3435,7 +3448,7 @@ static_library("ui") {
 
     libs += [ "crypt32.lib" ]
 
-    if (is_chrome_branded) {
+    if (true) {
       sources += [ "webui/help/version_updater_win.cc" ]
       deps += [
         "//chrome/browser/win/installer_downloader:prefs",

@@ -12,6 +12,10 @@
 #include "base/metrics/histogram_functions.h"
 #include "base/strings/string_util.h"
 #include "chrome/browser/default_browser/default_browser_setter.h"
+#include "chrome/browser/jatter/analytics/jatter_analytics_service_factory.h"
+#include "chrome/browser/jatter/analytics/jatter_analytics_service.h"
+#include "chrome/browser/profiles/profile.h"
+#include "chrome/browser/profiles/profile_manager.h"
 
 namespace default_browser {
 
@@ -100,6 +104,15 @@ void DefaultBrowserController::OnDismissed() {
 void DefaultBrowserController::OnSetterExecutionComplete(
     DefaultBrowserState default_browser_state) {
   RecordResultMetric(default_browser_state == DefaultBrowserState::IS_DEFAULT);
+
+  if (default_browser_state == DefaultBrowserState::IS_DEFAULT) {
+    Profile* profile = ProfileManager::GetLastUsedProfile();
+    if (profile) {
+      if (auto* analytics = JatterAnalyticsServiceFactory::GetForProfile(profile)) {
+        analytics->RecordDefaultBrowserSet();
+      }
+    }
+  }
 
   std::move(completion_callback_).Run(default_browser_state);
 }

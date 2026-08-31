@@ -140,7 +140,7 @@ bool AreNewChromeLabsExperimentsAvailable(Profile* profile) {
 
 bool IsChromeLabsEnabled() {
   // Always early out on the stable channel regardless of other conditions.
-  if (chrome::GetChannel() == version_info::Channel::STABLE) {
+  if (chrome::GetChannel() == version_info::Channel::UNKNOWN) {
     return false;
   }
   if (base::CommandLine::ForCurrentProcess()->HasSwitch(

@@ -41,6 +41,7 @@ source_set("default_browser") {
     "//chrome/app/theme:chrome_unscaled_resources_grit",
     "//chrome/browser:browser_process",
     "//chrome/browser:shell_integration",
+    "//chrome/browser/jatter/analytics",
     "//chrome/browser/notifications",
     "//chrome/browser/notifications:system_notification_helper",
     "//ui/base",

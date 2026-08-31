@@ -54,7 +54,8 @@ enum class PageActionIconType {
   kJsOptimizations = 38,
   kRecordReplay = 39,
   kIndigo = 40,
-  kMaxValue = kIndigo,
+  kRagIngestion = 41,
+  kMaxValue = kRagIngestion,
 };
 // LINT.ThenChange(//tools/metrics/histograms/metadata/page/enums.xml:PageActionIconType)
 

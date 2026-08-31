@@ -212,9 +212,9 @@ export class SettingsPersonalizationOptionsElement extends
         this.setChromeSigninUserChoiceInfo_.bind(this));
     // </if>
 
-    this.registerHelpBubble(
-        ANONYMIZED_URL_COLLECTION_ID,
-        this.$.urlCollectionToggle.getBubbleAnchor(), {anchorPaddingTop: 10});
+    if (this.$.urlCollectionToggle) {
+      this.registerHelpBubble(ANONYMIZED_URL_COLLECTION_ID, this.$.urlCollectionToggle.getBubbleAnchor(), { anchorPaddingTop: 10 });
+    }
   }
 
   // <if expr="is_chromeos">

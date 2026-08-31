@@ -15,6 +15,7 @@
 #include "base/process/kill.h"
 #include "build/build_config.h"
 #include "chrome/browser/favicon/favicon_utils.h"
+#include "chrome/browser/jatter/jatter_environment.h"
 #include "chrome/browser/resource_coordinator/lifecycle_unit_state.mojom.h"
 #include "chrome/browser/sessions/session_restore.h"
 #include "chrome/browser/ui/performance_controls/memory_saver_utils.h"
@@ -27,6 +28,7 @@
 #include "chrome/common/webui_url_constants.h"
 #include "chrome/grit/generated_resources.h"
 #include "components/security_interstitials/content/security_interstitial_tab_helper.h"
+#include "components/strings/grit/components_strings.h"
 #include "components/tabs/public/tab_interface.h"
 #include "content/public/browser/navigation_controller.h"
 #include "content/public/browser/navigation_entry.h"
@@ -111,6 +113,11 @@ base::CallbackListSubscription TabUIHelper::AddTabUIChangeCallback(
 }
 
 std::u16string TabUIHelper::GetTitle() const {
+  GURL url = web_contents()->GetVisibleURL();
+  if (url.DomainIs(jatter::kAppDomain) || url.host() == jatter::kAppHost) {
+    return l10n_util::GetStringUTF16(IDS_NEW_TAB_TITLE);
+  }
+  
   const tab_groups::SavedTabGroupWebContentsListener* wc_listener =
       tab().GetTabFeatures()->saved_tab_group_web_contents_listener();
   if (wc_listener) {

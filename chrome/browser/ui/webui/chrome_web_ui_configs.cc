@@ -32,6 +32,7 @@
 #include "chrome/browser/ui/webui/gcm_internals_ui.h"
 #include "chrome/browser/ui/webui/history_clusters/history_clusters_internals_ui_config.h"
 #include "chrome/browser/ui/webui/internal_debug_pages_disabled/internal_debug_pages_disabled_ui.h"
+#include "chrome/browser/ui/webui/jatter_ntp/jatter_ntp_ui.h"
 #include "chrome/browser/ui/webui/interstitials/interstitial_ui.h"
 #include "chrome/browser/ui/webui/local_state/local_state_ui.h"
 #include "chrome/browser/ui/webui/location_internals/location_internals_ui.h"
@@ -469,4 +470,6 @@ void RegisterChromeWebUIConfigs() {
   map.AddWebUIConfig(std::make_unique<skills::SkillsUIConfig>());
 #endif  // BUILDFLAG(IS_WIN) || BUILDFLAG(IS_MAC) || BUILDFLAG(IS_LINUX) || \
         // BUILDFLAG(IS_CHROMEOS)
+        
+  // map.AddWebUIConfig(std::make_unique<JatterNtpUIConfig>());
 }

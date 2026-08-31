@@ -12,6 +12,7 @@
 #include "base/memory/raw_ptr.h"
 #include "base/metrics/histogram_functions.h"
 #include "base/strings/strcat.h"
+#include "build/build_config.h"
 #include "chrome/app/chrome_command_ids.h"
 #include "chrome/browser/profiles/profile.h"
 #include "chrome/browser/sharing/click_to_call/click_to_call_ui_controller.h"
@@ -37,6 +38,9 @@
 #include "chrome/browser/ui/views/page_action/page_action_icon_params.h"
 #include "chrome/browser/ui/views/page_action/zoom_view.h"
 #include "chrome/browser/ui/views/passwords/manage_passwords_icon_views.h"
+#if !BUILDFLAG(IS_ANDROID)
+#include "chrome/browser/ui/views/rag_ingestion/rag_ingestion_page_action_icon_view.h"
+#endif
 #include "chrome/browser/ui/views/sharing/sharing_dialog_view.h"
 #include "chrome/browser/ui/views/sharing/sharing_icon_view.h"
 #include "chrome/browser/ui/views/sharing_hub/sharing_hub_icon_view.h"
@@ -160,6 +164,14 @@ void PageActionIconController::Init(const PageActionIconParams& params,
             type, std::make_unique<autofill::AddressBubblesIconView>(
                       params.command_updater, params.icon_label_bubble_delegate,
                       params.page_action_icon_delegate));
+        break;
+      case PageActionIconType::kRagIngestion:
+#if !BUILDFLAG(IS_ANDROID)
+        add_page_action_icon(
+            type, std::make_unique<RagIngestionPageActionIconView>(
+                      params.command_updater, params.icon_label_bubble_delegate,
+                      params.page_action_icon_delegate));
+#endif
         break;
       case PageActionIconType::kSaveCard:
         add_page_action_icon(

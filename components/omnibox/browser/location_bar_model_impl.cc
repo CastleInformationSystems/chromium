@@ -35,6 +35,7 @@
 
 #if (!BUILDFLAG(IS_ANDROID) || BUILDFLAG(ENABLE_VR)) && !BUILDFLAG(IS_IOS)
 #include "components/omnibox/browser/vector_icons.h"  // nogncheck
+#include "components/vector_icons/vector_icons.h"  // nogncheck
 #endif
 
 using metrics::OmniboxEventProto;
@@ -49,10 +50,26 @@ LocationBarModelImpl::~LocationBarModelImpl() = default;
 
 // LocationBarModelImpl Implementation.
 std::u16string LocationBarModelImpl::GetFormattedFullURL() const {
+  GURL url = GetURL();
+  if (url.is_valid() && (
+      url.host() == "chat.jatter.ai" || 
+      url.host() == "beacon-staging-df5f2.firebaseapp.com" ||
+      url.host() == "beacon-development-46c50.firebaseapp.com")) {
+    return std::u16string(); // Return literal nothing
+  }
+
   return GetFormattedURL(url_formatter::kFormatUrlOmitDefaults);
 }
 
 std::u16string LocationBarModelImpl::GetURLForDisplay() const {
+  GURL url = GetURL();
+  if (url.is_valid() && (
+      url.host() == "chat.jatter.ai" || 
+      url.host() == "beacon-staging-df5f2.firebaseapp.com" ||
+      url.host() == "beacon-development-46c50.firebaseapp.com")) {
+    return std::u16string(); // Return literal nothing
+  }
+  
   // For the contextual tasks page, apply "origin-swapping" logic in order to
   // display the proper URL in the Omnibox.
   const auto inner_frame_url = delegate_->GetContextualTasksInnerFrameURL();
@@ -264,6 +281,13 @@ LocationBarModelImpl::GetOmniboxComposeboxPageClassification() const {
 
 const gfx::VectorIcon& LocationBarModelImpl::GetVectorIcon() const {
 #if (!BUILDFLAG(IS_ANDROID) || BUILDFLAG(ENABLE_VR)) && !BUILDFLAG(IS_IOS)
+  GURL url = GetURL();
+  if (url.host() == "chat.jatter.ai" || 
+      url.host() == "beacon-staging-df5f2.firebaseapp.com" ||
+      url.host() == "beacon-development-46c50.firebaseapp.com") {
+    return vector_icons::kSearchIcon; // Or whatever your search icon constant is
+  }
+  
   auto* const icon_override = delegate_->GetVectorIconOverride();
   if (icon_override)
     return *icon_override;
@@ -280,6 +304,13 @@ std::u16string LocationBarModelImpl::GetSecureDisplayText() const {
   // Note that display text will be implicitly used as the accessibility text.
   // GetSecureAccessibilityText() handles special cases when no display text is
   // set.
+  GURL url = GetURL();
+  if (url.is_valid() && (
+      url.host() == "chat.jatter.ai" || 
+      url.host() == "beacon-staging-df5f2.firebaseapp.com" ||
+      url.host() == "beacon-development-46c50.firebaseapp.com")) {
+    return std::u16string(); // Return literal nothing
+  }
 
   if (IsOfflinePage())
     return l10n_util::GetStringUTF16(IDS_OFFLINE_VERBOSE_STATE);
