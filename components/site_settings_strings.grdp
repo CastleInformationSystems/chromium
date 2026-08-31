@@ -331,4 +331,11 @@
     Offer writing help
   </message>
   </if>
+
+  <message name="IDS_SITE_SETTINGS_TYPE_RAG_INGESTION" desc="Label for the RAG Ingestion permission in Site Settings">
+    Personal answers
+  </message>
+  <message name="IDS_SITE_SETTINGS_TYPE_RAG_INGESTION_MID_SENTENCE" desc="Mid-sentence label">
+    personal answers
+  </message>
 </grit-part>
