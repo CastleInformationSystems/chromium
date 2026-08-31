@@ -411,7 +411,7 @@ NSAttributedString* FormatHTMLListForUILabel(NSString* listString) {
   learnMoreButton.pointerInteractionEnabled = YES;
 
   UIStackView* subtitleStackView = [[UIStackView alloc]
-      initWithArrangedSubviews:@[ subtitleLabel, learnMoreButton ]];
+      initWithArrangedSubviews:@[ subtitleLabel/*, learnMoreButton */]];
   subtitleStackView.axis = UILayoutConstraintAxisVertical;
   subtitleStackView.spacing = 0;
   subtitleStackView.distribution = UIStackViewDistributionFill;

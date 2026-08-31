@@ -23,6 +23,7 @@
 #import "ios/chrome/browser/intelligence/bwg/utils/gemini_constants.h"
 #import "ios/chrome/browser/intelligence/features/features.h"
 #import "ios/chrome/browser/intelligence/page_action_menu/ui/page_action_menu_entrypoint_view.h"
+#import "ios/chrome/browser/jatter/rag_commands.h"
 #import "ios/chrome/browser/lens/ui_bundled/lens_entrypoint.h"
 #import "ios/chrome/browser/lens_overlay/coordinator/lens_overlay_availability.h"
 #import "ios/chrome/browser/lens_overlay/model/lens_overlay_presentation_type.h"
@@ -641,6 +642,74 @@ const CGFloat kShareIconBalancingHeightPadding = 1;
   }
 
   completion(self.delegate.omniboxScribbleForwardingTarget);
+}
+
+#pragma mark - Jatter RAG UI
+
+// Lazy initializer for the button
+- (UIButton*)jatterButton {
+  if (!_jatterButton) {
+    _jatterButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    _jatterButton.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    // Add a tap target that we will hook up in Phase 3!
+    [_jatterButton addTarget:self
+                      action:@selector(jatterButtonTapped)
+            forControlEvents:UIControlEventTouchUpInside];
+
+    // Inject the button into the view hierarchy
+    // (Depending on your specific Chromium branch, you might prefer adding 
+    // this to `self.locationBarSteadyView` instead of `self.view`)
+    [self.view addSubview:_jatterButton];
+
+    // Anchor it to the trailing edge, just inside the share/voice buttons
+    [NSLayoutConstraint activateConstraints:@[
+      [_jatterButton.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor],
+      [_jatterButton.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:-45.0],
+      [_jatterButton.widthAnchor constraintEqualToConstant:30.0],
+      [_jatterButton.heightAnchor constraintEqualToConstant:30.0],
+    ]];
+  }
+  return _jatterButton;
+}
+
+- (void)updateJatterIconWithState:(int)state {
+  // 0 = kHidden, 1 = kActive, 2 = kDisabled, 3 = kOffer
+  if (state == 0) {
+    self.jatterButton.hidden = YES;
+    return;
+  }
+
+  self.jatterButton.hidden = NO;
+  UIImage* icon = [[UIImage imageNamed:@"jatter_brand_icon"] 
+    imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+
+  switch (state) {
+    case 1: // kActive
+      // Standard icon, full opacity
+      self.jatterButton.alpha = 1.0;
+      break;
+    case 2: // kDisabled
+      // Fade the icon to 50% opacity to indicate it's off/blocked
+      self.jatterButton.alpha = 0.5;
+      break;
+    case 3: // kOffer
+      // Standard icon, full opacity
+      self.jatterButton.alpha = 1.0;
+      break;
+    default:
+      self.jatterButton.alpha = 1.0;
+      break;
+  }
+
+  [self.jatterButton setImage:icon forState:UIControlStateNormal];
+}
+
+- (void)jatterButtonTapped {
+  // Pass the tap event up to the command dispatcher
+  if (self.ragLocationBarHandler) {
+    [self.ragLocationBarHandler jatterIconTapped];
+  }
 }
 
 #pragma mark - private

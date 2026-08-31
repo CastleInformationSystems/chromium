@@ -10,8 +10,12 @@
 #import "base/strings/sys_string_conversions.h"
 #import "base/strings/utf_string_conversions.h"
 #import "base/time/time.h"
+#import "components/content_settings/core/browser/host_content_settings_map.h"
+#import "components/content_settings/core/common/content_settings.h"
+#import "components/content_settings/core/common/content_settings_types.h"
 #import "components/page_info/core/page_info_history_data_source.h"
 #import "components/strings/grit/components_strings.h"
+#import "ios/chrome/browser/content_settings/model/host_content_settings_map_factory.h"
 #import "ios/chrome/browser/keyboard/ui_bundled/UIKeyCommand+Chrome.h"
 #import "ios/chrome/browser/net/model/crurl.h"
 #import "ios/chrome/browser/page_info/constants/page_info_constants.h"
@@ -24,6 +28,7 @@
 #import "ios/chrome/browser/shared/model/url/chrome_url_constants.h"
 #import "ios/chrome/browser/shared/public/commands/page_info_commands.h"
 #import "ios/chrome/browser/shared/ui/symbols/symbols.h"
+#import "ios/chrome/browser/shared/ui/table_view/chrome_table_view_controller.h"
 #import "ios/chrome/browser/shared/ui/table_view/cells/table_view_attributed_string_header_footer_item.h"
 #import "ios/chrome/browser/shared/ui/table_view/cells/table_view_cell.h"
 #import "ios/chrome/browser/shared/ui/table_view/cells/table_view_detail_icon_item.h"
@@ -60,6 +65,7 @@ typedef NS_ENUM(NSInteger, ItemIdentifier) {
   ItemIdentifierPermissionsMicrophone,
   ItemIdentifierAboutThisSite,
   ItemIdentifierLastVisited,
+  ItemIdentifierRagPermission = 99,
 };
 
 // The minimum scale factor of the title label showing the URL.
@@ -182,10 +188,42 @@ const NSInteger kAboutThisSiteDetailTextNumberOfLines = 2;
   [snapshot appendItemsWithIdentifiers:@[ @(ItemIdentifierSecurity) ]
              intoSectionWithIdentifier:@(SectionIdentifierSecurityContent)];
 
+  // ---------------------------------------------------------
   // Permissions section.
+  // ---------------------------------------------------------
+  BOOL hasPermissionsSection = NO;
+
+  // Add existing OS-level permissions (if any somehow slip through)
   for (NSNumber* permission in self.permissionsInfo.allKeys) {
+    if (!hasPermissionsSection) {
+      [snapshot appendSectionsWithIdentifiers:@[ @(SectionIdentifierPermissions) ]];
+      hasPermissionsSection = YES;
+    }
     [self updateSnapshot:snapshot forPermission:permission];
   }
+
+  // [NEW] Add RAG Permission Row based on Content Settings
+  // Fetch current setting from C++
+  ProfileIOS* profile = self.profile;
+  if (profile && self.pageInfoURL.is_valid()) {
+    HostContentSettingsMap* settingsMap = ios::HostContentSettingsMapFactory::GetForProfile(profile);
+    
+    ContentSetting ragSetting = settingsMap->GetContentSetting(
+        self.pageInfoURL, self.pageInfoURL, ContentSettingsType::RAG_INGESTION);
+
+    // Only show the UI row if the user has interacted with it previously
+    if (ragSetting != CONTENT_SETTING_ASK) {
+      if (!hasPermissionsSection) {
+        [snapshot appendSectionsWithIdentifiers:@[ @(SectionIdentifierPermissions) ]];
+        hasPermissionsSection = YES;
+      }
+      
+      // Add our new ItemIdentifier
+      [snapshot appendItemsWithIdentifiers:@[ @(ItemIdentifierRagPermission) ]
+                intoSectionWithIdentifier:@(SectionIdentifierPermissions)];
+    }
+  }
+  // ---------------------------------------------------------
 
   if (IsAboutThisSiteFeatureEnabled()) {
     [self updateSnapshotForAboutThisSite:snapshot];
@@ -220,6 +258,9 @@ const NSInteger kAboutThisSiteDetailTextNumberOfLines = 2;
       break;
     case ItemIdentifierLastVisited:
       [self.pageInfoPresentationHandler showLastVisitedPage];
+      break;
+    case ItemIdentifierRagPermission:       // [NEW] Catch the tap!
+      [self presentRagPermissionSubMenu];
       break;
     case ItemIdentifierPermissionsCamera:
     case ItemIdentifierPermissionsMicrophone:
@@ -464,6 +505,59 @@ const NSInteger kAboutThisSiteDetailTextNumberOfLines = 2;
 
       return cell;
     }
+    case ItemIdentifierRagPermission: {
+      TableViewCellContentConfiguration* configuration =
+          [[TableViewCellContentConfiguration alloc] init];
+      configuration.title = @"Personal Answers";
+
+      // 1. Fetch current setting from C++ HostContentSettingsMap
+      ProfileIOS* profile = self.profile; // Or via your mediator/coordinator property
+      HostContentSettingsMap* settingsMap =
+          ios::HostContentSettingsMapFactory::GetForProfile(profile);
+      
+      ContentSetting ragSetting = settingsMap->GetContentSetting(
+          self.pageInfoURL, self.pageInfoURL, ContentSettingsType::RAG_INGESTION);
+
+      // 2. Display current setting as trailing text
+      switch (ragSetting) {
+        case CONTENT_SETTING_ALLOW:
+          configuration.trailingText = @"Allowed";
+          break;
+        case CONTENT_SETTING_BLOCK:
+          configuration.trailingText = @"Not allowed";
+          break;
+        case CONTENT_SETTING_ASK:
+        default:
+          configuration.trailingText = @"Ask (Default)";
+          break;
+      }
+
+      // 3. Configure the squircle icon (using purple brand color)
+      ColorfulSymbolContentConfiguration* iconConfiguration =
+          [[ColorfulSymbolContentConfiguration alloc] init];
+      
+      // 1. Load the standard image asset as a template
+      UIImage* jatterIcon = [[UIImage imageNamed:@"jatter_brand_icon"] 
+          imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
+
+      // 2. Create the configuration to match the surrounding Chromium icons
+      UIImageSymbolConfiguration* config = 
+          [UIImageSymbolConfiguration configurationWithPointSize:kPageInfoSymbolPointSize 
+                                                        weight:UIImageSymbolWeightRegular];
+
+      // 3. Assign it using the custom 'symbolImage' property!
+      iconConfiguration.symbolImage = [jatterIcon imageWithConfiguration:config];
+
+      configuration.leadingConfiguration = iconConfiguration;
+
+      // 4. Dequeue cell and add disclosure chevron (>)
+      UITableViewCell* cell =
+          [TableViewCellContentConfiguration dequeueTableViewCell:tableView];
+      cell.contentConfiguration = configuration;
+      cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
+      return cell;
+    }
   }
 }
 
@@ -590,6 +684,57 @@ const NSInteger kAboutThisSiteDetailTextNumberOfLines = 2;
     [snapshot
         deleteSectionsWithIdentifiers:@[ @(SectionIdentifierPermissions) ]];
   }
+}
+
+- (void)presentRagPermissionSubMenu {
+  UIAlertController* actionSheet = 
+      [UIAlertController alertControllerWithTitle:@"Personal Answers"
+                                          message:@"Allow Jatter to securely read this site to provide answers?"
+                                   preferredStyle:UIAlertControllerStyleActionSheet];
+
+  // Safely capture 'self' for the Objective-C blocks
+  __weak __typeof__(self) weakSelf = self;
+  
+  // Helper block to save setting and refresh UI
+  void (^updateSetting)(ContentSetting) = ^(ContentSetting setting) {
+    if (!weakSelf || !weakSelf.profile) return;
+    
+    HostContentSettingsMap* settingsMap = 
+        ios::HostContentSettingsMapFactory::GetForProfile(weakSelf.profile);
+    
+    settingsMap->SetContentSettingDefaultScope(
+        weakSelf.pageInfoURL, 
+        weakSelf.pageInfoURL, 
+        ContentSettingsType::RAG_INGESTION, 
+        setting);
+        
+    // Re-run the diffable data source generation to update the chevron text
+    [weakSelf loadModel]; 
+  };
+
+  [actionSheet addAction:[UIAlertAction actionWithTitle:@"Ask (Default)" 
+                                                  style:UIAlertActionStyleDefault 
+                                                handler:^(UIAlertAction * action) {
+    updateSetting(CONTENT_SETTING_ASK);
+  }]];
+  
+  [actionSheet addAction:[UIAlertAction actionWithTitle:@"Allowed" 
+                                                  style:UIAlertActionStyleDefault 
+                                                handler:^(UIAlertAction * action) {
+    updateSetting(CONTENT_SETTING_ALLOW);
+  }]];
+  
+  [actionSheet addAction:[UIAlertAction actionWithTitle:@"Not allowed" 
+                                                  style:UIAlertActionStyleDestructive 
+                                                handler:^(UIAlertAction * action) {
+    updateSetting(CONTENT_SETTING_BLOCK);
+  }]];
+  
+  [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" 
+                                                  style:UIAlertActionStyleCancel 
+                                                handler:nil]];
+
+  [self presentViewController:actionSheet animated:YES completion:nil];
 }
 
 #pragma mark - PageInfoAboutThisSiteConsumer

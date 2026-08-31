@@ -1,0 +1,27 @@
+source_set("analytics") {
+  sources = [
+    "jatter_analytics_service.cc",
+    "jatter_analytics_service.h",
+    "jatter_analytics_service_factory.h",
+    "jatter_analytics_service_factory.mm",
+    "jatter_analytics_service_ios.mm",
+    "jatter_analytics_tab_helper.h",
+    "jatter_analytics_tab_helper.mm",
+  ]
+
+  deps = [
+    "//base",
+    "//components/keyed_service/core",
+    "//components/keyed_service/ios",
+    "//components/pref_registry",
+    "//components/prefs",
+    "//ios/chrome/browser/jatter:jatter_core",
+    "//ios/chrome/browser/shared/model/profile",
+    "//ios/chrome/browser/shared/model/profile:profile_keyed_service_factory",
+    "//ios/web/public",
+    "//net",
+    "//services/network/public/cpp",
+  ]
+
+  frameworks = [ "UIKit.framework" ]
+}

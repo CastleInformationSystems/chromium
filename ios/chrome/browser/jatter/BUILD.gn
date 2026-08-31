@@ -1,0 +1,111 @@
+import("//build/config/jatter_args.gni")
+import("//build/config/ios/rules.gni")
+import("//ios/web/public/js_messaging/optimize_ts.gni")
+
+config("jatter_env_config") {
+  if (jatter_build_environment == "development") {
+    defines = [ "JATTER_DEVELOPMENT_MODE" ]
+  } else if (jatter_build_environment == "staging") {
+    defines = [ "JATTER_STAGING_MODE=1" ]
+  } else { # Production
+    defines = [ "JATTER_PRODUCTION_MODE" ]
+  }
+}
+
+# Lightweight target containing zero heavy browser dependencies.
+# Safe for analytics, url_rewriter, and other low-level utilities to import.
+source_set("jatter_core") {
+  sources = [
+    "jatter_environment.h",
+    "jatter_firebase_client.h",
+    "jatter_firebase_client.mm",
+    "jatter_token_storage.h",
+    "jatter_token_storage.mm",
+  ]
+
+  deps = [
+    "//base",
+    "//components/prefs",
+    "//ios/chrome/browser/shared/model/profile",
+    "//net",
+    "//services/network/public/cpp",
+  ]
+
+  public_configs = [ ":jatter_env_config" ]
+}
+
+bundle_data_xcassets("resources") {
+  catalog = "resources/Assets.xcassets"
+  sources = [
+    "resources/Assets.xcassets/Contents.json",
+    "resources/Assets.xcassets/jatter_brand_icon.imageset/Contents.json",
+    "resources/Assets.xcassets/jatter_brand_icon.imageset/jatter.svg",
+  ]
+}
+
+# Compiles jatter_bridge.ts into jatter_bridge.js and bundles it into app resources
+optimize_ts("jatter_bridge_js") {
+  sources = [ "jatter_bridge.ts" ]
+}
+
+# Compiles rag_ingestion.ts into rag_ingestion.js
+optimize_ts("rag_ingestion_js") {
+  sources = [ "rag_ingestion.ts" ]
+}
+
+source_set("jatter") {
+  sources = [
+    "jatter_authorization_handler.h",
+    "jatter_authorization_handler.mm",
+    "jatter_java_script_feature.h",
+    "jatter_java_script_feature.mm",
+    "rag_commands.h",
+    "rag_ingestion_anon_loader.h",
+    "rag_ingestion_anon_loader.mm",
+    "rag_ingestion_java_script_feature.h",
+    "rag_ingestion_java_script_feature.mm",
+    "rag_ingestion_network_client.h",
+    "rag_ingestion_network_client.mm",
+    "rag_ingestion_service.h",
+    "rag_ingestion_service.mm",
+    "rag_ingestion_service_factory.h",
+    "rag_ingestion_service_factory.mm",
+    "rag_ingestion_tab_helper.h",
+    "rag_ingestion_tab_helper.mm",
+  ]
+
+  deps = [
+    ":jatter_bridge_js",
+    ":jatter_core",
+    ":rag_ingestion_js",
+    ":resources",
+    "//base",
+    "//components/content_settings/core/browser",
+    "//components/content_settings/core/common",
+    "//components/favicon/core",
+    "//components/keyed_service/core",
+    "//components/keyed_service/ios",
+    "//components/pref_registry",
+    "//components/prefs",
+    "//crypto",
+    "//ios/chrome/browser/content_settings/model",
+    "//ios/chrome/browser/favicon/model",
+    "//ios/chrome/browser/shared/model/browser:browser",
+    "//ios/chrome/browser/shared/model/prefs:pref_names",
+    "//ios/chrome/browser/shared/model/profile",
+    "//ios/chrome/browser/shared/model/profile:profile_keyed_service_factory",
+    "//ios/chrome/browser/shared/model/web_state_list:web_state_list",
+    "//ios/chrome/browser/shared/public/commands:commands",
+    "//ios/web/public",
+    "//ios/web/public/js_messaging",
+    "//net",
+    "//services/network/public/cpp",
+    "//services/network/public/mojom",
+    "//third_party/boringssl",
+    "//third_party/re2",
+    "//ui/gfx",
+    "//url",
+  ]
+
+  public_deps = [ ":jatter_core" ]
+}

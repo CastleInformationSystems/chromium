@@ -41,6 +41,7 @@
 #import "ios/chrome/browser/intelligence/bwg/model/bwg_service.h"
 #import "ios/chrome/browser/intelligence/bwg/model/bwg_service_factory.h"
 #import "ios/chrome/browser/intelligence/features/features.h"
+#import "ios/chrome/browser/jatter/rag_ingestion_tab_helper.h"
 #import "ios/chrome/browser/lens/ui_bundled/lens_entrypoint.h"
 #import "ios/chrome/browser/lens_overlay/coordinator/lens_overlay_availability.h"
 #import "ios/chrome/browser/location_bar/badge/coordinator/location_bar_badge_coordinator.h"
@@ -205,10 +206,16 @@ const size_t kMaxURLDisplayChars = 32 * 1024;
                      forProtocol:@protocol(OmniboxCommands)];
   }
 
+  [self.browser->GetCommandDispatcher()
+      startDispatchingToTarget:self
+                   forProtocol:@protocol(RagLocationBarCommands)];
+
   BOOL isIncognito = self.isOffTheRecord;
 
   self.viewController = [[LocationBarViewController alloc] init];
   self.viewController.incognito = isIncognito;
+  self.viewController.ragLocationBarHandler = HandlerForProtocol(
+      self.browser->GetCommandDispatcher(), RagLocationBarCommands);
   _prefService = self.profile->GetPrefs();
   self.viewController.profilePrefs = _prefService;
   self.viewController.delegate = self;
@@ -482,6 +489,8 @@ const size_t kMaxURLDisplayChars = 32 * 1024;
   _incognitoBadgeFullscreenUIUpdater = nullptr;
   _omniboxFullscreenUIUpdater = nullptr;
   self.started = NO;
+
+  [self.browser->GetCommandDispatcher() stopDispatchingForProtocol:@protocol(RagLocationBarCommands)];
 }
 
 - (BOOL)omniboxPopupHasAutocompleteResults {
@@ -808,6 +817,43 @@ const size_t kMaxURLDisplayChars = 32 * 1024;
 - (UIBezierPath*)visiblePathForView:(UIView*)view {
   return [UIBezierPath bezierPathWithRoundedRect:view.bounds
                                     cornerRadius:view.bounds.size.height / 2];
+}
+
+#pragma mark - RagLocationBarCommands
+
+- (void)updateRagLocationBarIcon {
+  web::WebState* activeWebState = self.browser->GetWebStateList()->GetActiveWebState();
+  
+  // Explicitly cast to the specific subclass so the compiler knows our custom method exists
+  LocationBarViewController* locationBarVC = 
+      (LocationBarViewController*)self.locationBarViewController;
+
+  if (!activeWebState) {
+    [locationBarVC updateJatterIconWithState:0]; // 0 = Hidden
+    return;
+  }
+
+  RagIngestionTabHelper* tabHelper = RagIngestionTabHelper::FromWebState(activeWebState);
+  if (!tabHelper) {
+    [locationBarVC updateJatterIconWithState:0]; // 0 = Hidden
+    return;
+  }
+
+  int state = static_cast<int>(tabHelper->GetIconState());
+  [locationBarVC updateJatterIconWithState:state];
+}
+
+- (void)jatterIconTapped {
+  web::WebState* activeWebState = self.browser->GetWebStateList()->GetActiveWebState();
+  if (!activeWebState) return;
+
+  RagIngestionTabHelper* tabHelper = RagIngestionTabHelper::FromWebState(activeWebState);
+  if (tabHelper) {
+    // Re-trigger the exact same UI flow! Since the tab helper handles 
+    // the decision callback, it will automatically update the backend 
+    // and refresh the icon color if they change their mind.
+    tabHelper->ShowPermissionUI();
+  }
 }
 
 #pragma mark - Private
