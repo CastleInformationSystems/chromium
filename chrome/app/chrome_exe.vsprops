@@ -2,7 +2,7 @@
 <VisualStudioPropertySheet
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="chrome_exe"
+	Name="jatter_exe"
 	InheritedPropertySheets="$(SolutionDir)..\third_party\breakpad\using_breakpad.vsprops"
 	>
 	<Tool
@@ -12,7 +12,7 @@
 	<Tool
 		Name="VCLinkerTool"
 		DelayLoadDLLs="ole32.dll;oleaut32.dll"
-		OutputFile="$(OutDir)\chrome.exe"
+		OutputFile="$(OutDir)\jatter.exe"
 		ProgramDatabaseFile="$(OutDir)\$(ProjectName).pdb"
 	/>
 	<Tool
