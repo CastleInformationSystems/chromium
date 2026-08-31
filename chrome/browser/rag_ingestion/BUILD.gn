@@ -1,0 +1,71 @@
+import("//tools/grit/grit_rule.gni")
+import("//ui/base/ui_features.gni")
+import("//build/config/locales.gni") # 1. Import global locales
+
+grit("rag_ingestion_strings") {
+  source = "rag_ingestion_strings.grd"
+  outputs = [ "grit/rag_ingestion_strings.h" ]
+
+  _all_locales = all_chrome_locales
+
+  # 1. Safely handle pseudo-locales
+  _all_locales += [ "en-XA", "ar-XB" ]
+  _all_locales -= [ "en-XA", "ar-XB" ]
+  if (enable_pseudolocales) {
+    _all_locales += [ "en-XA", "ar-XB" ]
+  }
+
+  # 2. THE FIX: Explicitly add the 26 iOS-specific locales that are 
+  # hardcoded in the merged .grd file so Windows GN expects them.
+  _ios_extra = [
+    "as", "az", "be", "bs", "eu", "fr-CA", "gl", "hy", "is", "ka", 
+    "kk", "km", "ky", "lo", "mk", "mn", "my", "ne", "or", "pa", 
+    "si", "sq", "sr-Latn", "uz", "zh-HK", "zu"
+  ]
+  
+  # Add them safely without creating duplicates
+  _all_locales -= _ios_extra
+  _all_locales += _ios_extra
+
+  # 3. Safely remove Welsh ('cy') since it is NOT in your .grd file.
+  _all_locales += [ "cy" ]
+  _all_locales -= [ "cy" ]
+
+  # 4. Generate the exact list, including the gendered variants the repacker needs.
+  foreach(locale, _all_locales) {
+    outputs += [
+      "rag_ingestion_strings_${locale}.pak",
+      "rag_ingestion_strings_${locale}_FEMININE.pak",
+      "rag_ingestion_strings_${locale}_MASCULINE.pak",
+      "rag_ingestion_strings_${locale}_NEUTER.pak",
+    ]
+  }
+}
+
+source_set("rag_ingestion_ui") {
+  # Base dependencies that are safe for all platforms (including Android)
+  deps = [
+    ":rag_ingestion_strings",
+    "//base",
+  ]
+
+  # Only compile the desktop UI files and pull desktop dependencies if supported
+  if (toolkit_views) {
+    sources = [
+      "//chrome/browser/ui/views/rag_ingestion/rag_ingestion_bubble_view.cc",
+      "//chrome/browser/ui/views/rag_ingestion/rag_ingestion_bubble_view.h",
+    ]
+    
+    deps += [
+      "//chrome/browser/jatter",
+      "//chrome/browser/ui",
+      "//components/strings:components_strings_grit",
+      "//ui/base",
+      "//ui/views",
+      "//ui/views/controls/webview",
+      "//url",
+    ]
+  }
+  
+  # On Android (toolkit_views == false), this safely resolves to an empty module!
+}

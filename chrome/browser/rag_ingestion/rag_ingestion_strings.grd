@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grit latest_public_release="0" current_release="1">
+  <outputs>
+    <output filename="grit/rag_ingestion_strings.h" type="rc_header"><emit emit_type='prepend'></emit></output>
+    
+    <output filename="rag_ingestion_strings_af.pak" type="data_package" lang="af" />
+    <output filename="rag_ingestion_strings_af_FEMININE.pak" type="data_package" lang="af" />
+    <output filename="rag_ingestion_strings_af_MASCULINE.pak" type="data_package" lang="af" />
+    <output filename="rag_ingestion_strings_af_NEUTER.pak" type="data_package" lang="af" />
+
+    <output filename="rag_ingestion_strings_am.pak" type="data_package" lang="am" />
+    <output filename="rag_ingestion_strings_am_FEMININE.pak" type="data_package" lang="am" />
+    <output filename="rag_ingestion_strings_am_MASCULINE.pak" type="data_package" lang="am" />
+    <output filename="rag_ingestion_strings_am_NEUTER.pak" type="data_package" lang="am" />
+
+    <output filename="rag_ingestion_strings_ar.pak" type="data_package" lang="ar" />
+    <output filename="rag_ingestion_strings_ar_FEMININE.pak" type="data_package" lang="ar" />
+    <output filename="rag_ingestion_strings_ar_MASCULINE.pak" type="data_package" lang="ar" />
+    <output filename="rag_ingestion_strings_ar_NEUTER.pak" type="data_package" lang="ar" />
+
+    <output filename="rag_ingestion_strings_ar-XB.pak" type="data_package" lang="ar-XB" />
+    <output filename="rag_ingestion_strings_ar-XB_FEMININE.pak" type="data_package" lang="ar-XB" />
+    <output filename="rag_ingestion_strings_ar-XB_MASCULINE.pak" type="data_package" lang="ar-XB" />
+    <output filename="rag_ingestion_strings_ar-XB_NEUTER.pak" type="data_package" lang="ar-XB" />
+
+    <output filename="rag_ingestion_strings_as.pak" type="data_package" lang="as" />
+    <output filename="rag_ingestion_strings_as_FEMININE.pak" type="data_package" lang="as" />
+    <output filename="rag_ingestion_strings_as_MASCULINE.pak" type="data_package" lang="as" />
+    <output filename="rag_ingestion_strings_as_NEUTER.pak" type="data_package" lang="as" />
+
+    <output filename="rag_ingestion_strings_az.pak" type="data_package" lang="az" />
+    <output filename="rag_ingestion_strings_az_FEMININE.pak" type="data_package" lang="az" />
+    <output filename="rag_ingestion_strings_az_MASCULINE.pak" type="data_package" lang="az" />
+    <output filename="rag_ingestion_strings_az_NEUTER.pak" type="data_package" lang="az" />
+
+    <output filename="rag_ingestion_strings_be.pak" type="data_package" lang="be" />
+    <output filename="rag_ingestion_strings_be_FEMININE.pak" type="data_package" lang="be" />
+    <output filename="rag_ingestion_strings_be_MASCULINE.pak" type="data_package" lang="be" />
+    <output filename="rag_ingestion_strings_be_NEUTER.pak" type="data_package" lang="be" />
+
+    <output filename="rag_ingestion_strings_bg.pak" type="data_package" lang="bg" />
+    <output filename="rag_ingestion_strings_bg_FEMININE.pak" type="data_package" lang="bg" />
+    <output filename="rag_ingestion_strings_bg_MASCULINE.pak" type="data_package" lang="bg" />
+    <output filename="rag_ingestion_strings_bg_NEUTER.pak" type="data_package" lang="bg" />
+
+    <output filename="rag_ingestion_strings_bn.pak" type="data_package" lang="bn" />
+    <output filename="rag_ingestion_strings_bn_FEMININE.pak" type="data_package" lang="bn" />
+    <output filename="rag_ingestion_strings_bn_MASCULINE.pak" type="data_package" lang="bn" />
+    <output filename="rag_ingestion_strings_bn_NEUTER.pak" type="data_package" lang="bn" />
+
+    <output filename="rag_ingestion_strings_bs.pak" type="data_package" lang="bs" />
+    <output filename="rag_ingestion_strings_bs_FEMININE.pak" type="data_package" lang="bs" />
+    <output filename="rag_ingestion_strings_bs_MASCULINE.pak" type="data_package" lang="bs" />
+    <output filename="rag_ingestion_strings_bs_NEUTER.pak" type="data_package" lang="bs" />
+
+    <output filename="rag_ingestion_strings_ca.pak" type="data_package" lang="ca" />
+    <output filename="rag_ingestion_strings_ca_FEMININE.pak" type="data_package" lang="ca" />
+    <output filename="rag_ingestion_strings_ca_MASCULINE.pak" type="data_package" lang="ca" />
+    <output filename="rag_ingestion_strings_ca_NEUTER.pak" type="data_package" lang="ca" />
+
+    <output filename="rag_ingestion_strings_cs.pak" type="data_package" lang="cs" />
+    <output filename="rag_ingestion_strings_cs_FEMININE.pak" type="data_package" lang="cs" />
+    <output filename="rag_ingestion_strings_cs_MASCULINE.pak" type="data_package" lang="cs" />
+    <output filename="rag_ingestion_strings_cs_NEUTER.pak" type="data_package" lang="cs" />
+
+    <output filename="rag_ingestion_strings_da.pak" type="data_package" lang="da" />
+    <output filename="rag_ingestion_strings_da_FEMININE.pak" type="data_package" lang="da" />
+    <output filename="rag_ingestion_strings_da_MASCULINE.pak" type="data_package" lang="da" />
+    <output filename="rag_ingestion_strings_da_NEUTER.pak" type="data_package" lang="da" />
+
+    <output filename="rag_ingestion_strings_de.pak" type="data_package" lang="de" />
+    <output filename="rag_ingestion_strings_de_FEMININE.pak" type="data_package" lang="de" />
+    <output filename="rag_ingestion_strings_de_MASCULINE.pak" type="data_package" lang="de" />
+    <output filename="rag_ingestion_strings_de_NEUTER.pak" type="data_package" lang="de" />
+
+    <output filename="rag_ingestion_strings_el.pak" type="data_package" lang="el" />
+    <output filename="rag_ingestion_strings_el_FEMININE.pak" type="data_package" lang="el" />
+    <output filename="rag_ingestion_strings_el_MASCULINE.pak" type="data_package" lang="el" />
+    <output filename="rag_ingestion_strings_el_NEUTER.pak" type="data_package" lang="el" />
+
+    <output filename="rag_ingestion_strings_en-GB.pak" type="data_package" lang="en-GB" />
+    <output filename="rag_ingestion_strings_en-GB_FEMININE.pak" type="data_package" lang="en-GB" />
+    <output filename="rag_ingestion_strings_en-GB_MASCULINE.pak" type="data_package" lang="en-GB" />
+    <output filename="rag_ingestion_strings_en-GB_NEUTER.pak" type="data_package" lang="en-GB" />
+
+    <output filename="rag_ingestion_strings_en-US.pak" type="data_package" lang="en" />
+    <output filename="rag_ingestion_strings_en-US_FEMININE.pak" type="data_package" lang="en" />
+    <output filename="rag_ingestion_strings_en-US_MASCULINE.pak" type="data_package" lang="en" />
+    <output filename="rag_ingestion_strings_en-US_NEUTER.pak" type="data_package" lang="en" />
+
+    <output filename="rag_ingestion_strings_en-XA.pak" type="data_package" lang="en-XA" />
+    <output filename="rag_ingestion_strings_en-XA_FEMININE.pak" type="data_package" lang="en-XA" />
+    <output filename="rag_ingestion_strings_en-XA_MASCULINE.pak" type="data_package" lang="en-XA" />
+    <output filename="rag_ingestion_strings_en-XA_NEUTER.pak" type="data_package" lang="en-XA" />
+
+    <output filename="rag_ingestion_strings_es.pak" type="data_package" lang="es" />
+    <output filename="rag_ingestion_strings_es_FEMININE.pak" type="data_package" lang="es" />
+    <output filename="rag_ingestion_strings_es_MASCULINE.pak" type="data_package" lang="es" />
+    <output filename="rag_ingestion_strings_es_NEUTER.pak" type="data_package" lang="es" />
+
+    <output filename="rag_ingestion_strings_es-419.pak" type="data_package" lang="es-419" />
+    <output filename="rag_ingestion_strings_es-419_FEMININE.pak" type="data_package" lang="es-419" />
+    <output filename="rag_ingestion_strings_es-419_MASCULINE.pak" type="data_package" lang="es-419" />
+    <output filename="rag_ingestion_strings_es-419_NEUTER.pak" type="data_package" lang="es-419" />
+
+    <output filename="rag_ingestion_strings_et.pak" type="data_package" lang="et" />
+    <output filename="rag_ingestion_strings_et_FEMININE.pak" type="data_package" lang="et" />
+    <output filename="rag_ingestion_strings_et_MASCULINE.pak" type="data_package" lang="et" />
+    <output filename="rag_ingestion_strings_et_NEUTER.pak" type="data_package" lang="et" />
+
+    <output filename="rag_ingestion_strings_eu.pak" type="data_package" lang="eu" />
+    <output filename="rag_ingestion_strings_eu_FEMININE.pak" type="data_package" lang="eu" />
+    <output filename="rag_ingestion_strings_eu_MASCULINE.pak" type="data_package" lang="eu" />
+    <output filename="rag_ingestion_strings_eu_NEUTER.pak" type="data_package" lang="eu" />
+
+    <output filename="rag_ingestion_strings_fa.pak" type="data_package" lang="fa" />
+    <output filename="rag_ingestion_strings_fa_FEMININE.pak" type="data_package" lang="fa" />
+    <output filename="rag_ingestion_strings_fa_MASCULINE.pak" type="data_package" lang="fa" />
+    <output filename="rag_ingestion_strings_fa_NEUTER.pak" type="data_package" lang="fa" />
+
+    <output filename="rag_ingestion_strings_fi.pak" type="data_package" lang="fi" />
+    <output filename="rag_ingestion_strings_fi_FEMININE.pak" type="data_package" lang="fi" />
+    <output filename="rag_ingestion_strings_fi_MASCULINE.pak" type="data_package" lang="fi" />
+    <output filename="rag_ingestion_strings_fi_NEUTER.pak" type="data_package" lang="fi" />
+
+    <output filename="rag_ingestion_strings_fil.pak" type="data_package" lang="fil" />
+    <output filename="rag_ingestion_strings_fil_FEMININE.pak" type="data_package" lang="fil" />
+    <output filename="rag_ingestion_strings_fil_MASCULINE.pak" type="data_package" lang="fil" />
+    <output filename="rag_ingestion_strings_fil_NEUTER.pak" type="data_package" lang="fil" />
+
+    <output filename="rag_ingestion_strings_fr.pak" type="data_package" lang="fr" />
+    <output filename="rag_ingestion_strings_fr_FEMININE.pak" type="data_package" lang="fr" />
+    <output filename="rag_ingestion_strings_fr_MASCULINE.pak" type="data_package" lang="fr" />
+    <output filename="rag_ingestion_strings_fr_NEUTER.pak" type="data_package" lang="fr" />
+
+    <output filename="rag_ingestion_strings_fr-CA.pak" type="data_package" lang="fr-CA" />
+    <output filename="rag_ingestion_strings_fr-CA_FEMININE.pak" type="data_package" lang="fr-CA" />
+    <output filename="rag_ingestion_strings_fr-CA_MASCULINE.pak" type="data_package" lang="fr-CA" />
+    <output filename="rag_ingestion_strings_fr-CA_NEUTER.pak" type="data_package" lang="fr-CA" />
+
+    <output filename="rag_ingestion_strings_gl.pak" type="data_package" lang="gl" />
+    <output filename="rag_ingestion_strings_gl_FEMININE.pak" type="data_package" lang="gl" />
+    <output filename="rag_ingestion_strings_gl_MASCULINE.pak" type="data_package" lang="gl" />
+    <output filename="rag_ingestion_strings_gl_NEUTER.pak" type="data_package" lang="gl" />
+
+    <output filename="rag_ingestion_strings_gu.pak" type="data_package" lang="gu" />
+    <output filename="rag_ingestion_strings_gu_FEMININE.pak" type="data_package" lang="gu" />
+    <output filename="rag_ingestion_strings_gu_MASCULINE.pak" type="data_package" lang="gu" />
+    <output filename="rag_ingestion_strings_gu_NEUTER.pak" type="data_package" lang="gu" />
+
+    <output filename="rag_ingestion_strings_he.pak" type="data_package" lang="he" />
+    <output filename="rag_ingestion_strings_he_FEMININE.pak" type="data_package" lang="he" />
+    <output filename="rag_ingestion_strings_he_MASCULINE.pak" type="data_package" lang="he" />
+    <output filename="rag_ingestion_strings_he_NEUTER.pak" type="data_package" lang="he" />
+
+    <output filename="rag_ingestion_strings_hi.pak" type="data_package" lang="hi" />
+    <output filename="rag_ingestion_strings_hi_FEMININE.pak" type="data_package" lang="hi" />
+    <output filename="rag_ingestion_strings_hi_MASCULINE.pak" type="data_package" lang="hi" />
+    <output filename="rag_ingestion_strings_hi_NEUTER.pak" type="data_package" lang="hi" />
+
+    <output filename="rag_ingestion_strings_hr.pak" type="data_package" lang="hr" />
+    <output filename="rag_ingestion_strings_hr_FEMININE.pak" type="data_package" lang="hr" />
+    <output filename="rag_ingestion_strings_hr_MASCULINE.pak" type="data_package" lang="hr" />
+    <output filename="rag_ingestion_strings_hr_NEUTER.pak" type="data_package" lang="hr" />
+
+    <output filename="rag_ingestion_strings_hu.pak" type="data_package" lang="hu" />
+    <output filename="rag_ingestion_strings_hu_FEMININE.pak" type="data_package" lang="hu" />
+    <output filename="rag_ingestion_strings_hu_MASCULINE.pak" type="data_package" lang="hu" />
+    <output filename="rag_ingestion_strings_hu_NEUTER.pak" type="data_package" lang="hu" />
+
+    <output filename="rag_ingestion_strings_hy.pak" type="data_package" lang="hy" />
+    <output filename="rag_ingestion_strings_hy_FEMININE.pak" type="data_package" lang="hy" />
+    <output filename="rag_ingestion_strings_hy_MASCULINE.pak" type="data_package" lang="hy" />
+    <output filename="rag_ingestion_strings_hy_NEUTER.pak" type="data_package" lang="hy" />
+
+    <output filename="rag_ingestion_strings_id.pak" type="data_package" lang="id" />
+    <output filename="rag_ingestion_strings_id_FEMININE.pak" type="data_package" lang="id" />
+    <output filename="rag_ingestion_strings_id_MASCULINE.pak" type="data_package" lang="id" />
+    <output filename="rag_ingestion_strings_id_NEUTER.pak" type="data_package" lang="id" />
+
+    <output filename="rag_ingestion_strings_is.pak" type="data_package" lang="is" />
+    <output filename="rag_ingestion_strings_is_FEMININE.pak" type="data_package" lang="is" />
+    <output filename="rag_ingestion_strings_is_MASCULINE.pak" type="data_package" lang="is" />
+    <output filename="rag_ingestion_strings_is_NEUTER.pak" type="data_package" lang="is" />
+
+    <output filename="rag_ingestion_strings_it.pak" type="data_package" lang="it" />
+    <output filename="rag_ingestion_strings_it_FEMININE.pak" type="data_package" lang="it" />
+    <output filename="rag_ingestion_strings_it_MASCULINE.pak" type="data_package" lang="it" />
+    <output filename="rag_ingestion_strings_it_NEUTER.pak" type="data_package" lang="it" />
+
+    <output filename="rag_ingestion_strings_ja.pak" type="data_package" lang="ja" />
+    <output filename="rag_ingestion_strings_ja_FEMININE.pak" type="data_package" lang="ja" />
+    <output filename="rag_ingestion_strings_ja_MASCULINE.pak" type="data_package" lang="ja" />
+    <output filename="rag_ingestion_strings_ja_NEUTER.pak" type="data_package" lang="ja" />
+
+    <output filename="rag_ingestion_strings_ka.pak" type="data_package" lang="ka" />
+    <output filename="rag_ingestion_strings_ka_FEMININE.pak" type="data_package" lang="ka" />
+    <output filename="rag_ingestion_strings_ka_MASCULINE.pak" type="data_package" lang="ka" />
+    <output filename="rag_ingestion_strings_ka_NEUTER.pak" type="data_package" lang="ka" />
+
+    <output filename="rag_ingestion_strings_kk.pak" type="data_package" lang="kk" />
+    <output filename="rag_ingestion_strings_kk_FEMININE.pak" type="data_package" lang="kk" />
+    <output filename="rag_ingestion_strings_kk_MASCULINE.pak" type="data_package" lang="kk" />
+    <output filename="rag_ingestion_strings_kk_NEUTER.pak" type="data_package" lang="kk" />
+
+    <output filename="rag_ingestion_strings_km.pak" type="data_package" lang="km" />
+    <output filename="rag_ingestion_strings_km_FEMININE.pak" type="data_package" lang="km" />
+    <output filename="rag_ingestion_strings_km_MASCULINE.pak" type="data_package" lang="km" />
+    <output filename="rag_ingestion_strings_km_NEUTER.pak" type="data_package" lang="km" />
+
+    <output filename="rag_ingestion_strings_kn.pak" type="data_package" lang="kn" />
+    <output filename="rag_ingestion_strings_kn_FEMININE.pak" type="data_package" lang="kn" />
+    <output filename="rag_ingestion_strings_kn_MASCULINE.pak" type="data_package" lang="kn" />
+    <output filename="rag_ingestion_strings_kn_NEUTER.pak" type="data_package" lang="kn" />
+
+    <output filename="rag_ingestion_strings_ko.pak" type="data_package" lang="ko" />
+    <output filename="rag_ingestion_strings_ko_FEMININE.pak" type="data_package" lang="ko" />
+    <output filename="rag_ingestion_strings_ko_MASCULINE.pak" type="data_package" lang="ko" />
+    <output filename="rag_ingestion_strings_ko_NEUTER.pak" type="data_package" lang="ko" />
+
+    <output filename="rag_ingestion_strings_ky.pak" type="data_package" lang="ky" />
+    <output filename="rag_ingestion_strings_ky_FEMININE.pak" type="data_package" lang="ky" />
+    <output filename="rag_ingestion_strings_ky_MASCULINE.pak" type="data_package" lang="ky" />
+    <output filename="rag_ingestion_strings_ky_NEUTER.pak" type="data_package" lang="ky" />
+
+    <output filename="rag_ingestion_strings_lo.pak" type="data_package" lang="lo" />
+    <output filename="rag_ingestion_strings_lo_FEMININE.pak" type="data_package" lang="lo" />
+    <output filename="rag_ingestion_strings_lo_MASCULINE.pak" type="data_package" lang="lo" />
+    <output filename="rag_ingestion_strings_lo_NEUTER.pak" type="data_package" lang="lo" />
+
+    <output filename="rag_ingestion_strings_lt.pak" type="data_package" lang="lt" />
+    <output filename="rag_ingestion_strings_lt_FEMININE.pak" type="data_package" lang="lt" />
+    <output filename="rag_ingestion_strings_lt_MASCULINE.pak" type="data_package" lang="lt" />
+    <output filename="rag_ingestion_strings_lt_NEUTER.pak" type="data_package" lang="lt" />
+
+    <output filename="rag_ingestion_strings_lv.pak" type="data_package" lang="lv" />
+    <output filename="rag_ingestion_strings_lv_FEMININE.pak" type="data_package" lang="lv" />
+    <output filename="rag_ingestion_strings_lv_MASCULINE.pak" type="data_package" lang="lv" />
+    <output filename="rag_ingestion_strings_lv_NEUTER.pak" type="data_package" lang="lv" />
+
+    <output filename="rag_ingestion_strings_mk.pak" type="data_package" lang="mk" />
+    <output filename="rag_ingestion_strings_mk_FEMININE.pak" type="data_package" lang="mk" />
+    <output filename="rag_ingestion_strings_mk_MASCULINE.pak" type="data_package" lang="mk" />
+    <output filename="rag_ingestion_strings_mk_NEUTER.pak" type="data_package" lang="mk" />
+
+    <output filename="rag_ingestion_strings_ml.pak" type="data_package" lang="ml" />
+    <output filename="rag_ingestion_strings_ml_FEMININE.pak" type="data_package" lang="ml" />
+    <output filename="rag_ingestion_strings_ml_MASCULINE.pak" type="data_package" lang="ml" />
+    <output filename="rag_ingestion_strings_ml_NEUTER.pak" type="data_package" lang="ml" />
+
+    <output filename="rag_ingestion_strings_mn.pak" type="data_package" lang="mn" />
+    <output filename="rag_ingestion_strings_mn_FEMININE.pak" type="data_package" lang="mn" />
+    <output filename="rag_ingestion_strings_mn_MASCULINE.pak" type="data_package" lang="mn" />
+    <output filename="rag_ingestion_strings_mn_NEUTER.pak" type="data_package" lang="mn" />
+
+    <output filename="rag_ingestion_strings_mr.pak" type="data_package" lang="mr" />
+    <output filename="rag_ingestion_strings_mr_FEMININE.pak" type="data_package" lang="mr" />
+    <output filename="rag_ingestion_strings_mr_MASCULINE.pak" type="data_package" lang="mr" />
+    <output filename="rag_ingestion_strings_mr_NEUTER.pak" type="data_package" lang="mr" />
+
+    <output filename="rag_ingestion_strings_ms.pak" type="data_package" lang="ms" />
+    <output filename="rag_ingestion_strings_ms_FEMININE.pak" type="data_package" lang="ms" />
+    <output filename="rag_ingestion_strings_ms_MASCULINE.pak" type="data_package" lang="ms" />
+    <output filename="rag_ingestion_strings_ms_NEUTER.pak" type="data_package" lang="ms" />
+
+    <output filename="rag_ingestion_strings_my.pak" type="data_package" lang="my" />
+    <output filename="rag_ingestion_strings_my_FEMININE.pak" type="data_package" lang="my" />
+    <output filename="rag_ingestion_strings_my_MASCULINE.pak" type="data_package" lang="my" />
+    <output filename="rag_ingestion_strings_my_NEUTER.pak" type="data_package" lang="my" />
+
+    <output filename="rag_ingestion_strings_nb.pak" type="data_package" lang="no" />
+    <output filename="rag_ingestion_strings_nb_FEMININE.pak" type="data_package" lang="no" />
+    <output filename="rag_ingestion_strings_nb_MASCULINE.pak" type="data_package" lang="no" />
+    <output filename="rag_ingestion_strings_nb_NEUTER.pak" type="data_package" lang="no" />
+
+    <output filename="rag_ingestion_strings_ne.pak" type="data_package" lang="ne" />
+    <output filename="rag_ingestion_strings_ne_FEMININE.pak" type="data_package" lang="ne" />
+    <output filename="rag_ingestion_strings_ne_MASCULINE.pak" type="data_package" lang="ne" />
+    <output filename="rag_ingestion_strings_ne_NEUTER.pak" type="data_package" lang="ne" />
+
+    <output filename="rag_ingestion_strings_nl.pak" type="data_package" lang="nl" />
+    <output filename="rag_ingestion_strings_nl_FEMININE.pak" type="data_package" lang="nl" />
+    <output filename="rag_ingestion_strings_nl_MASCULINE.pak" type="data_package" lang="nl" />
+    <output filename="rag_ingestion_strings_nl_NEUTER.pak" type="data_package" lang="nl" />
+
+    <output filename="rag_ingestion_strings_or.pak" type="data_package" lang="or" />
+    <output filename="rag_ingestion_strings_or_FEMININE.pak" type="data_package" lang="or" />
+    <output filename="rag_ingestion_strings_or_MASCULINE.pak" type="data_package" lang="or" />
+    <output filename="rag_ingestion_strings_or_NEUTER.pak" type="data_package" lang="or" />
+
+    <output filename="rag_ingestion_strings_pa.pak" type="data_package" lang="pa" />
+    <output filename="rag_ingestion_strings_pa_FEMININE.pak" type="data_package" lang="pa" />
+    <output filename="rag_ingestion_strings_pa_MASCULINE.pak" type="data_package" lang="pa" />
+    <output filename="rag_ingestion_strings_pa_NEUTER.pak" type="data_package" lang="pa" />
+
+    <output filename="rag_ingestion_strings_pl.pak" type="data_package" lang="pl" />
+    <output filename="rag_ingestion_strings_pl_FEMININE.pak" type="data_package" lang="pl" />
+    <output filename="rag_ingestion_strings_pl_MASCULINE.pak" type="data_package" lang="pl" />
+    <output filename="rag_ingestion_strings_pl_NEUTER.pak" type="data_package" lang="pl" />
+
+    <output filename="rag_ingestion_strings_pt-BR.pak" type="data_package" lang="pt-BR" />
+    <output filename="rag_ingestion_strings_pt-BR_FEMININE.pak" type="data_package" lang="pt-BR" />
+    <output filename="rag_ingestion_strings_pt-BR_MASCULINE.pak" type="data_package" lang="pt-BR" />
+    <output filename="rag_ingestion_strings_pt-BR_NEUTER.pak" type="data_package" lang="pt-BR" />
+
+    <output filename="rag_ingestion_strings_pt-PT.pak" type="data_package" lang="pt-PT" />
+    <output filename="rag_ingestion_strings_pt-PT_FEMININE.pak" type="data_package" lang="pt-PT" />
+    <output filename="rag_ingestion_strings_pt-PT_MASCULINE.pak" type="data_package" lang="pt-PT" />
+    <output filename="rag_ingestion_strings_pt-PT_NEUTER.pak" type="data_package" lang="pt-PT" />
+
+    <output filename="rag_ingestion_strings_ro.pak" type="data_package" lang="ro" />
+    <output filename="rag_ingestion_strings_ro_FEMININE.pak" type="data_package" lang="ro" />
+    <output filename="rag_ingestion_strings_ro_MASCULINE.pak" type="data_package" lang="ro" />
+    <output filename="rag_ingestion_strings_ro_NEUTER.pak" type="data_package" lang="ro" />
+
+    <output filename="rag_ingestion_strings_ru.pak" type="data_package" lang="ru" />
+    <output filename="rag_ingestion_strings_ru_FEMININE.pak" type="data_package" lang="ru" />
+    <output filename="rag_ingestion_strings_ru_MASCULINE.pak" type="data_package" lang="ru" />
+    <output filename="rag_ingestion_strings_ru_NEUTER.pak" type="data_package" lang="ru" />
+
+    <output filename="rag_ingestion_strings_si.pak" type="data_package" lang="si" />
+    <output filename="rag_ingestion_strings_si_FEMININE.pak" type="data_package" lang="si" />
+    <output filename="rag_ingestion_strings_si_MASCULINE.pak" type="data_package" lang="si" />
+    <output filename="rag_ingestion_strings_si_NEUTER.pak" type="data_package" lang="si" />
+
+    <output filename="rag_ingestion_strings_sk.pak" type="data_package" lang="sk" />
+    <output filename="rag_ingestion_strings_sk_FEMININE.pak" type="data_package" lang="sk" />
+    <output filename="rag_ingestion_strings_sk_MASCULINE.pak" type="data_package" lang="sk" />
+    <output filename="rag_ingestion_strings_sk_NEUTER.pak" type="data_package" lang="sk" />
+
+    <output filename="rag_ingestion_strings_sl.pak" type="data_package" lang="sl" />
+    <output filename="rag_ingestion_strings_sl_FEMININE.pak" type="data_package" lang="sl" />
+    <output filename="rag_ingestion_strings_sl_MASCULINE.pak" type="data_package" lang="sl" />
+    <output filename="rag_ingestion_strings_sl_NEUTER.pak" type="data_package" lang="sl" />
+
+    <output filename="rag_ingestion_strings_sq.pak" type="data_package" lang="sq" />
+    <output filename="rag_ingestion_strings_sq_FEMININE.pak" type="data_package" lang="sq" />
+    <output filename="rag_ingestion_strings_sq_MASCULINE.pak" type="data_package" lang="sq" />
+    <output filename="rag_ingestion_strings_sq_NEUTER.pak" type="data_package" lang="sq" />
+
+    <output filename="rag_ingestion_strings_sr.pak" type="data_package" lang="sr" />
+    <output filename="rag_ingestion_strings_sr_FEMININE.pak" type="data_package" lang="sr" />
+    <output filename="rag_ingestion_strings_sr_MASCULINE.pak" type="data_package" lang="sr" />
+    <output filename="rag_ingestion_strings_sr_NEUTER.pak" type="data_package" lang="sr" />
+
+    <output filename="rag_ingestion_strings_sr-Latn.pak" type="data_package" lang="sr-Latn" />
+    <output filename="rag_ingestion_strings_sr-Latn_FEMININE.pak" type="data_package" lang="sr-Latn" />
+    <output filename="rag_ingestion_strings_sr-Latn_MASCULINE.pak" type="data_package" lang="sr-Latn" />
+    <output filename="rag_ingestion_strings_sr-Latn_NEUTER.pak" type="data_package" lang="sr-Latn" />
+
+    <output filename="rag_ingestion_strings_sv.pak" type="data_package" lang="sv" />
+    <output filename="rag_ingestion_strings_sv_FEMININE.pak" type="data_package" lang="sv" />
+    <output filename="rag_ingestion_strings_sv_MASCULINE.pak" type="data_package" lang="sv" />
+    <output filename="rag_ingestion_strings_sv_NEUTER.pak" type="data_package" lang="sv" />
+
+    <output filename="rag_ingestion_strings_sw.pak" type="data_package" lang="sw" />
+    <output filename="rag_ingestion_strings_sw_FEMININE.pak" type="data_package" lang="sw" />
+    <output filename="rag_ingestion_strings_sw_MASCULINE.pak" type="data_package" lang="sw" />
+    <output filename="rag_ingestion_strings_sw_NEUTER.pak" type="data_package" lang="sw" />
+
+    <output filename="rag_ingestion_strings_ta.pak" type="data_package" lang="ta" />
+    <output filename="rag_ingestion_strings_ta_FEMININE.pak" type="data_package" lang="ta" />
+    <output filename="rag_ingestion_strings_ta_MASCULINE.pak" type="data_package" lang="ta" />
+    <output filename="rag_ingestion_strings_ta_NEUTER.pak" type="data_package" lang="ta" />
+
+    <output filename="rag_ingestion_strings_te.pak" type="data_package" lang="te" />
+    <output filename="rag_ingestion_strings_te_FEMININE.pak" type="data_package" lang="te" />
+    <output filename="rag_ingestion_strings_te_MASCULINE.pak" type="data_package" lang="te" />
+    <output filename="rag_ingestion_strings_te_NEUTER.pak" type="data_package" lang="te" />
+
+    <output filename="rag_ingestion_strings_th.pak" type="data_package" lang="th" />
+    <output filename="rag_ingestion_strings_th_FEMININE.pak" type="data_package" lang="th" />
+    <output filename="rag_ingestion_strings_th_MASCULINE.pak" type="data_package" lang="th" />
+    <output filename="rag_ingestion_strings_th_NEUTER.pak" type="data_package" lang="th" />
+
+    <output filename="rag_ingestion_strings_tr.pak" type="data_package" lang="tr" />
+    <output filename="rag_ingestion_strings_tr_FEMININE.pak" type="data_package" lang="tr" />
+    <output filename="rag_ingestion_strings_tr_MASCULINE.pak" type="data_package" lang="tr" />
+    <output filename="rag_ingestion_strings_tr_NEUTER.pak" type="data_package" lang="tr" />
+
+    <output filename="rag_ingestion_strings_uk.pak" type="data_package" lang="uk" />
+    <output filename="rag_ingestion_strings_uk_FEMININE.pak" type="data_package" lang="uk" />
+    <output filename="rag_ingestion_strings_uk_MASCULINE.pak" type="data_package" lang="uk" />
+    <output filename="rag_ingestion_strings_uk_NEUTER.pak" type="data_package" lang="uk" />
+
+    <output filename="rag_ingestion_strings_ur.pak" type="data_package" lang="ur" />
+    <output filename="rag_ingestion_strings_ur_FEMININE.pak" type="data_package" lang="ur" />
+    <output filename="rag_ingestion_strings_ur_MASCULINE.pak" type="data_package" lang="ur" />
+    <output filename="rag_ingestion_strings_ur_NEUTER.pak" type="data_package" lang="ur" />
+
+    <output filename="rag_ingestion_strings_uz.pak" type="data_package" lang="uz" />
+    <output filename="rag_ingestion_strings_uz_FEMININE.pak" type="data_package" lang="uz" />
+    <output filename="rag_ingestion_strings_uz_MASCULINE.pak" type="data_package" lang="uz" />
+    <output filename="rag_ingestion_strings_uz_NEUTER.pak" type="data_package" lang="uz" />
+
+    <output filename="rag_ingestion_strings_vi.pak" type="data_package" lang="vi" />
+    <output filename="rag_ingestion_strings_vi_FEMININE.pak" type="data_package" lang="vi" />
+    <output filename="rag_ingestion_strings_vi_MASCULINE.pak" type="data_package" lang="vi" />
+    <output filename="rag_ingestion_strings_vi_NEUTER.pak" type="data_package" lang="vi" />
+
+    <output filename="rag_ingestion_strings_zh-CN.pak" type="data_package" lang="zh-CN" />
+    <output filename="rag_ingestion_strings_zh-CN_FEMININE.pak" type="data_package" lang="zh-CN" />
+    <output filename="rag_ingestion_strings_zh-CN_MASCULINE.pak" type="data_package" lang="zh-CN" />
+    <output filename="rag_ingestion_strings_zh-CN_NEUTER.pak" type="data_package" lang="zh-CN" />
+
+    <output filename="rag_ingestion_strings_zh-HK.pak" type="data_package" lang="zh-HK" />
+    <output filename="rag_ingestion_strings_zh-HK_FEMININE.pak" type="data_package" lang="zh-HK" />
+    <output filename="rag_ingestion_strings_zh-HK_MASCULINE.pak" type="data_package" lang="zh-HK" />
+    <output filename="rag_ingestion_strings_zh-HK_NEUTER.pak" type="data_package" lang="zh-HK" />
+
+    <output filename="rag_ingestion_strings_zh-TW.pak" type="data_package" lang="zh-TW" />
+    <output filename="rag_ingestion_strings_zh-TW_FEMININE.pak" type="data_package" lang="zh-TW" />
+    <output filename="rag_ingestion_strings_zh-TW_MASCULINE.pak" type="data_package" lang="zh-TW" />
+    <output filename="rag_ingestion_strings_zh-TW_NEUTER.pak" type="data_package" lang="zh-TW" />
+
+    <output filename="rag_ingestion_strings_zu.pak" type="data_package" lang="zu" />
+    <output filename="rag_ingestion_strings_zu_FEMININE.pak" type="data_package" lang="zu" />
+    <output filename="rag_ingestion_strings_zu_MASCULINE.pak" type="data_package" lang="zu" />
+    <output filename="rag_ingestion_strings_zu_NEUTER.pak" type="data_package" lang="zu" />
+  </outputs>
+  
+  <translations>
+  </translations>
+
+  <release seq="1">
+    <messages fallback_to_english="true">
+      <message name="IDS_RAG_INGESTION_BUBBLE_TITLE" desc="Title of the RAG Ingestion permission bubble">
+        Enable personal answers for <ph name="SITE_NAME">$1<ex>Wikipedia</ex></ph>?
+      </message>
+      <message name="IDS_RAG_INGESTION_BUBBLE_TEXT" desc="Description in the permission bubble">
+        Jatter can securely learn about websites you log into in order to provide personal answers and assistance.
+      </message>
+      <message name="IDS_RAG_INGESTION_ALLOW_BUTTON" desc="Allow button text">
+        Enable
+      </message>
+      <message name="IDS_RAG_INGESTION_BLOCK_BUTTON" desc="Block button text">
+        Never
+      </message>
+      <message name="IDS_RAG_INGESTION_TRANSITION_BUBBLE_ASK_ABOUT_TEXT" desc="Input field text">
+        Ask about <ph name="SITE_NAME">$1<ex>Wikipedia</ex></ph>
+      </message>
+      <message name="IDS_RAG_INGESTION_TRANSITION_BUBBLE_STATUS_TEXT" desc="Text of ingestion current status">
+        Learning
+      </message>
+      <message name="IDS_RAG_INGESTION_TRANSITION_BUBBLE_DOMAIN_ENABLED_FOR_TEXT" desc="Domain for which rag ingestion was enabled for">
+        Personal answers are enabled for <ph name="SITE_NAME">$1<ex>Wikipedia</ex></ph>
+      </message>
+      <message name="IDS_RAG_INGESTION_TRANSITION_BUBBLE_DOMAIN_DISABLED_FOR_TEXT" desc="Used when RAG ingestion is disabled">
+        Personal answers are disabled for <ph name="SITE_NAME">$1<ex>Wikipedia</ex></ph>
+      </message>
+    </messages>
+  </release>
+</grit>

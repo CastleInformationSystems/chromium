@@ -1,0 +1,41 @@
+import("//mojo/public/tools/bindings/mojom.gni")
+import("//build/config/jatter_args.gni")
+
+mojom("jatter_mojom") {
+  sources = [ "jatter.mojom" ]
+}
+
+config("jatter_env_config") {
+  if (jatter_build_environment == "development") {
+    defines = [ "JATTER_DEVELOPMENT_MODE" ]
+  } else if (jatter_build_environment == "staging") {
+    defines = [ "JATTER_STAGING_MODE=1" ]
+  } else { # Production
+    defines = [ "JATTER_PRODUCTION_MODE" ]
+  }
+}
+
+source_set("jatter") {
+  sources = [
+    "jatter_authorization_impl.cc",
+    "jatter_authorization_impl.h",
+    "jatter_environment.h",
+    "jatter_token_storage.cc",
+    "jatter_token_storage.h",
+    "jatter_firebase_client.cc",
+    "jatter_firebase_client.h",
+  ]
+
+  deps = [
+    ":jatter_mojom",
+    "//base",
+    "//content/public/browser",
+    "//mojo/public/cpp/bindings",      
+  ]
+
+  public_deps = [
+    ":jatter_mojom",
+  ]
+
+  public_configs = [ ":jatter_env_config" ]
+}

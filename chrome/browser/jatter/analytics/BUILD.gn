@@ -1,0 +1,43 @@
+source_set("analytics") {
+  sources = [
+    "jatter_analytics_service.cc",
+    "jatter_analytics_service.h",
+    "jatter_analytics_service_factory.cc",
+    "jatter_analytics_service_factory.h",
+    "jatter_analytics_tab_helper.h",
+    "jatter_analytics_tab_helper.cc",
+  ]
+
+  deps = [
+    "//base",
+    "//chrome/browser/jatter",
+    "//components/keyed_service/content",
+    "//components/prefs",
+    "//content/public/browser",
+    "//net",
+    "//services/network/public/cpp",
+    
+    # Note: We intentionally do NOT depend on "//chrome/browser" here.
+    # Depending on the parent creates a circular dependency in GN, 
+    # since the parent is about to depend on us!
+  ]
+
+  # Inject the correct platform implementation
+  if (is_android) {
+    sources += [ 
+      "jatter_analytics_service_android.cc",
+      "android/jatter_analytics_service_bridge.cc",
+    ]
+    deps += [
+      "android:jni_headers",
+      "//chrome/browser/profiles:profile", 
+    ]
+  } else {
+    sources += [ "jatter_analytics_service_desktop.cc" ]
+  }
+
+  # The Desktop Session Duration Tracker is a sibling dependency needed only on Desktop
+  if (!is_android) {
+    deps += [ "//chrome/browser/metrics/desktop_session_duration" ]
+  }
+}
