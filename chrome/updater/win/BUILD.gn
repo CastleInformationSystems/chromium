@@ -77,6 +77,39 @@ copy("signing") {
   outputs = [ "$root_out_dir/UpdaterSigning/{{source_file_part}}" ]
 }
 
+action("sign_updater_binaries") {
+  script = "//chrome/installer/mini_installer/codesign/sign.py"
+  
+  # List all inner executable binaries (DLLs and EXEs) for the updater
+  updater_binaries = [
+    "updater.exe",
+    "msi_custom_action.dll",
+    "tag.exe",
+  ]
+
+  inputs = []
+  foreach(binary, updater_binaries) {
+    inputs += [ "$root_out_dir/$binary" ]
+  }
+  
+  # The output stamp to satisfy Ninja
+  outputs = [ "$target_gen_dir/updater_signed_binaries.stamp" ]
+
+  args = [
+    rebase_path(root_out_dir, root_build_dir),
+    rebase_path(outputs[0], root_build_dir),
+  ]
+  # Append the list of binaries to the arguments naturally
+  args += updater_binaries
+
+  # Depend on the targets that compile these specific binaries
+  deps = [
+    ":updater",
+    "//chrome/updater/tools:tag",
+    "//chrome/updater/win/installer:msi_custom_action",
+  ]
+}
+
 artifact_zip("updater_zip") {
   output = "$root_build_dir/updater.zip"
   inputs =
@@ -91,6 +124,7 @@ artifact_zip("updater_zip") {
       ] + get_target_outputs(":signing")
   deps = [
     ":signing",
+    ":sign_updater_binaries",
     "//chrome/updater:updater_license",
     "//chrome/updater/app/server/win:updater_idl",
     "//chrome/updater/app/server/win:updater_internal_idl",

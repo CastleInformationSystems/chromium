@@ -3,21 +3,29 @@
 // found in the LICENSE file.
 
 #include "chrome/installer/util/google_update_constants.h"
+#include "chrome/installer/util/jatter_buildflags.h"
+
+#if BUILDFLAG(IS_JATTER_PROD)
+#define JATTER_APP_GUID L"site.beacon.jatter"
+#else
+#define JATTER_APP_GUID L"site.beacon.staging"
+#endif
+
 
 namespace google_update {
 
-const wchar_t kChromeUpgradeCode[] = L"{8A69D345-D564-463C-AFF1-A69D9E530F96}";
+const wchar_t kChromeUpgradeCode[] = JATTER_APP_GUID;
 
 const wchar_t kGoogleUpdateUpgradeCode[] =
-    L"{430FD4D0-B729-4F61-AA34-91526481799D}";
+    L"{6e8ffa8f-e7e2-4000-9884-589283c27015}";
 
-const wchar_t kGoogleUpdateSetupExe[] = L"GoogleUpdateSetup.exe";
+const wchar_t kGoogleUpdateSetupExe[] = L"JatterUpdateSetup.exe";
 
-const wchar_t kRegPathClients[] = L"Software\\Google\\Update\\Clients";
-const wchar_t kRegPathClientState[] = L"Software\\Google\\Update\\ClientState";
+const wchar_t kRegPathClients[] = L"Software\\Jatter\\Update\\Clients";
+const wchar_t kRegPathClientState[] = L"Software\\Jatter\\Update\\ClientState";
 const wchar_t kRegPathClientStateMedium[] =
-    L"Software\\Google\\Update\\ClientStateMedium";
-const wchar_t kRegPathGoogleUpdate[] = L"Software\\Google\\Update";
+    L"Software\\Jatter\\Update\\ClientStateMedium";
+const wchar_t kRegPathGoogleUpdate[] = L"Software\\Jatter\\Update";
 
 const wchar_t kRegCommandsKey[] = L"Commands";
 

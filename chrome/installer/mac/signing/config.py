@@ -92,7 +92,7 @@ class CodeSignConfig(object):
     def enable_updater(self):
         """Returns True if the build should use updater-related resources.
         """
-        raise ConfigError('enable_updater')
+        return True
 
     @property
     def identity(self):
@@ -186,7 +186,7 @@ class CodeSignConfig(object):
         """Returns whether the final code signed binary should be assessed by
         Gatekeeper after signing.
         """
-        return True
+        return False
 
     @property
     def inject_get_task_allow_entitlement(self):

@@ -5,10 +5,20 @@
 import("//build/buildflag_header.gni")
 import("//build/config/chrome_build.gni")
 import("//testing/test.gni")
+import("//build/config/jatter_args.gni")
+
+_is_jatter_prod = jatter_build_environment == "prod"
+
+buildflag_header("jatter_buildflags") {
+  header = "jatter_buildflags.h"
+  flags = [
+    "IS_JATTER_PROD=$_is_jatter_prod",
+  ]
+}
 
 buildflag_header("buildflags") {
   header = "buildflags.h"
-  if (is_chrome_branded && is_win) {
+  if (is_win) {
     flags = [ "USE_GOOGLE_UPDATE_INTEGRATION=true" ]
   } else {
     flags = [ "USE_GOOGLE_UPDATE_INTEGRATION=false" ]
@@ -26,6 +36,7 @@ if (is_win) {
 
     public_deps = [
       ":buildflags",
+      ":jatter_buildflags",
       "//build:branding_buildflags",
       "//chrome/chrome_elf:nt_registry",
     ]

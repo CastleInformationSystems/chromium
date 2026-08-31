@@ -55,6 +55,8 @@ class Invoker(invoker.Base):
             'notarytool',
             'submit',
             path,
+            '--keychain-profile',
+            'jatter-notary',
             '--no-wait',
             '--output-format',
             'plist',
@@ -96,6 +98,8 @@ class Invoker(invoker.Base):
             'notarytool',
             'info',
             uuid,
+            '--keychain-profile',
+            'jatter-notary',
             '--output-format',
             'plist',
         ] + self.notary_args

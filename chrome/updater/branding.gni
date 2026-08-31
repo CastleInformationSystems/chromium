@@ -3,108 +3,123 @@
 # found in the LICENSE file.
 
 import("//build/config/chrome_build.gni")
+import("//build/config/jatter_args.gni")
+
+if (jatter_build_environment == "staging") {
+  jatter_server_url = "https://us-central1-beacon-staging-df5f2.cloudfunctions.net"
+  jatter_app_id = "site.beacon.staging"
+  name = "JatterStaging"
+  updater_name = "JatterUpdaterStaging"
+  updater_display_name = "Jatter Updater Staging"
+} else {
+  jatter_server_url = "https://us-central1-beacon-dd0a1.cloudfunctions.net"
+  jatter_app_id = "site.beacon.jatter"
+  name = "Jatter"
+  updater_name = "JatterUpdater"
+  updater_display_name = "Jatter Updater"
+}
 
 if (is_chrome_branded) {
   import("//chrome/updater/internal/branding_google.gni")
 } else {
-  browser_name = "Chromium"
-  browser_product_name = "Chromium"
-  crash_product_name = "ChromiumUpdater"
-  crash_upload_url = "https://clients2.google.com/cr/staging_report"
-  help_center_url = "http://support.google.com/installer/"
-  app_logo_url = "https://dl.google.com/update2/installers/icons/"
-  keystone_app_name = "ChromiumSoftwareUpdate"
-  keystone_bundle_identifier = "org.chromium.Keystone"
-  mac_browser_bundle_identifier = "org.chromium.Chromium"
-  mac_updater_bundle_identifier = "org.chromium.ChromiumUpdater"
-  privileged_helper_bundle_name = "ChromiumUpdaterPrivilegedHelper"
-  privileged_helper_name = "org.chromium.Chromium.UpdaterPrivilegedHelper"
+  browser_name = name
+  browser_product_name = name
+  crash_product_name = updater_name
+  crash_upload_url = ""
+  help_center_url = "https://jatter.ai/help"
+  app_logo_url = "https://chat.jatter.ai/favicon.png"
+  keystone_app_name = "${name}SoftwareUpdate"
+  keystone_bundle_identifier = "site.beacon.Keystone"
+  mac_browser_bundle_identifier = jatter_app_id
+  mac_updater_bundle_identifier = "site.beacon.${updater_name}"
+  privileged_helper_bundle_name = "${updater_name}PrivilegedHelper"
+  privileged_helper_name = "${jatter_app_id}.UpdaterPrivilegedHelper"
   updater_app_icon_path = "//chrome/app/theme/chromium/mac/app.icns"
-  updater_company_full_name = "Chromium Authors"
-  updater_company_short_name = "Chromium"
-  updater_company_short_name_lowercase = "chromium"
-  updater_company_short_name_uppercase = "CHROMIUM"
+  updater_company_full_name = "Jatter"
+  updater_company_short_name = "Jatter"
+  updater_company_short_name_lowercase = "jatter"
+  updater_company_short_name_uppercase = "JATTER"
   updater_copyright =
-      "Copyright 2020 The Chromium Authors. All rights reserved."
-  updater_product_full_name = "ChromiumUpdater"
-  updater_product_full_name_dashed_lowercase = "chromium-updater"
-  updater_product_full_display_name = "Chromium Updater"
-  updater_metainstaller_name = "Chromium Installer"
-  mac_team_identifier = "PLACEHOLDER"
+      "Copyright 2026 Jatter. All rights reserved."
+  updater_product_full_name = updater_name
+  updater_product_full_name_dashed_lowercase = "jatter-updater"
+  updater_product_full_display_name = updater_display_name
+  updater_metainstaller_name = "${name} Installer"
+  mac_team_identifier = "LY2B8BGZJC"
   updater_appid = "{6e8ffa8f-e7e2-4000-9884-589283c27015}"
-  browser_appid = "{5d8d08af-2df9-4da2-86c1-eac353a0ca32}"
+  browser_appid = jatter_app_id
   qualification_appid = "{43f3a046-04b3-4443-a770-d67dae90e440}"
   platform_experience_helper_appid = "{b84ca560-bb0c-4ec9-a288-df67e15354c7}"
   crx_pkhash = ""
   legacy_service_name_prefix = "cupdate"
-  prefs_access_mutex = "{A6B9ECD5-772A-4D3F-BFEB-CF9340534A3E}"
-  setup_mutex_prefix = "{25569F82-3B67-4185-8127-88E4CF803680}"
+  prefs_access_mutex = "{5FF2760D-3A09-4B61-9706-1A61C574DDB5}"
+  setup_mutex_prefix = "{4E079AD3-74A9-4861-8796-734B944F0DE8}"
   grdfile_name = "chromium_strings"
   extra_args_is_chrome_branded = "IS_CHROME_BRANDED=False"
-  update_check_url = "https://omaha-qa.sandbox.google.com/service/update2/json"
-  updater_event_logging_url = "https://play.googleapis.com/staging/log/"
+  update_check_url = "${jatter_server_url}/service/update2"
+  updater_event_logging_url = "${jatter_server_url}/service/update2"
 
-  UpdaterLegacyLibGUID = "4C61BB05-94D1-4BAB-B69C-C34195AF92CA"
-  GoogleUpdate3WebUserClassGUID = "75828ED1-7BE8-45D0-8950-AA85CBF74510"
-  GoogleUpdate3WebSystemClassGUID = "283209B7-C761-41CA-BE8D-B5321CD78FD6"
-  GoogleUpdate3WebServiceClassGUID = "B52C8B56-9541-4B78-9B2F-665366B78A9C"
-  PolicyStatusUserClassGUID = "4DAC24AB-B340-4B7E-AD01-1504A7F59EEA"
-  PolicyStatusSystemClassGUID = "83FE19AC-72A6-4A72-B136-724444121586"
-  ProcessLauncherClassGUID = "811A664F-703E-407C-A323-E6E31D1EFFA0"
+  UpdaterLegacyLibGUID = "81F3D5B7-14A2-4E9C-A25B-C6D7E8F9A0B1"
+  GoogleUpdate3WebUserClassGUID = "F2A3B4C5-D6E7-4F8A-9B0C-1D2E3F4A5B6C"
+  GoogleUpdate3WebSystemClassGUID = "3E7A1C9F-8B2D-456A-91C4-F8E3D7A2B6C1"
+  GoogleUpdate3WebServiceClassGUID = "C58316EA-7128-49A3-9A25-1C748B5D39EA"
+  PolicyStatusUserClassGUID = "5A92B74C-1D3E-48F9-82A1-6F5D4B3C2A9E"
+  PolicyStatusSystemClassGUID = "8F34A92B-4501-4D62-A8E2-2B8F67C315B9"
+  ProcessLauncherClassGUID = "1B6D4C8A-3E2F-4A91-B7C5-9D0F2E1A8B3C"
 
-  IAppVersionWebGUID = "3057E1F8-2498-4C19-99B5-F7F207DA4DC7"
-  IAppVersionWebUserGUID = "F4874A57-8C88-4B1D-AAB8-4B06CF98FB29"
-  IAppVersionWebSystemGUID = "4AF986BF-DD14-45C2-8228-2541622699CD"
+  IAppVersionWebGUID = "D4A1B2C3-E5F6-47A8-B9C0-D1E2F3A4B5C6"
+  IAppVersionWebUserGUID = "F2A3B4C5-D6E7-48F9-A0B1-C2D3E4F5A6B7"
+  IAppVersionWebSystemGUID = "C3D4E5F6-A7B8-49C0-D1E2-F3A4B5C6D7E8"
 
-  ICurrentStateGUID = "BE5D3E90-A66C-4A0A-9B7B-1A6B9BF3971E"
-  ICurrentStateUserGUID = "AE097E2A-7F4B-4248-8698-D6E515E9C638"
-  ICurrentStateSystemGUID = "E0425C1F-4263-4BA5-9328-423470344FC0"
+  ICurrentStateGUID = "B4C5D6E7-F8A9-40B1-C2D3-E4F5A6B7C8D9"
+  ICurrentStateUserGUID = "4A4A5E4B-3D98-4D5B-A45F-CFA08F696A1D"
+  ICurrentStateSystemGUID = "A0AB0FD8-6C2B-404D-B666-F6301F01F1EA"
 
-  IGoogleUpdate3WebGUID = "027234BD-61BB-4F5C-9386-7FE804171C8C"
-  IGoogleUpdate3WebUserGUID = "E2C00808-83C7-4CE4-8075-7E185A90AE04"
-  IGoogleUpdate3WebSystemGUID = "B7DA4837-09FF-4355-BFE1-30598E40F41A"
+  IGoogleUpdate3WebGUID = "F7A8B9C0-D1E2-43F4-A5B6-C7D8E9F0A1B2"
+  IGoogleUpdate3WebUserGUID = "A8B9C0D1-E2F3-44A5-B6C7-D8E9F0A1B2C3"
+  IGoogleUpdate3WebSystemGUID = "B9C0D1E2-F3A4-45B6-C7D8-E9F0A1B2C3D4"
 
-  IAppBundleWebGUID = "D734C877-21F4-496E-B857-3E5B2E72E4CC"
-  IAppBundleWebUserGUID = "EA08425E-054B-4564-B0A0-8BAAB76F38E9"
-  IAppBundleWebSystemGUID = "D45CFCE3-5297-4D0B-925E-1924A32A7452"
+  IAppBundleWebGUID = "C0D1E2F3-A4B5-46C7-D8E9-F0A1B2C3D4E5"
+  IAppBundleWebUserGUID = "D1E2F3A4-B5C6-47D8-E9F0-A1B2C3D4E5F6"
+  IAppBundleWebSystemGUID = "E2F3A4B5-C6D7-48E9-F0A1-B2C3D4E5F6A7"
 
-  IAppWebGUID = "2C6218B9-088D-4D25-A4F8-570558124142"
-  IAppWebUserGUID = "2C320333-21CF-4FC8-BF8F-4287DB3795B7"
-  IAppWebSystemGUID = "8CA0CD21-6864-4BD8-BF0F-2D69AF3A0FE8"
+  IAppWebGUID = "F3A4B5C6-D7E8-49F0-A1B2-C3D4E5F6A7B8"
+  IAppWebUserGUID = "A4B5C6D7-E8F9-40A1-B2C3-D4E5F6A7B8C9"
+  IAppWebSystemGUID = "B5C6D7E8-F9A0-41B2-C3D4-E5F6A7B8C9D0"
 
-  IAppCommandWebGUID = "87DBF75E-F590-4802-93FD-F8D07800E2E9"
-  IAppCommandWebUserGUID = "F8D4B43D-7D22-47FE-B6AD-BAC5ED8A1659"
-  IAppCommandWebSystemGUID = "DF735BF0-0265-4D65-BABA-E244D428EFC5"
+  IAppCommandWebGUID = "C6D7E8F9-A0B1-42C3-D4E5-F6A7B8C9D0E1"
+  IAppCommandWebUserGUID = "D7E8F9A0-B1C2-43D4-E5F6-A7B8C9D0E1F2"
+  IAppCommandWebSystemGUID = "E8F9A0B1-C2D3-44E5-F6A7-B8C9D0E1F2A3"
 
-  IPolicyStatusGUID = "7D908375-C9D0-44C5-BB98-206F3C24A74C"
-  IPolicyStatusUserGUID = "19309C09-C93C-45DA-8C02-9A8B8198A5E0"
-  IPolicyStatusSystemGUID = "F8197F77-DE9C-4BB0-9F63-459A001154C6"
+  IPolicyStatusGUID = "F9A0B1C2-D3E4-45F6-A7B8-C9D0E1F2A3B4"
+  IPolicyStatusUserGUID = "A0B1C2D3-E4F5-46A7-B8C9-D0E1F2A3B4C5"
+  IPolicyStatusSystemGUID = "B1C2D3E4-F5A6-47B8-C9D0-E1F2A3B4C5D6"
 
-  IPolicyStatus2GUID = "9D31EA63-2E06-4D41-98C7-CB1F307DB597"
-  IPolicyStatus2UserGUID = "1163C9E6-6391-46E2-96AB-2BCB8907D669"
-  IPolicyStatus2SystemGUID = "78A85A33-F541-4A52-A1F2-0BCBA1F1A4F0"
+  IPolicyStatus2GUID = "C2D3E4F5-A6B7-48C9-D0E1-F2A3B4C5D6E7"
+  IPolicyStatus2UserGUID = "D3E4F5A6-B7C8-49D0-E1F2-A3B4C5D6E7F8"
+  IPolicyStatus2SystemGUID = "E4F5A6B7-C8D9-40E1-F2A3-B4C5D6E7F8A9"
 
-  IPolicyStatus3GUID = "5C674FC1-80E3-48D2-987B-79D9D286065B"
-  IPolicyStatus3UserGUID = "847BB70C-47D0-46C2-8C97-9000A1F9AD99"
-  IPolicyStatus3SystemGUID = "6F7996CA-5531-4299-BD7F-3C7090520090"
+  IPolicyStatus3GUID = "F5A6B7C8-D9E0-41F2-A3B4-C5D6E7F8A9B0"
+  IPolicyStatus3UserGUID = "A6B7C8D9-E0F1-42A3-B4C5-D6E7F8A9B0C1"
+  IPolicyStatus3SystemGUID = "B7C8D9E0-F1A2-43B4-C5D6-E7F8A9B0C1D2"
 
-  IPolicyStatus4GUID = "4F08E832-C4AF-4D77-840F-8884083E8324"
-  IPolicyStatus4UserGUID = "3C0435E1-B19F-4B7A-8481-D7EBAEBFAF47"
-  IPolicyStatus4SystemGUID = "DD9F76CA-FCFB-4F8E-B65E-F7C0703AAFBD"
+  IPolicyStatus4GUID = "C8D9E0F1-A2B3-44C5-D6E7-F8A9B0C1D2E3"
+  IPolicyStatus4UserGUID = "D9E0F1A2-B3C4-45D6-E7F8-A9B0C1D2E3F4"
+  IPolicyStatus4SystemGUID = "E0F1A2B3-C4D5-46E7-F8A9-B0C1D2E3F4A5"
 
-  IPolicyStatusValueGUID = "47C8886A-A4B5-4F6C-865A-41A207074DFA"
-  IPolicyStatusValueUserGUID = "13D172EB-2BFB-4D72-AF10-7D33337B7FC6"
-  IPolicyStatusValueSystemGUID = "CFF9AE0F-C5C5-4D53-8394-7602758A52BA"
+  IPolicyStatusValueGUID = "F1A2B3C4-D5E6-47F8-A9B0-C1D2E3F4A5B6"
+  IPolicyStatusValueUserGUID = "A2B3C4D5-E6F7-48A9-B0C1-D2E3F4A5B6C7"
+  IPolicyStatusValueSystemGUID = "B3C4D5E6-F7A8-49B0-C1D2-E3F4A5B6C7D8"
 
-  IProcessLauncherGUID = "EED70106-3604-4385-866E-6D540E99CA1A"
-  IProcessLauncherSystemGUID = "437174A3-B9A5-4835-B896-7DE8C1FE2638"
+  IProcessLauncherGUID = "C4D5E6F7-A8B9-40C1-D2E3-F4A5B6C7D8E9"
+  IProcessLauncherSystemGUID = "D5E6F7A8-B9C0-41D2-E3F4-A5B6C7D8E9F0"
 
-  IProcessLauncher2GUID = "BAEE6326-C925-4FA4-AFE9-5FA69902B021"
-  IProcessLauncher2SystemGUID = "E1C53EEF-2BAB-4420-BDD7-256B91C49D0C"
+  IProcessLauncher2GUID = "E6F7A8B9-C0D1-42E3-F4A5-B6C7D8E9F0A1"
+  IProcessLauncher2SystemGUID = "009384E2-98E5-451F-85AB-C483B758EA3A"
 
   if (is_mac) {
     legacy_google_update_appid = keystone_bundle_identifier
   } else {
-    legacy_google_update_appid = "{8B2B92A3-1BA2-4154-A89C-DA74C9C505E4}"
+    legacy_google_update_appid = "{6B3370DC-24E7-4BA3-A6AE-D817F54910FE}"
   }
 }

@@ -2,11 +2,21 @@
 # Use of this source code is governed by a BSD-style license that can be
 # found in the LICENSE file.
 
+import("//build/config/jatter_args.gni")
 import("//build/config/python.gni")
 import("//build/timestamp.gni")
 import("//chrome/updater/branding.gni")
 import("//chrome/updater/updater_process_version_rc_template.gni")
 import("//testing/test.gni")
+
+# Determine the exact strings based on the environment
+if (jatter_build_environment == "prod") {
+  _app_guid = "site.beacon.jatter"
+  _app_name = "Jatter"
+} else {
+  _app_guid = "site.beacon.staging"
+  _app_name = "JatterStaging"
+}
 
 source_set("msi_custom_action_sources") {
   sources = [
@@ -185,6 +195,10 @@ generate_installer("installer") {
     "//chrome/updater/win:updater",
   ]
   deps = [ "//chrome/updater:constants_prod" ]
+  deps += [
+    # Force the archiver to wait for the inner signature!
+    "//chrome/updater/win:sign_updater_binaries",
+  ]
   release_file = "updater.release"
   runtime_deps = updater_runtime_deps
 }
@@ -199,4 +213,56 @@ generate_installer("installer_test") {
   deps = [ "//chrome/updater:constants_test" ]
   release_file = "updater_test.release"
   runtime_deps = updater_test_runtime_deps
+}
+
+# [NEW ACTION] Sign the standalone Updater setup executable.
+action("sign_updater_setup_action") {
+  # Wait for the UpdaterSetup.exe to be fully generated
+  deps = [ ":installer" ]
+
+  # Reuse your existing Python signing script
+  script = "//chrome/installer/mini_installer/codesign/sign_mini_installer.py"
+
+  # Input is the unsigned UpdaterSetup
+  inputs = [ "$root_out_dir/UpdaterSetup.exe" ]
+  
+  # The output is a placeholder stamp file to ensure GN knows this step was run
+  outputs = [ "$target_gen_dir/updater_setup_signed.stamp" ] 
+
+  args = [
+    rebase_path("$root_out_dir/UpdaterSetup.exe", root_build_dir),
+    rebase_path("$target_gen_dir/updater_setup_signed.stamp", root_build_dir),
+  ]
+}
+
+# [NEW ACTION] Tag the signed installer with the Omaha metadata
+action("tag_updater_setup_action") {
+  script = "//chrome/installer/mini_installer/codesign/tag_installer.py"
+
+  # We need both the tagging tool and the SIGNED installer
+  inputs = [ 
+    "$root_out_dir/tag.exe",
+    "$root_out_dir/UpdaterSetup.exe" 
+  ]
+  
+  # The final, ready-to-ship installer!
+  outputs = [ "$root_out_dir/${_app_name}Setup_Tagged.exe" ]
+
+  args = [
+    "--tagger", rebase_path("$root_out_dir/tag.exe", root_build_dir),
+    "--in-file", rebase_path("$root_out_dir/UpdaterSetup.exe", root_build_dir),
+    "--out-file", rebase_path(outputs[0], root_build_dir),
+    "--tag-string", "appguid=${_app_guid}&appname=${_app_name}&needsadmin=Prefers",
+  ]
+
+  deps = [
+    # Force Ninja to wait until the binary is SIGNED
+    ":sign_updater_setup_action", 
+    
+    # GN STRICTNESS: Explicitly depend on the target that generated tag.exe
+    "//chrome/updater/tools:tag",
+    
+    # GN STRICTNESS: Explicitly depend on the target that generated UpdaterSetup.exe
+    ":installer", 
+  ]
 }

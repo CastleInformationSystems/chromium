@@ -117,9 +117,7 @@
 #include "base/test/clang_profiling.h"
 #endif
 
-#if BUILDFLAG(GOOGLE_CHROME_BRANDING)
 #include "chrome/installer/util/google_update_util.h"
-#endif
 
 #if BUILDFLAG(WEBNN_INSTALL_RUNTIME_IN_CHROME_INSTALLER)
 #include "chrome/installer/setup/install_win_app_runtime.h"
@@ -664,12 +662,10 @@ installer::InstallStatus UninstallProducts(InstallationState& original_state,
     base::LaunchProcess(system_level_cmd, base::LaunchOptions());
   }
 
-#if BUILDFLAG(GOOGLE_CHROME_BRANDING)
   // Tell Google Update that an uninstall has taken place. Ignore the return
   // value: success or failure of Google Update has no bearing on the success
   // or failure of Chrome's uninstallation.
   google_update::UninstallGoogleUpdate(installer_state.system_install());
-#endif  // BUILDFLAG(GOOGLE_CHROME_BRANDING)
 
   return install_status;
 }

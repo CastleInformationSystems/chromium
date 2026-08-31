@@ -107,7 +107,7 @@ class RequestSender : public base::RefCountedThreadSafe<RequestSender> {
   std::vector<GURL> urls_;
   base::flat_map<std::string, std::string> request_extra_headers_;
   std::string request_body_;
-  bool use_signing_ = false;  // True if CUP signing is used.
+  bool use_signing_ = true;  // True if CUP signing is used.
   RequestSenderCallback request_sender_callback_;
 
   std::vector<GURL>::const_iterator cur_url_;

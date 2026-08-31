@@ -3,9 +3,20 @@
 # found in the LICENSE file.
 
 import("//base/win/embedded_i18n/generate_embedded_i18n.gni")
+import("//build/buildflag_header.gni")
 import("//build/config/chrome_build.gni")
+import("//build/config/jatter_args.gni")
 
 import("//testing/test.gni")
+
+_is_jatter_prod = jatter_build_environment == "prod"
+
+buildflag_header("jatter_buildflags") {
+  header = "jatter_buildflags.h"
+  flags = [
+    "IS_JATTER_PROD=$_is_jatter_prod",
+  ]
+}
 
 if (is_win) {
   source_set("metainstaller_utils") {
@@ -261,6 +272,8 @@ source_set("constants") {
     ]
 
     public_deps = [ "//base" ]
+
+    deps = [ ":jatter_buildflags" ]
   }
 }
 

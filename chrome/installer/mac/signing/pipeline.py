@@ -347,7 +347,7 @@ def _package_and_sign_pkg(paths, dist_config):
             'pkgbuild', '--root', root_directory, '--component-plist',
             component_property_path, '--identifier', dist_config.base_bundle_id,
             '--version', dist_config.version, '--install-location',
-            '/Applications', '--scripts', scripts_path
+            '/Applications'
         ]
         # The pkgbuild command on macOS 12 Monterey gained the ability to
         # compress component packages based on the minimum OS requirement for

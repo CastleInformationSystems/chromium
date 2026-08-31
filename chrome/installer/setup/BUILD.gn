@@ -129,7 +129,7 @@ if (is_win) {
       deps += [ "//services/webnn/public/cpp:win" ]
     }
 
-    if (is_chrome_branded) {
+    if (true) {
       sources += [
         "channel_override_work_item.cc",
         "channel_override_work_item.h",

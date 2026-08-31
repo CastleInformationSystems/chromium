@@ -12,19 +12,28 @@
 #include "chrome/app/chrome_dll_resource.h"
 #include "chrome/common/chrome_icon_resources_win.h"
 #include "chrome/install_static/install_constants.h"
+#include "chrome/install_static/jatter_buildflags.h"
+
+#if BUILDFLAG(IS_JATTER_PROD)
+#define JATTER_APP_GUID L"site.beacon.jatter"
+#define JATTER_NAME L"Jatter"
+#else
+#define JATTER_APP_GUID L"site.beacon.staging"
+#define JATTER_NAME L"JatterStaging"
+#endif
 
 namespace install_static {
 
 // The brand-specific company name to be included as a component of the install
 // and user data directory paths. May be empty if no such dir is to be used.
-inline constexpr wchar_t kCompanyPathName[] = L"";
+inline constexpr wchar_t kCompanyPathName[] = JATTER_NAME;
 
 // The brand-specific product name to be included as a component of the install
 // and user data directory paths.
-inline constexpr wchar_t kProductPathName[] = L"Chromium";
+inline constexpr wchar_t kProductPathName[] = JATTER_NAME;
 
 // The brand-specific safe browsing client name.
-inline constexpr char kSafeBrowsingName[] = "chromium";
+inline constexpr char kSafeBrowsingName[] = "jatter";
 
 // Note: This list of indices must be kept in sync with the brand-specific
 // resource strings in chrome/installer/util/prebuild/create_string_rc.
@@ -44,18 +53,18 @@ inline constexpr auto kInstallModes = std::to_array<InstallConstants>({
             L"",  // Empty install_suffix for the primary install mode.
         .logo_suffix = L"",  // No logo suffix for the primary install mode.
         .app_guid =
-            L"",  // Empty app_guid since no integration with Google Update.
-        .base_app_name = L"Chromium",              // A distinct base_app_name.
-        .base_app_id = L"Chromium",                // A distinct base_app_id.
-        .browser_prog_id_prefix = L"ChromiumHTM",  // Browser ProgID prefix.
+            JATTER_APP_GUID,  // Empty app_guid since no integration with Google Update.
+        .base_app_name = JATTER_NAME,              // A distinct base_app_name.
+        .base_app_id = JATTER_NAME,                // A distinct base_app_id.
+        .browser_prog_id_prefix = L"JatterHTM",  // Browser ProgID prefix.
         .browser_prog_id_description =
-            L"Chromium HTML Document",  // Browser ProgID description.
-        .direct_launch_url_scheme = "chromium",
-        .pdf_prog_id_prefix = L"ChromiumPDF",  // PDF ProgID prefix.
+            L"Jatter HTML Document",  // Browser ProgID description.
+        .direct_launch_url_scheme = "jatter",
+        .pdf_prog_id_prefix = L"JatterPDF",  // PDF ProgID prefix.
         .pdf_prog_id_description =
-            L"Chromium PDF Document",  // PDF ProgID description.
+            L"Jatter PDF Document",  // PDF ProgID description.
         .active_setup_guid =
-            L"{7D2B3E1D-D096-4594-9D8F-A6667F12E0AC}",  // Active Setup
+            JATTER_APP_GUID,  // Active Setup
                                                         // GUID.
         .legacy_command_execute_clsid =
             L"{A2DF06F9-A21A-44A8-8A99-8B9C84F29160}",  // CommandExecuteImpl
@@ -89,7 +98,7 @@ inline constexpr auto kInstallModes = std::to_array<InstallConstants>({
                                           // TypeLib
         .default_channel_name =
             L"",  // Empty default channel name since no update integration.
-        .channel_strategy = ChannelStrategy::UNSUPPORTED,
+        .channel_strategy = ChannelStrategy::FIXED,
         .supports_system_level = true,  // Supports system-level installs.
         .supports_set_as_default_browser =
             true,  // Supports in-product set as default browser UX.
