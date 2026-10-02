@@ -16,6 +16,7 @@
 #include "base/uuid.h" // For generating random GUIDs
 #include "chrome/browser/jatter/jatter_environment.h"
 #include "chrome/browser/jatter/jatter_firebase_client.h"
+#include "chrome/browser/jatter/jatter_firebase_client_factory.h"
 #include "chrome/browser/jatter/jatter_token_storage.h"
 #include "chrome/browser/profiles/profile.h"
 #include "components/prefs/pref_service.h" // For storage
@@ -330,7 +331,7 @@ void RagIngestionNetworkClient::MakeAuthorizedRequest(
     const std::string& content_type,
     ApiCallback callback) {
   
-  JatterFirebaseClient::GetInstance()->Invoke(
+  JatterFirebaseClientFactory::GetForProfile(profile_)->Invoke(
       profile_,
       [endpoint, method, payload, content_type, profile = profile_]() {
 #ifndef JATTER_PRODUCTION_MODE

@@ -1,22 +1,47 @@
 #ifndef JATTER_FIREBASE_CLIENT_H_
 #define JATTER_FIREBASE_CLIENT_H_
 
+#include <vector>
+
 #include "base/containers/unique_ptr_adapters.h"
+#include "base/functional/callback.h"
 #include "base/memory/singleton.h"
+#include "base/memory/weak_ptr.h"
+#include "base/scoped_observation.h"
 #include "base/supports_user_data.h"
+#include "base/task/cancelable_task_tracker.h"
+#include "base/time/time.h"
+#include "base/values.h"
 #include "chrome/browser/profiles/profile.h"
+#include "components/history/core/browser/history_service_observer.h"
+#include "components/history/core/browser/history_types.h"
+#include "components/keyed_service/core/keyed_service.h"
 #include "content/public/browser/render_frame_host.h"
 #include "services/network/public/cpp/simple_url_loader.h"
 
-class JatterFirebaseClient {
+namespace user_prefs {
+class PrefRegistrySyncable;
+}
+
+class JatterFirebaseClient : public history::HistoryServiceObserver,
+                             public KeyedService {
  public:
   using ResponseCallback = base::OnceCallback<void(std::optional<std::string>)>;
   using CreateUrlLoaderCallback =
       std::function<std::unique_ptr<network::SimpleURLLoader>()>;
 
-  static JatterFirebaseClient* GetInstance();
+  explicit JatterFirebaseClient(Profile* profile);
+  ~JatterFirebaseClient() override;
 
-  void ObservePageVisit(Profile* profile, std::string url, std::string title);
+  static void RegisterProfilePrefs(user_prefs::PrefRegistrySyncable* registry);
+
+  void OnURLVisited(history::HistoryService* history_service,
+                    const history::VisitedURLInfo& visited_url_info) override;
+
+  // Step 4 FRE history ingestion
+  void LogBulkWebPageVisits(Profile* profile, base::ListValue visits_list);
+  // Triggers the AI refresh endpoint
+  void RefreshPersonalizedAssistance(Profile* profile);
 
   static void SetAuthorizationnHeader(
       Profile* profile,
@@ -24,19 +49,12 @@ class JatterFirebaseClient {
 
   void Invoke(Profile* profile,
               CreateUrlLoaderCallback url_loader_creator,
-              ResponseCallback callback); 
+              ResponseCallback callback);
+  void SetAuthReady(); 
 
  private:
-  friend struct base::DefaultSingletonTraits<JatterFirebaseClient>;
-
-  JatterFirebaseClient();
-  ~JatterFirebaseClient();
-
-  JatterFirebaseClient(const JatterFirebaseClient&) = delete;
-  JatterFirebaseClient& operator=(const JatterFirebaseClient&) = delete;
-
   void OnResponseReceivedWithRetry(network::SimpleURLLoader* loader,
-                                   Profile* profile,
+                                   base::WeakPtr<Profile> weak_profile,
                                    CreateUrlLoaderCallback url_loader_creator,
                                    ResponseCallback callback,
                                    std::optional<std::string> response_body);
@@ -47,7 +65,7 @@ class JatterFirebaseClient {
 
   void OnAuthenticationResponseReceived(
       network::SimpleURLLoader* loader,
-      Profile* profile,
+      base::WeakPtr<Profile> weak_profile,
       CreateUrlLoaderCallback url_loader_creator,
       ResponseCallback callback,
       std::optional<std::string> response_body);   
@@ -58,8 +76,19 @@ class JatterFirebaseClient {
 
   void RemoveUrlLoader(network::SimpleURLLoader* loader);
 
+  void ExecuteNetworkRequest(Profile* profile, std::string json_body);
+
+  bool is_auth_ready_ = false;
+  std::vector<base::OnceClosure> pending_network_tasks_;
+  base::ScopedObservation<history::HistoryService, history::HistoryServiceObserver>
+      history_observation_{this};
   std::set<std::unique_ptr<network::SimpleURLLoader>, base::UniquePtrComparator>
       loaders_;
+  base::CancelableTaskTracker task_tracker_;
+  base::TimeTicks last_refresh_time_; // Used for rate-limiting
+  raw_ptr<Profile> profile_;
+
+  base::WeakPtrFactory<JatterFirebaseClient> weak_ptr_factory_{this};
 };
 
 #endif  // JATTER_FIREBASE_CLIENT_H_

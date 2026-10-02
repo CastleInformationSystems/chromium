@@ -7,6 +7,7 @@
 #include "base/notreached.h"
 #include "build/build_config.h"
 #include "chrome/utility/importer/bookmarks_file_importer.h"
+#include "chrome/utility/importer/chrome_importer.h"
 #include "chrome/utility/importer/firefox_importer.h"
 
 #if BUILDFLAG(IS_WIN)
@@ -44,6 +45,8 @@ scoped_refptr<Importer> CreateImporterByType(
     case user_data_importer::TYPE_SAFARI:
       return new SafariImporter(base::apple::GetUserLibraryPath());
 #endif
+    case user_data_importer::TYPE_CHROME:
+      return new ChromeImporter();
     default:
       NOTREACHED();
   }

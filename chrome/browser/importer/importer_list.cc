@@ -6,7 +6,10 @@
 
 #include <stdint.h>
 
+#include "base/files/file_util.h"
 #include "base/functional/bind.h"
+#include "base/path_service.h"
+#include "base/strings/utf_string_conversions.h"
 #include "base/task/task_traits.h"
 #include "base/task/thread_pool.h"
 #include "base/threading/scoped_blocking_call.h"
@@ -157,6 +160,45 @@ void DetectFirefoxProfiles(
   }
 }
 
+void DetectChromeProfiles(std::vector<user_data_importer::SourceProfile>* profiles) {
+  base::FilePath chrome_user_data_dir;
+
+#if BUILDFLAG(IS_WIN)
+  if (base::PathService::Get(base::DIR_LOCAL_APP_DATA, &chrome_user_data_dir)) {
+    chrome_user_data_dir = chrome_user_data_dir.AppendASCII("Google")
+                                               .AppendASCII("Chrome")
+                                               .AppendASCII("User Data");
+  }
+#elif BUILDFLAG(IS_MAC)
+  // DIR_APP_DATA on macOS resolves to ~/Library/Application Support
+  if (base::PathService::Get(base::DIR_APP_DATA, &chrome_user_data_dir)) {
+    chrome_user_data_dir = chrome_user_data_dir.AppendASCII("Google")
+                                               .AppendASCII("Chrome");
+  }
+#elif BUILDFLAG(IS_LINUX)
+  // Linux installations typically default to ~/.config/google-chrome
+  base::FilePath home_dir;
+  if (base::PathService::Get(base::DIR_HOME, &home_dir)) {
+    chrome_user_data_dir = home_dir.AppendASCII(".config")
+                                   .AppendASCII("google-chrome");
+  }
+#endif
+
+  // If the directory exists, Chrome is installed and has user data
+  if (!chrome_user_data_dir.empty() && base::PathExists(chrome_user_data_dir)) {
+    user_data_importer::SourceProfile chrome_profile;
+    chrome_profile.importer_name = u"Google Chrome";
+    chrome_profile.importer_type = user_data_importer::TYPE_CHROME;
+    chrome_profile.source_path = chrome_user_data_dir;
+    chrome_profile.app_path = chrome_user_data_dir;
+    // Specify what Jatter can extract from Chrome
+    chrome_profile.services_supported = user_data_importer::HISTORY | 
+                                        user_data_importer::FAVORITES;
+    
+    profiles->push_back(chrome_profile);
+  }
+}
+
 std::vector<user_data_importer::SourceProfile> DetectSourceProfilesWorker(
     const std::string& locale,
     bool include_interactive_profiles) {
@@ -186,6 +228,9 @@ std::vector<user_data_importer::SourceProfile> DetectSourceProfilesWorker(
 #else
   DetectFirefoxProfiles(locale, &profiles);
 #endif
+
+  DetectChromeProfiles(&profiles);
+
   if (include_interactive_profiles) {
     user_data_importer::SourceProfile bookmarks_profile;
     bookmarks_profile.importer_name =

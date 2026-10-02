@@ -17,6 +17,7 @@
 #include "base/threading/thread_restrictions.h"
 #include "build/build_config.h"
 #include "chrome/browser/first_run/first_run.h"
+#include "chrome/browser/jatter/jatter_environment.h"
 #include "chrome/browser/prefs/session_startup_pref.h"
 #include "chrome/browser/privacy_sandbox/notice/desktop_entrypoint_handlers_helper.h"
 #include "chrome/browser/profile_resetter/triggered_profile_resetter.h"
@@ -172,6 +173,20 @@ StartupTabs StartupTabProviderImpl::GetPreferencesTabs(
 StartupTabs StartupTabProviderImpl::GetNewTabPageTabs(
     const base::CommandLine& command_line,
     Profile* profile) const {
+  // --- JATTER: Post-FRE Plus Upgrade Navigation ---
+  if (profile &&
+      profile->GetPrefs()->GetBoolean(prefs::kJatterShowPlusUpgradeOnStartup)) {
+    // 1. Immediately reset the flag so it only triggers on this first launch
+    profile->GetPrefs()->SetBoolean(prefs::kJatterShowPlusUpgradeOnStartup,
+                                    false);
+
+    // 2. Open directly to the upgrade portal instead of the NTP
+    StartupTabs tabs;
+    tabs.emplace_back(GURL(jatter::kAppUrl).Resolve("/upgrade"));
+    return tabs;
+  }
+  // ----------------------------------------------------
+
   return GetNewTabPageTabsForState(
       StartupBrowserCreator::GetSessionStartupPref(command_line, profile));
 }

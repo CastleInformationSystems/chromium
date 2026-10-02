@@ -4,6 +4,7 @@
 #include "base/i18n/time_formatting.h"
 #include "chrome/app/vector_icons/vector_icons.h" // For kSettingsIcon
 #include "chrome/browser/jatter/jatter_environment.h"
+#include "chrome/browser/profiles/profile.h"
 #include "chrome/browser/ui/browser.h"
 #include "chrome/browser/ui/browser_window.h"
 #include "chrome/browser/platform_util.h"
@@ -14,6 +15,8 @@
 #include "chrome/browser/ui/views/page_action/page_action_icon_controller.h"
 #include "chrome/browser/ui/rag_ingestion/rag_ingestion_page_action_controller.h"
 #include "chrome/browser/rag_ingestion/grit/rag_ingestion_strings.h"
+#include "chrome/common/pref_names.h"
+#include "components/prefs/pref_service.h"
 #include "components/strings/grit/components_strings.h"
 #include "components/vector_icons/vector_icons.h" // Sometimes needed for generic icons
 #include "content/public/browser/page_navigator.h"
@@ -87,7 +90,12 @@ RagIngestionBubbleView::RagIngestionBubbleView(
     is_disabled = (controller->GetIconState() == RagIngestionPageActionController::IconState::kDisabled);
   }
 
-  if (show_management_ui || is_disabled) {
+  Profile* profile = Profile::FromBrowserContext(web_contents->GetBrowserContext());
+  bool always_allow = profile->GetPrefs()->GetBoolean(
+      prefs::kJatterAlwaysAllowPersonalization);
+
+  // If the user selected "Always allow" in Step 3 or Settings, bypass the permission prompt
+  if (show_management_ui || is_disabled || always_allow) {
     BuildActiveUI(); // State B: Already Allowed (Management)
   } else {
     BuildPermissionUI(); // State A: Requesting Permission
@@ -202,6 +210,10 @@ void RagIngestionBubbleView::BuildActiveUI() {
       // This bypasses the stale 'kUnknown' backend status completely.
       is_enabled = (controller->GetIconState() == RagIngestionPageActionController::IconState::kActive);
   }
+
+  Profile* profile = Profile::FromBrowserContext(web_contents_->GetBrowserContext());
+  is_enabled  = profile->GetPrefs()->GetBoolean(
+      prefs::kJatterAlwaysAllowPersonalization);
 
   std::string host = info.canonical_host.empty() ? 
       std::string(web_contents_->GetLastCommittedURL().host()) : info.canonical_host;

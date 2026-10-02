@@ -17,6 +17,8 @@ import {routes} from '../route.js';
 import {Router} from '../router.js';
 import {SettingsViewMixin} from '../settings_page/settings_view_mixin.js';
 
+import '../controls/settings_toggle_button.js';
+
 import {getTemplate} from './ai_page.html.js';
 import {FeatureOptInState, SettingsAiPageFeaturePrefName} from './constants.js';
 

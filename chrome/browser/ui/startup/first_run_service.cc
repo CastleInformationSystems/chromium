@@ -172,10 +172,10 @@ void FirstRunService::TryMarkFirstRunAlreadyFinished(
     return;
   }
 
-  if (policy_effect != PolicyEffect::kNone) {
-    FinishFirstRun(FinishedReason::kSkippedByPolicies);
-    return;
-  }
+  // if (policy_effect != PolicyEffect::kNone) {
+  //   FinishFirstRun(FinishedReason::kSkippedByPolicies);
+  //   return;
+  // }
 
   // Fallthrough: let the FRE be shown when the user opens a browser UI for the
   // first time.

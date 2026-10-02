@@ -27,7 +27,6 @@
 #include "chrome/browser/jatter/jatter_environment.h"
 #include "chrome/browser/password_manager/chrome_password_manager_client.h"
 #include "chrome/browser/profiles/profile.h"
-#include "chrome/browser/jatter/jatter_firebase_client.h"
 #include "chrome/browser/rag_ingestion/rag_ingestion_service.h"
 #include "chrome/browser/rag_ingestion/rag_ingestion_service_factory.h"
 #if BUILDFLAG(IS_ANDROID)
@@ -137,15 +136,6 @@ void RagIngestionTabHelper::DocumentReadyForExtraction(const GURL& url) {
   }
 
   if (ShouldIgnoreUrl(url)) return;
-  
-  Profile* profile = Profile::FromBrowserContext(web_contents()->GetBrowserContext());
-  std::u16string title = web_contents()->GetTitle();
-  
-  JatterFirebaseClient::GetInstance()->ObservePageVisit(
-      profile, 
-      url.spec(), 
-      base::UTF16ToUTF8(title)
-  );
 
   CheckAuthWall(url);
 }

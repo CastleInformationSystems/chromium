@@ -4087,6 +4087,11 @@ inline constexpr char kAuxiliarySearchLastDonatedHistoryEntryVisitTime[] =
 // Dictionary to persist Firebase token id and refresh token
 inline constexpr char kJatterAuthenticationToken[] =
     "jatter.authentication.token";
+// Boolean indicating if Jatter can automatically learn from signed-in sites.
+inline constexpr char kJatterAlwaysAllowPersonalization[] = 
+    "jatter.always_allow_personalization";
+inline constexpr char kJatterShowPlusUpgradeOnStartup[] = 
+      "jatter.show_plus_upgrade_on_startup";
 }  // namespace prefs
 
 #endif  // CHROME_COMMON_PREF_NAMES_H_

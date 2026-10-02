@@ -30,6 +30,11 @@
 #include "chrome/browser/ui/hats/survey_config.h"
 #include "chrome/browser/ui/ui_features.h"
 #include "chrome/browser/ui/views/frame/browser_view.h"
+#include "chrome/browser/ui/views/profiles/jatter_fre_history_step_controller.h"
+#include "chrome/browser/ui/views/profiles/jatter_fre_learn_step_controller.h"
+#include "chrome/browser/ui/views/profiles/jatter_fre_plus_step_controller.h"
+#include "chrome/browser/ui/views/profiles/jatter_fre_welcome_step_controller.h"
+#include "chrome/browser/ui/views/profiles/jatter_fre_susi_step_controller.h"
 #include "chrome/browser/ui/views/profiles/profile_management_flow_controller.h"
 #include "chrome/browser/ui/views/profiles/profile_management_flow_controller_impl.h"
 #include "chrome/browser/ui/views/profiles/profile_management_step_controller.h"
@@ -534,13 +539,79 @@ void FirstRunFlowController::ShowSigninError(Profile* profile,
 }
 
 void FirstRunFlowController::Init() {
+  // RegisterStep(
+  //     Step::kIntro,
+  //     CreateIntroStep(
+  //         host(),
+  //         base::BindRepeating(&FirstRunFlowController::HandleIntroSigninChoice,
+  //                             weak_ptr_factory_.GetWeakPtr()),
+  //         /*enable_animations=*/true));
+  finish_flow_callback_ = base::BindOnce(
+      &FirstRunFlowController::FinishFlowAndRunInBrowser,
+      base::Unretained(this),
+      base::Unretained(profile_), 
+      PostHostClearedCallback());
+      
+  // Step 5: Jatter Plus (Mapped to kDefaultBrowser temporarily)
+  RegisterStep(
+      Step::kDefaultBrowser,
+      std::make_unique<JatterFrePlusStepController>(
+          host(),
+          profile_,
+          base::BindOnce(&FirstRunFlowController::RunFinishFlowCallback,
+                         base::Unretained(this))));
+
+  // Step 4: History Import (Mapped to kSyncPromo temporarily)
+  RegisterStep(
+      Step::kPostSignInFlow,
+      std::make_unique<JatterFreHistoryStepController>(
+          host(),
+          base::BindOnce(&FirstRunFlowController::SwitchToStep,
+                         weak_ptr_factory_.GetWeakPtr(),
+                         Step::kDefaultBrowser, // Advance to Step 5
+                         /*reset_state=*/true,
+                         StepSwitchFinishedCallback(),
+                         base::NullCallback())));
+  // Step 3
+  RegisterStep(
+      Step::kSearchEngineChoice,
+      std::make_unique<JatterFreLearnStepController>(
+          host(),
+          profile_,
+          base::BindOnce(&FirstRunFlowController::SwitchToStep,
+                         weak_ptr_factory_.GetWeakPtr(),
+                         Step::kPostSignInFlow,
+                         /*reset_state=*/true,
+                         // Bind the default arguments explicitly so BindOnce 
+                         // resolves to a zero-argument base::OnceClosure
+                         StepSwitchFinishedCallback(),
+                         base::NullCallback())));
+  // Step 1                       
   RegisterStep(
       Step::kIntro,
-      CreateIntroStep(
+      std::make_unique<JatterFreWelcomeStepController>(
           host(),
-          base::BindRepeating(&FirstRunFlowController::HandleIntroSigninChoice,
-                              weak_ptr_factory_.GetWeakPtr()),
-          /*enable_animations=*/true));
+          base::BindOnce(&FirstRunFlowController::SwitchToStep,
+                         weak_ptr_factory_.GetWeakPtr(),
+                         Step::kAccountSelection,
+                         /*reset_state=*/true,
+                         // Bind the default arguments explicitly so BindOnce 
+                         // resolves to a zero-argument base::OnceClosure
+                         StepSwitchFinishedCallback(),
+                         base::NullCallback())));
+  // Step 2
+  RegisterStep(
+      Step::kAccountSelection, 
+      std::make_unique<JatterFreSusiStepController>(
+          host(),
+          base::BindOnce(&FirstRunFlowController::SwitchToStep,
+                         weak_ptr_factory_.GetWeakPtr(),
+                         Step::kSearchEngineChoice,
+                         /*reset_state=*/true,
+                         // Bind the default arguments explicitly so BindOnce 
+                         // resolves to a zero-argument base::OnceClosure
+                         StepSwitchFinishedCallback(),
+                         base::NullCallback())));
   SwitchToStep(Step::kIntro, /*reset_state=*/true);
 
   signin_metrics::LogSignInOffered(

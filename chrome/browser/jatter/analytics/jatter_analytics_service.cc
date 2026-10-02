@@ -11,6 +11,7 @@
 #include "base/time/time.h"
 #include "chrome/browser/jatter/jatter_environment.h"
 #include "chrome/browser/jatter/jatter_firebase_client.h"
+#include "chrome/browser/jatter/jatter_firebase_client_factory.h"
 #include "chrome/browser/profiles/profile.h"
 #include "components/pref_registry/pref_registry_syncable.h"
 #include "components/prefs/pref_service.h"
@@ -176,7 +177,7 @@ void JatterAnalyticsService::FlushEvents() {
   event_queue_ = base::ListValue();
   queued_event_count_ = 0;
 
-  JatterFirebaseClient::GetInstance()->Invoke(
+  JatterFirebaseClientFactory::GetForProfile(profile_)->Invoke(
       profile_,
       [json_string, profile = profile_]() {
         const std::string endpoint_url = std::string(jatter::kBaseApiUrl) + "/logAnalyticEvents";

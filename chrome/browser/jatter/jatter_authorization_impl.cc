@@ -8,6 +8,8 @@
 #include "base/values.h"
 #include "chrome/browser/browser_process.h"
 #include "chrome/browser/jatter/jatter_environment.h"
+#include "chrome/browser/jatter/jatter_firebase_client_factory.h"
+#include "chrome/browser/jatter/jatter_firebase_client.h"
 #include "chrome/browser/jatter/jatter_token_storage.h"
 #include "chrome/browser/profiles/profile.h"
 #include "chrome/browser/rag_ingestion/rag_ingestion_service_factory.h"
@@ -117,6 +119,11 @@ class DownloadHelper : public base::RefCounted<DownloadHelper> {
 
           // Store tokens
           storage->SetTokens(*id_token, *refresh_token);
+
+          // Flush the network queue now that auth tokens exist
+          if (auto* client = JatterFirebaseClientFactory::GetForProfile(profile)) {
+            client->SetAuthReady();
+          }
         }
       }
 

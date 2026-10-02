@@ -43,9 +43,7 @@ IntroUI::IntroUI(content::WebUI* web_ui) : content::WebUIController(web_ui) {
       switches::IsFirstRunDesktopRefreshEnabled(
           is_in_search_engine_choice_region);
   webui::SetupWebUIDataSource(source, kIntroResources,
-                              is_first_run_desktop_refresh_enabled
-                                  ? IDR_INTRO_INTRO_REFRESH_HTML
-                                  : IDR_INTRO_INTRO_HTML);
+                              IDR_INTRO_JATTER_WELCOME_HTML);
 
   int title_id = IDS_FRE_SIGN_IN_TITLE_0;
 
@@ -138,6 +136,35 @@ IntroUI::IntroUI(content::WebUI* web_ui) : content::WebUIController(web_ui) {
 #if BUILDFLAG(GOOGLE_CHROME_BRANDING)
   source->AddResourcePath("images/gshield.svg", IDR_GSHIELD_ICON_SVG);
 #endif
+  
+  source->AddResourcePath("images/jatter_mascot.svg",
+                          IDR_INTRO_IMAGES_JATTER_MASCOT_SVG);
+  source->AddResourcePath("images/background.png",
+                          IDR_INTRO_IMAGES_BACKGROUND_PNG);
+  
+  source->AddResourcePath("jatter_susi_prompt.html", IDR_INTRO_JATTER_SUSI_PROMPT_HTML);
+  source->AddResourcePath("jatter_susi_prompt.css", IDR_INTRO_JATTER_SUSI_PROMPT_CSS);
+  source->AddResourcePath("jatter_susi_prompt.js", IDR_INTRO_JATTER_SUSI_PROMPT_JS);
+
+  source->AddResourcePath("jatter_welcome.html", IDR_INTRO_JATTER_WELCOME_HTML);
+  source->AddResourcePath("jatter_welcome.css", IDR_INTRO_JATTER_WELCOME_CSS);
+  source->AddResourcePath("jatter_welcome.js", IDR_INTRO_JATTER_WELCOME_JS);
+  source->AddResourcePath("susi", IDR_INTRO_JATTER_SUSI_PROMPT_HTML);
+
+  source->AddResourcePath("jatter_learn_settings.html", IDR_INTRO_JATTER_LEARN_SETTINGS_HTML);
+  source->AddResourcePath("jatter_learn_settings.css", IDR_INTRO_JATTER_LEARN_SETTINGS_CSS);
+  source->AddResourcePath("jatter_learn_settings.js", IDR_INTRO_JATTER_LEARN_SETTINGS_JS);
+  source->AddResourcePath("learn", IDR_INTRO_JATTER_LEARN_SETTINGS_HTML);
+
+  source->AddResourcePath("jatter_history_import.html", IDR_INTRO_JATTER_HISTORY_IMPORT_HTML);
+  source->AddResourcePath("jatter_history_import.css", IDR_INTRO_JATTER_HISTORY_IMPORT_CSS);
+  source->AddResourcePath("jatter_history_import.js", IDR_INTRO_JATTER_HISTORY_IMPORT_JS);
+  source->AddResourcePath("history", IDR_INTRO_JATTER_HISTORY_IMPORT_HTML);
+
+  source->AddResourcePath("jatter_plus.html", IDR_INTRO_JATTER_PLUS_HTML);
+  source->AddResourcePath("jatter_plus.css", IDR_INTRO_JATTER_PLUS_CSS);
+  source->AddResourcePath("jatter_plus.js", IDR_INTRO_JATTER_PLUS_JS);
+  source->AddResourcePath("plus", IDR_INTRO_JATTER_PLUS_HTML);
 
   // Unretained ok: `this` owns the handler.
   auto intro_handler = std::make_unique<IntroHandler>(

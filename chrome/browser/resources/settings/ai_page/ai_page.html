@@ -35,5 +35,11 @@
         role-description="$i18n{subpageArrowRoleDescription}"
         on-click="onTabOrganizationRowClick_">
     </cr-link-row>
+    <settings-toggle-button
+        id="jatterPersonalizationToggle"
+        pref="{{prefs.jatter.always_allow_personalization}}"
+        label="Learn from the sites you sign into"
+        sub-label="Jatter can learn from websites you sign in to so it can give you more personal, useful answers.">
+    </settings-toggle-button>
   </div>
 </settings-section>

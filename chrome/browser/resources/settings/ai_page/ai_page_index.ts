@@ -9,7 +9,7 @@
  */
 import 'chrome://resources/cr_elements/cr_view_manager/cr_view_manager.js';
 import '/shared/settings/prefs/prefs.js';
-import './ai_info_card.js';
+// import './ai_info_card.js';
 import './ai_page.js';
 import '../glic_page/glic_page.js';
 import '../glic_page/glic_subpage.js';
@@ -92,7 +92,7 @@ export class SettingsAiPageIndexElement extends SettingsAiPageIndexElementBase
   declare private showTabOrganizationControl_: boolean;
 
   private showDefaultViews_() {
-    const defaultViews: string[] = ['aiInfoCard'];
+    const defaultViews: string[] = [];
 
     if (this.showAiPageAiFeatureSection_) {
       defaultViews.push('parent');

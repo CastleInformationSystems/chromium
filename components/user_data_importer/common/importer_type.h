@@ -28,6 +28,7 @@ enum ImporterType {
 #if BUILDFLAG(IS_WIN)
   TYPE_EDGE = 6,
 #endif
+  TYPE_CHROME = 7,
 };
 
 }  // namespace user_data_importer

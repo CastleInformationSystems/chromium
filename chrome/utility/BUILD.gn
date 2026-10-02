@@ -95,6 +95,8 @@ static_library("utility") {
     sources += [
       "importer/bookmarks_file_importer.cc",
       "importer/bookmarks_file_importer.h",
+      "importer/chrome_importer.cc",
+      "importer/chrome_importer.h",
       "importer/external_process_importer_bridge.cc",
       "importer/external_process_importer_bridge.h",
       "importer/importer.cc",

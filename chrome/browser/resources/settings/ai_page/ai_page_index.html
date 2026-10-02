@@ -13,7 +13,6 @@
 
 <cr-view-manager id="viewManager" class="cr-centered-card-container"
     show-all$="[[shouldShowAll]]">
-  <settings-ai-info-card slot="view" id="aiInfoCard"></settings-ai-info-card>
 
   <template is="dom-if" if="[[showGlicSettings_]]">
     <settings-glic-page slot="view" id="glic" prefs="{{prefs}}">

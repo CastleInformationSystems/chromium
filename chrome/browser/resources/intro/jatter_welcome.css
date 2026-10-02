@@ -1,0 +1,97 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: #1f2024;
+  /* Replaced gradient with the new background PNG */
+  background: url('images/background.png') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.fre-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 480px;
+  width: 100%;
+}
+
+.mascot-logo {
+  width: 88px;
+  height: 88px;
+  border-radius: 24px;
+  box-shadow: 0 12px 24px rgba(110, 68, 255, 0.25);
+  margin-bottom: 24px;
+}
+
+.fre-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+}
+
+.fre-subtitle {
+  font-size: 16px;
+  color: #636674;
+  margin: 0 0 32px 0;
+}
+
+.fre-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #434656;
+  cursor: pointer;
+  user-select: none;
+}
+
+.fre-checkbox-label input[type='checkbox'] {
+  accent-color: #6e44ff;
+  width: 18px;
+  height: 18px;
+}
+
+.actions-wrapper {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.primary-button {
+  padding: 10px 24px;
+  border-radius: 100px; /* Pill shape matching the spec */
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  background-color: #6e44ff; /* Jatter Purple */
+  color: white;
+}
+
+.secondary-button {
+  padding: 10px 24px;
+  border-radius: 100px; /* Pill shape matching the spec */
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: transparent;
+  color: #1f2024;
+  border: 1px solid #d1d5db;
+}
+
+.primary-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(110, 68, 255, 0.45);
+}

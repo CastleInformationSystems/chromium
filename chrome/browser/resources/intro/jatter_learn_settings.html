@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Load the base layout, typography, button, and mascot styles from Step 1 -->
+  <link rel="stylesheet" href="jatter_welcome.css">
+  <!-- Load the Step 3 specific radio button styles -->
+  <link rel="stylesheet" href="jatter_learn_settings.css">
+</head>
+<body>
+  <div class="fre-container">
+    <div class="logo-wrapper">
+      <img src="images/jatter_mascot.svg" alt="Jatter" class="mascot-logo" />
+    </div>
+
+    <h1 class="fre-title">Learn from the sites you sign into?</h1>
+    <p class="fre-subtitle">Jatter can learn from websites you sign in to so it can give you more personal, useful answers. You control when this happens.</p>
+
+    <div class="radio-group">
+      <label class="fre-radio-label">
+        <input type="radio" name="learnSetting" id="alwaysAllow" value="always" checked />
+        <div class="radio-text">
+          <span class="radio-title">Always allow</span>
+          <span class="radio-desc">Let Jatter learn from signed in websites automatically</span>
+        </div>
+      </label>
+
+      <label class="fre-radio-label">
+        <input type="radio" name="learnSetting" id="askEachTime" value="ask" />
+        <div class="radio-text">
+          <span class="radio-title">Ask me each time</span>
+          <span class="radio-desc">Ask before Jatter learns from a signed in website</span>
+        </div>
+      </label>
+    </div>
+
+    <div class="actions-wrapper">
+      <button id="continueBtn" class="primary-button">Continue</button>
+    </div>
+  </div>
+
+  <script type="module" src="jatter_learn_settings.js"></script>
+</body>
+</html>

@@ -2222,6 +2222,10 @@ void RegisterProfilePrefs(user_prefs::PrefRegistrySyncable* registry,
 #endif  // BUILDFLAG(IS_ANDROID)
 
   registry->RegisterBooleanPref(prefs::kStaticStorageQuotaEnabled, false);
+  registry->RegisterBooleanPref(prefs::kJatterAlwaysAllowPersonalization, 
+                                /*default_value=*/true);
+  registry->RegisterBooleanPref(prefs::kJatterShowPlusUpgradeOnStartup, 
+                                /*default_value=*/false);
 }
 
 void RegisterUserProfilePrefs(user_prefs::PrefRegistrySyncable* registry) {

@@ -640,9 +640,9 @@ SettingsUI::SettingsUI(content::WebUI* web_ui)
   // features, the visibility of these are separately controlled but we want to
   // show the subpage if any of the AI features or Glic are enabled.
   html_source->AddBoolean("showAiPage",
-                          show_glic_section || show_ai_features_section);
+                          show_glic_section || show_ai_features_section || true);
   html_source->AddBoolean("showAiPageAiFeatureSection",
-                          show_ai_features_section);
+                          show_ai_features_section || true);
 
   html_source->AddBoolean(
       "enableSupportForHomeAndWork",

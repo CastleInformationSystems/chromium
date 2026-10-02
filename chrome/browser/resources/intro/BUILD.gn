@@ -13,15 +13,34 @@ build_webui("build") {
   static_files = [
     "default_browser/default_browser.html",
     "default_browser/default_browser_refresh.html",
+    "images/background.png",
     "images/default_browser_frame.svg",
     "images/default_browser_frame_dark.svg",
+    "images/import.svg",
+    "images/jatter_mascot.svg",
+    "images/jatter_mascot_plus.svg",
     "images/refresh_showcase_illustration_chromium.png",
     "intro.html",
     "intro_refresh.html",
+    "jatter_history_import.html",
+    "jatter_history_import.css",
+    "jatter_learn_settings.html",
+    "jatter_learn_settings.css",
+    "jatter_plus.html",
+    "jatter_plus.css",
+    "jatter_susi_prompt.html",
+    "jatter_susi_prompt.css",
+    "jatter_welcome.html",
+    "jatter_welcome.css",
   ]
 
   ts_files = [
     "browser_proxy.ts",
+    "jatter_history_import.ts",
+    "jatter_learn_settings.ts",
+    "jatter_plus.ts",
+    "jatter_susi_prompt.ts",
+    "jatter_welcome.ts",
     "default_browser/browser_proxy.ts",
   ]
 
