@@ -34,8 +34,10 @@
 #else
 #include "chrome/browser/ui/rag_ingestion/rag_ingestion_page_action_controller.h"
 #endif
+#include "chrome/common/pref_names.h"
 #include "components/embedder_support/user_agent_utils.h"
 #include "components/password_manager/core/browser/password_manager.h"
+#include "components/prefs/pref_service.h"
 #include "content/public/browser/browser_context.h"
 #include "content/public/common/mhtml_generation_params.h"
 #include "content/public/browser/navigation_handle.h"
@@ -692,9 +694,10 @@ void RagIngestionTabHelper::OnPermissionCheckComplete(
   // =========================================================================
   // 3. PLATFORM-SPECIFIC UI LOGIC
   // =========================================================================
+  bool always_allow = profile->GetPrefs()->GetBoolean(prefs::kJatterAlwaysAllowPersonalization);
+
 #if BUILDFLAG(IS_ANDROID)
   // --- ANDROID UI ---
-  // Ensure the Android controller is created to manage the adaptive toolbar button.
   RagIngestionControllerAndroid::CreateForWebContents(web_contents());
   auto* controller = RagIngestionControllerAndroid::FromWebContents(web_contents());
   if (!controller) return;
@@ -708,20 +711,23 @@ void RagIngestionTabHelper::OnPermissionCheckComplete(
   else if (info.status == RagIngestionService::BackendStatus::kUnknown) {
     RagIngestionService::UserPermission local_status = service->GetUserPermission(current_check_url_);
     
-    if (local_status == RagIngestionService::UserPermission::kGranted) {
+    if (local_status == RagIngestionService::UserPermission::kGranted || always_allow) {
       controller->ShowActiveState();
+      
+      // Auto-ingest if the backend didn't know about this allowed site
+      if (always_allow && local_status != RagIngestionService::UserPermission::kGranted) {
+        service->SetUserPermission(current_check_url_, RagIngestionService::UserPermission::kGranted);
+        IngestCurrentPage();
+      }
     } else if (local_status == RagIngestionService::UserPermission::kDenied) {
       controller->ShowDisabledState();
     } else {
-      // For undecided pages, trigger the ephemeral bottom sheet offer prompt
       controller->ShowOfferPrompt(current_check_url_); 
     }
   }
 
 #else
   // --- DESKTOP UI ---
-  // Desktop has a persistent Omnibox icon that must be initialized and updated 
-  // for every state.
   RagIngestionPageActionController::CreateForWebContents(web_contents());
   auto* controller = RagIngestionPageActionController::FromWebContents(web_contents());
   if (!controller) return;
@@ -737,8 +743,15 @@ void RagIngestionTabHelper::OnPermissionCheckComplete(
   else if (info.status == RagIngestionService::BackendStatus::kUnknown) {
     RagIngestionService::UserPermission local_status = service->GetUserPermission(current_check_url_);
     
-    if (local_status == RagIngestionService::UserPermission::kGranted) {
+    if (local_status == RagIngestionService::UserPermission::kGranted || always_allow) {
       controller->ShowActiveState();
+      
+      // Auto-ingest if the backend didn't know about this allowed site
+      if (always_allow && local_status != RagIngestionService::UserPermission::kGranted) {
+        // Sync to local settings so we don't have to rely purely on the global pref next time
+        service->SetUserPermission(current_check_url_, RagIngestionService::UserPermission::kGranted);
+        IngestCurrentPage();
+      }
     } else if (local_status == RagIngestionService::UserPermission::kDenied) {
       controller->ShowDisabledState();
     } else {

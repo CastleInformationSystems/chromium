@@ -2223,7 +2223,7 @@ void RegisterProfilePrefs(user_prefs::PrefRegistrySyncable* registry,
 
   registry->RegisterBooleanPref(prefs::kStaticStorageQuotaEnabled, false);
   registry->RegisterBooleanPref(prefs::kJatterAlwaysAllowPersonalization, 
-                                /*default_value=*/true);
+                                /*default_value=*/false);
   registry->RegisterBooleanPref(prefs::kJatterShowPlusUpgradeOnStartup, 
                                 /*default_value=*/false);
 }

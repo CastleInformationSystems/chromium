@@ -84,10 +84,13 @@ RagIngestionBubbleView::RagIngestionBubbleView(
   set_fixed_width(bubble_width);
 
   bool is_disabled = false;
+  bool is_active = false;
   
   auto* controller = RagIngestionPageActionController::FromWebContents(web_contents_.get());
   if (controller) {
     is_disabled = (controller->GetIconState() == RagIngestionPageActionController::IconState::kDisabled);
+    // Grab the active state from the controller
+    is_active = (controller->GetIconState() == RagIngestionPageActionController::IconState::kActive);
   }
 
   Profile* profile = Profile::FromBrowserContext(web_contents->GetBrowserContext());
@@ -95,7 +98,7 @@ RagIngestionBubbleView::RagIngestionBubbleView(
       prefs::kJatterAlwaysAllowPersonalization);
 
   // If the user selected "Always allow" in Step 3 or Settings, bypass the permission prompt
-  if (show_management_ui || is_disabled || always_allow) {
+  if (show_management_ui || is_disabled || is_active || always_allow) {
     BuildActiveUI(); // State B: Already Allowed (Management)
   } else {
     BuildPermissionUI(); // State A: Requesting Permission
@@ -212,7 +215,7 @@ void RagIngestionBubbleView::BuildActiveUI() {
   }
 
   Profile* profile = Profile::FromBrowserContext(web_contents_->GetBrowserContext());
-  is_enabled  = profile->GetPrefs()->GetBoolean(
+  is_enabled |= profile->GetPrefs()->GetBoolean(
       prefs::kJatterAlwaysAllowPersonalization);
 
   std::string host = info.canonical_host.empty() ? 
