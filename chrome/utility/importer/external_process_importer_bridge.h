@@ -54,6 +54,9 @@ class ExternalProcessImporterBridge : public ImporterBridge {
   void SetHistoryItems(
       const std::vector<user_data_importer::ImporterURLRow>& rows,
       user_data_importer::VisitSource visit_source) override;
+  
+  void SetHistoryVisits(
+        std::vector<chrome::mojom::ImporterVisitRowPtr> visits) override;
 
   void SetKeywords(
       const std::vector<user_data_importer::SearchEngineInfo>& search_engines,

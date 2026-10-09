@@ -152,6 +152,16 @@ void ExternalProcessImporterClient::OnHistoryImportGroup(
         static_cast<user_data_importer::VisitSource>(visit_source));
 }
 
+void ExternalProcessImporterClient::OnHistoryVisitImportGroup(
+    std::vector<chrome::mojom::ImporterVisitRowPtr> history_visit_rows_group) {
+  if (cancelled_)
+    return;
+
+  // Pass the batch down to the InProcessImporterBridge 
+  // (which will hold the translation map and inject it into the database)
+  bridge_->SetHistoryVisits(std::move(history_visit_rows_group));
+}
+
 void ExternalProcessImporterClient::OnHomePageImportReady(
     const GURL& home_page) {
   if (cancelled_)

@@ -102,6 +102,12 @@ void ExternalProcessImporterBridge::SetHistoryItems(
   DCHECK_EQ(0, rows_left);
 }
 
+void ExternalProcessImporterBridge::SetHistoryVisits(
+    std::vector<chrome::mojom::ImporterVisitRowPtr> visits) {
+  // Pass the data over the Mojo pipe to ExternalProcessImporterClient
+  observer_->OnHistoryVisitImportGroup(std::move(visits));
+}
+
 void ExternalProcessImporterBridge::SetKeywords(
     const std::vector<user_data_importer::SearchEngineInfo>& search_engines,
     bool unique_on_host_and_path) {

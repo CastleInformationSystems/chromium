@@ -30,6 +30,7 @@
 #include "components/bookmarks/common/bookmark_pref_names.h"
 #include "components/favicon/core/favicon_service.h"
 #include "components/history/core/browser/history_service.h"
+#include "components/history/core/browser/history_types.h"
 #include "components/password_manager/core/browser/password_form.h"
 #include "components/password_manager/core/browser/password_store/password_store_interface.h"
 #include "components/password_manager/core/common/password_manager_pref_names.h"
@@ -105,6 +106,41 @@ void ProfileWriter::AddHistoryPage(const history::URLRows& page,
     HistoryServiceFactory::GetForProfile(profile_,
                                          ServiceAccessType::EXPLICIT_ACCESS)
         ->AddPagesWithDetails(page, visit_source);
+  }
+}
+
+void ProfileWriter::AddHistoryVisits(
+    std::vector<chrome::mojom::ImporterVisitRowPtr> visits) {
+  if (visits.empty()) {
+    return;
+  }
+
+  history::HistoryService* history_service =
+      HistoryServiceFactory::GetForProfile(profile_,
+                                           ServiceAccessType::EXPLICIT_ACCESS);
+  if (history_service) {
+    // Translate from the chrome::mojom layer to the components/history layer
+    std::vector<history::ImportedExternalVisit> history_visits;
+    history_visits.reserve(visits.size());
+    
+    for (const auto& mojo_row : visits) {
+      history::ImportedExternalVisit row;
+      row.url = mojo_row->url;
+      row.title = mojo_row->title;
+      row.visit_count = mojo_row->visit_count;
+      row.typed_count = mojo_row->typed_count;
+      row.hidden = mojo_row->hidden;
+      row.source_visit_id = mojo_row->source_visit_id;
+      row.source_from_visit_id = mojo_row->source_from_visit_id;
+      row.visit_time = mojo_row->visit_time;
+      row.visit_duration = mojo_row->visit_duration;
+      row.transition = mojo_row->transition;
+      row.external_referrer_url = mojo_row->external_referrer_url;
+      
+      history_visits.push_back(std::move(row));
+    }
+
+    history_service->AddImportedVisits(std::move(history_visits));
   }
 }
 

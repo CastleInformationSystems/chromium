@@ -51,6 +51,9 @@ class InProcessImporterBridge : public ImporterBridge {
 
   void SetAutofillFormData(
       const std::vector<ImporterAutofillFormDataEntry>& entries) override;
+  
+  void SetHistoryVisits(
+    std::vector<chrome::mojom::ImporterVisitRowPtr> visits) override;
 
   void NotifyStarted() override;
   void NotifyItemStarted(user_data_importer::ImportItem item) override;

@@ -1561,6 +1561,71 @@ void HistoryBackend::AddPagesWithDetails(const URLRows& urls,
   ScheduleCommit();
 }
 
+void HistoryBackend::AddImportedVisits(
+    std::vector<history::ImportedExternalVisit> visits) {
+  if (!db_) {
+    return;
+  }
+
+  for (const auto& row : visits) {
+    history::URLRow local_url_row;
+    history::URLID local_url_id = db_->GetRowForURL(row.url, &local_url_row);
+    
+    if (local_url_id == 0) {
+      local_url_row = history::URLRow(row.url);
+      local_url_row.set_title(row.title);
+      local_url_row.set_visit_count(row.visit_count);
+      local_url_row.set_typed_count(row.typed_count);
+      local_url_row.set_hidden(row.hidden);
+      local_url_row.set_last_visit(row.visit_time);  // Populate last_visit
+      local_url_id = db_->AddURL(local_url_row);
+    } else {
+      // Update existing URL with the latest metadata
+      if (row.visit_time > local_url_row.last_visit()) {
+        local_url_row.set_last_visit(row.visit_time);
+      }
+      if (local_url_row.title().empty() && !row.title.empty()) {
+        local_url_row.set_title(row.title);
+      }
+      local_url_row.set_visit_count(local_url_row.visit_count() + 1);
+      db_->UpdateURLRow(local_url_id, local_url_row);
+    }
+
+    history::VisitID local_from_visit = 0;
+    if (row.source_from_visit_id != 0) {
+      auto it = imported_visit_id_mapper_.find(row.source_from_visit_id);
+      if (it != imported_visit_id_mapper_.end()) {
+        local_from_visit = it->second;
+      }
+    }
+
+    // Ensure transition contains CHAIN_START | CHAIN_END (0x30000000)
+    // so VisitDatabase::GetVisibleVisitsInRange does not filter it out
+    int transition_int = row.transition;
+    if ((transition_int & ui::PAGE_TRANSITION_CHAIN_END) == 0) {
+      transition_int |= (ui::PAGE_TRANSITION_CHAIN_START | ui::PAGE_TRANSITION_CHAIN_END);
+    }
+
+    history::VisitRow new_visit;
+    new_visit.url_id = local_url_id;
+    new_visit.visit_time = row.visit_time;
+    new_visit.referring_visit = local_from_visit;
+    new_visit.external_referrer_url = GURL(row.external_referrer_url);
+    new_visit.transition = ui::PageTransitionFromInt(transition_int);
+    new_visit.visit_duration = row.visit_duration;
+    new_visit.source = history::SOURCE_BROWSED;
+
+    history::VisitID local_visit_id = db_->AddVisit(&new_visit);
+
+    if (local_visit_id != 0) {
+      imported_visit_id_mapper_[row.source_visit_id] = local_visit_id;
+    }
+  }
+
+  // Commit SQLite transaction to disk
+  ScheduleCommit();
+}
+
 bool HistoryBackend::IsExpiredVisitTime(const base::Time& time) const {
   return time < expirer_.GetCurrentExpirationTime();
 }

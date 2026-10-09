@@ -22,6 +22,19 @@ static constexpr float kScoreEpsilon = 1e-8;
 
 }  // namespace
 
+ImportedExternalVisit::ImportedExternalVisit() = default;
+
+ImportedExternalVisit::ImportedExternalVisit(
+    const ImportedExternalVisit& other) = default;
+
+ImportedExternalVisit::ImportedExternalVisit(
+    ImportedExternalVisit&& other) noexcept = default;
+
+ImportedExternalVisit& ImportedExternalVisit::operator=(
+    const ImportedExternalVisit& other) = default;
+
+ImportedExternalVisit::~ImportedExternalVisit() = default;
+
 // VisitRow --------------------------------------------------------------------
 
 VisitRow::VisitRow() = default;

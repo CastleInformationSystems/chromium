@@ -28,6 +28,7 @@
 #include "components/user_data_importer/utility/bookmark_parser.h"
 #include "sql/database.h"
 #include "sql/statement.h"
+#include "ui/base/page_transition_types.h"
 #include "url/gurl.h"
 
 #if !BUILDFLAG(IS_MAC)
@@ -172,45 +173,75 @@ void FirefoxImporter::ImportHistory() {
   if (!db.Open(file))
     return;
 
-  // |visit_type| represent the transition type of URLs (typed, click,
-  // redirect, bookmark, etc.) We eliminate some URLs like sub-frames and
-  // redirects, since we don't want them to appear in history.
-  // Firefox transition types are defined in:
-  //   toolkit/components/places/nsINavHistoryService.idl
-  const char query[] =
-      "SELECT h.url, h.title, h.visit_count, "
-      "h.hidden, h.typed, v.visit_date "
-      "FROM moz_places h JOIN moz_historyvisits v "
-      "ON h.id = v.place_id "
-      "WHERE v.visit_type <= 3";
+  // 1. Join moz_places for URL details
+  // 2. Join moz_historyvisits in chronological order (uses moz_historyvisits_dateindex)
+  // 3. Left Join moz_places as 'ref' to resolve triggeringPlaceId to a referrer URL
+  const char kHistoryQuery[] =
+      "SELECT h.url, h.title, h.visit_count, h.typed, h.hidden, "
+      "v.id, v.from_visit, v.visit_date, v.visit_type, "
+      "ref.url "
+      "FROM moz_places h "
+      "JOIN moz_historyvisits v ON h.id = v.place_id "
+      "LEFT JOIN moz_places ref ON ref.id = v.triggeringPlaceId "
+      "WHERE v.visit_type <= 3 "
+      "ORDER BY v.visit_date ASC";
 
-  sql::Statement s(db.GetUniqueStatement(query));
+  sql::Statement s(db.GetUniqueStatement(kHistoryQuery));
   if (!s.is_valid()) {
     return;
   }
 
-  std::vector<user_data_importer::ImporterURLRow> rows;
+  std::vector<chrome::mojom::ImporterVisitRowPtr> visit_batch;
+  constexpr size_t kMaxBatchSize = 1500;
+
   while (s.Step() && !cancelled()) {
     GURL url(s.ColumnStringView(0));
 
-    // Filter out unwanted URLs.
     if (!CanImportURL(url)) {
       continue;
     }
 
-    user_data_importer::ImporterURLRow row(url);
-    row.title = s.ColumnString16(1);
-    row.visit_count = s.ColumnInt(2);
-    row.hidden = s.ColumnInt(3) == 1;
-    row.typed_count = s.ColumnInt(4);
-    row.last_visit = base::Time::FromTimeT(s.ColumnInt64(5)/1000000);
+    auto row = chrome::mojom::ImporterVisitRow::New();
+    row->url = url;
+    row->title = s.ColumnString16(1);
+    row->visit_count = s.ColumnInt(2);
+    row->typed_count = s.ColumnInt(3);
+    row->hidden = (s.ColumnInt(4) == 1);
 
-    rows.push_back(row);
+    // Granular visit IDs
+    row->source_visit_id = s.ColumnInt64(5);
+    row->source_from_visit_id = s.ColumnInt64(6);
+
+    // PRTime: Microseconds since Unix Epoch (1970-01-01)
+    row->visit_time = base::Time::UnixEpoch() + base::Microseconds(s.ColumnInt64(7));
+    row->visit_duration = base::Microseconds(0);
+
+    // Map Firefox transitions
+    int ff_visit_type = s.ColumnInt(8);
+    int transition = ui::PAGE_TRANSITION_LINK;
+    if (ff_visit_type == 2) {
+      transition = ui::PAGE_TRANSITION_TYPED;
+    } else if (ff_visit_type == 3) {
+      transition = ui::PAGE_TRANSITION_AUTO_BOOKMARK;
+    }
+    // Qualify as both start and end of navigation chain
+    transition |= (ui::PAGE_TRANSITION_CHAIN_START | ui::PAGE_TRANSITION_CHAIN_END);
+    row->transition = transition;
+
+    // Extracted from triggeringPlaceId lookup (empty string if NULL)
+    row->external_referrer_url = s.ColumnString(9);
+
+    visit_batch.push_back(std::move(row));
+
+    if (visit_batch.size() >= kMaxBatchSize) {
+      bridge_->SetHistoryVisits(std::move(visit_batch));
+      visit_batch = std::vector<chrome::mojom::ImporterVisitRowPtr>();
+    }
   }
 
-  if (!rows.empty() && !cancelled())
-    bridge_->SetHistoryItems(rows,
-                             user_data_importer::VISIT_SOURCE_FIREFOX_IMPORTED);
+  if (!visit_batch.empty() && !cancelled()) {
+    bridge_->SetHistoryVisits(std::move(visit_batch));
+  }
 }
 
 void FirefoxImporter::ImportBookmarks() {

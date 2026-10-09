@@ -39,6 +39,7 @@
 #include "components/history/core/browser/sync/history_backend_for_sync.h"
 #include "components/history/core/browser/visit_tracker.h"
 #include "components/sync/service/sync_service.h"
+#include "components/user_data_importer/common/importer_visit_row.h"
 #include "sql/init_status.h"
 #include "url/origin.h"
 
@@ -818,6 +819,9 @@ class HistoryBackend : public base::RefCountedThreadSafe<HistoryBackend>,
   // Each visit will have the visit_source type set.
   void AddPagesWithDetails(const URLRows& info, VisitSource visit_source);
 
+  void AddImportedVisits(
+    std::vector<history::ImportedExternalVisit> visits);
+
 #if defined(UNIT_TEST)
   HistoryDatabase* db() const { return db_.get(); }
 
@@ -1161,6 +1165,10 @@ class HistoryBackend : public base::RefCountedThreadSafe<HistoryBackend>,
 
   // Whether segments data should include foreign history.
   bool can_add_foreign_visits_to_segments_ = false;
+
+  // Maintains the old-to-new ID mapping across multiple imported batches.
+  // Maps [Chrome/Edge visit_id] -> [Jatter visit_id]
+  std::map<int64_t, history::VisitID> imported_visit_id_mapper_;
 };
 
 }  // namespace history

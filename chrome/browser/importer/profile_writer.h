@@ -11,9 +11,11 @@
 #include "base/memory/raw_ptr.h"
 #include "base/memory/ref_counted.h"
 #include "build/build_config.h"
+#include "chrome/common/importer/profile_import.mojom.h"
 #include "components/favicon_base/favicon_usage_data.h"
 #include "components/history/core/browser/history_types.h"
 #include "components/search_engines/template_url_service.h"
+#include "components/user_data_importer/common/importer_visit_row.h"
 #include "url/gurl.h"
 
 class Profile;
@@ -50,6 +52,8 @@ class ProfileWriter : public base::RefCountedThreadSafe<ProfileWriter> {
 
   virtual void AddHistoryPage(const history::URLRows& page,
                               history::VisitSource visit_source);
+  virtual void AddHistoryVisits(
+    std::vector<chrome::mojom::ImporterVisitRowPtr> visits);
 
   virtual void AddHomepage(const GURL& homepage);
 

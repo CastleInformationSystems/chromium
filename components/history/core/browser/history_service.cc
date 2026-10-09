@@ -898,6 +898,19 @@ void HistoryService::AddPagesWithDetails(const URLRows& info,
                               history_backend_, info, visit_source));
 }
 
+void HistoryService::AddImportedVisits(
+    std::vector<history::ImportedExternalVisit> visits) {
+  DCHECK_CALLED_ON_VALID_SEQUENCE(sequence_checker_);
+  
+  if (history_backend_) {
+    // Now std::move() can successfully strip the vector's contents 
+    // and hand ownership to the background thread.
+    ScheduleTask(PRIORITY_NORMAL,
+                 base::BindOnce(&history::HistoryBackend::AddImportedVisits,
+                                history_backend_, std::move(visits)));
+  }
+}
+
 base::CancelableTaskTracker::TaskId HistoryService::GetFavicon(
     const GURL& icon_url,
     favicon_base::IconType icon_type,

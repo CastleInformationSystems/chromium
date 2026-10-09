@@ -79,6 +79,26 @@ inline constexpr std::optional<std::string> kNoAppIdFilter;
 // `clusters_and_visits` SQL tables.
 using ClusterId = base::IdType64<class ClusterIdTag>;
 
+struct ImportedExternalVisit {
+  ImportedExternalVisit();
+  ImportedExternalVisit(const ImportedExternalVisit& other);
+  ImportedExternalVisit(ImportedExternalVisit&& other) noexcept;
+  ImportedExternalVisit& operator=(const ImportedExternalVisit& other);
+  ~ImportedExternalVisit();
+
+  GURL url;
+  std::u16string title;
+  int visit_count = 0;
+  int typed_count = 0;
+  bool hidden = false;
+  int64_t source_visit_id = 0;
+  int64_t source_from_visit_id = 0;
+  base::Time visit_time;
+  base::TimeDelta visit_duration;
+  int transition = 0;
+  std::string external_referrer_url;
+};
+
 // VisitRow -------------------------------------------------------------------
 
 // Holds all information associated with a specific visit. A visit holds time

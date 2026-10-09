@@ -5,6 +5,7 @@
 module chrome.mojom;
 
 import "mojo/public/mojom/base/string16.mojom";
+import "mojo/public/mojom/base/time.mojom";
 import "sandbox/policy/mojom/sandbox.mojom";
 import "url/mojom/url.mojom";
 
@@ -31,6 +32,20 @@ struct ImporterIE7PasswordInfo;
 
 [Native]
 enum ImportItem;
+
+struct ImporterVisitRow {
+  url.mojom.Url url;
+  mojo_base.mojom.String16 title;
+  int32 visit_count;
+  int32 typed_count;
+  bool hidden;
+  int64 source_visit_id;
+  int64 source_from_visit_id;
+  mojo_base.mojom.Time visit_time;
+  mojo_base.mojom.TimeDelta visit_duration;
+  int32 transition;
+  string external_referrer_url;
+};
 
 // Represents information about an imported password form. Typemapped to
 // importer::ImportedPasswordForm.
@@ -68,6 +83,7 @@ interface ProfileImportObserver {
   OnHistoryImportGroup(
       array<ImporterURLRow> history_rows_group,
       int32 visit_source);
+  OnHistoryVisitImportGroup(array<ImporterVisitRow> history_visit_rows_group);
   OnHomePageImportReady(url.mojom.Url home_page);
   OnBookmarksImportStart(
       mojo_base.mojom.String16 first_folder_name,
@@ -101,3 +117,4 @@ interface ProfileImport {
   // Tell the importer that we're done with one item.
   ReportImportItemFinished(ImportItem item);
 };
+

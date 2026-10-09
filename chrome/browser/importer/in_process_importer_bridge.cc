@@ -167,6 +167,14 @@ void InProcessImporterBridge::SetAutofillFormData(
   writer_->AddAutocompleteFormDataEntries(autocomplete_entries);
 }
 
+void InProcessImporterBridge::SetHistoryVisits(
+    std::vector<chrome::mojom::ImporterVisitRowPtr> visits) {
+  if (visits.empty())
+    return;
+
+  writer_->AddHistoryVisits(std::move(visits));
+}
+
 void InProcessImporterBridge::NotifyStarted() {
   host_->NotifyImportStarted();
 }

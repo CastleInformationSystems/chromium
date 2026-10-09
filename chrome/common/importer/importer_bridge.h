@@ -10,6 +10,7 @@
 
 #include "base/memory/ref_counted.h"
 #include "build/build_config.h"
+#include "chrome/common/importer/profile_import.mojom.h"
 #include "components/favicon_base/favicon_usage_data.h"
 #include "components/user_data_importer/common/importer_data_types.h"
 #include "components/user_data_importer/common/importer_url_row.h"
@@ -50,6 +51,9 @@ class ImporterBridge : public base::RefCountedThreadSafe<ImporterBridge> {
 
   virtual void SetAutofillFormData(
       const std::vector<ImporterAutofillFormDataEntry>& entries) = 0;
+  
+  virtual void SetHistoryVisits(
+    std::vector<chrome::mojom::ImporterVisitRowPtr> visits) = 0;
 
   // Notifies the coordinator that the import operation has begun.
   virtual void NotifyStarted() = 0;

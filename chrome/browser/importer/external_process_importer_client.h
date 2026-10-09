@@ -62,6 +62,8 @@ class ExternalProcessImporterClient
   void OnHistoryImportGroup(
       const std::vector<user_data_importer::ImporterURLRow>& history_rows_group,
       int visit_source) override;
+  void OnHistoryVisitImportGroup(
+      std::vector<chrome::mojom::ImporterVisitRowPtr> history_visit_rows_group) override;
   void OnHomePageImportReady(const GURL& home_page) override;
   void OnBookmarksImportStart(const std::u16string& first_folder_name,
                               uint32_t total_bookmarks_count) override;

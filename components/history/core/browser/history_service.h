@@ -45,6 +45,7 @@
 #include "components/sync_device_info/device_info.h"
 #include "components/sync_device_info/device_info_tracker.h"
 #include "components/sync_device_info/local_device_info_provider.h"
+#include "components/user_data_importer/common/importer_visit_row.h"
 #include "sql/init_status.h"
 #include "ui/base/page_transition_types.h"
 
@@ -790,6 +791,9 @@ class HistoryService : public KeyedService,
 
   // The same as AddPageWithDetails() but takes a vector.
   void AddPagesWithDetails(const URLRows& info, VisitSource visit_source);
+
+  void AddImportedVisits(
+    std::vector<history::ImportedExternalVisit> visits);
 
   base::SafeRef<HistoryService> AsSafeRef();
 

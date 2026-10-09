@@ -33,8 +33,11 @@ void ChromeImporter::Cancel() {
 }
 
 void ChromeImporter::ImportHistory() {
-  base::FilePath history_path = source_path_.AppendASCII("Default")
-                                            .AppendASCII("History");
+  // Support both direct profile directories and User Data roots.
+  base::FilePath history_path = source_path_.AppendASCII("History");
+  if (!base::PathExists(history_path)) {
+    history_path = source_path_.AppendASCII("Default").AppendASCII("History");
+  }
 
   if (!base::PathExists(history_path)) {
     return;
@@ -50,42 +53,67 @@ void ChromeImporter::ImportHistory() {
     return;
   }
 
-  // FIX 1: Use a whitelisted tag string that the compiler recognizes
+  // Copy WAL and SHM files to replay uncommitted transactions safely
+  base::FilePath wal_source = history_path.AddExtension(FILE_PATH_LITERAL("-wal"));
+  if (base::PathExists(wal_source)) {
+    base::CopyFile(wal_source, temp_dir.GetPath().AppendASCII("History-wal"));
+  }
+
+  base::FilePath shm_source = history_path.AddExtension(FILE_PATH_LITERAL("-shm"));
+  if (base::PathExists(shm_source)) {
+    base::CopyFile(shm_source, temp_dir.GetPath().AppendASCII("History-shm"));
+  }
+
   sql::Database db(sql::Database::Tag{"History"});
-  
   if (!db.Open(temp_history_path)) {
     return;
   }
 
+  // CRITICAL: We MUST JOIN the tables and ORDER BY v.visit_time ASC.
+  // This guarantees that when the browser process rebuilds the graph,
+  // a parent visit is fully ingested and mapped before its child arrives.
   const char kHistoryQuery[] =
-      "SELECT url, title, visit_count, typed_count, last_visit_time, hidden "
-      "FROM urls WHERE hidden = 0";
+      "SELECT u.url, u.title, u.visit_count, u.typed_count, u.hidden, "
+      "v.id, v.from_visit, v.visit_time, v.visit_duration, v.transition, v.external_referrer_url "
+      "FROM visits v "
+      "JOIN urls u ON v.url = u.id "
+      "WHERE u.hidden = 0 "
+      "ORDER BY v.visit_time ASC";
 
   sql::Statement s(db.GetUniqueStatement(kHistoryQuery));
 
-  // FIX 2: Use the IPC-safe ImporterURLRow struct from your custom namespace
-  std::vector<user_data_importer::ImporterURLRow> rows;
-  
+  std::vector<chrome::mojom::ImporterVisitRowPtr> visit_batch;
+  constexpr size_t kMaxBatchSize = 1500; 
+
   while (s.Step() && !cancelled_) {
     GURL url(s.ColumnString(0));
+    if (!url.is_valid() || url.SchemeIsFile()) continue;
+
+    // Mojo creates a smart pointer for us
+    auto row = chrome::mojom::ImporterVisitRow::New();
     
-    if (!url.is_valid() || url.SchemeIsFile()) {
-      continue;
+    row->url = url;
+    row->title = s.ColumnString16(1);
+    row->visit_count = s.ColumnInt(2);
+    row->typed_count = s.ColumnInt(3);
+    row->hidden = (s.ColumnInt(4) != 0);
+    row->source_visit_id = s.ColumnInt64(5);
+    row->source_from_visit_id = s.ColumnInt64(6);
+    row->visit_time = base::Time::FromInternalValue(s.ColumnInt64(7));
+    row->visit_duration = base::Microseconds(s.ColumnInt64(8));
+    row->transition = s.ColumnInt(9);
+    row->external_referrer_url = s.ColumnString(10);
+
+    visit_batch.push_back(std::move(row));
+
+    if (visit_batch.size() >= kMaxBatchSize) {
+      // Move the batch over the bridge and prep a fresh vector
+      bridge_->SetHistoryVisits(std::move(visit_batch));
+      visit_batch = std::vector<chrome::mojom::ImporterVisitRowPtr>();
     }
-
-    user_data_importer::ImporterURLRow row;
-    row.url = url;
-    row.title = s.ColumnString16(1);
-    row.visit_count = s.ColumnInt(2);
-    row.typed_count = s.ColumnInt(3);
-    row.last_visit = base::Time::FromInternalValue(s.ColumnInt64(4));
-    row.hidden = (s.ColumnInt(5) != 0);
-
-    rows.push_back(row);
   }
 
-  if (!rows.empty() && !cancelled_) {
-    // FIX 3: Use the user_data_importer namespace for the VisitSource enum
-    bridge_->SetHistoryItems(rows, user_data_importer::VISIT_SOURCE_FIREFOX_IMPORTED);
+  if (!visit_batch.empty() && !cancelled_) {
+    bridge_->SetHistoryVisits(std::move(visit_batch));
   }
 }
