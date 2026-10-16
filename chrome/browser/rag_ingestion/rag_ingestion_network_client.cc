@@ -14,6 +14,7 @@
 #include "base/strings/string_util.h"
 #include "base/strings/utf_string_conversions.h"
 #include "base/uuid.h" // For generating random GUIDs
+#include "chrome/browser/jatter/encryption/jatter_encryptor.h"
 #include "chrome/browser/jatter/jatter_environment.h"
 #include "chrome/browser/jatter/jatter_firebase_client.h"
 #include "chrome/browser/jatter/jatter_firebase_client_factory.h"
@@ -168,6 +169,30 @@ void RagIngestionNetworkClient::SetIngestionPermission(const GURL& url,
      }
   }
 
+  std::optional<std::string> pk = JatterTokenStorage::GetOrCreate(profile_)->GetPrivateKey();
+  std::optional<std::string> sig = JatterTokenStorage::GetOrCreate(profile_)->GetPrivateKeySignature();
+
+  if (sig) payload.Set("keySignature", *sig);
+
+  if (pk) {
+    payload.Set("encryptedUrl", JatterEncryptor::Encrypt(url_spec, *pk));
+    payload.Set("encryptedSiteName", JatterEncryptor::Encrypt(safe_site_name, *pk));
+    
+    // canonicalHost: lowercase, no www.
+    std::string host = std::string(url.host());
+    if (base::StartsWith(host, "www.", base::CompareCase::INSENSITIVE_ASCII)) {
+      host = host.substr(4);
+    }
+    payload.Set("encryptedHost", JatterEncryptor::Encrypt(host, *pk));
+
+    if (!metadata.title.empty()) payload.Set("encryptedTitle", JatterEncryptor::Encrypt(metadata.title, *pk));
+    if (!metadata.description.empty()) payload.Set("encryptedDescription", JatterEncryptor::Encrypt(metadata.description, *pk));
+    if (!metadata.keywords.empty()) payload.Set("encryptedKeywords", JatterEncryptor::Encrypt(metadata.keywords, *pk));
+    if (!metadata.icon_base64.empty() && metadata.icon_base64.length() < 140000) {
+      payload.Set("encryptedIcon", JatterEncryptor::Encrypt(metadata.icon_base64, *pk));
+    }
+  }
+
   MakeAuthorizedRequest(
       GURL(std::string(jatter::kBaseApiUrl) + "/setIngestionPermission"), 
       "POST",
@@ -279,6 +304,17 @@ void RagIngestionNetworkClient::UploadRawDocument(
   multipart_body += "--" + boundary + "\r\n";
   multipart_body += "Content-Disposition: form-data; name=\"profileGuid\"\r\n\r\n";
   multipart_body += GetProfileGuid() + "\r\n";
+
+  std::optional<std::string> pk = JatterTokenStorage::GetOrCreate(profile_)->GetPrivateKey();
+  std::optional<std::string> sig = JatterTokenStorage::GetOrCreate(profile_)->GetPrivateKeySignature();
+  
+  if (sig) {
+    multipart_body += "--" + boundary + "\r\nContent-Disposition: form-data; name=\"keySignature\"\r\n\r\n" + *sig + "\r\n";
+  }
+  if (pk) {
+    multipart_body += "--" + boundary + "\r\nContent-Disposition: form-data; name=\"encryptedUrl\"\r\n\r\n" + JatterEncryptor::Encrypt(url.spec(), *pk) + "\r\n";
+    multipart_body += "--" + boundary + "\r\nContent-Disposition: form-data; name=\"encryptedPageTitle\"\r\n\r\n" + JatterEncryptor::Encrypt(page_title, *pk) + "\r\n";
+  }
   
   // Add pageTitle
   multipart_body += "--" + boundary + "\r\n";
@@ -307,6 +343,11 @@ void RagIngestionNetworkClient::IngestEncryptedDocument(
   // Append backend tracking identifiers to the JSON structure
   document_text_json.Set("profileGuid", GetProfileGuid());
   document_text_json.Set("url", url.spec());
+
+  std::optional<std::string> sig = JatterTokenStorage::GetOrCreate(profile_)->GetPrivateKeySignature();
+  if (sig) {
+    document_text_json.Set("keySignature", *sig);
+  }
 
   // Adapter to convert ApiCallback to OnceClosure since the expected response is just a 200 OK (empty) [cite: 50]
   auto callback_adapter = base::BindOnce(

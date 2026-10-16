@@ -1,7 +1,10 @@
 #ifndef CHROME_UTILITY_IMPORTER_CHROME_IMPORTER_H_
 #define CHROME_UTILITY_IMPORTER_CHROME_IMPORTER_H_
 
+#include <string>
+
 #include "base/files/file_path.h"
+#include "base/files/scoped_temp_dir.h"
 #include "chrome/utility/importer/importer.h"
 
 class ChromeImporter : public Importer {
@@ -21,8 +24,14 @@ class ChromeImporter : public Importer {
   ~ChromeImporter() override;
 
   void ImportHistory();
+  void ImportBookmarks();
+  void ImportAutofillFormData();
+
+  // Copies an SQLite database (and its WAL/SHM logs) to temp_dir_ to bypass live locks.
+  base::FilePath GetCopiedSQLiteDb(const std::string& db_name);
 
   base::FilePath source_path_;
+  base::ScopedTempDir temp_dir_;
   bool cancelled_ = false;
 };
 

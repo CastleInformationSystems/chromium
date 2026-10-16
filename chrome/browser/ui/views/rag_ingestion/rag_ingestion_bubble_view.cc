@@ -375,15 +375,15 @@ void RagIngestionBubbleView::OnAllow() {
     auto* controller = RagIngestionPageActionController::FromWebContents(web_contents_.get());
     if (controller) {
       // 1. Fetch the backend info to check the requiresUpgrade flag
-      RagIngestionService::BackendPermissionInfo info = controller->GetBackendInfo();
+      // RagIngestionService::BackendPermissionInfo info = controller->GetBackendInfo();
 
       // 2. Branch logic based on the flag
-      if (info.requires_upgrade) {
-        // [NEW] Upgrade flow: Open the tab and DO NOT grant permission
-        controller->OnUpgradeRequired();
-        GetWidget()->Close(); 
-        return; 
-      }
+      // if (info.requires_upgrade) {
+      //   // [NEW] Upgrade flow: Open the tab and DO NOT grant permission
+      //   controller->OnUpgradeRequired();
+      //   GetWidget()->Close(); 
+      //   return; 
+      // }
 
       // 3. Normal flow: Grant permission
       controller->OnPermissionUserDecision(true);

@@ -97,7 +97,8 @@ void EnumerateChromiumProfiles(
       profile.source_path = root_path;
       profile.app_path = root_path;
       profile.services_supported = user_data_importer::HISTORY |
-                                   user_data_importer::FAVORITES;
+                                   user_data_importer::FAVORITES |
+                                   user_data_importer::AUTOFILL_FORM_DATA;
       profiles->push_back(profile);
     }
     return;
@@ -116,7 +117,8 @@ void EnumerateChromiumProfiles(
       profile.source_path = default_path;
       profile.app_path = default_path;
       profile.services_supported = user_data_importer::HISTORY |
-                                   user_data_importer::FAVORITES;
+                                   user_data_importer::FAVORITES |
+                                   user_data_importer::AUTOFILL_FORM_DATA;
       profiles->push_back(profile);
     }
     return;
@@ -141,7 +143,8 @@ void EnumerateChromiumProfiles(
       profile.source_path = default_path;
       profile.app_path = default_path;
       profile.services_supported = user_data_importer::HISTORY |
-                                   user_data_importer::FAVORITES;
+                                   user_data_importer::FAVORITES |
+                                   user_data_importer::AUTOFILL_FORM_DATA;
       profiles->push_back(profile);
     }
     return;
@@ -171,7 +174,8 @@ void EnumerateChromiumProfiles(
     profile.source_path = profile_path;
     profile.app_path = profile_path;
     profile.services_supported = user_data_importer::HISTORY |
-                                 user_data_importer::FAVORITES;
+                                 user_data_importer::FAVORITES |
+                                 user_data_importer::AUTOFILL_FORM_DATA;
     profiles->push_back(profile);
   }
 }

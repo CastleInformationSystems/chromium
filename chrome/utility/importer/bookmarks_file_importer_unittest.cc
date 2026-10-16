@@ -75,6 +75,10 @@ class MockImporterBridge : public ImporterBridge {
                user_data_importer::VisitSource),
               (override));
   MOCK_METHOD(void,
+              SetHistoryVisits,
+              (std::vector<chrome::mojom::ImporterVisitRowPtr>),
+              (override));
+  MOCK_METHOD(void,
               SetPasswordForm,
               (const user_data_importer::ImportedPasswordForm&),
               (override));

@@ -26,6 +26,9 @@ void JatterNtpNavigationObserver::DidFinishNavigation(content::NavigationHandle*
     bool is_ntp = base::StartsWith(url.spec(), jatter::kAppUrl, base::CompareCase::INSENSITIVE_ASCII);
 
     if (is_ntp) {
-      JatterFirebaseClientFactory::GetForProfile(profile)->RefreshPersonalizedAssistance(profile);
+      // Factory returns nullptr in Incognito mode
+      if (JatterFirebaseClient* client = JatterFirebaseClientFactory::GetForProfile(profile)) {
+        client->RefreshPersonalizedAssistance(profile);
+      }
     }
 }

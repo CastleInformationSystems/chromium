@@ -145,26 +145,34 @@ JatterAuthorizationImpl::~JatterAuthorizationImpl() = default;
 
 void JatterAuthorizationImpl::SendAuthToken(const std::string& token) {
 #ifndef JATTER_PRODUCTION_MODE
-  LOG(INFO) << "Received Firebase token from renderer: " << token;
-  LOG(INFO) << "kFirebaseApiKey: " << jatter::kFirebaseApiKey;
+  // Safe logging: Only log that it was received and its size, NEVER the token itself.
+  LOG(INFO) << "[JatterAuth] Received Firebase auth token from JS (length: " 
+            << token.length() << "). Initiating custom token request...";
 #endif
   SendCustomTokenRequest(token, jatter::kFirebaseApiKey);
 }
 
 void JatterAuthorizationImpl::SendPrivateKey(const std::string& private_key) {
 #ifndef JATTER_PRODUCTION_MODE
-  LOG(INFO) << "Received Firebase private_key from renderer: " << private_key;
+  LOG(INFO) << "[JatterAuth] Received Jatter private key from JS (length: " 
+            << private_key.length() << "). Storing via OSCrypt...";
 #endif
-  Profile* profile = Profile::FromBrowserContext(
-              render_frame_host().GetBrowserContext());
-  RagIngestionService* service = 
-      RagIngestionServiceFactory::GetForProfile(profile);
-  
-  if (service) {
-    service->SetPrivateKey(private_key);
-  } else {
-    // Optional: Log it so you know it was safely ignored
-    VLOG(1) << "[Jatter] Ignored SendPrivateKey: RagIngestionService is null (Incognito).";
+
+  Profile* profile = Profile::FromBrowserContext(render_frame_host().GetBrowserContext());
+  if (profile) {
+    JatterTokenStorage::GetOrCreate(profile)->SetPrivateKey(private_key);
+  }
+}
+
+void JatterAuthorizationImpl::SendPrivateKeySignature(const std::string& signature) {
+#ifndef JATTER_PRODUCTION_MODE
+  LOG(INFO) << "[JatterAuth] Received private key signature from JS (length: " 
+            << signature.length() << "). Pairing with key in OSCrypt...";
+#endif
+
+  Profile* profile = Profile::FromBrowserContext(render_frame_host().GetBrowserContext());
+  if (profile) {
+    JatterTokenStorage::GetOrCreate(profile)->SetPrivateKeySignature(signature);
   }
 }
 

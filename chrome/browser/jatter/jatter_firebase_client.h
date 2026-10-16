@@ -2,6 +2,7 @@
 #define JATTER_FIREBASE_CLIENT_H_
 
 #include <vector>
+#include <set>
 
 #include "base/containers/unique_ptr_adapters.h"
 #include "base/functional/callback.h"
@@ -10,7 +11,6 @@
 #include "base/scoped_observation.h"
 #include "base/supports_user_data.h"
 #include "base/task/cancelable_task_tracker.h"
-#include "base/time/time.h"
 #include "base/values.h"
 #include "chrome/browser/profiles/profile.h"
 #include "components/history/core/browser/history_service_observer.h"
@@ -40,8 +40,6 @@ class JatterFirebaseClient : public history::HistoryServiceObserver,
 
   // Step 4 FRE history ingestion
   void LogBulkWebPageVisits(Profile* profile, base::ListValue visits_list);
-  // Triggers the AI refresh endpoint
-  void RefreshPersonalizedAssistance(Profile* profile);
 
   static void SetAuthorizationnHeader(
       Profile* profile,
@@ -85,7 +83,6 @@ class JatterFirebaseClient : public history::HistoryServiceObserver,
   std::set<std::unique_ptr<network::SimpleURLLoader>, base::UniquePtrComparator>
       loaders_;
   base::CancelableTaskTracker task_tracker_;
-  base::TimeTicks last_refresh_time_; // Used for rate-limiting
   raw_ptr<Profile> profile_;
 
   base::WeakPtrFactory<JatterFirebaseClient> weak_ptr_factory_{this};

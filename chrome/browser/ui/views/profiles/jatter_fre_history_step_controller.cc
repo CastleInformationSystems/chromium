@@ -177,7 +177,13 @@ void JatterFreHistoryStepController::OnHistoryChoice(
     Profile* target_profile = Profile::FromBrowserContext(
         host()->GetPickerContents()->GetBrowserContext());
 
-    uint16_t items_to_import = user_data_importer::HISTORY;
+   // 1. Define all the items we ideally want to import
+    uint16_t desired_items = user_data_importer::HISTORY |
+                             user_data_importer::FAVORITES |
+                             user_data_importer::AUTOFILL_FORM_DATA;
+
+    // 2. Intersect with what the source profile actually supports
+    uint16_t items_to_import = desired_items & source_profile.services_supported;
 
     if ((source_profile.services_supported & items_to_import) != 0) {
       auto* importer_host = new ExternalProcessImporterHost();

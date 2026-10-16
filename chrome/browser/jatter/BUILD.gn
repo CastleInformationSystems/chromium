@@ -1,5 +1,6 @@
 import("//mojo/public/tools/bindings/mojom.gni")
 import("//build/config/jatter_args.gni")
+import("//testing/test.gni")
 
 mojom("jatter_mojom") {
   sources = [ "jatter.mojom" ]
@@ -15,13 +16,25 @@ config("jatter_env_config") {
   }
 }
 
+# 1. Pure crypto target (No dependencies on Profile, Prefs, or BrowserContext)
+source_set("jatter_encryption") {
+  sources = [
+    "encryption/jatter_encryptor.cc",
+    "encryption/jatter_encryptor.h",
+  ]
+
+  deps = [
+    "//base",
+    "//crypto",
+    "//third_party/boringssl",
+  ]
+}
+
 source_set("jatter") {
   sources = [
     "jatter_authorization_impl.cc",
     "jatter_authorization_impl.h",
     "jatter_environment.h",
-    "jatter_ntp_navigation_observer.h",
-    "jatter_ntp_navigation_observer.cc",
     "jatter_token_storage.cc",
     "jatter_token_storage.h",
     "jatter_firebase_client_factory.h",
@@ -31,15 +44,33 @@ source_set("jatter") {
   ]
 
   deps = [
+    ":jatter_encryption",
     ":jatter_mojom",
     "//base",
     "//content/public/browser",
-    "//mojo/public/cpp/bindings",      
+    "//crypto",
+    "//mojo/public/cpp/bindings",
+    "//third_party/boringssl",
   ]
 
   public_deps = [
+    ":jatter_encryption",
     ":jatter_mojom",
   ]
 
   public_configs = [ ":jatter_env_config" ]
+}
+
+# 2. Standalone unit test binary (links only pure crypto and gtest runner)
+test("jatter_unittests") {
+  sources = [
+    "encryption/jatter_encryptor_unittest.cc",
+  ]
+
+  deps = [
+    ":jatter_encryption",
+    "//base",
+    "//base/test:run_all_unittests",
+    "//testing/gtest",
+  ]
 }

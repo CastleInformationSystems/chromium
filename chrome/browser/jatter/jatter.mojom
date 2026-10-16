@@ -4,4 +4,5 @@ module jatter.mojom;
 interface JatterAuthorization {
   SendAuthToken(string token);
   SendPrivateKey(string private_key);
+  SendPrivateKeySignature(string signature); // Add this
 };

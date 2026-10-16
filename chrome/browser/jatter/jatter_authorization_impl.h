@@ -15,6 +15,7 @@ class JatterAuthorizationImpl : public content::DocumentService<jatter::mojom::J
 
   void SendAuthToken(const std::string& token) override;
   void SendPrivateKey(const std::string& private_key) override;
+  void SendPrivateKeySignature(const std::string& signature) override;
 
  private:
   void SendCustomTokenRequest(const std::string& custom_token,

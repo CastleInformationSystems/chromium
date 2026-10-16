@@ -22,6 +22,8 @@
 #include "build/build_config.h"
 #include "chrome/browser/content_settings/host_content_settings_map_factory.h"
 #include "chrome/browser/favicon/favicon_service_factory.h"
+#include "chrome/browser/jatter/jatter_token_storage.h"
+#include "chrome/browser/jatter/encryption/jatter_encryptor.h"
 #include "chrome/browser/profiles/profile.h"
 #if !BUILDFLAG(IS_ANDROID)
 #include "chrome/browser/ui/browser.h"
@@ -297,7 +299,25 @@ void RagIngestionService::OnBackendResponse(
 
   // Parse specific UI keys
   if (const std::string* host = dict.FindString("canonicalHost")) info.canonical_host = *host;
-  if (const std::string* name = dict.FindString("siteName")) info.site_name = *name;
+  if (const std::string* name = dict.FindString("siteName")) {
+    info.site_name = *name;
+
+    // Site Decryption Logic
+    bool is_encrypted = dict.FindBool("siteNameIsEncrypted").value_or(false);
+    bool can_decrypt = dict.FindBool("canDecrypt").value_or(false);
+    
+    if (is_encrypted && can_decrypt) {
+      std::optional<std::string> pk = JatterTokenStorage::GetOrCreate(profile_)->GetPrivateKey();
+      if (pk) {
+        std::optional<std::string> decrypted = JatterEncryptor::Decrypt(*name, *pk);
+        if (decrypted) {
+          info.site_name = *decrypted;
+        } else if (!info.canonical_host.empty()) {
+          info.site_name = info.canonical_host; // Decryption failed, fallback to plaintext host
+        }
+      }
+    }
+  } 
     
   info.can_prompt = dict.FindBool("canPrompt").value_or(false);
     

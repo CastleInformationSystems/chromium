@@ -40,7 +40,7 @@
 #include "chrome/browser/history_embeddings/history_embeddings_service_factory.h"
 #include "chrome/browser/history_embeddings/history_embeddings_tab_helper.h"
 #include "chrome/browser/image_fetcher/image_fetcher_service_factory.h"
-#include "chrome/browser/jatter/jatter_ntp_navigation_observer.h"
+// #include "chrome/browser/jatter/jatter_ntp_navigation_observer.h"
 #include "chrome/browser/jatter/analytics/jatter_analytics_tab_helper.h"
 #include "chrome/browser/login_detection/login_detection_tab_helper.h"
 #include "chrome/browser/lookalikes/safety_tip_web_contents_observer.h"
@@ -543,7 +543,7 @@ void TabHelpers::AttachTabHelpers(WebContents* web_contents) {
   prerender::NoStatePrefetchTabHelper::CreateForWebContents(web_contents);
   RagIngestionTabHelper::CreateForWebContents(web_contents);
   JatterAnalyticsTabHelper::CreateForWebContents(web_contents);
-  JatterNtpNavigationObserver::CreateForWebContents(web_contents);
+  // JatterNtpNavigationObserver::CreateForWebContents(web_contents);
   RecentlyAudibleHelper::CreateForWebContents(web_contents);
 #if BUILDFLAG(IS_ANDROID)
   RequestDesktopSiteWebContentsObserverAndroid::CreateForWebContents(
