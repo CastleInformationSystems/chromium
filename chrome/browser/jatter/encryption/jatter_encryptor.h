@@ -1,9 +1,10 @@
 #ifndef CHROME_BROWSER_JATTER_JATTER_ENCRYPTOR_H_
 #define CHROME_BROWSER_JATTER_JATTER_ENCRYPTOR_H_
 
+#include <cstdint>
+#include <optional>
 #include <string>
 #include <vector>
-#include <optional>
 
 class JatterEncryptor {
  public:

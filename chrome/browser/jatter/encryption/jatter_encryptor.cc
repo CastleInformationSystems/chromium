@@ -55,7 +55,10 @@ std::string JatterEncryptor::EncryptWithIVForTesting(const std::string& plaintex
                     reinterpret_cast<const uint8_t*>(padded.data()), padded.length());
 
   int out_len2 = 0;
-  EVP_EncryptFinal_ex(ctx.get(), ciphertext.data() + out_len1, &out_len2);
+  EVP_EncryptFinal_ex(
+      ctx.get(),
+      base::span(ciphertext).subspan(static_cast<size_t>(out_len1)).data(),
+      &out_len2);
 
   std::string iv_b64 = base::Base64Encode(iv);
   std::string ct_b64 = base::Base64Encode(ciphertext);
@@ -90,7 +93,10 @@ std::optional<std::string> JatterEncryptor::Decrypt(const std::string& formatted
                     reinterpret_cast<const uint8_t*>(ciphertext.data()), ciphertext.length());
 
   int out_len2 = 0;
-  EVP_DecryptFinal_ex(ctx.get(), padded.data() + out_len1, &out_len2);
+  EVP_DecryptFinal_ex(
+      ctx.get(),
+      base::span(padded).subspan(static_cast<size_t>(out_len1)).data(),
+      &out_len2);
 
   std::string padded_str(reinterpret_cast<char*>(padded.data()), ciphertext.length());
   return StripPKCS7Padding(padded_str);
