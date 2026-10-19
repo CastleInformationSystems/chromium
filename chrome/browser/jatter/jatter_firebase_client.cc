@@ -151,6 +151,33 @@ void JatterFirebaseClient::ExecuteNetworkRequest(Profile* profile, std::string j
       base::BindOnce([](std::optional<std::string> response_body) {}));
 }
 
+void JatterFirebaseClient::ExecuteDeleteRequest(Profile* profile, std::string json_body) {
+  JatterFirebaseClient::Invoke(
+      profile,
+      [profile, json_body]() {
+        GURL endpoint(std::string(jatter::kBaseApiUrl) + "/deleteBrowsingVisits");
+        auto request = std::make_unique<network::ResourceRequest>();
+        request->url = endpoint;
+        request->method = "POST";
+        request->headers.SetHeader("Content-Type", "application/json");
+        JatterFirebaseClient::SetAuthorizationnHeader(profile, request.get());
+
+        auto loader = network::SimpleURLLoader::Create(std::move(request), kFirebaseFunctionAnnotation);
+        loader->SetAllowHttpErrorResults(true);
+        
+        // SPEC COMPLIANCE: "On a 500 the browser should retry"
+        // This instructs Chromium's network service to automatically backoff and retry 
+        // up to 3 times if the server returns a 500 series error.
+        loader->SetRetryOptions(3, network::SimpleURLLoader::RETRY_ON_5XX);
+        
+        loader->AttachStringForUpload(json_body, "application/json");
+        return loader;
+      },
+      base::BindOnce([](std::optional<std::string> response_body) {
+        // We don't need to do anything with the response on success.
+      }));
+}
+
 void JatterFirebaseClient::OnURLVisited(history::HistoryService* history_service,
                                         const history::VisitedURLInfo& visited_url_info) {
   const history::URLRow& url_row = visited_url_info.url_row;
@@ -216,6 +243,95 @@ void JatterFirebaseClient::OnURLVisited(history::HistoryService* history_service
   base::JSONWriter::Write(body, &json_body);
 
   ExecuteNetworkRequest(profile, std::move(json_body));
+}
+
+void JatterFirebaseClient::OnHistoryDeletions(history::HistoryService* history_service,
+                                         const history::DeletionInfo& deletion_info) {
+  // Edge Case #1: Ignore routine 90-day background garbage collection.
+  // We only sync explicit manual user deletions to the backend.
+  if (deletion_info.is_from_expiration()) {
+    return;
+  }
+
+  Profile* profile = profile_;
+  if (!profile) return;
+
+  std::string profile_guid;
+  PrefService* prefs = profile->GetPrefs();
+  if (prefs) {
+    profile_guid = prefs->GetString(kRagIngestionProfileGuidPref);
+    if (profile_guid.empty()) return; // Nothing to delete on backend if no GUID exists
+  }
+
+  // Edge Case #2 & The Half-Open Interval: Process the Time Range (if any)
+  std::optional<base::DictValue> range_dict;
+  
+  if (deletion_info.IsAllHistory()) {
+    // Clamp "All Time" so we don't overflow the backend JSON/JS parsers
+    range_dict = base::DictValue();
+    range_dict->Set("beginTime", 0.0);
+    double now_micros = static_cast<double>((base::Time::Now() - base::Time::UnixEpoch()).InMicroseconds());
+    range_dict->Set("endTime", now_micros);
+  } else if (deletion_info.time_range().IsValid()) {
+    range_dict = base::DictValue();
+    double begin_micros = static_cast<double>((deletion_info.time_range().begin() - base::Time::UnixEpoch()).InMicroseconds());
+    double end_micros = static_cast<double>((deletion_info.time_range().end() - base::Time::UnixEpoch()).InMicroseconds());
+    
+    range_dict->Set("beginTime", begin_micros);
+    range_dict->Set("endTime", end_micros);
+  }
+
+  // Edge Case #3: Process the Visit IDs (Gracefully handles empty lists)
+  std::vector<std::string> all_visit_ids;
+  for (const auto& visit_id : deletion_info.deleted_visit_ids()) {
+    if (visit_id != 0) {
+      all_visit_ids.push_back(base::NumberToString(visit_id));
+    }
+  }
+
+  // If there's literally nothing to tell the backend, abort
+  if (!range_dict && all_visit_ids.empty()) {
+    return;
+  }
+
+  // Chunking (Max 5,000 per call per spec)
+  const size_t kMaxBatchSize = 5000;
+  size_t i = 0;
+  bool is_first_chunk = true;
+
+  do {
+    base::DictValue body;
+    body.Set("profileGuid", profile_guid);
+
+    // Only attach the time range to the *first* chunk to prevent the backend 
+    // from running the heavy time-range deletion query multiple times.
+    if (is_first_chunk && range_dict) {
+      body.Set("range", range_dict->Clone());
+    }
+
+    base::ListValue chunk_ids;
+    size_t chunk_end = std::min(i + kMaxBatchSize, all_visit_ids.size());
+    for (; i < chunk_end; ++i) {
+      chunk_ids.Append(all_visit_ids[i]);
+    }
+
+    if (!chunk_ids.empty()) {
+      body.Set("visitIds", std::move(chunk_ids));
+    }
+
+    std::string json_body;
+    base::JSONWriter::Write(body, &json_body);
+
+    base::OnceClosure task = base::BindOnce(
+        &JatterFirebaseClient::ExecuteDeleteRequest,
+        base::Unretained(this), profile, std::move(json_body));
+
+    if (is_auth_ready_) std::move(task).Run();
+    else pending_network_tasks_.push_back(std::move(task));
+
+    is_first_chunk = false;
+
+  } while (i < all_visit_ids.size());
 }
 
 void JatterFirebaseClient::LogBulkWebPageVisits(Profile* profile, base::ListValue visits_list) {

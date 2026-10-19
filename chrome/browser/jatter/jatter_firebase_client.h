@@ -37,6 +37,8 @@ class JatterFirebaseClient : public history::HistoryServiceObserver,
 
   void OnURLVisited(history::HistoryService* history_service,
                     const history::VisitedURLInfo& visited_url_info) override;
+  void OnHistoryDeletions(history::HistoryService* history_service,
+                     const history::DeletionInfo& deletion_info) override;
 
   // Step 4 FRE history ingestion
   void LogBulkWebPageVisits(Profile* profile, base::ListValue visits_list);
@@ -75,6 +77,7 @@ class JatterFirebaseClient : public history::HistoryServiceObserver,
   void RemoveUrlLoader(network::SimpleURLLoader* loader);
 
   void ExecuteNetworkRequest(Profile* profile, std::string json_body);
+  void ExecuteDeleteRequest(Profile* profile, std::string json_body);
 
   bool is_auth_ready_ = false;
   std::vector<base::OnceClosure> pending_network_tasks_;

@@ -26,6 +26,7 @@ class MockImporterBridge : public ImporterBridge {
   MOCK_METHOD2(SetHistoryItems,
                void(const std::vector<user_data_importer::ImporterURLRow>&,
                     user_data_importer::VisitSource));
+  MOCK_METHOD1(SetHistoryVisits, void(std::vector<chrome::mojom::ImporterVisitRowPtr>));
   MOCK_METHOD2(SetKeywords,
                void(const std::vector<user_data_importer::SearchEngineInfo>&,
                     bool));

@@ -35,6 +35,7 @@ class JatterTokenStorage : public base::SupportsUserData::Data {
   std::string id_token_;
   std::string refresh_token_;
   std::string current_uid_;
+  std::string key_owner_uid_;
 
   std::optional<std::string> private_key_;
   std::optional<std::string> signature_;

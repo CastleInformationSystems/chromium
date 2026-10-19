@@ -83,7 +83,6 @@ class RagIngestionService : public KeyedService,
       base::OnceCallback<void(BackendPermissionInfo)> callback);
 
   // --- FLOW C: INGESTION ---
-  void SetPrivateKey(const std::string& private_key_base64);
 
   // Starts the 4-step pipeline: Chunk -> Embed -> Encrypt -> Ingest
   void StartPassiveLearningPipeline(const GURL& url, const std::string& inner_text);
@@ -112,6 +111,8 @@ class RagIngestionService : public KeyedService,
   void OnBackendResponse(
       base::OnceCallback<void(BackendPermissionInfo)> client_callback,
       std::optional<base::Value> result);
+
+  std::string GetPrivateKeyBase64() const;
 
   void FetchRootPageMetadata(const GURL& root_url, 
                              const GURL& original_url,
@@ -191,8 +192,6 @@ class RagIngestionService : public KeyedService,
   
   std::unique_ptr<RagIngestionNetworkClient> network_client_;
   // std::map<std::string, std::unique_ptr<HiddenCrawlJob>> active_crawl_jobs_;
-
-  std::string private_key_base64_;
 
   // Prevents infinite loops when syncing
   bool is_updating_from_backend_ = false; 

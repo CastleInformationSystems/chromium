@@ -56,22 +56,30 @@ void JatterTokenStorage::SetTokens(const std::string& id_token,
   refresh_token_ = refresh_token;
 
   std::string new_uid = ExtractUidFromToken(id_token_);
-  
-  // FIX: Only drop the pair if we are explicitly switching from one known user to another.
-  // This prevents wiping the newly received key on a fresh login.
-  if (!current_uid_.empty() && !new_uid.empty() && new_uid != current_uid_) {
-    private_key_ = std::nullopt;
-    signature_ = std::nullopt;
-    SaveEncryptionPairToPrefs();
+
+  if (!new_uid.empty()) {
+    // If we had keys tied to an actual prior user, and the new token is for someone else:
+    if (!key_owner_uid_.empty() && key_owner_uid_ != new_uid) {
+      private_key_ = std::nullopt;
+      signature_ = std::nullopt;
+      key_owner_uid_.clear();
+      SaveEncryptionPairToPrefs();
+    } else {
+      // Bind the incoming/current keys to this newly authenticated UID
+      key_owner_uid_ = new_uid;
+      SaveEncryptionPairToPrefs();
+    }
+    current_uid_ = new_uid;
   }
-  
-  current_uid_ = new_uid;
+
   SaveToPrefs();
 }
 
 void JatterTokenStorage::SetPrivateKey(const std::string& private_key) {
   private_key_ = private_key;
-  signature_ = std::nullopt; // Replace pair; incomplete until signature arrives (R2.2)
+  signature_ = std::nullopt;  // Incomplete until signature arrives (R2.2)
+  // Bind to current_uid_ if known; otherwise SetTokens will bind it upon token arrival
+  key_owner_uid_ = current_uid_;
   SaveEncryptionPairToPrefs();
 }
 
@@ -117,6 +125,10 @@ void JatterTokenStorage::LoadFromPrefs() {
       signature_ = dec_sig;
     }
   }
+
+  if (const std::string* owner = dict.FindString("key_owner_uid")) {
+    key_owner_uid_ = *owner;
+  }
 }
 
 void JatterTokenStorage::SaveToPrefs() {
@@ -145,6 +157,12 @@ void JatterTokenStorage::SaveEncryptionPairToPrefs() {
     }
   } else {
     dict.Remove("enc_signature");
+  }
+
+  if (!key_owner_uid_.empty() && private_key_) {
+    dict.Set("key_owner_uid", key_owner_uid_);
+  } else {
+    dict.Remove("key_owner_uid");
   }
 
   profile_->GetPrefs()->SetDict(prefs::kJatterAuthenticationToken, std::move(dict));
