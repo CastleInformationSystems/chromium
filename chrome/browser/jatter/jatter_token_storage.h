@@ -13,8 +13,14 @@ class JatterTokenStorage : public base::SupportsUserData::Data {
   ~JatterTokenStorage() override;
 
   void SetTokens(const std::string& id_token, const std::string& refresh_token);
+  // NEW MODE: Strict check requiring both key AND signature.
+  // Used for R2.2 telemetry metadata (logWebPageVisits, setIngestionPermission)
   void SetPrivateKey(const std::string& private_key);
   void SetPrivateKeySignature(const std::string& signature);
+
+  // LEGACY MODE: Returns the key even if the user is anonymous (no signature).
+  // Used exclusively for RAG document chunk encryption.
+  std::optional<std::string> GetRawPrivateKey() const;
 
   std::string GetIdToken() const;
   std::string GetRefreshToken() const;

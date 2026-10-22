@@ -153,6 +153,13 @@ void RagIngestionService::Shutdown() {
   }
 }
 
+std::string RagIngestionService::GetRawPrivateKeyBase64() const {
+  if (auto* storage = JatterTokenStorage::GetOrCreate(profile_)) {
+    return storage->GetRawPrivateKey().value_or("");
+  }
+  return "";
+}
+
 // Returns the active base64-encoded private key only if a complete, valid pair exists
 std::string RagIngestionService::GetPrivateKeyBase64() const {
   if (auto* storage = JatterTokenStorage::GetOrCreate(profile_)) {
@@ -897,9 +904,9 @@ void RagIngestionService::StartPassiveLearningPipeline(const GURL& url,
                                                        const std::string& inner_text) {
   if (!network_client_) return;
 
-  std::string private_key = GetPrivateKeyBase64();
+  std::string private_key = GetRawPrivateKeyBase64();
   if (private_key.empty()) {
-    LOG(WARNING) << "[RAG] Cannot start passive learning: Incomplete or missing key pair.";
+    LOG(WARNING) << "[RAG] Cannot start passive learning: No private key available.";
     return;
   }
 
@@ -1004,7 +1011,7 @@ std::vector<std::string> RagIngestionService::EncryptChunks(
 
   // 1. Decode the Base64 Private Key
   std::string raw_key;
-  if (!base::Base64Decode(GetPrivateKeyBase64(), &raw_key)) {
+  if (!base::Base64Decode(GetRawPrivateKeyBase64(), &raw_key)) {
 #ifndef JATTER_PRODUCTION_MODE
     LOG(ERROR) << "[RAG] Failed to decode base64 private key.";
 #endif
@@ -1085,7 +1092,7 @@ std::string RagIngestionService::EncryptSingleString(const std::string& clear_te
 
   // 1. Decode the Base64 Private Key
   std::string raw_key;
-  if (!base::Base64Decode(GetPrivateKeyBase64(), &raw_key)) {
+  if (!base::Base64Decode(GetRawPrivateKeyBase64(), &raw_key)) {
 #ifndef JATTER_PRODUCTION_MODE
     LOG(ERROR) << "[RAG] Failed to decode base64 private key.";
 #endif

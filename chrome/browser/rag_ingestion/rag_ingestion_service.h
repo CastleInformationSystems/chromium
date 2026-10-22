@@ -112,6 +112,7 @@ class RagIngestionService : public KeyedService,
       base::OnceCallback<void(BackendPermissionInfo)> client_callback,
       std::optional<base::Value> result);
 
+  std::string GetRawPrivateKeyBase64() const; 
   std::string GetPrivateKeyBase64() const;
 
   void FetchRootPageMetadata(const GURL& root_url, 

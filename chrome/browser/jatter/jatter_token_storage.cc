@@ -91,6 +91,10 @@ void JatterTokenStorage::SetPrivateKeySignature(const std::string& signature) {
 std::string JatterTokenStorage::GetIdToken() const { return id_token_; }
 std::string JatterTokenStorage::GetRefreshToken() const { return refresh_token_; }
 
+std::optional<std::string> JatterTokenStorage::GetRawPrivateKey() const {
+  return private_key_; // Returns the anonymous key without requiring a signature
+}
+
 std::optional<std::string> JatterTokenStorage::GetPrivateKey() const {
   if (private_key_ && signature_) return private_key_;
   return std::nullopt; // Incomplete
