@@ -40,6 +40,10 @@ import org.chromium.build.annotations.Nullable;
 import org.chromium.chrome.R;
 import org.chromium.chrome.browser.customtabs.CustomTabActivity;
 import org.chromium.chrome.browser.feature_engagement.TrackerFactory;
+import org.chromium.chrome.browser.firstrun.JatterWelcomeFragment;
+import org.chromium.chrome.browser.firstrun.JatterSusiFragment;
+import org.chromium.chrome.browser.firstrun.JatterLearnFragment;
+import org.chromium.chrome.browser.firstrun.JatterPlusFragment;
 import org.chromium.chrome.browser.flags.ChromeFeatureList;
 import org.chromium.chrome.browser.metrics.UmaUtils;
 import org.chromium.chrome.browser.preferences.ChromePreferenceKeys;
@@ -236,10 +240,11 @@ public class FirstRunActivity extends FirstRunActivityBase implements FirstRunPa
 
     /** Creates first page and sets up adapter. Should result UI being shown on the screen. */
     private void createFirstPage() {
-        // BooleanSupplier showWelcomePage = () -> !FirstRunStatus.shouldSkipWelcomePage();
-        BooleanSupplier showWelcomePage = () -> false;
-        mPages.add(new FirstRunPage<>(SigninFirstRunFragment.class, showWelcomePage));
+        // Step 1: Jatter Welcome Screen (Pure Android UI, no C++ required)
+        BooleanSupplier showWelcomePage = () -> true;
+        mPages.add(new FirstRunPage<>(JatterWelcomeFragment.class, showWelcomePage));
         mFreProgressStates.add(MobileFreProgress.WELCOME_SHOWN);
+        
         mPagerAdapter = new FirstRunPagerAdapter(FirstRunActivity.this, mPages);
         mPager.setAdapter(mPagerAdapter);
         mPageTransformer = new FirstRunPageTransformer();
@@ -259,10 +264,7 @@ public class FirstRunActivity extends FirstRunActivityBase implements FirstRunPa
         assert !mPostNativeAndPolicyPagesCreated;
         assert areNativeAndPoliciesInitialized();
 
-        // Initialize SigninChecker, to kick off sign-in for child accounts as early as possible.
-        //
-        // TODO(b/245912657): explicitly sign in supervised users in {@link
-        // FullscreenSigninMediator#handleContinueWithNative} rather than relying on SigninChecker.
+        // Initialize SigninChecker to handle OS-level account states
         Profile originalProfile =
                 assumeNonNull(getProfileProviderSupplier().get()).getOriginalProfile();
         SigninCheckerProvider.get(originalProfile);
@@ -270,46 +272,19 @@ public class FirstRunActivity extends FirstRunActivityBase implements FirstRunPa
         assumeNonNull(mFreProperties);
         mFirstRunFlowSequencer.updateFirstRunProperties(mFreProperties);
 
-        BooleanSupplier showSearchEnginePromo =
-                () -> mFreProperties.getBoolean(SHOW_SEARCH_ENGINE_PAGE);
+        BooleanSupplier alwaysShow = () -> true;
 
-        // An optional page to select a default search engine.
-        if (showSearchEnginePromo.getAsBoolean()) {
-            mPages.add(
-                    new FirstRunPage<>(
-                            DefaultSearchEngineFirstRunFragment.class, showSearchEnginePromo));
-            mFreProgressStates.add(MobileFreProgress.DEFAULT_SEARCH_ENGINE_SHOWN);
-        }
+        // Step 2: Sign-Up / Sign-In (Requires Native WebContents)
+        mPages.add(new FirstRunPage<>(JatterSusiFragment.class, alwaysShow));
+        mFreProgressStates.add(MobileFreProgress.WELCOME_SHOWN);
 
-        // An optional history sync opt-in page, the visibility of this page will be decided on the
-        // fly according to the situation.
-        BooleanSupplier showHistorySync = () -> mFreProperties.getBoolean(SHOW_HISTORY_SYNC_PAGE);
-        if (!showHistorySync.getAsBoolean()) {
-            HistorySyncHelper historySyncHelper = HistorySyncHelper.getForProfile(originalProfile);
-            historySyncHelper.recordHistorySyncNotShown(SigninAccessPoint.START_PAGE);
-        }
-        mPages.add(new FirstRunPage<>(HistorySyncFirstRunFragment.class, showHistorySync));
-        mFreProgressStates.add(MobileFreProgress.HISTORY_SYNC_OPT_IN_SHOWN);
+        // Step 3: RAG Personalization Consent (Requires Native PrefService)
+        mPages.add(new FirstRunPage<>(JatterLearnFragment.class, alwaysShow));
+        mFreProgressStates.add(MobileFreProgress.WELCOME_SHOWN);
 
-        if (ChromeFeatureList.sDefaultBrowserPromoFre.isEnabled()) {
-            BooleanSupplier showDefaultBrowserPromo =
-                    () -> {
-                        // Skip CCT.
-                        if (isLaunchedFromCct()) return false;
-
-                        // Restrict promos to FRE triggered via main intents only (exclude FRE
-                        // before CCTs/PWAs/TWAs).
-                        if (!mLaunchedFromChromeIcon) return false;
-
-                        return DefaultBrowserPromoUtils.getInstance()
-                                .shouldShowRoleManagerPromoForFre(this);
-                    };
-
-            mPages.add(
-                    new FirstRunPage<>(
-                            DefaultBrowserPromoFirstRunFragment.class, showDefaultBrowserPromo));
-            mFreProgressStates.add(MobileFreProgress.DEFAULT_BROWSER_PROMO_SHOWN);
-        }
+        // Step 4: Jatter Plus Upgrade (Requires Native PrefService)
+        mPages.add(new FirstRunPage<>(JatterPlusFragment.class, alwaysShow));
+        mFreProgressStates.add(MobileFreProgress.WELCOME_SHOWN);
 
         if (mPagerAdapter != null) {
             mPagerAdapter.notifyDataSetChanged();

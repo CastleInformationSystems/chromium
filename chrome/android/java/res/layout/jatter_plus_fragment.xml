@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/jatter_fre_background"
+    android:padding="24dp">
+
+    <ImageView
+        android:layout_width="104dp"
+        android:layout_height="104dp"
+        android:layout_marginTop="72dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_jatter_mascot_plus"
+        android:importantForAccessibility="no" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="Upgrade to Jatter Plus"
+        android:textColor="#202124"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="Unlock advanced AI models, unlimited requests, and prioritized background sync."
+        android:textColor="#5F6368"
+        android:textSize="16sp"
+        android:lineSpacingExtra="4dp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/plus_upgrade_button"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/jatter_primary_button_bg"
+        android:textColor="@android:color/white"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:text="Explore Jatter Plus" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/plus_skip_button"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginBottom="16dp"
+        android:background="@android:color/transparent"
+        android:textColor="#6045E2"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:elevation="0dp"
+        android:stateListAnimator="@null"
+        android:text="No thanks" />
+
+</LinearLayout>

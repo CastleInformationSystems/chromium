@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <org.chromium.components.browser_ui.settings.ChromeSwitchPreference
+        android:key="jatter_always_allow_personalization"
+        android:title="Automatically learn sites you sign into"
+        android:summary="Jatter can automatically learn from the sites you sign into as you browse to provide personalized assistance. If this option is disabled, Jatter will ask for permission for each site."
+        app:allowDividerBelow="false" />
+
+</PreferenceScreen>

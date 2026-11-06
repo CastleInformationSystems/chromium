@@ -668,6 +668,11 @@ chrome_java_sources = [
   "java/src/org/chromium/chrome/browser/firstrun/ForcedSigninProcessor.java",
   "java/src/org/chromium/chrome/browser/firstrun/FreIntentCreator.java",
   "java/src/org/chromium/chrome/browser/firstrun/HistorySyncFirstRunFragment.java",
+  "java/src/org/chromium/chrome/browser/firstrun/JatterFreJni.java",
+  "java/src/org/chromium/chrome/browser/firstrun/JatterLearnFragment.java",
+  "java/src/org/chromium/chrome/browser/firstrun/JatterPlusFragment.java",
+  "java/src/org/chromium/chrome/browser/firstrun/JatterSusiFragment.java",
+  "java/src/org/chromium/chrome/browser/firstrun/JatterWelcomeFragment.java",
   "java/src/org/chromium/chrome/browser/firstrun/LightweightFirstRunActivity.java",
   "java/src/org/chromium/chrome/browser/firstrun/SkipTosDialogPolicyListener.java",
   "java/src/org/chromium/chrome/browser/firstrun/TosDialogBehaviorSharedPrefInvalidator.java",
@@ -1027,6 +1032,7 @@ chrome_java_sources = [
   "java/src/org/chromium/chrome/browser/services/gcm/GCMNativeBackgroundTask.java",
   "java/src/org/chromium/chrome/browser/services/gcm/GcmUma.java",
   "java/src/org/chromium/chrome/browser/settings/FragmentDependencyProvider.java",
+  "java/src/org/chromium/chrome/browser/settings/JatterAiPreferenceFragment.java",
 
   # LINT.IfChange(MainSettingsBuildRule)
   "java/src/org/chromium/chrome/browser/settings/MainSettings.java",

@@ -137,6 +137,8 @@ import org.chromium.chrome.browser.feature_engagement.TrackerFactory;
 import org.chromium.chrome.browser.feed.FeedSurfaceTracker;
 import org.chromium.chrome.browser.feed.FeedUma;
 import org.chromium.chrome.browser.feedback.OmniboxFeedbackSource;
+import org.chromium.chrome.browser.firstrun.JatterFreJni;
+import org.chromium.chrome.browser.firstrun.JatterFreJniJni;
 import org.chromium.chrome.browser.flags.ActivityType;
 import org.chromium.chrome.browser.flags.ChromeFeatureList;
 import org.chromium.chrome.browser.flags.ChromeSwitches;
@@ -1500,6 +1502,16 @@ public class ChromeTabbedActivity extends ChromeActivity implements PreAttachInt
                     this::isWarmOnResume);
 
             super.finishNativeInitialization();
+
+            // --- JATTER: Post-FRE Plus Upgrade Navigation ---
+            Profile profile = getProfileProviderSupplier().get().getOriginalProfile();
+            if (JatterFreJni.getAndClearShowPlusUpgradeOnStartup(profile)) {
+                // Open directly to the upgrade portal instead of the NTP
+                String upgradeUrl = JatterFreJniJni.get().getAppUrl() + "/upgrade";
+                LoadUrlParams params = new LoadUrlParams(upgradeUrl);
+                getTabCreator(false).createNewTab(params, TabLaunchType.FROM_STARTUP, null);
+            }
+            // ------------------------------------------------
 
             recordFirstAppLaunchTimestampIfNeeded();
             // TODO(jinsukkim): Let these classes handle the registration by themselves.

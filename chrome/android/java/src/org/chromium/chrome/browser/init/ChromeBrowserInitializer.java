@@ -17,10 +17,12 @@ import org.chromium.base.task.ChainedTasks;
 import org.chromium.base.task.TaskTraits;
 import org.chromium.build.annotations.NullMarked;
 import org.chromium.build.annotations.Nullable;
+import org.chromium.chrome.browser.firstrun.JatterFreJniJni;
 import org.chromium.chrome.browser.flags.ChromeSwitches;
 import org.chromium.chrome.browser.profiles.ProfileManager;
 import org.chromium.chrome.browser.signin.SigninCheckerProvider;
 import org.chromium.components.background_task_scheduler.BackgroundTaskSchedulerFactory;
+import org.chromium.components.embedder_support.util.UrlConstants;
 import org.chromium.content_public.browser.BrowserStartupController;
 import org.chromium.content_public.browser.BrowserStartupController.StartupMetrics;
 
@@ -250,6 +252,8 @@ public class ChromeBrowserInitializer {
             startChromeBrowserProcessesSync(delegate.shouldStartGpuProcess());
             tasks.start(true);
         }
+
+        UrlConstants.NTP_URL = JatterFreJniJni.get().getAppUrl();
     }
 
     private void startChromeBrowserProcessesAsync(

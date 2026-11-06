@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#6045E2" />
+    <!-- A radius of 26dp creates a perfect pill shape for a 52dp tall button -->
+    <corners android:radius="26dp" />
+</shape>
