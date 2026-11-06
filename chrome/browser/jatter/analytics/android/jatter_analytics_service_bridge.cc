@@ -27,6 +27,17 @@ static void JNI_JatterAnalyticsServiceBridge_RecordDefaultBrowserSet(
   }
 }
 
+static void JNI_JatterAnalyticsServiceBridge_RecordSessionStarted(
+    JNIEnv* env,
+    const JavaRef<jobject>& j_profile) {
+  Profile* profile = Profile::FromJavaObject(j_profile);
+  if (!profile) return;
+
+  if (auto* analytics = JatterAnalyticsServiceFactory::GetForProfile(profile)) {
+    analytics->StartSession();
+  }
+}
+
 static void JNI_JatterAnalyticsServiceBridge_RecordSessionEnded(
     JNIEnv* env,
     const JavaRef<jobject>& j_profile,

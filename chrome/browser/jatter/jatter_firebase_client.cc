@@ -1,5 +1,6 @@
 #include "chrome/browser/jatter/jatter_firebase_client.h"
 
+#include "base/base64.h"
 #include "base/i18n/time_formatting.h"
 #include "base/json/json_reader.h"
 #include "base/json/json_writer.h"
@@ -63,7 +64,8 @@ base::DictValue BuildVisitDict(int64_t visit_id,
                                  const std::string& external_referrer_url,
                                  double visit_duration_micros,
                                  base::DictValue metadata,
-                                 const std::optional<std::string>& private_key) {
+                                 const std::optional<std::string>& private_key,
+                                 const std::optional<std::string>& signature) {
   
   base::DictValue url_dict;
   url_dict.Set("url", url_string);
@@ -73,10 +75,14 @@ base::DictValue BuildVisitDict(int64_t visit_id,
   url_dict.Set("lastVisitTime", last_visit_time_micros);
   url_dict.Set("metadata", metadata.Clone());
 
-  if (private_key) {
+  // Attempt to decode the key. Only proceed with encryption if it succeeds.
+  std::string decoded_key;
+  bool can_encrypt = private_key && base::Base64Decode(*private_key, &decoded_key);
+
+  if (can_encrypt) {
     std::string unencrypted_url_json;
     base::JSONWriter::Write(url_dict, &unencrypted_url_json);
-    url_dict.Set("encrypted", JatterEncryptor::Encrypt(unencrypted_url_json, *private_key));
+    url_dict.Set("encrypted", JatterEncryptor::Encrypt(unencrypted_url_json, decoded_key));
   }
 
   base::DictValue visit_dict;
@@ -89,14 +95,18 @@ base::DictValue BuildVisitDict(int64_t visit_id,
   visit_dict.Set("external_referrer_url", external_referrer_url);
   visit_dict.Set("visitDuration", visit_duration_micros);
   
-  if (private_key) {
+  if (can_encrypt) {
     base::DictValue visit_encrypt_payload;
     visit_encrypt_payload.Set("url", url_string);
     visit_encrypt_payload.Set("external_referrer_url", external_referrer_url);
     
     std::string unencrypted_visit_json;
     base::JSONWriter::Write(visit_encrypt_payload, &unencrypted_visit_json);
-    visit_dict.Set("encrypted", JatterEncryptor::Encrypt(unencrypted_visit_json, *private_key));
+    visit_dict.Set("encrypted", JatterEncryptor::Encrypt(unencrypted_visit_json, decoded_key));
+
+    if (signature) {
+      visit_dict.Set("parkedKeySignature", *signature);
+    }
   }
 
   return visit_dict;
@@ -178,25 +188,78 @@ void JatterFirebaseClient::ExecuteDeleteRequest(Profile* profile, std::string js
       }));
 }
 
-void JatterFirebaseClient::OnURLVisited(history::HistoryService* history_service,
-                                        const history::VisitedURLInfo& visited_url_info) {
+void JatterFirebaseClient::OnURLVisitedWithNavigationId(
+    history::HistoryService* history_service,
+    const history::VisitedURLInfo& visited_url_info) {
+  
+  // 1. Extract the navigation ID natively from the struct
+  if (!visited_url_info.local_navigation_id.has_value()) {
+    return; // We cannot map this visit to a UI tab without the ID
+  }
+  int64_t nav_entry_id = static_cast<int64_t>(visited_url_info.local_navigation_id.value());
+
   const history::URLRow& url_row = visited_url_info.url_row;
   const history::VisitRow& visit_row = visited_url_info.visit_row;
 
-  // 1. Ignore subframes
-  if (!ui::PageTransitionIsMainFrame(visit_row.transition)) {
+  // 2. Ignore subframes & internal pages
+  if (!ui::PageTransitionIsMainFrame(visit_row.transition) ||
+      base::StartsWith(url_row.url().spec(), jatter::kAppUrl, base::CompareCase::INSENSITIVE_ASCII)) {
     return;
   }
 
-  // 2. Ignore internal Jatter/NTP pages
-  if (base::StartsWith(url_row.url().spec(), jatter::kAppUrl, 
-                       base::CompareCase::INSENSITIVE_ASCII)) {
+  // RESTORED: Profile safety check
+  Profile* profile = profile_;
+  if (!profile) return;
+
+  JatterTokenStorage* storage = JatterTokenStorage::GetOrCreate(profile);
+  std::optional<std::string> private_key = storage->GetPrivateKey();
+  std::optional<std::string> signature = storage->GetPrivateKeySignature();
+  
+  // Verify the key can actually be decoded before attempting encryption
+  std::string decoded_key;
+  bool can_encrypt = private_key && base::Base64Decode(*private_key, &decoded_key);
+
+  double visit_time_micros = static_cast<double>((visit_row.visit_time - base::Time::UnixEpoch()).InMicroseconds());
+  double last_visit_time_micros = static_cast<double>((url_row.last_visit() - base::Time::UnixEpoch()).InMicroseconds());
+
+  // Build the dictionary with 0.0 duration (to be overwritten by the TabHelper)
+  base::DictValue visit_dict = BuildVisitDict(
+      visit_row.visit_id, url_row.url().spec(), base::UTF16ToUTF8(url_row.title()), 
+      url_row.visit_count(), url_row.typed_count(), last_visit_time_micros, 
+      visit_time_micros, visit_row.referring_visit, visit_row.external_referrer_url.spec(),    
+      0.0, base::DictValue(), can_encrypt ? private_key : std::nullopt,
+      can_encrypt ? signature : std::nullopt
+  );
+
+  // Park the JSON payload. DO NOT execute a network request yet.
+  pending_visits_[nav_entry_id] = visit_dict.Clone();
+
+  // Race Condition Guard
+  auto duration_it = pending_durations_.find(nav_entry_id);
+  if (duration_it != pending_durations_.end()) {
+    double parked_duration = duration_it->second;
+    pending_durations_.erase(duration_it);
+
+    UpdateActiveDuration(nav_entry_id, parked_duration, /*is_final_flush=*/false);
+  }
+}
+
+void JatterFirebaseClient::UpdateActiveDuration(int nav_entry_id, double duration_micros, bool is_final_flush) {
+  auto visit_it = pending_visits_.find(nav_entry_id);
+  if (visit_it == pending_visits_.end()) {
+    if (is_final_flush) {
+      // The tab closed, but the DB never logged a valid visit for it. Drop the data.
+      pending_durations_.erase(nav_entry_id);
+    } else {
+      pending_durations_[nav_entry_id] = duration_micros;
+    }
     return;
   }
 
   Profile* profile = profile_;
   if (!profile) return;
-  
+
+  // GUID lazy generation
   std::string profile_guid;
   PrefService* prefs = profile->GetPrefs();
   if (prefs) {
@@ -207,43 +270,118 @@ void JatterFirebaseClient::OnURLVisited(history::HistoryService* history_service
     }
   }
 
-  JatterTokenStorage* storage = JatterTokenStorage::GetOrCreate(profile);
-  std::optional<std::string> private_key = storage->GetPrivateKey();
-  std::optional<std::string> signature = storage->GetPrivateKeySignature();
+  // Inject the updated foreground time
+  visit_it->second.Set("visitDuration", duration_micros);
 
-  double visit_time_micros = static_cast<double>((visit_row.visit_time - base::Time::UnixEpoch()).InMicroseconds());
-  double last_visit_time_micros = static_cast<double>((url_row.last_visit() - base::Time::UnixEpoch()).InMicroseconds());
-  double visit_duration_micros = static_cast<double>(visit_row.visit_duration.InMicroseconds());
+  base::DictValue cloned_visit = visit_it->second.Clone();
+  std::string parked_signature;
+  
+  if (const std::string* sig_ptr = cloned_visit.FindString("parkedKeySignature")) {
+    parked_signature = *sig_ptr;
+    cloned_visit.Remove("parkedKeySignature"); // Clean up before sending to backend
+  }
 
   base::ListValue visits_list;
-  visits_list.Append(BuildVisitDict(
-      visit_row.visit_id, 
-      url_row.url().spec(), 
-      base::UTF16ToUTF8(url_row.title()), 
-      url_row.visit_count(), 
-      url_row.typed_count(), 
-      last_visit_time_micros, 
-      visit_time_micros, 
-      visit_row.referring_visit, 
-      visit_row.external_referrer_url.spec(),    
-      visit_duration_micros,                     
-      base::DictValue(),
-      private_key
-  ));
+  visits_list.Append(std::move(cloned_visit)); 
 
   base::DictValue body;
   body.Set("profileGuid", profile_guid);
-  if (signature) {
-    body.Set("keySignature", *signature);
+  if (!parked_signature.empty()) {
+    body.Set("keySignature", parked_signature); // Attach to root
   }
   body.Set("visits", std::move(visits_list));
 
-  // Serialize JSON *before* the lambda to keep the lambda entirely copyable
   std::string json_body;
   base::JSONWriter::Write(body, &json_body);
 
-  ExecuteNetworkRequest(profile, std::move(json_body));
+  base::OnceClosure task = base::BindOnce(
+    &JatterFirebaseClient::ExecuteNetworkRequest,
+    base::Unretained(this), profile, std::move(json_body));
+
+  if (is_auth_ready_) {
+    std::move(task).Run();
+  } else {
+    pending_network_tasks_.push_back(std::move(task));
+  }
+
+  if (is_final_flush) {
+    pending_visits_.erase(visit_it);
+  }
 }
+
+// void JatterFirebaseClient::OnURLVisited(history::HistoryService* history_service,
+//                                         const history::VisitedURLInfo& visited_url_info) {
+//   const history::URLRow& url_row = visited_url_info.url_row;
+//   const history::VisitRow& visit_row = visited_url_info.visit_row;
+
+//   // 1. Ignore subframes
+//   if (!ui::PageTransitionIsMainFrame(visit_row.transition)) {
+//     return;
+//   }
+
+//   // 2. Ignore internal Jatter/NTP pages
+//   if (base::StartsWith(url_row.url().spec(), jatter::kAppUrl, 
+//                        base::CompareCase::INSENSITIVE_ASCII)) {
+//     return;
+//   }
+
+//   Profile* profile = profile_;
+//   if (!profile) return;
+  
+//   std::string profile_guid;
+//   PrefService* prefs = profile->GetPrefs();
+//   if (prefs) {
+//     profile_guid = prefs->GetString(kRagIngestionProfileGuidPref);
+//     if (profile_guid.empty()) {
+//       profile_guid = base::Uuid::GenerateRandomV4().AsLowercaseString();
+//       prefs->SetString(kRagIngestionProfileGuidPref, profile_guid);
+//     }
+//   }
+
+//   JatterTokenStorage* storage = JatterTokenStorage::GetOrCreate(profile);
+//   std::optional<std::string> private_key = storage->GetPrivateKey();
+//   std::optional<std::string> signature = storage->GetPrivateKeySignature();
+
+//   // 1. Verify the key can actually be decoded before attempting encryption
+//   std::string decoded_key;
+//   bool can_encrypt = private_key && base::Base64Decode(*private_key, &decoded_key);
+
+//   double visit_time_micros = static_cast<double>((visit_row.visit_time - base::Time::UnixEpoch()).InMicroseconds());
+//   double last_visit_time_micros = static_cast<double>((url_row.last_visit() - base::Time::UnixEpoch()).InMicroseconds());
+//   double visit_duration_micros = static_cast<double>(visit_row.visit_duration.InMicroseconds());
+
+//   base::ListValue visits_list;
+//   visits_list.Append(BuildVisitDict(
+//       visit_row.visit_id, 
+//       url_row.url().spec(), 
+//       base::UTF16ToUTF8(url_row.title()), 
+//       url_row.visit_count(), 
+//       url_row.typed_count(), 
+//       last_visit_time_micros, 
+//       visit_time_micros, 
+//       visit_row.referring_visit, 
+//       visit_row.external_referrer_url.spec(),    
+//       visit_duration_micros,                     
+//       base::DictValue(),
+//       can_encrypt ? private_key : std::nullopt
+//   ));
+
+//   base::DictValue body;
+//   body.Set("profileGuid", profile_guid);
+  
+//   // 3. ONLY attach the signature if encryption was actually successful
+//   if (can_encrypt && signature) {
+//     body.Set("keySignature", *signature);
+//   }
+  
+//   body.Set("visits", std::move(visits_list));
+
+//   // Serialize JSON *before* the lambda to keep the lambda entirely copyable
+//   std::string json_body;
+//   base::JSONWriter::Write(body, &json_body);
+
+//   ExecuteNetworkRequest(profile, std::move(json_body));
+// }
 
 void JatterFirebaseClient::OnHistoryDeletions(history::HistoryService* history_service,
                                          const history::DeletionInfo& deletion_info) {
@@ -351,7 +489,10 @@ void JatterFirebaseClient::LogBulkWebPageVisits(Profile* profile, base::ListValu
   std::optional<std::string> signature = storage->GetPrivateKeySignature();
   std::optional<std::string> private_key = storage->GetPrivateKey();
 
-  // Enforce 2,000 maximum batch limit per spec
+  // 1. Verify key validity upfront
+  std::string decoded_key;
+  bool can_encrypt = private_key && base::Base64Decode(*private_key, &decoded_key);
+
   const size_t kMaxBatchSize = 2000;
   base::ListValue current_batch;
   
@@ -361,31 +502,28 @@ void JatterFirebaseClient::LogBulkWebPageVisits(Profile* profile, base::ListValu
     // Grab the mutable dictionary reference
     base::DictValue& visit_dict = visit_val.GetDict();
     
-    if (private_key) {
-      // 1. Encrypt the inner "url" dict
+    // 2. Only attempt encryption if the key is valid
+    if (can_encrypt) {
       base::DictValue* url_dict = visit_dict.FindDict("url");
       if (url_dict) {
         std::string unencrypted_url_json;
         base::JSONWriter::Write(*url_dict, &unencrypted_url_json);
-        url_dict->Set("encrypted", JatterEncryptor::Encrypt(unencrypted_url_json, *private_key));
+        url_dict->Set("encrypted", JatterEncryptor::Encrypt(unencrypted_url_json, decoded_key));
       }
 
-      // 2. Encrypt the visit itself
       base::DictValue visit_encrypt_payload;
-      
       if (url_dict) {
         if (const std::string* visit_url = url_dict->FindString("url")) {
           visit_encrypt_payload.Set("url", *visit_url);
         }
       }
-      
       if (const std::string* ext_ref = visit_dict.FindString("external_referrer_url")) {
         visit_encrypt_payload.Set("external_referrer_url", *ext_ref);
       }
       
       std::string unencrypted_visit_json;
       base::JSONWriter::Write(visit_encrypt_payload, &unencrypted_visit_json);
-      visit_dict.Set("encrypted", JatterEncryptor::Encrypt(unencrypted_visit_json, *private_key));
+      visit_dict.Set("encrypted", JatterEncryptor::Encrypt(unencrypted_visit_json, decoded_key));
     }
 
     current_batch.Append(std::move(visit_val));
@@ -393,7 +531,9 @@ void JatterFirebaseClient::LogBulkWebPageVisits(Profile* profile, base::ListValu
     if (current_batch.size() >= kMaxBatchSize) {
       base::DictValue body;
       body.Set("profileGuid", profile_guid);
-      if (signature) {
+      
+      // 3. Only attach the signature if encryption was executed
+      if (can_encrypt && signature) {
         body.Set("keySignature", *signature);
       }
       body.Set("visits", std::move(current_batch));
@@ -416,7 +556,9 @@ void JatterFirebaseClient::LogBulkWebPageVisits(Profile* profile, base::ListValu
   if (!current_batch.empty()) {
     base::DictValue body;
     body.Set("profileGuid", profile_guid);
-    if (signature) {
+    
+    // 4. Protect the final batch flush
+    if (can_encrypt && signature) {
       body.Set("keySignature", *signature);
     }
     body.Set("visits", std::move(current_batch));
@@ -438,13 +580,21 @@ void JatterFirebaseClient::SetAuthorizationnHeader(
     network::ResourceRequest* resource_request) {
   JatterTokenStorage* storage = JatterTokenStorage::GetOrCreate(profile);
   std::string id_token = storage->GetIdToken();
-  resource_request->headers.SetHeader("Authorization", "Bearer " + id_token);
+  // Fix C5: Only set the header if the token actually exists
+  if (!id_token.empty()) {
+    resource_request->headers.SetHeader("Authorization", "Bearer " + id_token);
+  } else {
+#ifndef JATTER_PRODUCTION_MODE
+    DVLOG(1) << "[JatterFirebaseClient] Sending request anonymously (no ID token present).";
+#endif
+  }
 }
 
 void JatterFirebaseClient::Invoke(
     Profile* profile,
     JatterFirebaseClient::CreateUrlLoaderCallback url_loader_creator,
-    JatterFirebaseClient::ResponseCallback callback) {
+    JatterFirebaseClient::ResponseCallback callback,
+    bool allow_anonymous) {
   
   // Guard: Abort immediately if the profile has no auth token
   JatterTokenStorage* storage = JatterTokenStorage::GetOrCreate(profile);
@@ -454,10 +604,14 @@ void JatterFirebaseClient::Invoke(
       RefreshAuthToken(profile, url_loader_creator, std::move(callback));
       return;
     }
-
-    // If BOTH are empty, this is an unauthenticated profile. Abort safely.
-    std::move(callback).Run(std::nullopt);
-    return;
+    
+    // Fix C5: If BOTH are empty, abort ONLY IF anonymous sending is not allowed
+    if (!allow_anonymous) {
+      std::move(callback).Run(std::nullopt);
+      return;
+    }
+    // If allow_anonymous is true, it safely falls through the end of this block 
+    // and continues to send the network request!
   }
 
   std::unique_ptr<network::SimpleURLLoader> url_loader(url_loader_creator());
@@ -473,7 +627,8 @@ void JatterFirebaseClient::Invoke(
       base::BindOnce(&JatterFirebaseClient::OnResponseReceivedWithRetry,
                      base::Unretained(this), base::Unretained(loader_ptr),
                      profile->GetWeakPtr(), url_loader_creator,
-                     std::move(callback)),
+                     std::move(callback),
+                     allow_anonymous),
       network::SimpleURLLoader::kMaxBoundedStringDownloadSize);
 }
 
@@ -522,11 +677,12 @@ void JatterFirebaseClient::RefreshAuthToken(
 }
 
 void JatterFirebaseClient::OnResponseReceivedWithRetry(
-    network::SimpleURLLoader* loader,
-    base::WeakPtr<Profile> weak_profile,
-    JatterFirebaseClient::CreateUrlLoaderCallback url_loader_creator,
-    JatterFirebaseClient::ResponseCallback callback,
-    std::optional<std::string> response_body) {
+        network::SimpleURLLoader* loader,
+        base::WeakPtr<Profile> weak_profile,
+        JatterFirebaseClient::CreateUrlLoaderCallback url_loader_creator,
+        JatterFirebaseClient::ResponseCallback callback,
+        bool allow_anonymous,
+        std::optional<std::string> response_body) {
   // Guard: Safely exit if the profile was destroyed
   if (!weak_profile) {
     RemoveUrlLoader(loader);
@@ -571,7 +727,20 @@ void JatterFirebaseClient::OnResponseReceivedWithRetry(
               << "). Attempting token refresh...";
     
     did_attempt_refresh = true;
-    RefreshAuthToken(profile, url_loader_creator, std::move(callback));
+    
+    if (!is_refreshing_) {
+      is_refreshing_ = true;
+      RefreshAuthToken(profile, url_loader_creator, std::move(callback));
+    } else {
+      // Queue this request to execute once the in-flight refresh completes
+      pending_retries_.push_back(base::BindOnce(
+          &JatterFirebaseClient::Invoke, 
+          weak_ptr_factory_.GetWeakPtr(),
+          profile, 
+          std::move(url_loader_creator), 
+          std::move(callback),
+          allow_anonymous));
+    }
   }
 
   // 5. If no refresh was needed, pass the data back to the caller normally
@@ -648,6 +817,13 @@ void JatterFirebaseClient::OnAuthenticationResponseReceived(
   }
 
   RemoveUrlLoader(loader);
+
+  // Release the lock and drain the queue regardless of success/failure
+  is_refreshing_ = false;
+  for (auto& retry_task : pending_retries_) {
+    std::move(retry_task).Run();
+  }
+  pending_retries_.clear();
 }
 
 void JatterFirebaseClient::RemoveUrlLoader(network::SimpleURLLoader* loader) {

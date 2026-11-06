@@ -1,8 +1,9 @@
 #ifndef JATTER_FIREBASE_CLIENT_H_
 #define JATTER_FIREBASE_CLIENT_H_
 
-#include <vector>
+#include <map>
 #include <set>
+#include <vector>
 
 #include "base/containers/unique_ptr_adapters.h"
 #include "base/functional/callback.h"
@@ -35,8 +36,9 @@ class JatterFirebaseClient : public history::HistoryServiceObserver,
 
   static void RegisterProfilePrefs(user_prefs::PrefRegistrySyncable* registry);
 
-  void OnURLVisited(history::HistoryService* history_service,
-                    const history::VisitedURLInfo& visited_url_info) override;
+  void OnURLVisitedWithNavigationId(
+      history::HistoryService* history_service,
+      const history::VisitedURLInfo& visited_url_info) override;
   void OnHistoryDeletions(history::HistoryService* history_service,
                      const history::DeletionInfo& deletion_info) override;
 
@@ -49,15 +51,20 @@ class JatterFirebaseClient : public history::HistoryServiceObserver,
 
   void Invoke(Profile* profile,
               CreateUrlLoaderCallback url_loader_creator,
-              ResponseCallback callback);
+              ResponseCallback callback,
+              bool allow_anonymous = false);
   void SetAuthReady(); 
 
+  void UpdateActiveDuration(int nav_entry_id, double duration_micros, bool is_final_flush);
+
  private:
-  void OnResponseReceivedWithRetry(network::SimpleURLLoader* loader,
-                                   base::WeakPtr<Profile> weak_profile,
-                                   CreateUrlLoaderCallback url_loader_creator,
-                                   ResponseCallback callback,
-                                   std::optional<std::string> response_body);
+  void OnResponseReceivedWithRetry(
+        network::SimpleURLLoader* loader,
+        base::WeakPtr<Profile> weak_profile,
+        JatterFirebaseClient::CreateUrlLoaderCallback url_loader_creator,
+        JatterFirebaseClient::ResponseCallback callback,
+        bool allow_anonymous,
+        std::optional<std::string> response_body);
 
   void OnResponseReceived(network::SimpleURLLoader* loader,
                           ResponseCallback callback,
@@ -80,7 +87,11 @@ class JatterFirebaseClient : public history::HistoryServiceObserver,
   void ExecuteDeleteRequest(Profile* profile, std::string json_body);
 
   bool is_auth_ready_ = false;
+  bool is_refreshing_ = false;
   std::vector<base::OnceClosure> pending_network_tasks_;
+  std::map<int64_t, base::DictValue> pending_visits_;
+  std::map<int64_t, double> pending_durations_;
+  std::vector<base::OnceClosure> pending_retries_;
   base::ScopedObservation<history::HistoryService, history::HistoryServiceObserver>
       history_observation_{this};
   std::set<std::unique_ptr<network::SimpleURLLoader>, base::UniquePtrComparator>

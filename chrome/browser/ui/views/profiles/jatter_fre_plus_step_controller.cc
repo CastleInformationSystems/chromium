@@ -1,4 +1,6 @@
 #include "chrome/browser/ui/views/profiles/jatter_fre_plus_step_controller.h"
+
+#include "base/task/sequenced_task_runner.h"
 #include "chrome/browser/ui/views/profiles/profile_picker_web_contents_host.h"
 #include "chrome/browser/ui/webui/intro/intro_ui.h"
 #include "chrome/browser/ui/webui/intro/jatter_plus_handler.h"
@@ -8,7 +10,6 @@
 #include "content/public/browser/web_contents.h"
 #include "content/public/browser/web_ui.h"
 #include "url/gurl.h"
-#include "base/logging.h"
 
 JatterFrePlusStepController::JatterFrePlusStepController(
     ProfilePickerWebContentsHost* host,
@@ -21,6 +22,17 @@ JatterFrePlusStepController::JatterFrePlusStepController(
 JatterFrePlusStepController::~JatterFrePlusStepController() = default;
 
 void JatterFrePlusStepController::Show(StepSwitchFinishedCallback step_shown_callback, bool reset_state) {
+  // Guard: If they already have Plus, instantly fire the completion callback
+  // to skip this screen and launch the main browser.
+  if (profile_->GetPrefs()->GetBoolean(prefs::kJatterIsPlusSubscriber)) {
+    if (step_completed_callback_) {
+      // PostTask prevents synchronous re-entrancy crashes in the FlowController
+      base::SequencedTaskRunner::GetCurrentDefault()->PostTask(
+          FROM_HERE, std::move(step_completed_callback_));
+    }
+    return;
+  }
+
   host()->ShowScreenInPickerContents(
       GURL("chrome://intro/plus"),
       base::BindOnce(&JatterFrePlusStepController::OnPlusPageLoaded,

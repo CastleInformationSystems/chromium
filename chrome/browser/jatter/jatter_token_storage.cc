@@ -5,6 +5,7 @@
 #include "base/json/json_reader.h"
 #include "base/strings/string_split.h"
 #include "base/values.h"
+#include "chrome/browser/jatter/encryption/jatter_encryptor.h"
 #include "chrome/browser/profiles/profile.h"
 #include "chrome/common/pref_names.h"
 #include "components/os_crypt/sync/os_crypt.h"
@@ -84,6 +85,18 @@ void JatterTokenStorage::SetPrivateKey(const std::string& private_key) {
 }
 
 void JatterTokenStorage::SetPrivateKeySignature(const std::string& signature) {
+  if (private_key_) {
+    std::string decoded_key;
+    // Decode the stored Base64 key and verify the incoming signature matches
+    if (base::Base64Decode(*private_key_, &decoded_key) &&
+        JatterEncryptor::DeriveSignature(decoded_key) != signature) {
+      // Mismatch: The blobs would be encrypted under a different key than the signature claims.
+      // Treat the pair as incomplete to force a plaintext fallback.
+      signature_ = std::nullopt;
+      SaveEncryptionPairToPrefs();
+      return; 
+    }
+  }
   signature_ = signature;
   SaveEncryptionPairToPrefs();
 }

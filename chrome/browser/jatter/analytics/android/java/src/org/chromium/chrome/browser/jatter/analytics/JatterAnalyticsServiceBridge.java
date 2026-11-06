@@ -18,6 +18,12 @@ public class JatterAnalyticsServiceBridge {
         JatterAnalyticsServiceBridgeJni.get().recordDefaultBrowserSet(profile);
     }
 
+    // Hook for the Android Activity lifecycle
+    public static void recordSessionStarted(Profile profile) {
+        if (profile == null) return;
+        JatterAnalyticsServiceBridgeJni.get().recordSessionStarted(profile);
+    }
+
     public static void recordSessionEnded(Profile profile, long sessionLengthMillis) {
         if (profile == null) return;
         JatterAnalyticsServiceBridgeJni.get().recordSessionEnded(profile, sessionLengthMillis);
@@ -31,6 +37,7 @@ public class JatterAnalyticsServiceBridge {
     @NativeMethods
     public interface Natives {
         void recordDefaultBrowserSet(Profile profile);
+        void recordSessionStarted(Profile profile);
         void recordSessionEnded(Profile profile, long sessionLengthMillis);
         void recordCustomEvent(Profile profile, String eventName, String jsonParams);
     }

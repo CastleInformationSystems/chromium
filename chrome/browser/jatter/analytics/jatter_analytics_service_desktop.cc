@@ -20,9 +20,19 @@ class JatterSessionObserverBridge : public metrics::DesktopSessionDurationTracke
     }
   }
 
+  void OnSessionStarted(base::TimeTicks session_start) override {
+    if (service_) {
+      // Fire the start session logic we just built!
+      service_->StartSession();
+    }
+  }
+
   // metrics::DesktopSessionDurationTracker::Observer implementation
-  void OnSessionEnded(base::TimeDelta session_length, base::TimeTicks session_end) override {
-    service_->RecordSessionEnded(session_length);
+  void OnSessionEnded(base::TimeDelta session_length,
+                    base::TimeTicks session_end) override {
+    if (service_) {
+      service_->RecordSessionEnded(session_length);
+    }
   }
 
  private:

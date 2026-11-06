@@ -37,6 +37,9 @@ class JatterAnalyticsService : public KeyedService {
   // KeyedService implementation:
   void Shutdown() override;
 
+  // Triggered when the browser gains focus or starts
+  void StartSession();
+
   // Called by our platform-specific bridges
   void RecordSessionEnded(base::TimeDelta session_length);
 
@@ -60,6 +63,15 @@ class JatterAnalyticsService : public KeyedService {
   base::ListValue event_queue_;
   size_t queued_event_count_ = 0;
   base::RepeatingTimer flush_timer_;
+
+  // Session State Variables
+  int64_t session_id_ = 0;
+  int session_number_ = 0;
+  base::TimeTicks engagement_mark_;
+  base::TimeDelta reported_engagement_;
+
+  // Holds events while waiting for the HTTP response
+  base::ListValue in_flight_events_;
 
   // Holds our platform-specific observer so it dies with the service
   std::unique_ptr<JatterSessionObserverBridge, BridgeDeleter> session_observer_bridge_;

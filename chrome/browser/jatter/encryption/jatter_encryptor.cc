@@ -1,6 +1,7 @@
 #include "chrome/browser/jatter/encryption/jatter_encryptor.h"
 
 #include "base/base64.h"
+#include "base/containers/span.h"
 #include "base/strings/string_split.h"
 #include "crypto/random.h"
 #include "crypto/sha2.h"
@@ -103,11 +104,16 @@ std::optional<std::string> JatterEncryptor::Decrypt(const std::string& formatted
 }
 
 std::string JatterEncryptor::DeriveSignature(const std::string& decoded_key) {
-  std::string key_sha256 = crypto::SHA256HashString(decoded_key);
-  std::string base64_sha256 = base::Base64Encode(key_sha256);
+  // 1. Safely view the string as a bounds-checked byte span
+  base::span<const uint8_t> key_span = base::as_byte_span(decoded_key);
+  
+  // 2. Use the modern span-based crypto overload (returns std::array natively)
+  std::array<uint8_t, crypto::kSHA256Length> hash = crypto::SHA256Hash(key_span);
+  
+  // 3. base::Base64Encode natively accepts spans (std::array implicitly converts)
+  std::string base64_sha256 = base::Base64Encode(hash);
   
   std::vector<uint8_t> zero_iv(kBlockSize, 0);
-  
   std::string formatted = EncryptWithIVForTesting(base64_sha256, decoded_key, zero_iv);
   
   std::vector<std::string> parts = base::SplitString(
