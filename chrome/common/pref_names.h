@@ -4092,6 +4092,7 @@ inline constexpr char kJatterAlwaysAllowPersonalization[] =
     "jatter.always_allow_personalization";
 inline constexpr char kJatterShowPlusUpgradeOnStartup[] = 
       "jatter.show_plus_upgrade_on_startup";
+inline constexpr char kJatterIsPlusSubscriber[] = "jatter.is_plus_subscriber";
 }  // namespace prefs
 
 #endif  // CHROME_COMMON_PREF_NAMES_H_

@@ -2,12 +2,16 @@
 
 #include "base/task/sequenced_task_runner.h"
 #include "chrome/browser/jatter/jatter_environment.h"
+#include "chrome/browser/profiles/profile.h"
 #include "chrome/browser/ui/views/profiles/profile_picker_web_contents_host.h"
 #include "chrome/browser/ui/webui/intro/jatter_susi_handler.h"
+#include "chrome/common/pref_names.h"
+#include "components/prefs/pref_service.h"
 #include "content/public/browser/navigation_controller.h"
 #include "content/public/browser/navigation_handle.h"
 #include "content/public/browser/web_contents.h"
 #include "content/public/browser/web_ui.h"
+#include "net/base/url_util.h"
 #include "url/gurl.h"
 
 JatterFreSusiStepController::JatterFreSusiStepController(
@@ -72,6 +76,19 @@ void JatterFreSusiStepController::DidStartNavigation(
     // Success: Advance to Step 3
     if (target_url.path() == "/sign_in/complete") {
       host()->GetPickerContents()->Stop();
+      
+      // --- NEW: Parse the subscriber flag and save to Prefs ---
+      std::string is_subscriber_str;
+      if (net::GetValueForKeyInQuery(target_url, "subscriber", &is_subscriber_str) && 
+          is_subscriber_str == "true") {
+        Profile* profile = Profile::FromBrowserContext(
+            host()->GetPickerContents()->GetBrowserContext());
+        if (profile) {
+          profile->GetPrefs()->SetBoolean(prefs::kJatterIsPlusSubscriber, true);
+        }
+      }
+      // --------------------------------------------------------
+
       if (step_completed_callback_) {
         // Safely escape the observer stack before advancing
         base::SequencedTaskRunner::GetCurrentDefault()->PostTask(

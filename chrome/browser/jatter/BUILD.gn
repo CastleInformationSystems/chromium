@@ -46,6 +46,8 @@ source_set("jatter") {
     "jatter_firebase_client_factory.cc",
     "jatter_firebase_client.cc",
     "jatter_firebase_client.h",
+    "jatter_tab_helper.h",
+    "jatter_tab_helper.cc",
   ]
 
   deps = [

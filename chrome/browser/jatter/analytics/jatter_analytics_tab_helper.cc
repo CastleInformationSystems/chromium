@@ -21,7 +21,8 @@ void JatterAnalyticsTabHelper::DidFinishNavigation(
   // Only track committed, primary main-frame navigations (ignore subframes and anchor/fragment navigations)
   if (!navigation_handle->HasCommitted() ||
       !navigation_handle->IsInPrimaryMainFrame() ||
-      navigation_handle->IsSameDocument()) {
+      navigation_handle->IsSameDocument() ||
+      navigation_handle->IsErrorPage()) {
     return;
   }
 

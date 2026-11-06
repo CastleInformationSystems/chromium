@@ -5,6 +5,7 @@
 #include "chrome/browser/jatter/analytics/jatter_analytics_service_factory.h"
 
 #include "chrome/browser/jatter/analytics/jatter_analytics_service.h"
+#include "chrome/browser/jatter/jatter_firebase_client_factory.h"
 #include "chrome/browser/profiles/profile.h"
 #include "components/keyed_service/content/browser_context_dependency_manager.h"
 
@@ -28,6 +29,7 @@ JatterAnalyticsServiceFactory::JatterAnalyticsServiceFactory()
   // If your analytics service relies on other KeyedServices, declare them here.
   // For example, if you depend on HostContentSettingsMap:
   // DependsOn(HostContentSettingsMapFactory::GetInstance());
+  DependsOn(JatterFirebaseClientFactory::GetInstance());
 }
 
 JatterAnalyticsServiceFactory::~JatterAnalyticsServiceFactory() = default;

@@ -4,6 +4,7 @@
 
 #include "chrome/browser/rag_ingestion/rag_ingestion_network_client.h"
 
+#include "base/base64.h"
 #include "base/compiler_specific.h" // For UNSAFE_BUFFERS macro
 #include "base/containers/span.h"
 #include "base/functional/callback_helpers.h"
@@ -174,22 +175,25 @@ void RagIngestionNetworkClient::SetIngestionPermission(const GURL& url,
 
   if (sig) payload.Set("keySignature", *sig);
 
-  if (pk) {
-    payload.Set("encryptedUrl", JatterEncryptor::Encrypt(url_spec, *pk));
-    payload.Set("encryptedSiteName", JatterEncryptor::Encrypt(safe_site_name, *pk));
+  std::string decoded_key;
+  bool can_encrypt = pk && base::Base64Decode(*pk, &decoded_key);
+
+  if (can_encrypt) {
+    payload.Set("encryptedUrl", JatterEncryptor::Encrypt(url_spec, decoded_key));
+    payload.Set("encryptedSiteName", JatterEncryptor::Encrypt(safe_site_name, decoded_key));
     
     // canonicalHost: lowercase, no www.
     std::string host = std::string(url.host());
     if (base::StartsWith(host, "www.", base::CompareCase::INSENSITIVE_ASCII)) {
       host = host.substr(4);
     }
-    payload.Set("encryptedHost", JatterEncryptor::Encrypt(host, *pk));
+    payload.Set("encryptedHost", JatterEncryptor::Encrypt(host, decoded_key));
 
-    if (!metadata.title.empty()) payload.Set("encryptedTitle", JatterEncryptor::Encrypt(metadata.title, *pk));
-    if (!metadata.description.empty()) payload.Set("encryptedDescription", JatterEncryptor::Encrypt(metadata.description, *pk));
-    if (!metadata.keywords.empty()) payload.Set("encryptedKeywords", JatterEncryptor::Encrypt(metadata.keywords, *pk));
+    if (!metadata.title.empty()) payload.Set("encryptedTitle", JatterEncryptor::Encrypt(metadata.title, decoded_key));
+    if (!metadata.description.empty()) payload.Set("encryptedDescription", JatterEncryptor::Encrypt(metadata.description, decoded_key));
+    if (!metadata.keywords.empty()) payload.Set("encryptedKeywords", JatterEncryptor::Encrypt(metadata.keywords, decoded_key));
     if (!metadata.icon_base64.empty() && metadata.icon_base64.length() < 140000) {
-      payload.Set("encryptedIcon", JatterEncryptor::Encrypt(metadata.icon_base64, *pk));
+      payload.Set("encryptedIcon", JatterEncryptor::Encrypt(metadata.icon_base64, decoded_key));
     }
   }
 
@@ -311,9 +315,13 @@ void RagIngestionNetworkClient::UploadRawDocument(
   if (sig) {
     multipart_body += "--" + boundary + "\r\nContent-Disposition: form-data; name=\"keySignature\"\r\n\r\n" + *sig + "\r\n";
   }
-  if (pk) {
-    multipart_body += "--" + boundary + "\r\nContent-Disposition: form-data; name=\"encryptedUrl\"\r\n\r\n" + JatterEncryptor::Encrypt(url.spec(), *pk) + "\r\n";
-    multipart_body += "--" + boundary + "\r\nContent-Disposition: form-data; name=\"encryptedPageTitle\"\r\n\r\n" + JatterEncryptor::Encrypt(page_title, *pk) + "\r\n";
+
+  std::string decoded_key;
+  bool can_encrypt = pk && base::Base64Decode(*pk, &decoded_key);
+
+  if (can_encrypt) {
+    multipart_body += "--" + boundary + "\r\nContent-Disposition: form-data; name=\"encryptedUrl\"\r\n\r\n" + JatterEncryptor::Encrypt(url.spec(), decoded_key) + "\r\n";
+    multipart_body += "--" + boundary + "\r\nContent-Disposition: form-data; name=\"encryptedPageTitle\"\r\n\r\n" + JatterEncryptor::Encrypt(page_title, decoded_key) + "\r\n";
   }
   
   // Add pageTitle

@@ -2226,6 +2226,7 @@ void RegisterProfilePrefs(user_prefs::PrefRegistrySyncable* registry,
                                 /*default_value=*/false);
   registry->RegisterBooleanPref(prefs::kJatterShowPlusUpgradeOnStartup, 
                                 /*default_value=*/false);
+  registry->RegisterBooleanPref(prefs::kJatterIsPlusSubscriber, false);
 }
 
 void RegisterUserProfilePrefs(user_prefs::PrefRegistrySyncable* registry) {
